@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the gnl_schema feature.
+ */
+
+include_once 'gnl_schema.features.inc';
