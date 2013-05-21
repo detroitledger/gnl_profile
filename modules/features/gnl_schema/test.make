@@ -26,19 +26,22 @@ projects[features][subdir] = "contrib"
 projects[features][version] = "2.0-rc1"
 
 projects[git_deploy][subdir] = "contrib"
-projects[git_deploy][version] = "2.2+3-dev"
+projects[git_deploy][version] = "2.x-dev"
 
 projects[gnl_schema][download][type] = "git"
 projects[gnl_schema][download][url] = "https://github.com/bnchdrff/gnl_schema.git"
 projects[gnl_schema][type] = "module"
 projects[gnl_schema][subdir] = "features"
-projects[gnl_schema][version] = "0.1"
+projects[gnl_schema][revision] = "79576f7689226bfe65a1e62dbe17c15fa3167985"
 
 projects[link][subdir] = "contrib"
 projects[link][version] = "1.1"
 
+projects[relation][download][type] = "git"
+projects[relation][download][url] = "git://git.drupal.org/project/relation.git"
+projects[relation][type] = "module"
 projects[relation][subdir] = "contrib"
-projects[relation][version] = "1.0-rc4.16-dev"
+projects[relation][revision] = "8f3251c440ab2ca5eca72d38c1019f3d2925f26f"
 
 projects[views][subdir] = "contrib"
 projects[views][version] = "3.7"
