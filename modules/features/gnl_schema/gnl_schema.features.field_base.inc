@@ -119,20 +119,20 @@ function gnl_schema_field_default_field_bases() {
     'type' => 'datetime',
   );
 
-  // Exported field_base: 'field_funders'
-  $field_bases['field_funders'] = array(
+  // Exported field_base: 'field_funding_rels'
+  $field_bases['field_funding_rels'] = array(
     'active' => 1,
-    'cardinality' => 1,
+    'cardinality' => -1,
     'deleted' => 0,
     'entity_types' => array(),
-    'field_name' => 'field_funders',
+    'field_name' => 'field_funding_rels',
     'foreign keys' => array(),
     'indexes' => array(),
     'locked' => 0,
-    'module' => 'relation_dummy_field',
+    'module' => 'relation_select',
     'settings' => array(),
     'translatable' => 0,
-    'type' => 'relation',
+    'type' => 'relation_select',
   );
 
   // Exported field_base: 'field_grant_types'

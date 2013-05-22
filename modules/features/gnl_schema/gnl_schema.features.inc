@@ -19,14 +19,6 @@ function gnl_schema_ctools_plugin_api() {
  */
 function gnl_schema_node_info() {
   $items = array(
-    'grant' => array(
-      'name' => t('Grant'),
-      'base' => 'node_content',
-      'description' => '',
-      'has_title' => '1',
-      'title_label' => t('Name'),
-      'help' => '',
-    ),
     'org' => array(
       'name' => t('Organization'),
       'base' => 'node_content',
