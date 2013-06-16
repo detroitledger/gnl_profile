@@ -22,5 +22,6 @@ function gnl_profile_form_install_configure_form_alter(&$form, $form_state) {
   $form['server_settings']['date_default_timezone']['#default_value'] = 'America/Detroit';
 
   // Disable the 'receive email notifications' checkbox.
+  $form['update_notifications']['update_status_module']['#default_value'][0] = 0;
   $form['update_notifications']['update_status_module']['#default_value'][1] = 0;
 }
