@@ -141,7 +141,7 @@ function gnl_profile_install() {
   // Assign some default permissions.
   $filtered_html_permission = filter_permission_name($filtered_html_format);
   $raw_html_permission = filter_permission_name($raw_html_format);
-  user_role_grant_permissions(DRUPAL_ANONYMOUS_RID, array('access content', $filtered_html_permission));
-  user_role_grant_permissions(DRUPAL_AUTHENTICATED_RID, array('access content', 'access administration menu', 'access devel information', $filtered_html_permission, $raw_html_permission));
+  user_role_grant_permissions(DRUPAL_ANONYMOUS_RID, array('access content'));
+  user_role_grant_permissions(DRUPAL_AUTHENTICATED_RID, array('access content'));
 }
 
