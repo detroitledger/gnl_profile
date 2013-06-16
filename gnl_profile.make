@@ -39,9 +39,15 @@ projects[link][version] = "1.1"
 
 projects[relation][download][type] = "git"
 projects[relation][download][url] = "git://git.drupal.org/project/relation.git"
-projects[relation][download][branch] = "7.x-1.x-dev"
+projects[relation][download][branch] = "7.x-1.x"
 projects[relation][type] = "module"
 projects[relation][subdir] = "contrib"
+
+projects[relation_select][download][type] = "git"
+projects[relation_select][download][url] = "git://git.drupal.org/project/relation_select.git"
+projects[relation_select][download][branch] = "7.x-1.x"
+projects[relation_select][type] = "module"
+projects[relation_select][subdir] = "contrib"
 
 projects[views][subdir] = "contrib"
 projects[views][version] = "3.7"
