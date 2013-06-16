@@ -32,7 +32,7 @@ projects[gnl_schema][download][type] = "git"
 projects[gnl_schema][download][url] = "https://github.com/bnchdrff/gnl_schema.git"
 projects[gnl_schema][type] = "module"
 projects[gnl_schema][subdir] = "features"
-projects[gnl_schema][revision] = "f53c1659c0fdc02610351d4a0a0c6212db14c378"
+projects[gnl_schema][revision] = "c2302249b58522b846bfc616c44bd915a782c098"
 
 projects[link][subdir] = "contrib"
 projects[link][version] = "1.1"
