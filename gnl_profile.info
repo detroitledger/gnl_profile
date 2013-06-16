@@ -8,12 +8,16 @@ dependencies[] = block
 dependencies[] = ctools
 dependencies[] = date
 dependencies[] = features
+dependencies[] = gnl_schema
 dependencies[] = link
 dependencies[] = number
 dependencies[] = relation
 dependencies[] = relation_dummy_field
 dependencies[] = relation_select
+dependencies[] = relation_ui
 dependencies[] = subform
 dependencies[] = taxonomy
 dependencies[] = text
-dependencies[] = gnl_schema
+dependencies[] = views
+dependencies[] = views_ui
+
