@@ -1,0 +1,17 @@
+name = gnl_profile
+description = Install profile for the Detroit Ledger
+core = 7.x
+php = 5.2.4
+version = 7.x-0.1
+project = gnl_profile
+dependencies[] = ctools
+dependencies[] = date
+dependencies[] = features
+dependencies[] = link
+dependencies[] = number
+dependencies[] = relation
+dependencies[] = relation_dummy_field
+dependencies[] = relation_select
+dependencies[] = taxonomy
+dependencies[] = text
+dependencies[] = gnl_schema
