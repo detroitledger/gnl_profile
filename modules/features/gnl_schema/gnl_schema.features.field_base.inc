@@ -39,6 +39,28 @@ function gnl_schema_field_default_field_bases() {
     'type' => 'text_with_summary',
   );
 
+  // Exported field_base: 'endpoints'
+  $field_bases['endpoints'] = array(
+    'active' => 1,
+    'cardinality' => -1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'endpoints',
+    'foreign keys' => array(),
+    'indexes' => array(
+      'relation' => array(
+        0 => 'entity_type',
+        1 => 'entity_id',
+        2 => 'r_index',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'relation_endpoint',
+    'settings' => array(),
+    'translatable' => 0,
+    'type' => 'relation_endpoint',
+  );
+
   // Exported field_base: 'field_amount'
   $field_bases['field_amount'] = array(
     'active' => 1,
@@ -117,6 +139,22 @@ function gnl_schema_field_default_field_bases() {
     ),
     'translatable' => 0,
     'type' => 'datetime',
+  );
+
+  // Exported field_base: 'field_funded_amount'
+  $field_bases['field_funded_amount'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_funded_amount',
+    'foreign keys' => array(),
+    'indexes' => array(),
+    'locked' => 0,
+    'module' => 'number',
+    'settings' => array(),
+    'translatable' => 0,
+    'type' => 'number_integer',
   );
 
   // Exported field_base: 'field_funding_rels'

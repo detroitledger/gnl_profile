@@ -161,10 +161,90 @@ function gnl_schema_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'relation-funds-endpoints'
+  $field_instances['relation-funds-endpoints'] = array(
+    'bundle' => 'funds',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'relation_endpoint',
+        'settings' => array(
+          'view_modes' => array(
+            'file' => 'default',
+            'node' => 'default',
+            'relation' => 'default',
+            'taxonomy_term' => 'default',
+            'taxonomy_vocabulary' => 'default',
+            'user' => 'default',
+          ),
+        ),
+        'type' => 'relation_endpoint',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'relation',
+    'field_name' => 'endpoints',
+    'label' => 'endpoints',
+    'required' => FALSE,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'module' => 'relation_endpoint',
+      'settings' => array(),
+      'type' => 'relation_endpoint',
+      'weight' => 0,
+    ),
+  );
+
+  // Exported field_instance: 'relation-funds-field_funded_amount'
+  $field_instances['relation-funds-field_funded_amount'] = array(
+    'bundle' => 'funds',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'number',
+        'settings' => array(
+          'decimal_separator' => '.',
+          'prefix_suffix' => TRUE,
+          'scale' => 0,
+          'thousand_separator' => ' ',
+        ),
+        'type' => 'number_integer',
+        'weight' => 1,
+      ),
+    ),
+    'entity_type' => 'relation',
+    'field_name' => 'field_funded_amount',
+    'label' => 'amount',
+    'required' => FALSE,
+    'settings' => array(
+      'max' => '',
+      'min' => '',
+      'prefix' => '',
+      'suffix' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'module' => 'number',
+      'settings' => array(),
+      'type' => 'number',
+      'weight' => 1,
+    ),
+  );
+
   // Translatables
   // Included for use with string extractors like potx.
   t('Body');
   t('Funding relationships');
+  t('amount');
+  t('endpoints');
 
   return $field_instances;
 }
