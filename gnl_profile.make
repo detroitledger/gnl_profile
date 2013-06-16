@@ -49,6 +49,12 @@ projects[relation_select][download][branch] = "7.x-1.x"
 projects[relation_select][type] = "module"
 projects[relation_select][subdir] = "contrib"
 
+projects[subform][download][type] = "git"
+projects[subform][download][url] = "git://git.drupal.org/project/subform.git"
+projects[subform][download][branch] = "7.x-1.x"
+projects[subform][type] = "module"
+projects[subform][subdir] = "contrib"
+
 projects[views][subdir] = "contrib"
 projects[views][version] = "3.7"
 

@@ -13,6 +13,7 @@ dependencies[] = number
 dependencies[] = relation
 dependencies[] = relation_dummy_field
 dependencies[] = relation_select
+dependencies[] = subform
 dependencies[] = taxonomy
 dependencies[] = text
 dependencies[] = gnl_schema
