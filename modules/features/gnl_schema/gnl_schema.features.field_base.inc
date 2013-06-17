@@ -157,22 +157,6 @@ function gnl_schema_field_default_field_bases() {
     'type' => 'number_integer',
   );
 
-  // Exported field_base: 'field_funding_rels'
-  $field_bases['field_funding_rels'] = array(
-    'active' => 1,
-    'cardinality' => -1,
-    'deleted' => 0,
-    'entity_types' => array(),
-    'field_name' => 'field_funding_rels',
-    'foreign keys' => array(),
-    'indexes' => array(),
-    'locked' => 0,
-    'module' => 'relation_select',
-    'settings' => array(),
-    'translatable' => 0,
-    'type' => 'relation_select',
-  );
-
   // Exported field_base: 'field_grant_types'
   $field_bases['field_grant_types'] = array(
     'active' => 1,
