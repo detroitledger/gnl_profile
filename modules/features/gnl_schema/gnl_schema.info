@@ -21,7 +21,6 @@ dependencies[] = views_ui
 features[ctools][] = views:views_default:3.0
 features[features_api][] = api:2
 features[field_base][] = body
-features[field_base][] = endpoints
 features[field_base][] = field_amount
 features[field_base][] = field_date_announced
 features[field_base][] = field_duration
