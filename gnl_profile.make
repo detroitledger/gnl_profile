@@ -4,6 +4,9 @@ api = 2
 projects[drupal][version] = "7.22"
 
 ; Modules
+projects[addressfield][subdir] = "contrib"
+projects[addressfield][version] = "1.0-beta4"
+
 projects[views_bulk_operations][subdir] = "contrib"
 projects[views_bulk_operations][version] = "3.1"
 
@@ -32,7 +35,7 @@ projects[gnl_schema][download][type] = "git"
 projects[gnl_schema][download][url] = "https://github.com/bnchdrff/gnl_schema.git"
 projects[gnl_schema][type] = "module"
 projects[gnl_schema][subdir] = "features"
-projects[gnl_schema][revision] = "c2302249b58522b846bfc616c44bd915a782c098"
+projects[gnl_schema][revision] = "8476c6e66f843ed31795b067987e58a3e8556db9"
 
 projects[link][subdir] = "contrib"
 projects[link][version] = "1.1"
