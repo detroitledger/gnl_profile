@@ -38,7 +38,7 @@ projects[git_deploy][subdir] = "contrib"
 projects[git_deploy][version] = "2.x-dev"
 
 projects[gnl_schema][download][type] = "git"
-projects[gnl_schema][download][url] = "git@github.com:bnchdrff/gnl_schema.git"
+projects[gnl_schema][download][url] = "https://github.com/bnchdrff/gnl_schema.git"
 projects[gnl_schema][download][branch] = "7.x-1.x"
 projects[gnl_schema][type] = "module"
 projects[gnl_schema][subdir] = "features"
