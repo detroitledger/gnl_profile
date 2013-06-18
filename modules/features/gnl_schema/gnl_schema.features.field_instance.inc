@@ -308,7 +308,7 @@ function gnl_schema_field_default_field_instances() {
       'active' => 1,
       'module' => 'text',
       'settings' => array(
-        'rows' => 20,
+        'rows' => 4,
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
@@ -349,7 +349,7 @@ function gnl_schema_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 6,
+      'weight' => 5,
     ),
   );
 
@@ -412,7 +412,7 @@ function gnl_schema_field_default_field_instances() {
         ),
       ),
       'type' => 'addressfield_standard',
-      'weight' => 3,
+      'weight' => 2,
     ),
   );
 
@@ -447,7 +447,7 @@ function gnl_schema_field_default_field_instances() {
     'label' => 'Founded/dissolved',
     'required' => 0,
     'settings' => array(
-      'default_value' => 'now',
+      'default_value' => 'blank',
       'default_value2' => 'blank',
       'default_value_code' => '',
       'default_value_code2' => '',
@@ -465,7 +465,7 @@ function gnl_schema_field_default_field_instances() {
         'year_range' => '-3:+3',
       ),
       'type' => 'date_text',
-      'weight' => 2,
+      'weight' => 6,
     ),
   );
 
@@ -519,7 +519,7 @@ function gnl_schema_field_default_field_instances() {
       'module' => 'link',
       'settings' => array(),
       'type' => 'link_field',
-      'weight' => 4,
+      'weight' => 3,
     ),
   );
 
@@ -559,7 +559,7 @@ function gnl_schema_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'taxonomy_autocomplete',
-      'weight' => 5,
+      'weight' => 4,
     ),
   );
 
