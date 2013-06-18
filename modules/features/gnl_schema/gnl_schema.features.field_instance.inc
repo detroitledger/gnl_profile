@@ -10,6 +10,227 @@
 function gnl_schema_field_default_field_instances() {
   $field_instances = array();
 
+  // Exported field_instance: 'node-grant-body'
+  $field_instances['node-grant-body'] = array(
+    'bundle' => 'grant',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'hidden',
+        'module' => 'text',
+        'settings' => array(
+          'trim_length' => 600,
+        ),
+        'type' => 'text_summary_or_trimmed',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'body',
+    'label' => 'Body',
+    'required' => FALSE,
+    'settings' => array(
+      'display_summary' => TRUE,
+      'text_processing' => 1,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 20,
+        'summary_rows' => 5,
+      ),
+      'type' => 'text_textarea_with_summary',
+      'weight' => -4,
+    ),
+  );
+
+  // Exported field_instance: 'node-grant-field_funded_amount'
+  $field_instances['node-grant-field_funded_amount'] = array(
+    'bundle' => 'grant',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'number',
+        'settings' => array(
+          'decimal_separator' => '.',
+          'prefix_suffix' => TRUE,
+          'scale' => 0,
+          'thousand_separator' => ' ',
+        ),
+        'type' => 'number_integer',
+        'weight' => 3,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_funded_amount',
+    'label' => 'amount',
+    'required' => 0,
+    'settings' => array(
+      'max' => '',
+      'min' => '',
+      'prefix' => '$',
+      'suffix' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'number',
+      'settings' => array(),
+      'type' => 'number',
+      'weight' => 0,
+    ),
+  );
+
+  // Exported field_instance: 'node-grant-field_funder'
+  $field_instances['node-grant-field_funder'] = array(
+    'bundle' => 'grant',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'entityreference',
+        'settings' => array(
+          'link' => 1,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 1,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_funder',
+    'label' => 'Funder',
+    'required' => 1,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'entityreference',
+      'settings' => array(
+        'match_operator' => 'CONTAINS',
+        'path' => '',
+        'references_dialog_add' => 1,
+        'references_dialog_edit' => 0,
+        'references_dialog_search' => 0,
+        'references_dialog_search_view' => '',
+        'size' => 60,
+      ),
+      'type' => 'entityreference_autocomplete',
+      'weight' => -3,
+    ),
+  );
+
+  // Exported field_instance: 'node-grant-field_ntee'
+  $field_instances['node-grant-field_ntee'] = array(
+    'bundle' => 'grant',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'taxonomy',
+        'settings' => array(),
+        'type' => 'taxonomy_term_reference_link',
+        'weight' => 4,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_ntee',
+    'label' => 'NTEE',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 2,
+    ),
+  );
+
+  // Exported field_instance: 'node-grant-field_recipient'
+  $field_instances['node-grant-field_recipient'] = array(
+    'bundle' => 'grant',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'entityreference',
+        'settings' => array(
+          'link' => 1,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 2,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_recipient',
+    'label' => 'Recipient',
+    'required' => 1,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'entityreference',
+      'settings' => array(
+        'match_operator' => 'CONTAINS',
+        'path' => '',
+        'references_dialog_add' => 1,
+        'references_dialog_edit' => 0,
+        'references_dialog_search' => 0,
+        'references_dialog_search_view' => '',
+        'size' => 60,
+      ),
+      'type' => 'entityreference_autocomplete',
+      'weight' => -2,
+    ),
+  );
+
   // Exported field_instance: 'node-org-body'
   $field_instances['node-org-body'] = array(
     'bundle' => 'org',
@@ -265,126 +486,18 @@ function gnl_schema_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'relation-funds-endpoints'
-  $field_instances['relation-funds-endpoints'] = array(
-    'bundle' => 'funds',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'relation_endpoint',
-        'settings' => array(
-          'view_modes' => array(
-            'file' => 'default',
-            'node' => 'default',
-            'relation' => 'default',
-            'taxonomy_term' => 'default',
-            'taxonomy_vocabulary' => 'default',
-            'user' => 'default',
-          ),
-        ),
-        'type' => 'relation_endpoint',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'relation',
-    'field_name' => 'endpoints',
-    'label' => 'endpoints',
-    'required' => FALSE,
-    'settings' => array(
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'module' => 'relation_endpoint',
-      'settings' => array(),
-      'type' => 'relation_endpoint',
-      'weight' => 0,
-    ),
-  );
-
-  // Exported field_instance: 'relation-funds-field_funded_amount'
-  $field_instances['relation-funds-field_funded_amount'] = array(
-    'bundle' => 'funds',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'number',
-        'settings' => array(
-          'decimal_separator' => '.',
-          'prefix_suffix' => TRUE,
-          'scale' => 0,
-          'thousand_separator' => ' ',
-        ),
-        'type' => 'number_integer',
-        'weight' => 1,
-      ),
-    ),
-    'entity_type' => 'relation',
-    'field_name' => 'field_funded_amount',
-    'label' => 'amount',
-    'required' => FALSE,
-    'settings' => array(
-      'max' => '',
-      'min' => '',
-      'prefix' => '',
-      'suffix' => '',
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'module' => 'number',
-      'settings' => array(),
-      'type' => 'number',
-      'weight' => 1,
-    ),
-  );
-
-  // Exported field_instance: 'relation-funds-field_ntee'
-  $field_instances['relation-funds-field_ntee'] = array(
-    'bundle' => 'funds',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => 'see http://foundationcenter.org/gainknowledge/grantsclass/index.html',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'taxonomy',
-        'settings' => array(),
-        'type' => 'taxonomy_term_reference_link',
-        'weight' => 2,
-      ),
-    ),
-    'entity_type' => 'relation',
-    'field_name' => 'field_ntee',
-    'label' => 'NTEE',
-    'required' => 0,
-    'settings' => array(
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'options',
-      'settings' => array(),
-      'type' => 'options_select',
-      'weight' => 2,
-    ),
-  );
-
   // Translatables
   // Included for use with string extractors like potx.
   t('Address');
+  t('Body');
   t('Description');
   t('Founded/dissolved');
+  t('Funder');
   t('Links');
   t('NTEE');
+  t('Recipient');
   t('Tags');
   t('amount');
-  t('endpoints');
-  t('see http://foundationcenter.org/gainknowledge/grantsclass/index.html');
 
   return $field_instances;
 }
