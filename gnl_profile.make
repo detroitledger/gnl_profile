@@ -25,6 +25,12 @@ projects[diff][version] = "3.2"
 projects[entity][subdir] = "contrib"
 projects[entity][version] = "1.1"
 
+projects[entityreference][download][type] = "git"
+projects[entityreference][download][url] = "git://git.drupal.org/project/entityreference.git"
+projects[entityreference][download][branch] = "7.x-1.x"
+projects[entityreference][type] = "module"
+projects[entityreference][subdir] = "contrib"
+
 projects[features][subdir] = "contrib"
 projects[features][version] = "2.0-rc1"
 
@@ -35,28 +41,10 @@ projects[gnl_schema][download][type] = "git"
 projects[gnl_schema][download][url] = "git@github.com:bnchdrff/gnl_schema.git"
 projects[gnl_schema][type] = "module"
 projects[gnl_schema][subdir] = "features"
-projects[gnl_schema][revision] = "8476c6e66f843ed31795b067987e58a3e8556db9"
+projects[gnl_schema][revision] = "3683b44e0ac571536896c600d8301e5203f1688f"
 
 projects[link][subdir] = "contrib"
 projects[link][version] = "1.1"
-
-projects[relation][download][type] = "git"
-projects[relation][download][url] = "git://git.drupal.org/project/relation.git"
-projects[relation][download][branch] = "7.x-1.x"
-projects[relation][type] = "module"
-projects[relation][subdir] = "contrib"
-
-projects[relation_select][download][type] = "git"
-projects[relation_select][download][url] = "git://git.drupal.org/project/relation_select.git"
-projects[relation_select][download][branch] = "7.x-1.x"
-projects[relation_select][type] = "module"
-projects[relation_select][subdir] = "contrib"
-
-projects[subform][download][type] = "git"
-projects[subform][download][url] = "git://git.drupal.org/project/subform.git"
-projects[subform][download][branch] = "7.x-1.x"
-projects[subform][type] = "module"
-projects[subform][subdir] = "contrib"
 
 projects[views][subdir] = "contrib"
 projects[views][version] = "3.7"
