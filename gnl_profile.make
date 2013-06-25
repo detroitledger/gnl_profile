@@ -49,4 +49,15 @@ projects[link][version] = "1.1"
 projects[views][subdir] = "contrib"
 projects[views][version] = "3.7"
 
+; Themes
+projects[omega][type] = "theme"
+projects[omega][download][type] = "git"
+projects[omega][download][url] = "git://git.drupal.org/project/omega.git"
+projects[omega][download][branch] = "7.x-4.x"
+projects[omega][download][revision] = "512053f306f546c0aadf772d76cee4479a84e9fb"
+
+projects[gnl_theme][type] = "theme"
+projects[gnl_theme][download][type] = "git"
+projects[gnl_theme][download][url] = "https://github.com/bnchdrff/gnl_theme.git"
+projects[gnl_theme][download][branch] = "7.x-1.x"
 
