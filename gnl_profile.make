@@ -46,6 +46,18 @@ projects[gnl_schema][subdir] = "features"
 projects[link][subdir] = "contrib"
 projects[link][version] = "1.1"
 
+projects[migrate][type] = "module"
+projects[migrate][subdir] = "contrib"
+projects[migrate][download][type] = "git"
+projects[migrate][download][url] = "git://git.drupal.org/project/migrate.git"
+projects[migrate][download][branch] = "7.x-2.x"
+
+projects[migrate_gnl][download][type] = "git"
+projects[migrate_gnl][download][url] = "https://github.com/detroitledger/migrate_gnl.git"
+projects[migrate_gnl][download][branch] = "7.x-1.x"
+projects[migrate_gnl][type] = "module"
+projects[migrate_gnl][subdir] = "features"
+
 projects[views][subdir] = "contrib"
 projects[views][version] = "3.7"
 
