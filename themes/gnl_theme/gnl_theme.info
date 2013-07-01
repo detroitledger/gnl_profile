@@ -14,3 +14,10 @@ regions[content] = Content
 regions[sidebar_first] = First Sidebar
 regions[sidebar_second] = Second Sidebar
 regions[footer] = Footer
+
+
+; Information added by drush on 2013-06-28
+version = ""
+project = "gnl_theme"
+datestamp = "1372444710"
+

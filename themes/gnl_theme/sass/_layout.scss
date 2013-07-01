@@ -6,3 +6,19 @@
  * components should not be placed here and should instead be kept with the
  * relevant SCSS for that component.
  ******************************************************************************/
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  border-top: 5px solid $blue;
+}
+
+.l-header {
+  a {
+    border: none;
+  }
+}

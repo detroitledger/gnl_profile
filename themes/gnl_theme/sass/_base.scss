@@ -12,3 +12,14 @@
  * before adding any more specific customisations you ensure that as any new
  * features are added they will be correctly styled without any extra work.
  ******************************************************************************/
+
+body {
+ color: #333;
+}
+
+a {
+  color: $blue;
+  text-decoration: none;
+  border-bottom: 1px dotted $blue;
+}
+
