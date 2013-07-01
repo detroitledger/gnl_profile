@@ -10,6 +10,9 @@ projects[addressfield][version] = "1.0-beta4"
 projects[views_bulk_operations][subdir] = "contrib"
 projects[views_bulk_operations][version] = "3.1"
 
+projects[context][subdir] = "contrib"
+projects[context][version] = "3.0-beta6"
+
 projects[ctools][subdir] = "contrib"
 projects[ctools][version] = "1.3"
 
