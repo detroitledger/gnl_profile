@@ -56,7 +56,7 @@ projects[migrate_gnl][download][type] = "git"
 projects[migrate_gnl][download][url] = "https://github.com/detroitledger/migrate_gnl.git"
 projects[migrate_gnl][download][branch] = "7.x-1.x"
 projects[migrate_gnl][type] = "module"
-projects[migrate_gnl][subdir] = "features"
+projects[migrate_gnl][subdir] = "custom"
 
 projects[views][subdir] = "contrib"
 projects[views][version] = "3.7"
