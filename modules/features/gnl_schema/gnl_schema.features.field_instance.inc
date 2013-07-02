@@ -50,7 +50,7 @@ function gnl_schema_field_default_field_instances() {
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
-      'weight' => -4,
+      'weight' => 0,
     ),
   );
 
@@ -82,7 +82,7 @@ function gnl_schema_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_funded_amount',
-    'label' => 'amount',
+    'label' => 'Amount',
     'required' => 0,
     'settings' => array(
       'max' => '',
@@ -96,7 +96,7 @@ function gnl_schema_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 0,
+      'weight' => -4,
     ),
   );
 
@@ -143,7 +143,7 @@ function gnl_schema_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'entityreference_autocomplete',
-      'weight' => -3,
+      'weight' => 1,
     ),
   );
 
@@ -183,7 +183,7 @@ function gnl_schema_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'taxonomy_autocomplete',
-      'weight' => 3,
+      'weight' => -2,
     ),
   );
 
@@ -220,7 +220,7 @@ function gnl_schema_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 2,
+      'weight' => -3,
     ),
   );
 
@@ -267,7 +267,7 @@ function gnl_schema_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'entityreference_autocomplete',
-      'weight' => -2,
+      'weight' => 2,
     ),
   );
 
@@ -349,7 +349,7 @@ function gnl_schema_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 5,
+      'weight' => -3,
     ),
   );
 
@@ -559,13 +559,14 @@ function gnl_schema_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'taxonomy_autocomplete',
-      'weight' => 4,
+      'weight' => -1,
     ),
   );
 
   // Translatables
   // Included for use with string extractors like potx.
   t('Address');
+  t('Amount');
   t('Body');
   t('Description');
   t('Founded/dissolved');
@@ -574,7 +575,6 @@ function gnl_schema_field_default_field_instances() {
   t('NTEE');
   t('Recipient');
   t('Tags');
-  t('amount');
 
   return $field_instances;
 }
