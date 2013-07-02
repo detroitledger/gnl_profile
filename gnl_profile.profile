@@ -11,11 +11,11 @@ define('GNL_SITE_NAME', $_SERVER['SERVER_NAME']);
 function gnl_profile_form_install_configure_form_alter(&$form, $form_state) {
   // Set a default site name and email address.
   $form['site_information']['site_name']['#default_value'] = GNL_SITE_NAME;
-  $form['site_information']['site_mail']['#default_value'] = 'bc@thermitic.net';
+  $form['site_information']['site_mail']['#default_value'] = 'hello@detroitledger.org';
 
   // Set a default username and email address.
-  $form['admin_account']['account']['name']['#default_value'] = 'Benjamin Chodoroff';
-  $form['admin_account']['account']['mail']['#default_value'] = 'bc@thermitic.net';
+  $form['admin_account']['account']['name']['#default_value'] = 'ledger';
+  $form['admin_account']['account']['mail']['#default_value'] = 'hello@detroitledger.org';
 
   // Set a default country and timezone.
   $form['server_settings']['site_default_country']['#default_value'] = 'US';
