@@ -36,17 +36,18 @@ function gnl_schema_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'body',
-    'label' => 'Body',
-    'required' => FALSE,
+    'label' => 'Description',
+    'required' => 0,
     'settings' => array(
-      'display_summary' => TRUE,
+      'display_summary' => 1,
       'text_processing' => 1,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
+      'active' => 1,
       'module' => 'text',
       'settings' => array(
-        'rows' => 20,
+        'rows' => 4,
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
@@ -607,7 +608,6 @@ function gnl_schema_field_default_field_instances() {
   // Included for use with string extractors like potx.
   t('Address');
   t('Amount');
-  t('Body');
   t('Description');
   t('Founded/dissolved');
   t('Funder');
