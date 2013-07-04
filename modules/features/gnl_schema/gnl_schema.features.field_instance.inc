@@ -36,17 +36,18 @@ function gnl_schema_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'body',
-    'label' => 'Body',
-    'required' => FALSE,
+    'label' => 'Description',
+    'required' => 0,
     'settings' => array(
-      'display_summary' => TRUE,
+      'display_summary' => 1,
       'text_processing' => 1,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
+      'active' => 1,
       'module' => 'text',
       'settings' => array(
-        'rows' => 20,
+        'rows' => 4,
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
@@ -96,7 +97,7 @@ function gnl_schema_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => -4,
+      'weight' => 1,
     ),
   );
 
@@ -187,8 +188,8 @@ function gnl_schema_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-grant-field_ntee'
-  $field_instances['node-grant-field_ntee'] = array(
+  // Exported field_instance: 'node-grant-field_grant_types'
+  $field_instances['node-grant-field_grant_types'] = array(
     'bundle' => 'grant',
     'default_value' => NULL,
     'deleted' => 0,
@@ -199,7 +200,7 @@ function gnl_schema_field_default_field_instances() {
         'module' => 'taxonomy',
         'settings' => array(),
         'type' => 'taxonomy_term_reference_link',
-        'weight' => 4,
+        'weight' => 6,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -209,18 +210,21 @@ function gnl_schema_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
-    'field_name' => 'field_ntee',
-    'label' => 'NTEE',
+    'field_name' => 'field_grant_types',
+    'label' => 'Grant types',
     'required' => 0,
     'settings' => array(
       'user_register_form' => FALSE,
     ),
     'widget' => array(
-      'active' => 1,
-      'module' => 'options',
-      'settings' => array(),
-      'type' => 'options_select',
-      'weight' => -3,
+      'active' => 0,
+      'module' => 'taxonomy',
+      'settings' => array(
+        'autocomplete_path' => 'taxonomy/autocomplete',
+        'size' => 60,
+      ),
+      'type' => 'taxonomy_autocomplete',
+      'weight' => 2,
     ),
   );
 
@@ -658,18 +662,53 @@ function gnl_schema_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'taxonomy_term-ntee-field_ntee_code'
+  $field_instances['taxonomy_term-ntee-field_ntee_code'] = array(
+    'bundle' => 'ntee',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'Source: http://www.guidestar.org/rxg/help/ntee-codes.aspx',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'taxonomy_term',
+    'field_name' => 'field_ntee_code',
+    'label' => 'NTEE code',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 5,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 0,
+    ),
+  );
+
   // Translatables
   // Included for use with string extractors like potx.
   t('Address');
   t('Amount');
-  t('Body');
   t('Description');
   t('Founded/dissolved');
   t('Funder');
+  t('Grant types');
   t('Links');
   t('NTEE');
+  t('NTEE code');
   t('Recipient');
-  t('Source');
+  t('Source: http://www.guidestar.org/rxg/help/ntee-codes.aspx');
   t('Tags');
   t('Year');
 
