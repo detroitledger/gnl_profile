@@ -266,6 +266,7 @@ function gnl_schema_field_default_field_bases() {
       'display' => array(
         'url_cutoff' => 80,
       ),
+      'enable_tokens' => 0,
       'title' => 'optional',
       'title_maxlength' => 128,
       'title_value' => '',
@@ -404,6 +405,7 @@ function gnl_schema_field_default_field_bases() {
       'display' => array(
         'url_cutoff' => 80,
       ),
+      'enable_tokens' => 0,
       'title' => 'optional',
       'title_maxlength' => 128,
       'title_value' => '',
