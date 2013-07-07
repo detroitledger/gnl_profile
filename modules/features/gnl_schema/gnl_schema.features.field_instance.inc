@@ -707,6 +707,7 @@ function gnl_schema_field_default_field_instances() {
   t('NTEE');
   t('NTEE code');
   t('Recipient');
+  t('Source');
   t('Source: http://www.guidestar.org/rxg/help/ntee-codes.aspx');
   t('Tags');
   t('Year');
