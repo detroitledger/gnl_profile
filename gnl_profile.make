@@ -64,6 +64,9 @@ projects[migrate_gnl][subdir] = "custom"
 projects[pathauto][subdir] = "contrib"
 projects[pathauto][version] = "1.2"
 
+projects[strongarm][subdir] = "contrib"
+projects[strongarm][version] = "2.0"
+
 projects[views][subdir] = "contrib"
 projects[views][version] = "3.7"
 

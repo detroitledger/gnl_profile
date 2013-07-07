@@ -23,6 +23,7 @@ dependencies[] = migrate_gnl
 dependencies[] = number
 dependencies[] = options
 dependencies[] = pathauto
+dependencies[] = strongarm
 dependencies[] = taxonomy
 dependencies[] = text
 dependencies[] = views
