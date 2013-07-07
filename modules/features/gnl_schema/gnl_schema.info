@@ -5,7 +5,6 @@ package = Features
 php = 5.2.4
 project = gnl_schema
 dependencies[] = addressfield
-dependencies[] = auto_nodetitle
 dependencies[] = context
 dependencies[] = ctools
 dependencies[] = date
