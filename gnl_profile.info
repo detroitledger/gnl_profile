@@ -22,15 +22,9 @@ dependencies[] = migrate_ui
 dependencies[] = migrate_gnl
 dependencies[] = number
 dependencies[] = options
+dependencies[] = pathauto
 dependencies[] = taxonomy
 dependencies[] = text
 dependencies[] = views
 dependencies[] = views_ui
-
-
-
-; Information added by drush on 2013-07-01
-version = "unknown"
-project = "gnl_profile"
-datestamp = "1372723603"
 

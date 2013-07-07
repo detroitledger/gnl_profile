@@ -61,6 +61,9 @@ projects[migrate_gnl][download][branch] = "7.x-1.x"
 projects[migrate_gnl][type] = "module"
 projects[migrate_gnl][subdir] = "custom"
 
+projects[pathauto][subdir] = "contrib"
+projects[pathauto][version] = "1.2"
+
 projects[views][subdir] = "contrib"
 projects[views][version] = "3.7"
 
