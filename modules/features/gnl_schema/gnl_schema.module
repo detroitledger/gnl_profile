@@ -12,6 +12,4 @@ include_once 'gnl_schema.features.inc';
 function gnl_schema_form_grant_node_form_alter(&$form, &$form_state) {
   $form['title']['#required'] = FALSE;
   $form['title']['#type'] = 'hidden';
-  dsm($form);
-  dsm($form_state);
 }
