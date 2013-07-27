@@ -34,7 +34,8 @@ function gnl_schema_node_info() {
       'name' => t('Grant'),
       'base' => 'node_content',
       'description' => '',
-      'has_title' => FALSE,
+      'has_title' => '1',
+      'title_label' => t('Title'),
       'help' => '',
     ),
     'org' => array(
