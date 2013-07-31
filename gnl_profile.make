@@ -72,6 +72,9 @@ projects[pathauto][version] = "1.2"
 projects[strongarm][subdir] = "contrib"
 projects[strongarm][version] = "2.0"
 
+projects[token][subdir] = "contrib"
+projects[token][version] = "1.5"
+
 projects[views][subdir] = "contrib"
 projects[views][version] = "3.7"
 

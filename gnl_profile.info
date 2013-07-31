@@ -26,6 +26,7 @@ dependencies[] = pathauto
 dependencies[] = strongarm
 dependencies[] = taxonomy
 dependencies[] = text
+dependencies[] = token
 dependencies[] = views
 dependencies[] = views_ui
 
