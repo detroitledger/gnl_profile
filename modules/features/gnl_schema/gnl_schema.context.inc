@@ -29,11 +29,17 @@ function gnl_schema_context_default_contexts() {
   $context->reactions = array(
     'block' => array(
       'blocks' => array(
-        'views-ad97a1443bc64471623609036389167c' => array(
+        'views-9c633b208092dd4e7a56d5c1e642c0a9' => array(
           'module' => 'views',
-          'delta' => 'ad97a1443bc64471623609036389167c',
+          'delta' => '9c633b208092dd4e7a56d5c1e642c0a9',
           'region' => 'content',
-          'weight' => '1',
+          'weight' => '-10',
+        ),
+        'views-org_grants-org_grants_block' => array(
+          'module' => 'views',
+          'delta' => 'org_grants-org_grants_block',
+          'region' => 'content',
+          'weight' => '-9',
         ),
       ),
     ),
