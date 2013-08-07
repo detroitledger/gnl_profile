@@ -54,6 +54,9 @@ projects[gnl_schema][subdir] = "features"
 projects[link][subdir] = "contrib"
 projects[link][version] = "1.1"
 
+projects[libraries][subdir] = "contrib"
+projects[libraries][version] = "2.1"
+
 projects[migrate][type] = "module"
 projects[migrate][subdir] = "contrib"
 projects[migrate][download][type] = "git"
@@ -68,6 +71,12 @@ projects[migrate_gnl][subdir] = "custom"
 
 projects[pathauto][subdir] = "contrib"
 projects[pathauto][version] = "1.2"
+
+projects[services][subdir] = "contrib"
+projects[services][version] = "3.5"
+
+projects[services_views][subdir] = "contrib"
+projects[services_views][version] = "1.0-beta2"
 
 projects[strongarm][subdir] = "contrib"
 projects[strongarm][version] = "2.0"
