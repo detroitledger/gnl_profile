@@ -87,6 +87,9 @@ projects[token][version] = "1.5"
 projects[views][subdir] = "contrib"
 projects[views][version] = "3.7"
 
+projects[views_autocomplete_filters][subdir] = "contrib"
+projects[views_autocomplete_filters][version] = "1.0"
+
 ; Themes
 projects[omega][type] = "theme"
 projects[omega][download][type] = "git"

@@ -32,5 +32,6 @@ dependencies[] = taxonomy
 dependencies[] = text
 dependencies[] = token
 dependencies[] = views
+dependencies[] = views_autocomplete_filters
 dependencies[] = views_ui
 
