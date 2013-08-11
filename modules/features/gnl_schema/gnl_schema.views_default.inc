@@ -523,6 +523,58 @@ function gnl_schema_views_default_views() {
     4 => 0,
   );
   $handler->display->display_options['path'] = 'grants/add';
+
+  /* Display: Services */
+  $handler = $view->new_display('services', 'Services', 'org_totals_services');
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = '';
+  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  $handler->display->display_options['fields']['title']['element_type'] = '0';
+  $handler->display->display_options['fields']['title']['element_label_type'] = '0';
+  $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['title']['element_wrapper_type'] = '0';
+  $handler->display->display_options['fields']['title']['element_default_classes'] = FALSE;
+  /* Field: SUM(Content: Amount) */
+  $handler->display->display_options['fields']['field_funded_amount']['id'] = 'field_funded_amount';
+  $handler->display->display_options['fields']['field_funded_amount']['table'] = 'field_data_field_funded_amount';
+  $handler->display->display_options['fields']['field_funded_amount']['field'] = 'field_funded_amount';
+  $handler->display->display_options['fields']['field_funded_amount']['relationship'] = 'reverse_field_funder_node';
+  $handler->display->display_options['fields']['field_funded_amount']['group_type'] = 'sum';
+  $handler->display->display_options['fields']['field_funded_amount']['label'] = 'Total given';
+  $handler->display->display_options['fields']['field_funded_amount']['element_type'] = '0';
+  $handler->display->display_options['fields']['field_funded_amount']['element_label_type'] = '0';
+  $handler->display->display_options['fields']['field_funded_amount']['element_wrapper_type'] = '0';
+  $handler->display->display_options['fields']['field_funded_amount']['element_default_classes'] = FALSE;
+  $handler->display->display_options['fields']['field_funded_amount']['settings'] = array(
+    'thousand_separator' => ',',
+    'prefix_suffix' => 1,
+  );
+  /* Field: SUM(Content: Amount) */
+  $handler->display->display_options['fields']['field_funded_amount_1']['id'] = 'field_funded_amount_1';
+  $handler->display->display_options['fields']['field_funded_amount_1']['table'] = 'field_data_field_funded_amount';
+  $handler->display->display_options['fields']['field_funded_amount_1']['field'] = 'field_funded_amount';
+  $handler->display->display_options['fields']['field_funded_amount_1']['relationship'] = 'reverse_field_recipient_node';
+  $handler->display->display_options['fields']['field_funded_amount_1']['group_type'] = 'sum';
+  $handler->display->display_options['fields']['field_funded_amount_1']['label'] = 'Total received';
+  $handler->display->display_options['fields']['field_funded_amount_1']['element_type'] = '0';
+  $handler->display->display_options['fields']['field_funded_amount_1']['element_label_type'] = '0';
+  $handler->display->display_options['fields']['field_funded_amount_1']['element_wrapper_type'] = '0';
+  $handler->display->display_options['fields']['field_funded_amount_1']['element_default_classes'] = FALSE;
+  $handler->display->display_options['fields']['field_funded_amount_1']['settings'] = array(
+    'thousand_separator' => ',',
+    'prefix_suffix' => 1,
+  );
+  /* Field: Global: Custom text */
+  $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['table'] = 'views';
+  $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['alter']['text'] = '[field_funded_amount] and [field_funded_amount_1]';
+  $handler->display->display_options['path'] = 'org_totals_services';
   $export['orgs'] = $view;
 
   return $export;
