@@ -11,7 +11,7 @@ function gnl_schema_uuid_features_default_content() {
   $nodes = array();
 
   $nodes[] = array(
-  'uid' => 9,
+  'uid' => 0,
   'title' => 'Transparency',
   'log' => '',
   'status' => 1,
@@ -25,7 +25,7 @@ function gnl_schema_uuid_features_default_content() {
   'tnid' => 0,
   'translate' => 0,
   'uuid' => '22c6d32e-d297-46d0-8050-95c9d49ef1ca',
-  'revision_uid' => 9,
+  'revision_uid' => 1,
   'body' => array(
     'und' => array(
       0 => array(
@@ -58,13 +58,13 @@ function gnl_schema_uuid_features_default_content() {
       ),
     ),
   ),
-  'name' => 'matth',
+  'name' => '',
   'picture' => 0,
-  'data' => 'b:0;',
+  'data' => NULL,
   'date' => '2013-07-30 20:29:10 -0400',
 );
   $nodes[] = array(
-  'uid' => 9,
+  'uid' => 0,
   'title' => 'About the Detroit Ledger',
   'log' => '',
   'status' => 1,
@@ -78,7 +78,7 @@ function gnl_schema_uuid_features_default_content() {
   'tnid' => 0,
   'translate' => 0,
   'uuid' => '7ea570ba-598c-436c-9c7b-29e7e974f14b',
-  'revision_uid' => 9,
+  'revision_uid' => 1,
   'body' => array(
     'und' => array(
       0 => array(
@@ -129,13 +129,13 @@ But to get a comprehensive dataset, we need someone dedicated to getting the inf
       ),
     ),
   ),
-  'name' => 'matth',
+  'name' => '',
   'picture' => 0,
-  'data' => 'b:0;',
+  'data' => NULL,
   'date' => '2013-07-30 20:12:15 -0400',
 );
   $nodes[] = array(
-  'uid' => 9,
+  'uid' => 0,
   'title' => 'Our Methods',
   'log' => '',
   'status' => 1,
@@ -149,11 +149,11 @@ But to get a comprehensive dataset, we need someone dedicated to getting the inf
   'tnid' => 0,
   'translate' => 0,
   'uuid' => 'd0766f2c-35c8-4338-b8fc-28cee03b2dd5',
-  'revision_uid' => 9,
+  'revision_uid' => 1,
   'body' => array(),
-  'name' => 'matth',
+  'name' => '',
   'picture' => 0,
-  'data' => 'b:0;',
+  'data' => NULL,
   'date' => '2013-07-30 20:23:50 -0400',
 );
   return $nodes;

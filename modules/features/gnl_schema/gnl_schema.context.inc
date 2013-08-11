@@ -54,9 +54,9 @@ function gnl_schema_context_default_contexts() {
   $context->reactions = array(
     'block' => array(
       'blocks' => array(
-        'system-navigation' => array(
+        'system-main-menu' => array(
           'module' => 'system',
-          'delta' => 'navigation',
+          'delta' => 'main-menu',
           'region' => 'navigation',
           'weight' => '-10',
         ),
