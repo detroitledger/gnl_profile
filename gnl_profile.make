@@ -100,7 +100,7 @@ projects[views_autocomplete_filters][version] = "1.0"
 projects[omega][type] = "theme"
 projects[omega][download][type] = "git"
 projects[omega][download][url] = "git://git.drupal.org/project/omega.git"
-projects[omega][download][revision] = "512053f306f546c0aadf772d76cee4479a84e9fb"
+projects[omega][download][revision] = "4555f2fdd5af24e086ec3dadf2a49e8ee6348889"
 
 projects[gnl_theme][type] = "theme"
 projects[gnl_theme][download][type] = "git"
