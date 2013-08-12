@@ -1,0 +1,15 @@
+ul.breadcrumb {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  li {
+    list-style-type: none;
+    display: inline;
+  }
+  li:after {
+    content: '>';
+  }
+  li:last-child:after {
+    content: '';
+  }
+}

@@ -9,8 +9,10 @@ $gutter-width: $horz-spacing-unit;
 $grid-padding: 5px;
 $container-style: magic;
 $container-width: 1200px;
-$tab: 44em 12; // At 44em use 12 columns.
-$desk: 70em 12; // At 70em use 12 columns.
+$tab_break: 44em 12;
+$tab_width: 44em;
+$desk_break: 70em 12;
+$desk_width: 70em;
 
 $debug-grid: false !default;
 

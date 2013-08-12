@@ -17,9 +17,14 @@ body {
  color: #333;
 }
 
-a {
+a:link,
+a:visited {
   color: $blue;
   text-decoration: none;
-  border-bottom: 1px dotted $blue;
+  border-bottom: 1px solid transparent;
 }
 
+a:active,
+a:hover {
+  border-bottom: 1px dotted $blue;
+}

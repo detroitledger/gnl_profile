@@ -19,30 +19,17 @@
 %container {
   @include container;
   @include grid-background;
+  margin-bottom: $vert-spacing-unit;
 }
 
-.l-constrained {
+.l-header-wrapper,
+.l-highlighted-wrapper,
+.l-content-wrapper,
+.l-footer {
   @extend %container;
 }
 
-/* Header */
-.l-region--header {
-  padding: $vert-spacing-unit 0;
-
-  .block {
-    float: right;
-  }
-}
-
-/* Content Area */
-.l-highlighted-wrapper {
-  padding: $vert-spacing-unit 0;
-  background: #FFF;
-}
-.l-region--help {
-  margin-bottom: $vert-spacing-unit;
-}
-.l-main {
+.l-content {
   margin-top: 2 * $vert-spacing-unit;
   margin-bottom: 2 * $vert-spacing-unit;
 }
@@ -60,9 +47,13 @@
   background: #FFF;
 }
 
-@include at-breakpoint($tab) {
-  .l-constrained {
+@include at-breakpoint($tab_break) {
+  .l-header-wrapper,
+  .l-highlighted-wrapper,
+  .l-content-wrapper,
+  .l-footer {
     @include set-container-width;
+    width: $tab_width;
   }
 
   /* Header */
@@ -70,10 +61,10 @@
     @include span-columns(3, 12);
   }
   .l-region--navigation {
-    @include span-columns(6, 12);
+    @include span-columns(9 omega, 12);
   }
   .l-region--header {
-    @include span-columns(3 omega, 12);
+    @include span-columns(12 omega, 12);
   }
 
   /* Sidebars */
@@ -90,9 +81,13 @@
   }
 }
 
-@include at-breakpoint($desk) {
-  .l-constrained {
+@include at-breakpoint($desk_break) {
+  .l-header-wrapper,
+  .l-highlighted-wrapper,
+  .l-content-wrapper,
+  .l-footer {
     @include set-container-width;
+    width: $desk_width;
   }
 
   /* Sidebars */
