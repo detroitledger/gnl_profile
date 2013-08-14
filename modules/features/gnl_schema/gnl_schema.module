@@ -25,19 +25,16 @@ function gnl_schema_field_extra_fields() {
       'label' => t('Grants funded total'),
       'description' => t('Total dollar amount of grants funded by this organization.'),
       'weight' => 0,
-      'callback' => 'gnl_schema_org_grants_funded',
     ),
     'gnl_schema_org_grants_received' => array(
       'label' => t('Grants received total'),
       'description' => t('Total dollar amount of grants received by this organization.'),
       'weight' => 0,
-      'callback' => 'gnl_schema_org_grants_received',
     ),
     'gnl_schema_org_grants_datestart' => array(
       'label' => t('Grant data date start'),
       'description' => t('Year for which grant data starts'),
       'weight' => 0,
-      'callback' => 'gnl_schema_org_grants_datestart',
     ),
   );
   return $fields;
@@ -56,9 +53,9 @@ function gnl_schema_node_load($nodes, $types) {
   foreach ($nodes as $node) {
     if ($node->type == 'org') {
       $nid = $node->nid;
-      $node->org_grants_funded = gnl_schema_org_grants_funded($node->nid);
-      $node->org_grants_received = gnl_schema_org_grants_received($node->nid);
-      $node->org_grants_datestart = gnl_schema_org_grants_datestart($node->nid);
+      $node->org_grants_funded = gnl_schema_org_grants_funded($nid);
+      $node->org_grants_received = gnl_schema_org_grants_received($nid);
+      $node->org_grants_datestart = gnl_schema_org_grants_datestart($nid);
     }
   }
 }
