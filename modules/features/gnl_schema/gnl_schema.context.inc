@@ -23,18 +23,7 @@ function gnl_schema_context_default_contexts() {
       ),
     ),
   );
-  $context->reactions = array(
-    'block' => array(
-      'blocks' => array(
-        'search-form' => array(
-          'module' => 'search',
-          'delta' => 'form',
-          'region' => 'content',
-          'weight' => '-10',
-        ),
-      ),
-    ),
-  );
+  $context->reactions = array();
   $context->condition_mode = 0;
   $export['front'] = $context;
 
@@ -85,9 +74,9 @@ function gnl_schema_context_default_contexts() {
   $context->reactions = array(
     'block' => array(
       'blocks' => array(
-        'views-9c633b208092dd4e7a56d5c1e642c0a9' => array(
-          'module' => 'views',
-          'delta' => '9c633b208092dd4e7a56d5c1e642c0a9',
+        'system-main' => array(
+          'module' => 'system',
+          'delta' => 'main',
           'region' => 'content',
           'weight' => '-10',
         ),
