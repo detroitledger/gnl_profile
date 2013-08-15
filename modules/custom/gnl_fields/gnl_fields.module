@@ -1,0 +1,183 @@
+<?php
+/**
+ * @file
+ * Code for the gnl_fields module.
+ */
+
+/**
+ * Implements hook_views_api().
+ */
+function gnl_fields_views_api() {
+  return array(
+    'api' => '3.0',
+    'path' => drupal_get_path('module', 'gnl_fields') . '/views',
+  );
+}
+
+/**
+ * Implements hook_field_extra_fields().
+ *
+ * Add pseudo-fields for total funded and received, along with the first grant date.
+ */
+function gnl_fields_field_extra_fields() {
+  $fields['node']['org']['display'] = array(
+    'gnl_fields_org_grants_funded' => array(
+      'label' => t('Grants funded total'),
+      'description' => t('Total dollar amount of grants funded by this organization.'),
+      'weight' => 0,
+    ),
+    'gnl_fields_org_grants_received' => array(
+      'label' => t('Grants received total'),
+      'description' => t('Total dollar amount of grants received by this organization.'),
+      'weight' => 0,
+    ),
+    'gnl_fields_org_grants_datestart' => array(
+      'label' => t('Grant data date start'),
+      'description' => t('Year for which grant data starts'),
+      'weight' => 0,
+    ),
+  );
+  return $fields;
+}
+
+/**
+ * Implements hook_node_load().
+ *
+ * Add values for org_grants_* fields.
+ */
+function gnl_fields_node_load($nodes, $types) {
+  if (!in_array('org', $types)) {
+    return;
+  }
+
+  foreach ($nodes as $node) {
+    if ($node->type == 'org') {
+      $node->org_grants_funded = gnl_fields_org_grants_funded($node);
+      $node->org_grants_received = gnl_fields_org_grants_received($node);
+      $node->org_grants_datestart = gnl_fields_org_grants_datestart($node);
+    }
+  }
+}
+
+ /**
+ * Implements hook_node_view().
+ *
+ * Add values for org_grants_* fields.
+ */
+function gnl_fields_node_view($node, $view_mode, $langcode) {
+  switch ($node->type) {
+    case 'org':
+      $node->content['gnl_fields_org_grants_funded'] = array(
+        '#type' => 'item',
+        '#field_name' => 'gnl_fields_org_grants_funded',
+        '#label' => t('Grants funded total:'),
+        '#markup' => $node->org_grants_funded,
+        '#theme_wrappers' => array('gnl_fields_money_field'),
+        '#label_display' => 'above',
+      );
+      $node->content['gnl_fields_org_grants_received'] = array(
+        '#type' => 'item',
+        '#field_name' => 'gnl_fields_org_grants_received',
+        '#label' => t('Grants received total:'),
+        '#markup' => $node->org_grants_received,
+        '#theme_wrappers' => array('gnl_fields_money_field'),
+        '#label_display' => 'above',
+      );
+      $node->content['gnl_fields_org_grants_datestart'] = array(
+        '#type' => 'item',
+        '#field_name' => 'gnl_fields_org_grants_datestart',
+        '#label' => t('Grants cover years:'),
+        '#markup' => $node->org_grants_datestart,
+        '#theme_wrappers' => array('gnl_fields_datestart_field'),
+        '#label_display' => 'above',
+      );
+      break;
+  }
+}
+
+/**
+ * Implements hook_theme().
+ *
+ * Provide a theme wrapper for our org_grants_ pseudofields
+ */
+function gnl_fields_theme() {
+  return array(
+    'gnl_fields_money_field' => array(
+      'render element' => 'element',
+    ),
+    'gnl_fields_datestart_field' => array(
+      'render element' => 'element',
+    ),
+  );
+}
+
+/**
+ * Theme money fields.
+ *
+ * @see http://drupal.org/node/1471706
+ */
+function theme_gnl_fields_money_field($variables) {
+  // this is the wrong place to setlocale... but i couldn't find a more Drupaly alternative
+  setlocale(LC_MONETARY, 'en_US.UTF-8');
+
+  $classes = array('clearfix', 'field');
+
+  if (isset($variables['element']['#field_name'])) {
+    $classes[] = 'field--name-' . strtr($variables['element']['#field_name'], '_', '-');
+  }
+
+  if (isset($variables['element']['#label_display'])) {
+    $classes[] = 'field-label-' . $variables['element']['#label_display'];
+  }
+
+  $output = '<div class="' . implode(' ', $classes) . '">';
+
+  if (isset($variables['element']['#label'])) {
+    $output .= '<div class="field__label">' . $variables['element']['#label'] . '&nbsp;</div>';
+  }
+
+  $output .= '<div class="field__items">' . money_format('%.0n', $variables['element']['#markup']) . '</div>';
+  $output .= '</div>';
+
+  return $output;
+}
+/**
+ * Theme datestart fields.
+ *
+ * @see http://drupal.org/node/1471706
+ */
+function theme_gnl_fields_datestart_field($variables) {
+  $classes = array('clearfix', 'field');
+
+  if (isset($variables['element']['#field_name'])) {
+    $classes[] = 'field--name-' . strtr($variables['element']['#field_name'], '_', '-');
+  }
+
+  if (isset($variables['element']['#label_display'])) {
+    $classes[] = 'field-label-' . $variables['element']['#label_display'];
+  }
+
+  $output = '<div class="' . implode(' ', $classes) . '">';
+
+  if (isset($variables['element']['#label'])) {
+    $output .= '<div class="field__label">' . $variables['element']['#label'] . '&nbsp;</div>';
+  }
+
+  $output .= '<div class="field__items">' . substr($variables['element']['#markup'], 0, 4) . '</div>';
+  $output .= '</div>';
+
+  return $output;
+}
+
+function gnl_fields_org_grants_funded($node) {
+  return db_query('SELECT SUM(fdffa.field_funded_amount_value) FROM {field_data_field_funded_amount} AS fdffa INNER JOIN {field_data_field_funder} AS fdff ON fdffa.entity_id=fdff.entity_id WHERE fdff.field_funder_target_id=:nid', array(':nid' => $node->nid))->fetchField();
+}
+
+function gnl_fields_org_grants_received($node) {
+  return db_query('SELECT SUM(fdffa.field_funded_amount_value) FROM {field_data_field_funded_amount} AS fdffa INNER JOIN {field_data_field_recipient} AS fdfr ON fdffa.entity_id=fdfr.entity_id WHERE fdfr.field_recipient_target_id=:nid', array(':nid' => $node->nid))->fetchField();
+}
+
+function gnl_fields_org_grants_datestart($node) {
+  return db_query('SELECT MIN(min) FROM ((SELECT MIN(fdfy.field_year_value) AS min FROM {field_data_field_year} AS fdfy INNER JOIN {field_data_field_funder} AS fdff ON fdfy.entity_id=fdff.entity_id WHERE fdff.field_funder_target_id=:nid) UNION (SELECT MIN(fdfy.field_year_value) AS min FROM {field_data_field_year} AS fdfy INNER JOIN {field_data_field_recipient} AS fdfr ON fdfy.entity_id=fdfr.entity_id WHERE fdfr.field_recipient_target_id=:nid)) AS combine', array(':nid' => $node->nid))->fetchField();
+}
+
