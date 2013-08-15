@@ -52,9 +52,9 @@ function gnl_fields_node_load($nodes, $types) {
 
   foreach ($nodes as $node) {
     if ($node->type == 'org') {
-      $node->org_grants_funded = gnl_fields_org_grants_funded($node);
-      $node->org_grants_received = gnl_fields_org_grants_received($node);
-      $node->org_grants_datestart = gnl_fields_org_grants_datestart($node);
+      $node->org_grants_funded = (int) gnl_fields_org_grants_funded($node);
+      $node->org_grants_received = (int) gnl_fields_org_grants_received($node);
+      $node->org_grants_datestart = (int) gnl_fields_org_grants_datestart($node);
     }
   }
 }
