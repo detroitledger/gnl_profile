@@ -32,8 +32,60 @@ function gnl_schema_views_default_views() {
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['pager']['options']['id'] = '0';
   $handler->display->display_options['pager']['options']['quantity'] = '9';
-  $handler->display->display_options['style_plugin'] = 'default';
-  $handler->display->display_options['row_plugin'] = 'fields';
+  $handler->display->display_options['style_plugin'] = 'table';
+  $handler->display->display_options['style_options']['columns'] = array(
+    'field_year' => 'field_year',
+    'title_2' => 'title_2',
+    'field_funded_amount' => 'field_funded_amount',
+    'field_year_1' => 'field_year_1',
+    'title_3' => 'title_3',
+    'field_funded_amount_1' => 'field_funded_amount_1',
+  );
+  $handler->display->display_options['style_options']['default'] = '-1';
+  $handler->display->display_options['style_options']['info'] = array(
+    'field_year' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'title_2' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_funded_amount' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_year_1' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'title_3' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_funded_amount_1' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+  );
   /* Relationship: Entity Reference: Referencing entity */
   $handler->display->display_options['relationships']['reverse_field_funder_node']['id'] = 'reverse_field_funder_node';
   $handler->display->display_options['relationships']['reverse_field_funder_node']['table'] = 'node';
@@ -80,6 +132,7 @@ function gnl_schema_views_default_views() {
   $handler->display->display_options['fields']['field_funded_amount']['element_type'] = '0';
   $handler->display->display_options['fields']['field_funded_amount']['element_label_type'] = '0';
   $handler->display->display_options['fields']['field_funded_amount']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_funded_amount']['element_wrapper_type'] = '0';
   $handler->display->display_options['fields']['field_funded_amount']['element_default_classes'] = FALSE;
   $handler->display->display_options['fields']['field_funded_amount']['settings'] = array(
     'thousand_separator' => ',',
@@ -158,6 +211,95 @@ function gnl_schema_views_default_views() {
   $handler = $view->new_display('block', 'org grants block', 'org_grants_block');
   $handler->display->display_options['defaults']['use_ajax'] = FALSE;
   $handler->display->display_options['use_ajax'] = TRUE;
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: Year */
+  $handler->display->display_options['fields']['field_year']['id'] = 'field_year';
+  $handler->display->display_options['fields']['field_year']['table'] = 'field_data_field_year';
+  $handler->display->display_options['fields']['field_year']['field'] = 'field_year';
+  $handler->display->display_options['fields']['field_year']['relationship'] = 'reverse_field_funder_node';
+  $handler->display->display_options['fields']['field_year']['label'] = '';
+  $handler->display->display_options['fields']['field_year']['element_type'] = '0';
+  $handler->display->display_options['fields']['field_year']['element_label_type'] = '0';
+  $handler->display->display_options['fields']['field_year']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_year']['element_wrapper_type'] = '0';
+  $handler->display->display_options['fields']['field_year']['element_default_classes'] = FALSE;
+  $handler->display->display_options['fields']['field_year']['settings'] = array(
+    'format_type' => 'year',
+    'fromto' => 'both',
+    'multiple_number' => '',
+    'multiple_from' => '',
+    'multiple_to' => '',
+  );
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title_2']['id'] = 'title_2';
+  $handler->display->display_options['fields']['title_2']['table'] = 'node';
+  $handler->display->display_options['fields']['title_2']['field'] = 'title';
+  $handler->display->display_options['fields']['title_2']['relationship'] = 'reverse_field_funder_node';
+  $handler->display->display_options['fields']['title_2']['label'] = '';
+  $handler->display->display_options['fields']['title_2']['element_type'] = '0';
+  $handler->display->display_options['fields']['title_2']['element_label_type'] = '0';
+  $handler->display->display_options['fields']['title_2']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['title_2']['element_wrapper_type'] = '0';
+  $handler->display->display_options['fields']['title_2']['element_default_classes'] = FALSE;
+  /* Field: Content: Amount */
+  $handler->display->display_options['fields']['field_funded_amount']['id'] = 'field_funded_amount';
+  $handler->display->display_options['fields']['field_funded_amount']['table'] = 'field_data_field_funded_amount';
+  $handler->display->display_options['fields']['field_funded_amount']['field'] = 'field_funded_amount';
+  $handler->display->display_options['fields']['field_funded_amount']['relationship'] = 'reverse_field_funder_node';
+  $handler->display->display_options['fields']['field_funded_amount']['label'] = '';
+  $handler->display->display_options['fields']['field_funded_amount']['element_type'] = '0';
+  $handler->display->display_options['fields']['field_funded_amount']['element_label_type'] = '0';
+  $handler->display->display_options['fields']['field_funded_amount']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_funded_amount']['element_wrapper_type'] = '0';
+  $handler->display->display_options['fields']['field_funded_amount']['element_default_classes'] = FALSE;
+  $handler->display->display_options['fields']['field_funded_amount']['settings'] = array(
+    'thousand_separator' => ',',
+    'prefix_suffix' => 1,
+  );
+  /* Field: Content: Year */
+  $handler->display->display_options['fields']['field_year_1']['id'] = 'field_year_1';
+  $handler->display->display_options['fields']['field_year_1']['table'] = 'field_data_field_year';
+  $handler->display->display_options['fields']['field_year_1']['field'] = 'field_year';
+  $handler->display->display_options['fields']['field_year_1']['relationship'] = 'reverse_field_recipient_node';
+  $handler->display->display_options['fields']['field_year_1']['label'] = '';
+  $handler->display->display_options['fields']['field_year_1']['element_type'] = '0';
+  $handler->display->display_options['fields']['field_year_1']['element_label_type'] = '0';
+  $handler->display->display_options['fields']['field_year_1']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_year_1']['element_wrapper_type'] = '0';
+  $handler->display->display_options['fields']['field_year_1']['element_default_classes'] = FALSE;
+  $handler->display->display_options['fields']['field_year_1']['settings'] = array(
+    'format_type' => 'year',
+    'fromto' => 'both',
+    'multiple_number' => '',
+    'multiple_from' => '',
+    'multiple_to' => '',
+  );
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title_3']['id'] = 'title_3';
+  $handler->display->display_options['fields']['title_3']['table'] = 'node';
+  $handler->display->display_options['fields']['title_3']['field'] = 'title';
+  $handler->display->display_options['fields']['title_3']['relationship'] = 'reverse_field_recipient_node';
+  $handler->display->display_options['fields']['title_3']['label'] = '';
+  $handler->display->display_options['fields']['title_3']['element_type'] = '0';
+  $handler->display->display_options['fields']['title_3']['element_label_type'] = '0';
+  $handler->display->display_options['fields']['title_3']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['title_3']['element_wrapper_type'] = '0';
+  $handler->display->display_options['fields']['title_3']['element_default_classes'] = FALSE;
+  /* Field: Content: Amount */
+  $handler->display->display_options['fields']['field_funded_amount_1']['id'] = 'field_funded_amount_1';
+  $handler->display->display_options['fields']['field_funded_amount_1']['table'] = 'field_data_field_funded_amount';
+  $handler->display->display_options['fields']['field_funded_amount_1']['field'] = 'field_funded_amount';
+  $handler->display->display_options['fields']['field_funded_amount_1']['relationship'] = 'reverse_field_recipient_node';
+  $handler->display->display_options['fields']['field_funded_amount_1']['label'] = '';
+  $handler->display->display_options['fields']['field_funded_amount_1']['element_type'] = '0';
+  $handler->display->display_options['fields']['field_funded_amount_1']['element_label_type'] = '0';
+  $handler->display->display_options['fields']['field_funded_amount_1']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_funded_amount_1']['element_wrapper_type'] = '0';
+  $handler->display->display_options['fields']['field_funded_amount_1']['element_default_classes'] = FALSE;
+  $handler->display->display_options['fields']['field_funded_amount_1']['settings'] = array(
+    'thousand_separator' => ',',
+    'prefix_suffix' => 1,
+  );
 
   /* Display: org grants totals block */
   $handler = $view->new_display('block', 'org grants totals block', 'org_grants_totals_block');
@@ -286,7 +428,6 @@ function gnl_schema_views_default_views() {
   $handler->display->display_options['title'] = 'Organizations';
   $handler->display->display_options['use_ajax'] = TRUE;
   $handler->display->display_options['use_more_always'] = FALSE;
-  $handler->display->display_options['group_by'] = TRUE;
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
@@ -301,10 +442,9 @@ function gnl_schema_views_default_views() {
   $handler->display->display_options['style_plugin'] = 'table';
   $handler->display->display_options['style_options']['columns'] = array(
     'title' => 'title',
-    'field_funded_amount' => 'field_funded_amount',
-    'field_funded_amount_1' => 'field_funded_amount_1',
+    'grants_funded' => 'grants_funded',
   );
-  $handler->display->display_options['style_options']['default'] = 'field_funded_amount';
+  $handler->display->display_options['style_options']['default'] = 'title';
   $handler->display->display_options['style_options']['info'] = array(
     'title' => array(
       'sortable' => 1,
@@ -313,29 +453,14 @@ function gnl_schema_views_default_views() {
       'separator' => '',
       'empty_column' => 0,
     ),
-    'field_funded_amount' => array(
-      'sortable' => 1,
+    'grants_funded' => array(
+      'sortable' => 0,
       'default_sort_order' => 'desc',
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
     ),
-    'field_funded_amount_1' => array(
-      'sortable' => 1,
-      'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
   );
-  /* Relationship: Entity Reference: Referencing entity */
-  $handler->display->display_options['relationships']['reverse_field_funder_node']['id'] = 'reverse_field_funder_node';
-  $handler->display->display_options['relationships']['reverse_field_funder_node']['table'] = 'node';
-  $handler->display->display_options['relationships']['reverse_field_funder_node']['field'] = 'reverse_field_funder_node';
-  /* Relationship: Entity Reference: Referencing entity */
-  $handler->display->display_options['relationships']['reverse_field_recipient_node']['id'] = 'reverse_field_recipient_node';
-  $handler->display->display_options['relationships']['reverse_field_recipient_node']['table'] = 'node';
-  $handler->display->display_options['relationships']['reverse_field_recipient_node']['field'] = 'reverse_field_recipient_node';
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
@@ -348,36 +473,18 @@ function gnl_schema_views_default_views() {
   $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['title']['element_wrapper_type'] = '0';
   $handler->display->display_options['fields']['title']['element_default_classes'] = FALSE;
-  /* Field: SUM(Content: Amount) */
-  $handler->display->display_options['fields']['field_funded_amount']['id'] = 'field_funded_amount';
-  $handler->display->display_options['fields']['field_funded_amount']['table'] = 'field_data_field_funded_amount';
-  $handler->display->display_options['fields']['field_funded_amount']['field'] = 'field_funded_amount';
-  $handler->display->display_options['fields']['field_funded_amount']['relationship'] = 'reverse_field_funder_node';
-  $handler->display->display_options['fields']['field_funded_amount']['group_type'] = 'sum';
-  $handler->display->display_options['fields']['field_funded_amount']['label'] = 'Total given';
-  $handler->display->display_options['fields']['field_funded_amount']['element_type'] = '0';
-  $handler->display->display_options['fields']['field_funded_amount']['element_label_type'] = '0';
-  $handler->display->display_options['fields']['field_funded_amount']['element_wrapper_type'] = '0';
-  $handler->display->display_options['fields']['field_funded_amount']['element_default_classes'] = FALSE;
-  $handler->display->display_options['fields']['field_funded_amount']['settings'] = array(
-    'thousand_separator' => ',',
-    'prefix_suffix' => 1,
-  );
-  /* Field: SUM(Content: Amount) */
-  $handler->display->display_options['fields']['field_funded_amount_1']['id'] = 'field_funded_amount_1';
-  $handler->display->display_options['fields']['field_funded_amount_1']['table'] = 'field_data_field_funded_amount';
-  $handler->display->display_options['fields']['field_funded_amount_1']['field'] = 'field_funded_amount';
-  $handler->display->display_options['fields']['field_funded_amount_1']['relationship'] = 'reverse_field_recipient_node';
-  $handler->display->display_options['fields']['field_funded_amount_1']['group_type'] = 'sum';
-  $handler->display->display_options['fields']['field_funded_amount_1']['label'] = 'Total received';
-  $handler->display->display_options['fields']['field_funded_amount_1']['element_type'] = '0';
-  $handler->display->display_options['fields']['field_funded_amount_1']['element_label_type'] = '0';
-  $handler->display->display_options['fields']['field_funded_amount_1']['element_wrapper_type'] = '0';
-  $handler->display->display_options['fields']['field_funded_amount_1']['element_default_classes'] = FALSE;
-  $handler->display->display_options['fields']['field_funded_amount_1']['settings'] = array(
-    'thousand_separator' => ',',
-    'prefix_suffix' => 1,
-  );
+  /* Field: Content: Data from */
+  $handler->display->display_options['fields']['grants_datestart']['id'] = 'grants_datestart';
+  $handler->display->display_options['fields']['grants_datestart']['table'] = 'node';
+  $handler->display->display_options['fields']['grants_datestart']['field'] = 'grants_datestart';
+  /* Field: Content: Grants funded */
+  $handler->display->display_options['fields']['grants_funded']['id'] = 'grants_funded';
+  $handler->display->display_options['fields']['grants_funded']['table'] = 'node';
+  $handler->display->display_options['fields']['grants_funded']['field'] = 'grants_funded';
+  /* Field: Content: Grants received */
+  $handler->display->display_options['fields']['grants_received']['id'] = 'grants_received';
+  $handler->display->display_options['fields']['grants_received']['table'] = 'node';
+  $handler->display->display_options['fields']['grants_received']['field'] = 'grants_received';
   /* Sort criterion: Content: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'node';
@@ -527,6 +634,11 @@ function gnl_schema_views_default_views() {
   /* Display: Services */
   $handler = $view->new_display('services', 'Services', 'org_totals_services');
   $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: Nid */
+  $handler->display->display_options['fields']['nid']['id'] = 'nid';
+  $handler->display->display_options['fields']['nid']['table'] = 'node';
+  $handler->display->display_options['fields']['nid']['field'] = 'nid';
+  $handler->display->display_options['fields']['nid']['label'] = 'nid';
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
@@ -539,41 +651,19 @@ function gnl_schema_views_default_views() {
   $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['title']['element_wrapper_type'] = '0';
   $handler->display->display_options['fields']['title']['element_default_classes'] = FALSE;
-  /* Field: SUM(Content: Amount) */
-  $handler->display->display_options['fields']['field_funded_amount']['id'] = 'field_funded_amount';
-  $handler->display->display_options['fields']['field_funded_amount']['table'] = 'field_data_field_funded_amount';
-  $handler->display->display_options['fields']['field_funded_amount']['field'] = 'field_funded_amount';
-  $handler->display->display_options['fields']['field_funded_amount']['relationship'] = 'reverse_field_funder_node';
-  $handler->display->display_options['fields']['field_funded_amount']['group_type'] = 'sum';
-  $handler->display->display_options['fields']['field_funded_amount']['label'] = 'Total given';
-  $handler->display->display_options['fields']['field_funded_amount']['element_type'] = '0';
-  $handler->display->display_options['fields']['field_funded_amount']['element_label_type'] = '0';
-  $handler->display->display_options['fields']['field_funded_amount']['element_wrapper_type'] = '0';
-  $handler->display->display_options['fields']['field_funded_amount']['element_default_classes'] = FALSE;
-  $handler->display->display_options['fields']['field_funded_amount']['settings'] = array(
-    'thousand_separator' => ',',
-    'prefix_suffix' => 1,
-  );
-  /* Field: SUM(Content: Amount) */
-  $handler->display->display_options['fields']['field_funded_amount_1']['id'] = 'field_funded_amount_1';
-  $handler->display->display_options['fields']['field_funded_amount_1']['table'] = 'field_data_field_funded_amount';
-  $handler->display->display_options['fields']['field_funded_amount_1']['field'] = 'field_funded_amount';
-  $handler->display->display_options['fields']['field_funded_amount_1']['relationship'] = 'reverse_field_recipient_node';
-  $handler->display->display_options['fields']['field_funded_amount_1']['group_type'] = 'sum';
-  $handler->display->display_options['fields']['field_funded_amount_1']['label'] = 'Total received';
-  $handler->display->display_options['fields']['field_funded_amount_1']['element_type'] = '0';
-  $handler->display->display_options['fields']['field_funded_amount_1']['element_label_type'] = '0';
-  $handler->display->display_options['fields']['field_funded_amount_1']['element_wrapper_type'] = '0';
-  $handler->display->display_options['fields']['field_funded_amount_1']['element_default_classes'] = FALSE;
-  $handler->display->display_options['fields']['field_funded_amount_1']['settings'] = array(
-    'thousand_separator' => ',',
-    'prefix_suffix' => 1,
-  );
-  /* Field: Global: Custom text */
-  $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
-  $handler->display->display_options['fields']['nothing']['table'] = 'views';
-  $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
-  $handler->display->display_options['fields']['nothing']['alter']['text'] = '[field_funded_amount] and [field_funded_amount_1]';
+  $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
+  /* Field: Content: Data from */
+  $handler->display->display_options['fields']['grants_datestart']['id'] = 'grants_datestart';
+  $handler->display->display_options['fields']['grants_datestart']['table'] = 'node';
+  $handler->display->display_options['fields']['grants_datestart']['field'] = 'grants_datestart';
+  /* Field: Content: Grants funded */
+  $handler->display->display_options['fields']['grants_funded']['id'] = 'grants_funded';
+  $handler->display->display_options['fields']['grants_funded']['table'] = 'node';
+  $handler->display->display_options['fields']['grants_funded']['field'] = 'grants_funded';
+  /* Field: Content: Grants received */
+  $handler->display->display_options['fields']['grants_received']['id'] = 'grants_received';
+  $handler->display->display_options['fields']['grants_received']['table'] = 'node';
+  $handler->display->display_options['fields']['grants_received']['field'] = 'grants_received';
   $handler->display->display_options['path'] = 'org_totals_services';
   $export['orgs'] = $view;
 
