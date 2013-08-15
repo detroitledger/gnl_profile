@@ -45,6 +45,12 @@ projects[features][version] = "2.0-rc1"
 projects[git_deploy][subdir] = "contrib"
 projects[git_deploy][version] = "2.x-dev"
 
+projects[gnl_fields][download][type] = "git"
+projects[gnl_fields][download][url] = "https://github.com/detroitledger/gnl_fields.git"
+projects[gnl_fields][download][branch] = "7.x-1.x"
+projects[gnl_fields][type] = "module"
+projects[gnl_fields][subdir] = "custom"
+
 projects[gnl_schema][download][type] = "git"
 projects[gnl_schema][download][url] = "https://github.com/detroitledger/gnl_schema.git"
 projects[gnl_schema][download][branch] = "7.x-1.x"
