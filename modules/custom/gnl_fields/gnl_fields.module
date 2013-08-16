@@ -52,9 +52,9 @@ function gnl_fields_node_load($nodes, $types) {
 
   foreach ($nodes as $node) {
     if ($node->type == 'org') {
-      $node->org_grants_funded = gnl_fields_org_grants_funded($node);
-      $node->org_grants_received = gnl_fields_org_grants_received($node);
-      $node->org_grants_datestart = gnl_fields_org_grants_datestart($node);
+      $node->org_grants_funded = (int) gnl_fields_org_grants_funded($node);
+      $node->org_grants_received = (int) gnl_fields_org_grants_received($node);
+      $node->org_grants_datestart = (int) gnl_fields_org_grants_datestart($node);
     }
   }
 }
@@ -169,15 +169,32 @@ function theme_gnl_fields_datestart_field($variables) {
   return $output;
 }
 
-function gnl_fields_org_grants_funded($node) {
-  return db_query('SELECT SUM(fdffa.field_funded_amount_value) FROM {field_data_field_funded_amount} AS fdffa INNER JOIN {field_data_field_funder} AS fdff ON fdffa.entity_id=fdff.entity_id WHERE fdff.field_funder_target_id=:nid', array(':nid' => $node->nid))->fetchField();
+function gnl_fields_org_grants_funded($entity_or_nid) {
+  if (gettype($entity_or_nid) == 'object') {
+    $nid = $entity_or_nid->nid;
+  } else {
+    $nid = $entity_or_nid;
+  }
+  $amount = db_query('SELECT SUM(fdffa.field_funded_amount_value) FROM {field_data_field_funded_amount} AS fdffa INNER JOIN {field_data_field_funder} AS fdff ON fdffa.entity_id=fdff.entity_id WHERE fdff.field_funder_target_id=:nid', array(':nid' => $nid))->fetchField();
+  return $amount;
 }
 
-function gnl_fields_org_grants_received($node) {
-  return db_query('SELECT SUM(fdffa.field_funded_amount_value) FROM {field_data_field_funded_amount} AS fdffa INNER JOIN {field_data_field_recipient} AS fdfr ON fdffa.entity_id=fdfr.entity_id WHERE fdfr.field_recipient_target_id=:nid', array(':nid' => $node->nid))->fetchField();
+function gnl_fields_org_grants_received($entity_or_nid) {
+  if (gettype($entity_or_nid) == 'object') {
+    $nid = $entity_or_nid->nid;
+  } else {
+    $nid = $entity_or_nid;
+  }
+  $amount = db_query('SELECT SUM(fdffa.field_funded_amount_value) FROM {field_data_field_funded_amount} AS fdffa INNER JOIN {field_data_field_recipient} AS fdfr ON fdffa.entity_id=fdfr.entity_id WHERE fdfr.field_recipient_target_id=:nid', array(':nid' => $nid))->fetchField();
+  return $amount;
 }
 
-function gnl_fields_org_grants_datestart($node) {
-  return db_query('SELECT MIN(min) FROM ((SELECT MIN(fdfy.field_year_value) AS min FROM {field_data_field_year} AS fdfy INNER JOIN {field_data_field_funder} AS fdff ON fdfy.entity_id=fdff.entity_id WHERE fdff.field_funder_target_id=:nid) UNION (SELECT MIN(fdfy.field_year_value) AS min FROM {field_data_field_year} AS fdfy INNER JOIN {field_data_field_recipient} AS fdfr ON fdfy.entity_id=fdfr.entity_id WHERE fdfr.field_recipient_target_id=:nid)) AS combine', array(':nid' => $node->nid))->fetchField();
+function gnl_fields_org_grants_datestart($entity_or_nid) {
+  if (gettype($entity_or_nid) == 'object') {
+    $nid = $entity_or_nid->nid;
+  } else {
+    $nid = $entity_or_nid;
+  }
+  return db_query('SELECT MIN(min) FROM ((SELECT MIN(fdfy.field_year_value) AS min FROM {field_data_field_year} AS fdfy INNER JOIN {field_data_field_funder} AS fdff ON fdfy.entity_id=fdff.entity_id WHERE fdff.field_funder_target_id=:nid) UNION (SELECT MIN(fdfy.field_year_value) AS min FROM {field_data_field_year} AS fdfy INNER JOIN {field_data_field_recipient} AS fdfr ON fdfy.entity_id=fdfr.entity_id WHERE fdfr.field_recipient_target_id=:nid)) AS combine', array(':nid' => $nid))->fetchField();
 }
 
