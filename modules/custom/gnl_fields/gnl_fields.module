@@ -73,7 +73,7 @@ function gnl_fields_node_view($node, $view_mode, $langcode) {
         '#label' => t('Grants funded total:'),
         '#markup' => $node->org_grants_funded,
         '#theme_wrappers' => array('gnl_fields_money_field'),
-        '#label_display' => 'above',
+        '#label_display' => 'hidden',
       );
       $node->content['gnl_fields_org_grants_received'] = array(
         '#type' => 'item',
@@ -81,7 +81,7 @@ function gnl_fields_node_view($node, $view_mode, $langcode) {
         '#label' => t('Grants received total:'),
         '#markup' => $node->org_grants_received,
         '#theme_wrappers' => array('gnl_fields_money_field'),
-        '#label_display' => 'above',
+        '#label_display' => 'hidden',
       );
       $node->content['gnl_fields_org_grants_datestart'] = array(
         '#type' => 'item',
@@ -89,7 +89,7 @@ function gnl_fields_node_view($node, $view_mode, $langcode) {
         '#label' => t('Grants cover years:'),
         '#markup' => $node->org_grants_datestart,
         '#theme_wrappers' => array('gnl_fields_datestart_field'),
-        '#label_display' => 'above',
+        '#label_display' => 'hidden',
       );
       break;
   }
@@ -120,7 +120,7 @@ function theme_gnl_fields_money_field($variables) {
   // this is the wrong place to setlocale... but i couldn't find a more Drupaly alternative
   setlocale(LC_MONETARY, 'en_US.UTF-8');
 
-  $classes = array('clearfix', 'field');
+  $classes = array('field');
 
   if (isset($variables['element']['#field_name'])) {
     $classes[] = 'field--name-' . strtr($variables['element']['#field_name'], '_', '-');
@@ -130,14 +130,14 @@ function theme_gnl_fields_money_field($variables) {
     $classes[] = 'field-label-' . $variables['element']['#label_display'];
   }
 
-  $output = '<div class="' . implode(' ', $classes) . '">';
+  $output = '<span class="' . implode(' ', $classes) . '">';
 
-  if (isset($variables['element']['#label'])) {
+  if (isset($variables['element']['#label']) && $variables['element']['#label_display'] != 'hidden') {
     $output .= '<div class="field__label">' . $variables['element']['#label'] . '&nbsp;</div>';
   }
 
-  $output .= '<div class="field__items">' . money_format('%.0n', $variables['element']['#markup']) . '</div>';
-  $output .= '</div>';
+  $output .= money_format('%.0n', $variables['element']['#markup']);
+  $output .= '</span>';
 
   return $output;
 }
@@ -147,7 +147,7 @@ function theme_gnl_fields_money_field($variables) {
  * @see http://drupal.org/node/1471706
  */
 function theme_gnl_fields_datestart_field($variables) {
-  $classes = array('clearfix', 'field');
+  $classes = array('field');
 
   if (isset($variables['element']['#field_name'])) {
     $classes[] = 'field--name-' . strtr($variables['element']['#field_name'], '_', '-');
@@ -157,14 +157,14 @@ function theme_gnl_fields_datestart_field($variables) {
     $classes[] = 'field-label-' . $variables['element']['#label_display'];
   }
 
-  $output = '<div class="' . implode(' ', $classes) . '">';
+  $output = '<span class="' . implode(' ', $classes) . '">';
 
-  if (isset($variables['element']['#label'])) {
+  if (isset($variables['element']['#label']) && $variables['element']['#label_display'] != 'hidden') {
     $output .= '<div class="field__label">' . $variables['element']['#label'] . '&nbsp;</div>';
   }
 
-  $output .= '<div class="field__items">' . substr($variables['element']['#markup'], 0, 4) . '</div>';
-  $output .= '</div>';
+  $output .= substr($variables['element']['#markup'], 0, 4);
+  $output .= '</span>';
 
   return $output;
 }
@@ -176,6 +176,7 @@ function gnl_fields_org_grants_funded($entity_or_nid) {
     $nid = $entity_or_nid;
   }
   $amount = db_query('SELECT SUM(fdffa.field_funded_amount_value) FROM {field_data_field_funded_amount} AS fdffa INNER JOIN {field_data_field_funder} AS fdff ON fdffa.entity_id=fdff.entity_id WHERE fdff.field_funder_target_id=:nid', array(':nid' => $nid))->fetchField();
+  $amount = ($amount == NULL) ? NULL : (int) $amount;
   return $amount;
 }
 
@@ -186,6 +187,7 @@ function gnl_fields_org_grants_received($entity_or_nid) {
     $nid = $entity_or_nid;
   }
   $amount = db_query('SELECT SUM(fdffa.field_funded_amount_value) FROM {field_data_field_funded_amount} AS fdffa INNER JOIN {field_data_field_recipient} AS fdfr ON fdffa.entity_id=fdfr.entity_id WHERE fdfr.field_recipient_target_id=:nid', array(':nid' => $nid))->fetchField();
+  $amount = ($amount == NULL) ? NULL : (int) $amount;
   return $amount;
 }
 
