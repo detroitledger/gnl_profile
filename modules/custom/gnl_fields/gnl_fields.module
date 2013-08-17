@@ -92,6 +92,9 @@ function gnl_fields_node_view($node, $view_mode, $langcode) {
         '#label_display' => 'hidden',
       );
       break;
+    case 'grant':
+      $node->content['field_funded_amount']['#theme_wrappers'] = array('gnl_fields_money_field');
+      break;
   }
 }
 
@@ -136,7 +139,12 @@ function theme_gnl_fields_money_field($variables) {
     $output .= '<div class="field__label">' . $variables['element']['#label'] . '&nbsp;</div>';
   }
 
-  $output .= money_format('%.0n', $variables['element']['#markup']);
+  if (isset($variables['element']['#items'])) {
+    $output .= money_format('%.0n', $variables['element']['#items'][0]['value']);
+  }
+  else {
+    $output .= money_format('%.0n', $variables['element']['#markup']);
+  }
   $output .= '</span>';
 
   return $output;
