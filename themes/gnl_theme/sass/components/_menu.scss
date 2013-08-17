@@ -8,5 +8,11 @@ ul.menu {
     display: inline;
     margin: 0;
     padding: 0;
+    &:after {
+      content: ',';
+    }
+    &.last:after {
+      content: '.';
+    }
   }
 }
