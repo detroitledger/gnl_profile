@@ -1,12 +1,12 @@
+<?php
+$funder = strip_tags($content['field_funder'][0]['#markup']);
+$recipient = strip_tags($content['field_recipient'][0]['#markup']);
+$amount = $content['field_funded_amount'][0]['#markup'];
+$year = $content['field_year'][0]['#markup'];
+?>
 <article<?php print $attributes; ?>>
   <?php if (!empty($title_prefix) || !empty($title_suffix) || !$page): ?>
 
-  <?php
-    $funder = strip_tags($content['field_funder'][0]['#markup']);
-    $recipient = strip_tags($content['field_recipient'][0]['#markup']);
-    $amount = $content['field_funded_amount'][0]['#markup'];
-    $year = $content['field_year'][0]['#markup'];
-  ?>
       <?php print render($title_prefix); ?>
       <?php if (!$page): ?>
           <a href="<?php print $node_url; ?>" rel="bookmark"><?php print $funder; ?> gave <?php print $recipient; ?> <?php print $amount; ?></a> during <?php print $year; ?>
