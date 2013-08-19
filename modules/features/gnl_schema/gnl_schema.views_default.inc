@@ -338,11 +338,6 @@ function gnl_schema_views_default_views() {
   $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['title']['element_wrapper_type'] = '0';
   $handler->display->display_options['fields']['title']['element_default_classes'] = FALSE;
-  /* Sort criterion: Content: Post date */
-  $handler->display->display_options['sorts']['created']['id'] = 'created';
-  $handler->display->display_options['sorts']['created']['table'] = 'node';
-  $handler->display->display_options['sorts']['created']['field'] = 'created';
-  $handler->display->display_options['sorts']['created']['order'] = 'DESC';
   /* Sort criterion: Total granted */
   $handler->display->display_options['sorts']['raw_sort']['id'] = 'raw_sort';
   $handler->display->display_options['sorts']['raw_sort']['table'] = 'views_raw_sql';
@@ -350,6 +345,7 @@ function gnl_schema_views_default_views() {
   $handler->display->display_options['sorts']['raw_sort']['ui_name'] = 'Total granted';
   $handler->display->display_options['sorts']['raw_sort']['exposed'] = TRUE;
   $handler->display->display_options['sorts']['raw_sort']['expose']['label'] = 'Total granted';
+  $handler->display->display_options['sorts']['raw_sort']['raw_sql'] = '(SELECT SUM(fdffa.field_funded_amount_value) FROM {field_data_field_funded_amount} AS fdffa INNER JOIN {field_data_field_funder} AS fdff ON fdffa.entity_id=fdff.entity_id WHERE fdff.field_funder_target_id=node.nid)';
   /* Sort criterion: Total received */
   $handler->display->display_options['sorts']['raw_sort_1']['id'] = 'raw_sort_1';
   $handler->display->display_options['sorts']['raw_sort_1']['table'] = 'views_raw_sql';
@@ -357,6 +353,7 @@ function gnl_schema_views_default_views() {
   $handler->display->display_options['sorts']['raw_sort_1']['ui_name'] = 'Total received';
   $handler->display->display_options['sorts']['raw_sort_1']['exposed'] = TRUE;
   $handler->display->display_options['sorts']['raw_sort_1']['expose']['label'] = 'Total received';
+  $handler->display->display_options['sorts']['raw_sort_1']['raw_sql'] = '(SELECT SUM(fdffa.field_funded_amount_value) FROM {field_data_field_funded_amount} AS fdffa INNER JOIN {field_data_field_recipient} AS fdfr ON fdffa.entity_id=fdfr.entity_id WHERE fdfr.field_recipient_target_id=node.nid)';
   /* Filter criterion: Content: Published */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
