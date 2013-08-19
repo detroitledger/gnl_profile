@@ -167,6 +167,15 @@ function gnl_schema_views_default_views() {
   $handler->display->display_options['row_options']['relationship'] = 'reverse_field_funder_node';
   $handler->display->display_options['row_options']['links'] = FALSE;
   $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['empty'] = FALSE;
+  /* No results behavior: no grants funded msg */
+  $handler->display->display_options['empty']['area_text_custom']['id'] = 'area_text_custom';
+  $handler->display->display_options['empty']['area_text_custom']['table'] = 'views';
+  $handler->display->display_options['empty']['area_text_custom']['field'] = 'area_text_custom';
+  $handler->display->display_options['empty']['area_text_custom']['ui_name'] = 'no grants funded msg';
+  $handler->display->display_options['empty']['area_text_custom']['label'] = 'no grants funded msg';
+  $handler->display->display_options['empty']['area_text_custom']['empty'] = TRUE;
+  $handler->display->display_options['empty']['area_text_custom']['content'] = 'We don\'t have any records for grants made by this organization.';
   $handler->display->display_options['defaults']['relationships'] = FALSE;
   /* Relationship: Entity Reference: Referencing entity */
   $handler->display->display_options['relationships']['reverse_field_funder_node']['id'] = 'reverse_field_funder_node';
@@ -192,6 +201,15 @@ function gnl_schema_views_default_views() {
   $handler->display->display_options['row_options']['relationship'] = 'reverse_field_recipient_node';
   $handler->display->display_options['row_options']['links'] = FALSE;
   $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['empty'] = FALSE;
+  /* No results behavior: no grants received msg */
+  $handler->display->display_options['empty']['area_text_custom']['id'] = 'area_text_custom';
+  $handler->display->display_options['empty']['area_text_custom']['table'] = 'views';
+  $handler->display->display_options['empty']['area_text_custom']['field'] = 'area_text_custom';
+  $handler->display->display_options['empty']['area_text_custom']['ui_name'] = 'no grants received msg';
+  $handler->display->display_options['empty']['area_text_custom']['label'] = 'no grants received msg';
+  $handler->display->display_options['empty']['area_text_custom']['empty'] = TRUE;
+  $handler->display->display_options['empty']['area_text_custom']['content'] = 'We don\'t have any records for grants received by this organization.';
   $handler->display->display_options['defaults']['relationships'] = FALSE;
   /* Relationship: Entity Reference: Referencing entity */
   $handler->display->display_options['relationships']['reverse_field_recipient_node']['id'] = 'reverse_field_recipient_node';
@@ -325,6 +343,20 @@ function gnl_schema_views_default_views() {
   $handler->display->display_options['sorts']['created']['table'] = 'node';
   $handler->display->display_options['sorts']['created']['field'] = 'created';
   $handler->display->display_options['sorts']['created']['order'] = 'DESC';
+  /* Sort criterion: Total granted */
+  $handler->display->display_options['sorts']['raw_sort']['id'] = 'raw_sort';
+  $handler->display->display_options['sorts']['raw_sort']['table'] = 'views_raw_sql';
+  $handler->display->display_options['sorts']['raw_sort']['field'] = 'raw_sort';
+  $handler->display->display_options['sorts']['raw_sort']['ui_name'] = 'Total granted';
+  $handler->display->display_options['sorts']['raw_sort']['exposed'] = TRUE;
+  $handler->display->display_options['sorts']['raw_sort']['expose']['label'] = 'Total granted';
+  /* Sort criterion: Total received */
+  $handler->display->display_options['sorts']['raw_sort_1']['id'] = 'raw_sort_1';
+  $handler->display->display_options['sorts']['raw_sort_1']['table'] = 'views_raw_sql';
+  $handler->display->display_options['sorts']['raw_sort_1']['field'] = 'raw_sort';
+  $handler->display->display_options['sorts']['raw_sort_1']['ui_name'] = 'Total received';
+  $handler->display->display_options['sorts']['raw_sort_1']['exposed'] = TRUE;
+  $handler->display->display_options['sorts']['raw_sort_1']['expose']['label'] = 'Total received';
   /* Filter criterion: Content: Published */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
