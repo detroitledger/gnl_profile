@@ -102,6 +102,12 @@ projects[views][version] = "3.7"
 projects[views_autocomplete_filters][subdir] = "contrib"
 projects[views_autocomplete_filters][version] = "1.0"
 
+projects[views_raw_sql][type] = "module"
+projects[views_raw_sql][subdir] = "contrib"
+projects[views_raw_sql][download][type] = "git"
+projects[views_raw_sql][download][url] = "git://git.drupal.org/project/views_raw_sql.git"
+projects[views_raw_sql][download][branch] = "7.x-1.x"
+
 ; Themes
 projects[omega][type] = "theme"
 projects[omega][download][type] = "git"
