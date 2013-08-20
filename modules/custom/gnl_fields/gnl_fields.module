@@ -208,3 +208,19 @@ function gnl_fields_org_grants_datestart($entity_or_nid) {
   return db_query('SELECT MIN(min) FROM ((SELECT MIN(fdfy.field_year_value) AS min FROM {field_data_field_year} AS fdfy INNER JOIN {field_data_field_funder} AS fdff ON fdfy.entity_id=fdff.entity_id WHERE fdff.field_funder_target_id=:nid) UNION (SELECT MIN(fdfy.field_year_value) AS min FROM {field_data_field_year} AS fdfy INNER JOIN {field_data_field_recipient} AS fdfr ON fdfy.entity_id=fdfr.entity_id WHERE fdfr.field_recipient_target_id=:nid)) AS combine', array(':nid' => $nid))->fetchField();
 }
 
+/**
+ * Implements hook_services_request_postprocess_alter().
+ *
+ * For services_views resources, set numeric types correctly for nice JSON.
+ */
+function gnl_fields_services_request_postprocess_alter($controller, $args, &$result) {
+  if ($controller['callback'] === 'services_views_retrieve') {
+    foreach ((array) $result as $res) {
+      foreach ($res as &$field) {
+        if (is_numeric($field) ) {
+          $field = floatval($field);
+        }
+      }
+    }
+  }
+}
