@@ -215,6 +215,7 @@ function gnl_schema_views_default_views() {
   $handler->display->display_options['relationships']['reverse_field_recipient_node']['id'] = 'reverse_field_recipient_node';
   $handler->display->display_options['relationships']['reverse_field_recipient_node']['table'] = 'node';
   $handler->display->display_options['relationships']['reverse_field_recipient_node']['field'] = 'reverse_field_recipient_node';
+  $handler->display->display_options['relationships']['reverse_field_recipient_node']['required'] = TRUE;
   $handler->display->display_options['defaults']['sorts'] = FALSE;
   /* Sort criterion: Content: Year (field_year) */
   $handler->display->display_options['sorts']['field_year_value_1']['id'] = 'field_year_value_1';
