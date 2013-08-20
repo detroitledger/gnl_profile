@@ -10,7 +10,8 @@ $year = ($content['gnl_fields_org_grants_datestart']['#markup']) ? render($conte
       <?php print render($title_prefix); ?>
       <?php if (!$page): ?>
           <a href="<?php print $node_url; ?>" rel="bookmark"><?php
-            print $title . ' has ';
+            print $title;
+            if ($received || $granted) { print ' has '; }
             if ($received) { print 'received ' . $received; }
             if ($received && $granted) { print ' and '; }
             if ($granted) { print ' granted ' . $granted; }
