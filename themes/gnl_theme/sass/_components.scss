@@ -42,20 +42,21 @@
 @import "components/breadcrumbs";
 
 /* Header ------------------------------------------------------------------- */
-header {
-  width: 650px;
+.full-width-container {
   background: #0088cc;
-  margin: 0px auto;
+}
+
+header {
   a:link,
   a:visited {
     color: white;
   }
 }
 
-/* Organization ------------------------------------------------------------- */
+/* Organization -------------------------------------------------------------
 
 .l-content-wrapper {
   width: 650px;
   margin: 0px auto;
-}
+}*/
 
