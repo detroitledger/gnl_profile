@@ -4,6 +4,7 @@ $granted = ($content['gnl_fields_org_grants_funded']['#markup']) ? render($conte
 $year = ($content['gnl_fields_org_grants_datestart']['#markup']) ? render($content['gnl_fields_org_grants_datestart']) : NULL;
 ?>
 <article<?php print $attributes; ?>>
+
   <?php if (!empty($title_prefix) || !empty($title_suffix) || !$page): ?>
 
       <?php print render($title_prefix); ?>
