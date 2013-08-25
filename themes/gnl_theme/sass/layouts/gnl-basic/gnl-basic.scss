@@ -29,6 +29,13 @@
   @extend %container;
 }
 
+.l-header-wrapper {
+  margin-bottom: 0;
+}
+
+.full-width-container {
+}
+
 .l-content {
   margin-top: 2 * $vert-spacing-unit;
   margin-bottom: 2 * $vert-spacing-unit;

@@ -42,27 +42,28 @@
 @import "components/breadcrumbs";
 
 /* Header ------------------------------------------------------------------- */
-.full-width-container {
-  background: #0088cc;
-  color: #fff;
-  overflow: auto;
-  padding: 10px 0;
-  font-size: 12px;
-}
-
 .page-head {
   background: #04952e;
+  color: #fff;
 }
 
-.full-width-container header {
-  margin-bottom: 0;
-  a:link,
-  a:visited {
+.contrast {
+  background: #0088cc;
+  color: #fff;
+}
+
+.l-branding,
+.l-region--navigation,
+.page-head h1 {
+  font-size: 12px;
+  line-height: 14px;
+  a:link, a:active,
+  a:visited, a:hover {
     color: white;
   }
 }
 
-header .site-branding {
+.site-branding {
   font-weight: bold;
 }
 
@@ -78,17 +79,15 @@ header .site-branding {
   font-size: 14px;
 }
 
-/* Menu --------------------------------------------------------------------- */
-ul.menu li.leaf:after {
-  content: '' !important; /* wtf */
-}
-
-ul.menu li.leaf {
-  padding: 15px 30px 15px 0px;
-
-  :last-child {
-    padding-right: 0;
+/* Main Menu ---------------------------------------------------------------- */
+#block-system-main-menu {
+  ul.menu {
+    li.leaf {
+      padding-right: 23px;
+      :last-child {
+        padding-right: 0;
+      }
+    }
   }
 }
-
 

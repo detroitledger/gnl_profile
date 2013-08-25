@@ -15,12 +15,6 @@ regions[sidebar_first] = First Sidebar
 regions[sidebar_second] = Second Sidebar
 regions[footer] = Footer
 
-
-; Information added by drush on 2013-06-28
-version = ""
-project = "gnl_theme"
-datestamp = "1372444710"
-
 settings[toggle_logo] = 0
 settings[toggle_name] = 1
 settings[toggle_slogan] = 1
@@ -65,10 +59,4 @@ settings[omega_libraries][respond][status] = 0
 settings[omega_libraries][css3pie][status] = 0
 settings[omega_libraries][html5shiv][status] = 0
 settings[omega_libraries][messages][status] = 0
-
-
-; Information added by drush on 2013-08-19
-version = ""
-project = "gnl_theme"
-datestamp = "1376962693"
 
