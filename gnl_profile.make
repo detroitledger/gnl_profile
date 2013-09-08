@@ -102,6 +102,9 @@ projects[views][version] = "3.7"
 projects[views_autocomplete_filters][subdir] = "contrib"
 projects[views_autocomplete_filters][version] = "1.0"
 
+projects[views_data_export][subdir] = "contrib"
+projects[views_data_export][version] = "3.0-beta6"
+
 projects[views_raw_sql][type] = "module"
 projects[views_raw_sql][subdir] = "contrib"
 projects[views_raw_sql][download][type] = "git"
