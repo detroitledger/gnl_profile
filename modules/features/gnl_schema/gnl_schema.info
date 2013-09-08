@@ -102,6 +102,7 @@ features[variable][] = node_preview_org
 features[variable][] = node_submitted_grant
 features[variable][] = node_submitted_org
 features[variable][] = node_submitted_page
+features[views_view][] = all_grants
 features[views_view][] = org_grants
 features[views_view][] = organization_grants_received
 features[views_view][] = orgs
