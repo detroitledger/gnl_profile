@@ -8,16 +8,20 @@ $year = ($content['gnl_fields_org_grants_datestart']['#markup']) ? render($conte
 
       <?php print render($title_prefix); ?>
       <?php if (!$page): ?>
-          <a href="<?php print $node_url; ?>" rel="bookmark"><?php
+        <div class="homepage-org">
+          <a href="<?php print $node_url; ?>" rel="bookmark">
+          <?php
             print $title;
-            // if ($received || $granted) { print ' has '; }
-            print '<h2 class="funding-stats">';
-            if ($received) { print 'received ' . $received; }
-            if ($received && $granted) { print ' <br> '; }
-            if ($granted) { print ' granted ' . $granted; }
-            print '</h2>';
-            if ($year) { print '<p class="timeframe">since ' . $year . '</p>'; }
-          ?></a>
+            print '</a>';
+
+            print ' <span class="funding-stats">';
+            if ($received) { print 'received <span class="received">' . $received . '</span>'; }
+            if ($received && $granted) { print ' and '; }
+            if ($granted) { print ' granted <span class="granted">' . $granted . '</span>'; }
+            print '</span>';
+            if ($year) { print ' <span class="timeframe">since ' . $year . '</span>'; }
+          ?>
+      </div>
       <?php endif; ?>
       <?php print render($title_suffix); ?>
   <?php endif; ?>

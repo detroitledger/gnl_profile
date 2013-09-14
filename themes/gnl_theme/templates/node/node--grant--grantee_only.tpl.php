@@ -9,7 +9,7 @@ $year = $content['field_year'][0]['#markup'];
 
       <?php print render($title_prefix); ?>
       <?php if (!$page): ?>
-          <a href="<?php print $node_url; ?>" rel="bookmark"><?php print $amount; ?> to <?php print $recipient; ?></a>, <?php print $year; ?>
+          <a href="<?php print $node_url; ?>" rel="bookmark"><?php print $amount; ?> to <?php print $recipient; ?> in <?php print $year; ?></a>
       <?php endif; ?>
       <?php print render($title_suffix); ?>
   <?php endif; ?>
