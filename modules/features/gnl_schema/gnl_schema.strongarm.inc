@@ -57,6 +57,12 @@ function gnl_schema_strongarm() {
       'token' => array(
         'custom_settings' => FALSE,
       ),
+      'grantor_only' => array(
+        'custom_settings' => FALSE,
+      ),
+      'grantee_only' => array(
+        'custom_settings' => FALSE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(

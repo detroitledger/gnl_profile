@@ -25,7 +25,7 @@ function gnl_schema_uuid_features_default_content() {
   'tnid' => 0,
   'translate' => 0,
   'uuid' => '22c6d32e-d297-46d0-8050-95c9d49ef1ca',
-  'revision_uid' => 1,
+  'revision_uid' => 0,
   'body' => array(
     'und' => array(
       0 => array(
@@ -78,7 +78,7 @@ function gnl_schema_uuid_features_default_content() {
   'tnid' => 0,
   'translate' => 0,
   'uuid' => '7ea570ba-598c-436c-9c7b-29e7e974f14b',
-  'revision_uid' => 1,
+  'revision_uid' => 0,
   'body' => array(
     'und' => array(
       0 => array(
@@ -149,7 +149,7 @@ But to get a comprehensive dataset, we need someone dedicated to getting the inf
   'tnid' => 0,
   'translate' => 0,
   'uuid' => 'd0766f2c-35c8-4338-b8fc-28cee03b2dd5',
-  'revision_uid' => 1,
+  'revision_uid' => 0,
   'body' => array(),
   'name' => '',
   'picture' => 0,
