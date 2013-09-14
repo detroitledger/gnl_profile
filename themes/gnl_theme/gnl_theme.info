@@ -60,10 +60,3 @@ settings[omega_libraries][css3pie][status] = 0
 settings[omega_libraries][html5shiv][status] = 0
 settings[omega_libraries][messages][status] = 0
 
-
-
-; Information added by drush on 2013-09-14
-version = ""
-project = "gnl_theme"
-datestamp = "1379175588"
-
