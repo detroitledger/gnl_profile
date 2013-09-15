@@ -9,17 +9,22 @@ $year = ($content['gnl_fields_org_grants_datestart']['#markup']) ? render($conte
       <?php print render($title_prefix); ?>
       <?php if (!$page): ?>
         <div class="homepage-org">
-          <a href="<?php print $node_url; ?>" rel="bookmark">
+          <a href="<?php print $node_url; ?>" rel="bookmark"><?php print $title; ?></a>
           <?php
-            print $title;
-            print '</a>';
-
             print ' <span class="funding-stats">';
-            if ($received) { print 'received <span class="received">' . $received . '</span>'; }
-            if ($received && $granted) { print ' and '; }
-            if ($granted) { print ' granted <span class="granted">' . $granted . '</span>'; }
+            if ($received) {
+              print 'received <span class="received">' . $received . '</span>';
+            }
+            if ($received && $granted) {
+              print ' and ';
+            }
+            if ($granted) {
+              print ' granted <span class="granted">' . $granted . '</span>';
+            }
             print '</span>';
-            if ($year) { print ' <span class="timeframe">since ' . $year . '</span>'; }
+            if ($year) {
+              print ' <span class="timeframe">since ' . $year . '</span>';
+            }
           ?>
       </div>
       <?php endif; ?>
@@ -34,12 +39,14 @@ $year = ($content['gnl_fields_org_grants_datestart']['#markup']) ? render($conte
       <h2 class="grants-received">
           <?php print $received . ' received '; ?>
       </h2>
+      <?php print views_embed_view('org_grants', 'received'); ?>
     <?php } ?>
 
     <?php if ($granted) { ?>
       <h2 class="grants-given">
           <?php print $granted . ' given'; ?>
       </h2>
+      <?php print views_embed_view('org_grants', 'funded'); ?>
     <?php } ?>
 
     <?php if ($year) { ?>
