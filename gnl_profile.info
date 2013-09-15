@@ -6,6 +6,7 @@ version = 7.x-0.2
 project = gnl_profile
 dependencies[] = addressfield
 dependencies[] = block
+dependencies[] = boxes
 dependencies[] = context
 dependencies[] = context_ui
 dependencies[] = ctools

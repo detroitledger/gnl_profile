@@ -7,8 +7,8 @@ projects[drupal][version] = "7.22"
 projects[addressfield][subdir] = "contrib"
 projects[addressfield][version] = "1.0-beta4"
 
-projects[views_bulk_operations][subdir] = "contrib"
-projects[views_bulk_operations][version] = "3.1"
+projects[boxes][subdir] = "contrib"
+projects[boxes][version] = "1.1"
 
 projects[context][subdir] = "contrib"
 projects[context][version] = "3.0-beta6"
@@ -101,6 +101,9 @@ projects[views][version] = "3.7"
 
 projects[views_autocomplete_filters][subdir] = "contrib"
 projects[views_autocomplete_filters][version] = "1.0"
+
+projects[views_bulk_operations][subdir] = "contrib"
+projects[views_bulk_operations][version] = "3.1"
 
 projects[views_data_export][subdir] = "contrib"
 projects[views_data_export][version] = "3.0-beta6"
