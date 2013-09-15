@@ -362,6 +362,8 @@ function gnl_schema_views_default_views() {
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
   $handler->display->display_options['row_plugin'] = 'node';
   $handler->display->display_options['row_options']['relationship'] = 'reverse_field_funder_node';
+  $handler->display->display_options['row_options']['view_mode'] = 'grantee_only';
+  $handler->display->display_options['row_options']['links'] = FALSE;
   $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['empty'] = FALSE;
   /* No results behavior: no grants funded msg */
@@ -397,6 +399,7 @@ function gnl_schema_views_default_views() {
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
   $handler->display->display_options['row_plugin'] = 'node';
   $handler->display->display_options['row_options']['relationship'] = 'reverse_field_recipient_node';
+  $handler->display->display_options['row_options']['view_mode'] = 'grantor_only';
   $handler->display->display_options['row_options']['links'] = FALSE;
   $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['empty'] = FALSE;

@@ -80,18 +80,6 @@ function gnl_schema_context_default_contexts() {
           'region' => 'content',
           'weight' => '-10',
         ),
-        'views-org_grants-funded' => array(
-          'module' => 'views',
-          'delta' => 'org_grants-funded',
-          'region' => 'content',
-          'weight' => '-9',
-        ),
-        'views-org_grants-received' => array(
-          'module' => 'views',
-          'delta' => 'org_grants-received',
-          'region' => 'content',
-          'weight' => '-8',
-        ),
       ),
     ),
   );
