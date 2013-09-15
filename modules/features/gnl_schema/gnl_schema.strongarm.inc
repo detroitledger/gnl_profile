@@ -193,5 +193,12 @@ function gnl_schema_strongarm() {
   $strongarm->value = FALSE;
   $export['node_submitted_page'] = $strongarm;
 
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'site_frontpage';
+  $strongarm->value = 'orgs';
+  $export['site_frontpage'] = $strongarm;
+
   return $export;
 }
