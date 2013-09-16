@@ -39,11 +39,12 @@
  ******************************************************************************/
 
 @import "components/menu";
+@import "components/blocks";
 @import "components/breadcrumbs";
 
 /* Header ------------------------------------------------------------------- */
 .page-head {
-  background: #04952e;
+  background: $green;
   color: #fff;
   padding: 10px 0;
 }
@@ -71,24 +72,17 @@
 /* Orgs --------------------------------------------------------------------- */
 .homepage-org {
   padding: 1.5em 0;
-  border-bottom: 1px solid #e5dcaa;
+  border-bottom: 1px solid $darker-tan;
 
   .timeframe {
     color: $body-color;
     font-size: 16px;
   }
 
-  a {
-    background: #f7f4e5;
-    border: 1px solid #e5dcaa;
-    padding: 2px 5px;
-  }
-
+  a,
   .received,
   .granted {
-    background: #f7f4e5;
-    border: 1px solid #e5dcaa;
-    padding: 2px 5px;
+    @include highlight-tan;
   }
 }
 

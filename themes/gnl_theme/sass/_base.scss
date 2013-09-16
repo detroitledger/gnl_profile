@@ -14,7 +14,7 @@
  ******************************************************************************/
 
 body {
-  background: #f1ecd1;
+  background: $light-tan;
   font-family: nobile;
   color: $body-color;
 }
@@ -41,4 +41,9 @@ html.js .form-autocomplete {
 
 .view-id-orgs .views-exposed-form .views-exposed-widget .form-submit {
   margin-top: 0;
+}
+
+input[type="submit"],
+select {
+  @include highlight-tan;
 }
