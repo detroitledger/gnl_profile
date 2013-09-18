@@ -57,6 +57,9 @@ projects[gnl_schema][download][branch] = "7.x-1.x"
 projects[gnl_schema][type] = "module"
 projects[gnl_schema][subdir] = "features"
 
+projects[google_analytics][subdir] = "contrib"
+projects[google_analytics][version] = "1.3"
+
 projects[link][subdir] = "contrib"
 projects[link][version] = "1.1"
 

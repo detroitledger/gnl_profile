@@ -17,6 +17,7 @@ dependencies[] = features
 dependencies[] = field_ui
 dependencies[] = gnl_fields
 dependencies[] = gnl_schema
+dependencies[] = googleanalytics
 dependencies[] = link
 dependencies[] = libraries
 dependencies[] = menu
