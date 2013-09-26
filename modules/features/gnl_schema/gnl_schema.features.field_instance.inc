@@ -464,7 +464,53 @@ function gnl_schema_field_default_field_instances() {
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
-      'weight' => 4,
+      'weight' => 5,
+    ),
+  );
+
+  // Exported field_instance: 'node-org-field_ein'
+  $field_instances['node-org-field_ein'] = array(
+    'bundle' => 'org',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'Federal Employer Identification Number',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'number',
+        'settings' => array(
+          'decimal_separator' => '.',
+          'prefix_suffix' => TRUE,
+          'scale' => 0,
+          'thousand_separator' => ' ',
+        ),
+        'type' => 'number_integer',
+        'weight' => 10,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_ein',
+    'label' => 'EIN',
+    'required' => 0,
+    'settings' => array(
+      'max' => '',
+      'min' => '',
+      'prefix' => '',
+      'suffix' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'number',
+      'settings' => array(),
+      'type' => 'number',
+      'weight' => 1,
     ),
   );
 
@@ -504,7 +550,7 @@ function gnl_schema_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'taxonomy_autocomplete',
-      'weight' => 2,
+      'weight' => 3,
     ),
   );
 
@@ -561,7 +607,7 @@ function gnl_schema_field_default_field_instances() {
         ),
       ),
       'type' => 'addressfield_standard',
-      'weight' => 5,
+      'weight' => 6,
     ),
   );
 
@@ -614,7 +660,7 @@ function gnl_schema_field_default_field_instances() {
         'year_range' => '-3:+3',
       ),
       'type' => 'date_text',
-      'weight' => 7,
+      'weight' => 8,
     ),
   );
 
@@ -668,7 +714,7 @@ function gnl_schema_field_default_field_instances() {
       'module' => 'link',
       'settings' => array(),
       'type' => 'link_field',
-      'weight' => 6,
+      'weight' => 7,
     ),
   );
 
@@ -708,7 +754,7 @@ function gnl_schema_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'taxonomy_autocomplete',
-      'weight' => 3,
+      'weight' => 4,
     ),
   );
 
@@ -748,7 +794,7 @@ function gnl_schema_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 1,
+      'weight' => 2,
     ),
   );
 
@@ -836,6 +882,8 @@ function gnl_schema_field_default_field_instances() {
   t('Amount');
   t('Body');
   t('Description');
+  t('EIN');
+  t('Federal Employer Identification Number');
   t('Founded/dissolved');
   t('Funder');
   t('Grant types');
