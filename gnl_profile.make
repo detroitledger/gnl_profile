@@ -21,8 +21,6 @@ projects[date][download][url] = "git://git.drupal.org/project/date.git"
 projects[date][download][branch] = "7.x-2.x"
 projects[date][type] = "module"
 projects[date][subdir] = "contrib"
-projects[date][patch][2034231][url] = "https://drupal.org/files/date-consolidated_migrate-2.patch"
-projects[date][patch][2034231][md5] = "8a3aaf3f14b98e30e35284c97b64d627"
 
 projects[devel][subdir] = "contrib"
 projects[devel][version] = "1.3"
