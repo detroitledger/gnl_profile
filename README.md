@@ -24,6 +24,29 @@ drush mi Grants
 drush runserver --server=builtin 8080
 ```
 
+Testing
+-------
+
+A test suite lives in `tests/`. Tests are run using [PhantomJS](http://phantomjs.org/), [Behat](http://behat.org), [Mink Extension](http://extensions.behat.org/mink/), and [Drupal Extension](https://github.com/jhedstrom/drupalextension).
+
+After you do everything in the Install section above, you can run tests! Make sure the server is running on port 8080.
+
+```
+# install phantomjs
+# npm install phantomjs works well!
+# run phantomjs:
+phantomjs --webdriver=8643 &
+# set up behat/mink
+cd profiles/gnl_profiletests
+curl -s https://getcomposer.org/installer | php
+php composer.phar install # you need the php5-curl extension, among other extensions!
+# make sure behat has the drupalextension step definitions.. if nothing shows up, run:
+#./bin/behat --init
+./bin/behat -dl
+# run tests
+./bin/behat features/
+```
+
 More information
 ----------------
 
