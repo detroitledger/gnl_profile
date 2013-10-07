@@ -5,5 +5,4 @@ Feature: Visitor browses organizations
 
   Scenario: View default listing of organizations on homepage
     Given I am on the homepage
-    When I go to the homepage
     Then I should see 50 ".homepage-org" elements
