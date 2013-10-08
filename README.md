@@ -33,7 +33,7 @@ After you do everything in the Install section above, you can run tests! Make su
 
 ```
 # install phantomjs
-# npm install phantomjs works well!
+# npm install -g phantomjs works well!
 # run phantomjs:
 phantomjs --webdriver=8643 &
 # set up behat/mink
