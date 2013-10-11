@@ -1,7 +1,7 @@
 core = 7.x
 
 api = 2
-projects[drupal][version] = "7.22"
+projects[drupal][version] = "7.23"
 
 ; Modules
 projects[addressfield][subdir] = "contrib"
@@ -21,8 +21,6 @@ projects[date][download][url] = "git://git.drupal.org/project/date.git"
 projects[date][download][branch] = "7.x-2.x"
 projects[date][type] = "module"
 projects[date][subdir] = "contrib"
-projects[date][patch][2034231][url] = "https://drupal.org/files/date-consolidated_migrate-2.patch"
-projects[date][patch][2034231][md5] = "8a3aaf3f14b98e30e35284c97b64d627"
 
 projects[devel][subdir] = "contrib"
 projects[devel][version] = "1.3"
@@ -97,7 +95,11 @@ projects[uuid][subdir] = "contrib"
 projects[uuid][version] = "1.0-alpha5"
 
 projects[uuid_features][subdir] = "contrib"
-projects[uuid_features][version] = "1.0-alpha3"
+projects[uuid_features][download][type] = "git"
+projects[uuid_features][download][url] = "git://git.drupal.org/project/uuid_features.git"
+projects[uuid_features][download][branch] = "7.x-1.x"
+projects[uuid_features][patch][2052387][url] = "https://drupal.org/files/uuid_features-2052387-clone-export.patch"
+projects[uuid_features][patch][2052387][md5] = "9c5bc30141ba443cc23157e7bc6c721c"
 
 projects[views][subdir] = "contrib"
 projects[views][version] = "3.7"
