@@ -1,7 +1,11 @@
 core = 7.x
 
 api = 2
-projects[drupal][version] = "7.23"
+
+; omega8.cc core
+projects[drupal][type] = "core"
+projects[drupal][download][type] = "get"
+projects[drupal][download][url] = "http://files.aegir.cc/dev/drupal-7.23.1.tar.gz"
 
 ; Modules
 projects[addressfield][subdir] = "contrib"
@@ -11,7 +15,7 @@ projects[boxes][subdir] = "contrib"
 projects[boxes][version] = "1.1"
 
 projects[context][subdir] = "contrib"
-projects[context][version] = "3.0-beta6"
+projects[context][version] = "3.1"
 
 projects[ctools][subdir] = "contrib"
 projects[ctools][version] = "1.3"
@@ -29,7 +33,7 @@ projects[diff][subdir] = "contrib"
 projects[diff][version] = "3.2"
 
 projects[entity][subdir] = "contrib"
-projects[entity][version] = "1.1"
+projects[entity][version] = "1.2"
 
 projects[entityreference][download][type] = "git"
 projects[entityreference][download][url] = "git://git.drupal.org/project/entityreference.git"
@@ -38,7 +42,7 @@ projects[entityreference][type] = "module"
 projects[entityreference][subdir] = "contrib"
 
 projects[features][subdir] = "contrib"
-projects[features][version] = "2.0-rc1"
+projects[features][version] = "2.0"
 
 projects[git_deploy][subdir] = "contrib"
 projects[git_deploy][version] = "2.x-dev"
@@ -56,7 +60,7 @@ projects[gnl_schema][type] = "module"
 projects[gnl_schema][subdir] = "features"
 
 projects[google_analytics][subdir] = "contrib"
-projects[google_analytics][version] = "1.3"
+projects[google_analytics][version] = "1.4"
 
 projects[link][subdir] = "contrib"
 projects[link][version] = "1.1"
