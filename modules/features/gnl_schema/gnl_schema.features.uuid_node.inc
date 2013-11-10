@@ -149,8 +149,40 @@ But to get a comprehensive dataset, we need someone dedicated to getting the inf
   'tnid' => 0,
   'translate' => 0,
   'uuid' => 'd0766f2c-35c8-4338-b8fc-28cee03b2dd5',
-  'revision_uid' => 0,
-  'body' => array(),
+  'revision_uid' => 1,
+  'body' => array(
+    'und' => array(
+      0 => array(
+        'value' => 'Detroit Ledger’s vision is to create a picture of philanthropy in Detroit through dynamic data about grants and loans.  We’re aiming for ultimate transparency around the big-money question -- who is making and who is receiving grants and loans in the city?  
+
+<h2>Collecting Data</h2>
+
+We are thinking about Detroit as we experience it today and are collecting data about grantees within city boundaries who have received funds from 2011 onward, with the exception of a few older grants still active today.  We’re building our database by scraping foundation websites and utilizing publicly reported IRS 990 forms.  In some cases, we are also directly contacting organizations with data inquiries and information requests.  
+
+We are coding data with the intent to provide many search keys to our end-users; including granter foundation, grantee organization, National Tax-Exempt Entity (NTEE) classification, year granted and length of funds, awarded amount, impacted neighborhoods, and more.  Whenever possible, each grant has a direct source link to follow for foundation-specific details.  Otherwise, each grant has a static source citation.
+
+If our data source has not specifically listed the end date of a grant, we record that grant as active for a single fiscal year.  Many grants we’ve come across seem to be allocated for the broad purposes of “general operations” and “areas of greatest need.”  This commonality is not specifically recorded, but we note all project-specific and re-granting details when applicable to our sources.  
+
+<h2>Conversing with People</h2>
+
+In conjunction with the data and web components of our project, we are also conducting outreach to foundation representatives, funders, community experts, and our friends doing work relevant to philanthropy in the city.  We are compiling and publishing our “field journals” - scribbled with the conversations we share, the questions we ask, and the insights we note -  once approved by the folks involved.  Notes are typed and edited after our conversations to correct errors, maintain any agreed upon confidentiality, or add further detail. 
+
+We are doing outreach beginning in June and would love to chat and hear your perspective of grants, loans, and philanthropy in Detroit for twenty minutes or an hour.  If you want to be a contributing voice, email us at hello@detroitledger.org!',
+        'summary' => '',
+        'format' => 'filtered_html',
+        'safe_value' => '<p>Detroit Ledger’s vision is to create a picture of philanthropy in Detroit through dynamic data about grants and loans.  We’re aiming for ultimate transparency around the big-money question -- who is making and who is receiving grants and loans in the city?  </p>
+<p>Collecting Data</p>
+<p>We are thinking about Detroit as we experience it today and are collecting data about grantees within city boundaries who have received funds from 2011 onward, with the exception of a few older grants still active today.  We’re building our database by scraping foundation websites and utilizing publicly reported IRS 990 forms.  In some cases, we are also directly contacting organizations with data inquiries and information requests.  </p>
+<p>We are coding data with the intent to provide many search keys to our end-users; including granter foundation, grantee organization, National Tax-Exempt Entity (NTEE) classification, year granted and length of funds, awarded amount, impacted neighborhoods, and more.  Whenever possible, each grant has a direct source link to follow for foundation-specific details.  Otherwise, each grant has a static source citation.</p>
+<p>If our data source has not specifically listed the end date of a grant, we record that grant as active for a single fiscal year.  Many grants we’ve come across seem to be allocated for the broad purposes of “general operations” and “areas of greatest need.”  This commonality is not specifically recorded, but we note all project-specific and re-granting details when applicable to our sources.  </p>
+<p>Conversing with People</p>
+<p>In conjunction with the data and web components of our project, we are also conducting outreach to foundation representatives, funders, community experts, and our friends doing work relevant to philanthropy in the city.  We are compiling and publishing our “field journals” - scribbled with the conversations we share, the questions we ask, and the insights we note -  once approved by the folks involved.  Notes are typed and edited after our conversations to correct errors, maintain any agreed upon confidentiality, or add further detail. </p>
+<p>We are doing outreach beginning in June and would love to chat and hear your perspective of grants, loans, and philanthropy in Detroit for twenty minutes or an hour.  If you want to be a contributing voice, email us at <a href="mailto:hello@detroitledger.org">hello@detroitledger.org</a>!</p>
+',
+        'safe_summary' => '',
+      ),
+    ),
+  ),
   'name' => '',
   'picture' => 0,
   'data' => NULL,
