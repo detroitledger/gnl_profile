@@ -150,6 +150,52 @@ function gnl_schema_views_default_views() {
     'skip_safe' => 0,
     'skip_empty_values' => 0,
   );
+  /* Field: Content: Year */
+  $handler->display->display_options['fields']['field_year']['id'] = 'field_year';
+  $handler->display->display_options['fields']['field_year']['table'] = 'field_data_field_year';
+  $handler->display->display_options['fields']['field_year']['field'] = 'field_year';
+  $handler->display->display_options['fields']['field_year']['label'] = 'year_start';
+  $handler->display->display_options['fields']['field_year']['alter']['strip_tags'] = TRUE;
+  $handler->display->display_options['fields']['field_year']['element_default_classes'] = FALSE;
+  $handler->display->display_options['fields']['field_year']['settings'] = array(
+    'format_type' => 'year',
+    'fromto' => 'value',
+    'multiple_number' => '',
+    'multiple_from' => '',
+    'multiple_to' => '',
+  );
+  /* Field: Content: Year */
+  $handler->display->display_options['fields']['field_year_1']['id'] = 'field_year_1';
+  $handler->display->display_options['fields']['field_year_1']['table'] = 'field_data_field_year';
+  $handler->display->display_options['fields']['field_year_1']['field'] = 'field_year';
+  $handler->display->display_options['fields']['field_year_1']['label'] = 'year_end';
+  $handler->display->display_options['fields']['field_year_1']['alter']['strip_tags'] = TRUE;
+  $handler->display->display_options['fields']['field_year_1']['element_default_classes'] = FALSE;
+  $handler->display->display_options['fields']['field_year_1']['settings'] = array(
+    'format_type' => 'year',
+    'fromto' => 'value2',
+    'multiple_number' => '',
+    'multiple_from' => '',
+    'multiple_to' => '',
+  );
+  /* Field: Content: Funder */
+  $handler->display->display_options['fields']['field_funder_1']['id'] = 'field_funder_1';
+  $handler->display->display_options['fields']['field_funder_1']['table'] = 'field_data_field_funder';
+  $handler->display->display_options['fields']['field_funder_1']['field'] = 'field_funder';
+  $handler->display->display_options['fields']['field_funder_1']['label'] = 'from_id';
+  $handler->display->display_options['fields']['field_funder_1']['type'] = 'entityreference_entity_id';
+  $handler->display->display_options['fields']['field_funder_1']['settings'] = array(
+    'link' => 0,
+  );
+  /* Field: Content: Recipient */
+  $handler->display->display_options['fields']['field_recipient_1']['id'] = 'field_recipient_1';
+  $handler->display->display_options['fields']['field_recipient_1']['table'] = 'field_data_field_recipient';
+  $handler->display->display_options['fields']['field_recipient_1']['field'] = 'field_recipient';
+  $handler->display->display_options['fields']['field_recipient_1']['label'] = 'to_id';
+  $handler->display->display_options['fields']['field_recipient_1']['type'] = 'entityreference_entity_id';
+  $handler->display->display_options['fields']['field_recipient_1']['settings'] = array(
+    'link' => 0,
+  );
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Content: Published */
