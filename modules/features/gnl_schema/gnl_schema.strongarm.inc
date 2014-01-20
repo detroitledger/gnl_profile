@@ -67,10 +67,10 @@ function gnl_schema_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'title' => array(
-          'weight' => '0',
+          'weight' => '-5',
         ),
         'path' => array(
-          'weight' => '9',
+          'weight' => '30',
         ),
       ),
       'display' => array(
