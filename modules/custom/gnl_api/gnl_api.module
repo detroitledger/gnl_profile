@@ -1,0 +1,68 @@
+<?php
+/**
+* Implements of hook_services_resources().
+*/
+function gnl_api_services_resources() {
+  $api = array(
+    'org' => array(
+      'operations' => array(
+        'retrieve' => array(
+          'help' => 'Retrieves a single Organization',
+          'callback' => '_gnl_api_get_org',
+          'access callback' => 'user_access',
+          'access arguments' => array('access content'),
+          'access arguments append' => FALSE,
+          'args' => array(
+            array(
+              'name' => 'org_id',
+              'type' => 'string',
+              'description' => 'Organization ID',
+              'source' => array('path' => '1'),
+              'optional' => TRUE,
+              'default' => '0',
+            ),
+          ),
+        ),
+      ),
+    ),
+    'orgs' => array(
+      'operations' => array(
+        'retrieve' => array(
+          'help' => 'Retrieves Organizations',
+          'callback' => '_gnl_api_get_orgs',
+          'access callback' => 'user_access',
+          'access arguments' => array('access content'),
+          'access arguments append' => FALSE,
+          'args' => array(
+            array(
+              'name' => 'limit',
+              'type' => 'int',
+              'description' => 'Limit response count, default 10',
+              'source' => array('param' => 'limit'),
+              'optional' => TRUE,
+              'default' => '10',
+            ),
+          ),
+        ),
+      ),
+    ),
+  );
+
+  return $api;
+}
+
+function _gnl_api_get_org($org_id) {
+
+}
+
+function _gnl_api_get_orgs($limit) {
+
+}
+
+function _gnl_api_get_grant($grant_id) {
+
+}
+
+function _gnl_api_get_grants($limit) {
+
+}
