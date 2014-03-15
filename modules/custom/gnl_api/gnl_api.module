@@ -109,7 +109,7 @@ function _gnl_api_get_nodes($bundle, $limit, $offset) {
     ->propertyCondition('status', 1)
     ->propertyOrderBy('created', 'ASC')
     ->range($offset, $limit)
-    ->addMetaData('account', user_load(1));
+    ->addMetaData('account', user_load(0));
 
   $res = $query->execute();
   $org_nids = array_keys($res['node']);
