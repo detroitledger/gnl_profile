@@ -68,7 +68,7 @@ function gnl_api_services_resources() {
 }
 
 function _gnl_api_get_org($org_id) {
-  return node_load($org_id);
+  return _gnl_api_clean_node(node_load($org_id));
 }
 
 function _gnl_api_get_orgs($limit, $offset) {
@@ -78,7 +78,7 @@ function _gnl_api_get_orgs($limit, $offset) {
 }
 
 function _gnl_api_get_grant($grant_id) {
-
+  return _gnl_api_clean_node(node_load($grant_id));
 }
 
 function _gnl_api_get_grants($limit) {
