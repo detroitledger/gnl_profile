@@ -1,7 +1,15 @@
 <?php
+
 /**
-* Implements of hook_services_resources().
-*/
+ * @file gnl_api.module
+ */
+
+define("GNL_API_DEFAULT_LIMIT", 10);
+define("GNL_API_MAX_LIMIT", 100);
+
+/**
+ * Implementats hook_services_resources().
+ */
 function gnl_api_services_resources() {
   $api = array(
     'org' => array(
@@ -40,7 +48,15 @@ function gnl_api_services_resources() {
               'description' => 'Limit response count, default 10',
               'source' => array('param' => 'limit'),
               'optional' => TRUE,
-              'default' => '10',
+              'default' => GNL_API_DEFAULT_LIMIT,
+            ),
+            array(
+              'name' => 'offset',
+              'type' => 'int',
+              'description' => 'Offset starting record',
+              'source' => array('param' => 'offset'),
+              'optional' => TRUE,
+              'default' => 0,
             ),
           ),
         ),
@@ -52,11 +68,27 @@ function gnl_api_services_resources() {
 }
 
 function _gnl_api_get_org($org_id) {
-
+  return node_load($org_id);
 }
 
-function _gnl_api_get_orgs($limit) {
+function _gnl_api_get_orgs($limit, $offset) {
+  $limit = (is_int($limit) && $limit < GNL_API_MAX_LIMIT) ? $limit : GNL_API_DEFAULT_LIMIT;
+  $offset = (is_int($offset)) ? $offset : 0;
 
+  $query = new EntityFieldQuery();
+  $query->entityCondition('entity_type', 'node')
+    ->entityCondition('bundle', 'org')
+    ->propertyCondition('status', 1)
+    ->propertyOrderBy('created', 'ASC')
+    ->range($offset, $limit)
+    ->addMetaData('account', user_load(1));
+
+  $res = $query->execute();
+  $org_nids = array_keys($res['node']);
+
+  $orgs = node_load_multiple($org_nids);
+
+  return $orgs;
 }
 
 function _gnl_api_get_grant($grant_id) {
