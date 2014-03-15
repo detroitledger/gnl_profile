@@ -62,6 +62,56 @@ function gnl_api_services_resources() {
         ),
       ),
     ),
+    'grant' => array(
+      'operations' => array(
+        'retrieve' => array(
+          'help' => 'Retrieves a single Grant',
+          'callback' => '_gnl_api_get_grant',
+          'access callback' => 'user_access',
+          'access arguments' => array('access content'),
+          'access arguments append' => FALSE,
+          'args' => array(
+            array(
+              'name' => 'grant_id',
+              'type' => 'string',
+              'description' => 'Grant ID',
+              'source' => array('path' => '1'),
+              'optional' => TRUE,
+              'default' => '0',
+            ),
+          ),
+        ),
+      ),
+    ),
+    'grants' => array(
+      'operations' => array(
+        'retrieve' => array(
+          'help' => 'Retrieves Grants',
+          'callback' => '_gnl_api_get_grants',
+          'access callback' => 'user_access',
+          'access arguments' => array('access content'),
+          'access arguments append' => FALSE,
+          'args' => array(
+            array(
+              'name' => 'limit',
+              'type' => 'int',
+              'description' => 'Limit response count, default 10',
+              'source' => array('param' => 'limit'),
+              'optional' => TRUE,
+              'default' => GNL_API_DEFAULT_LIMIT,
+            ),
+            array(
+              'name' => 'offset',
+              'type' => 'int',
+              'description' => 'Offset starting record',
+              'source' => array('param' => 'offset'),
+              'optional' => TRUE,
+              'default' => 0,
+            ),
+          ),
+        ),
+      ),
+    ),
   );
 
   return $api;
@@ -72,19 +122,15 @@ function _gnl_api_get_org($org_id) {
 }
 
 function _gnl_api_get_orgs($limit, $offset) {
-  $orgs = _gnl_api_get_nodes('org', $limit, $offset);
-
-  return $orgs;
+  return _gnl_api_get_nodes('org', $limit, $offset);
 }
 
 function _gnl_api_get_grant($grant_id) {
   return _gnl_api_clean_node(node_load($grant_id));
 }
 
-function _gnl_api_get_grants($limit) {
-  $grants = _gnl_api_get_nodes('grant', $limit, $offset);
-
-  return $grants;
+function _gnl_api_get_grants($limit, $offset) {
+  return _gnl_api_get_nodes('grant', $limit, $offset);
 }
 
 /**
@@ -118,7 +164,6 @@ function _gnl_api_get_nodes($bundle, $limit, $offset) {
 
   return $orgs;
 }
-
 
 /**
  * Unsets Drupally things from nodes.
@@ -158,3 +203,4 @@ function _gnl_api_clean_node($node) {
 
   return $node;
 }
+
