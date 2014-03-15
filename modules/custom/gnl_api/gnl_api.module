@@ -8,7 +8,7 @@ define("GNL_API_DEFAULT_LIMIT", 10);
 define("GNL_API_MAX_LIMIT", 100);
 
 /**
- * Implementats hook_services_resources().
+ * Implements hook_services_resources().
  */
 function gnl_api_services_resources() {
   $api = array(
