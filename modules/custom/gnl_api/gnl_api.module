@@ -72,21 +72,7 @@ function _gnl_api_get_org($org_id) {
 }
 
 function _gnl_api_get_orgs($limit, $offset) {
-  $limit = (is_int($limit) && $limit < GNL_API_MAX_LIMIT) ? $limit : GNL_API_DEFAULT_LIMIT;
-  $offset = (is_int($offset)) ? $offset : 0;
-
-  $query = new EntityFieldQuery();
-  $query->entityCondition('entity_type', 'node')
-    ->entityCondition('bundle', 'org')
-    ->propertyCondition('status', 1)
-    ->propertyOrderBy('created', 'ASC')
-    ->range($offset, $limit)
-    ->addMetaData('account', user_load(1));
-
-  $res = $query->execute();
-  $org_nids = array_keys($res['node']);
-
-  $orgs = node_load_multiple($org_nids);
+  $orgs = _gnl_api_get_nodes('org', $limit, $offset);
 
   return $orgs;
 }
@@ -96,5 +82,79 @@ function _gnl_api_get_grant($grant_id) {
 }
 
 function _gnl_api_get_grants($limit) {
+  $grants = _gnl_api_get_nodes('grant', $limit, $offset);
 
+  return $grants;
+}
+
+/**
+ * Helps get a set of nodes.
+ *
+ * @param string $bundle
+ *   Drupal entity bundle
+ *
+ * @param int $limit
+ *
+ * @param int $offset
+ *
+ * @return array
+ */
+function _gnl_api_get_nodes($bundle, $limit, $offset) {
+  $limit = (is_int($limit) && $limit < GNL_API_MAX_LIMIT) ? $limit : GNL_API_DEFAULT_LIMIT;
+  $offset = (is_int($offset)) ? $offset : 0;
+
+  $query = new EntityFieldQuery();
+  $query->entityCondition('entity_type', 'node')
+    ->entityCondition('bundle', $bundle)
+    ->propertyCondition('status', 1)
+    ->propertyOrderBy('created', 'ASC')
+    ->range($offset, $limit)
+    ->addMetaData('account', user_load(1));
+
+  $res = $query->execute();
+  $org_nids = array_keys($res['node']);
+
+  $orgs = array_map('_gnl_api_clean_node', node_load_multiple($org_nids));
+
+  return $orgs;
+}
+
+
+/**
+ * Unsets Drupally things from nodes.
+ *
+ * @param object $node
+ *
+ * @return $node
+ */
+function _gnl_api_clean_node($node) {
+  // first, unset things
+  $unwanted_properties = array(
+    'data',
+    'language',
+    'picture',
+    'promote',
+    'sticky',
+  );
+
+  foreach ($unwanted_properties as $prop) {
+    unset($node->{$prop});
+  }
+
+  // then, remove language from things that just don't need it
+  foreach ($node as $key => $val) {
+    if (is_array($val)) {
+      // change empty arrays to NULL
+      if (count($val) === 0) {
+        $node->{$key} = NULL;
+      }
+      // remove translations
+      // @todo change this in future l10n work
+      if (strpos($key, 'field_') === 0 && array_key_exists('und', $val) && array_key_exists(0, $val['und'])) {
+        $node->{$key} = $val['und'][0];
+      }
+    }
+  }
+
+  return $node;
 }
