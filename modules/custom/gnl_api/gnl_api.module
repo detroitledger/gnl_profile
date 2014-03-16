@@ -16,54 +16,49 @@ function gnl_api_services_resources() {
       'operations' => array(
         'retrieve' => array(
           'help' => 'Retrieves Organization',
-          'callback' => '_gnl_api_get_node',
+          'callback' => '_gnl_api_retrieve_org',
           'access callback' => 'user_access',
           'access arguments' => array('access content'),
           'access arguments append' => FALSE,
           'args' => array(
             array(
               'name' => 'id',
-              'type' => 'string',
+              'type' => 'int',
               'description' => 'Organization ID',
               'source' => array('path' => '0'),
               'optional' => FALSE,
-              'default' => 'search',
+              'default value' => NULL,
             ),
           ),
         ),
-      ),
-    ),
-    'orgs_search' => array(
-      'operations' => array(
-        'create' => array(
-          'help' => 'Searches Organizations',
-          'callback' => '_gnl_api_search_orgs',
+        'index' => array(
+          'help' => 'Lists Organizations',
+          'callback' => '_gnl_api_index_orgs',
           'access arguments' => array('access content'),
-          'access arguments append' => FALSE,
           'args' => array(
-            array(
-              'name' => 'filters',
-              'type' => 'string',
-              'description' => 'Filter repsonses @todo',
-              'source' => array('data' => 'filters'),
-              'optional' => TRUE,
-              'default' => NULL,
-            ),
             array(
               'name' => 'limit',
               'type' => 'int',
               'description' => 'Limit response count (default ' . GNL_API_DEFAULT_LIMIT . ')',
-              'source' => array('data' => 'limit'),
+              'source' => array('param' => 'limit'),
               'optional' => TRUE,
-              'default' => NULL,
+              'default value' => GNL_API_DEFAULT_LIMIT,
             ),
             array(
               'name' => 'offset',
               'type' => 'int',
               'description' => 'Offset starting record',
-              'source' => array('data' => 'offset'),
+              'source' => array('param' => 'offset'),
               'optional' => TRUE,
-              'default' => 0,
+              'default value' => 0,
+            ),
+            array(
+              'name' => 'filters',
+              'type' => 'array',
+              'description' => 'Filter properties',
+              'source' => array('param' => 'filters'),
+              'optional' => TRUE,
+              'default value' => array(),
             ),
           ),
         ),
@@ -73,54 +68,41 @@ function gnl_api_services_resources() {
       'operations' => array(
         'retrieve' => array(
           'help' => 'Retrieves Grant',
-          'callback' => '_gnl_api_get_node',
+          'callback' => '_gnl_api_retrieve_grant',
           'access callback' => 'user_access',
           'access arguments' => array('access content'),
           'access arguments append' => FALSE,
           'args' => array(
             array(
               'name' => 'id',
-              'type' => 'string',
+              'type' => 'int',
               'description' => 'Grant ID',
               'source' => array('path' => '0'),
               'optional' => FALSE,
-              'default' => 'search',
+              'default value' => NULL,
             ),
           ),
         ),
-      ),
-    ),
-    'grants_search' => array(
-      'operations' => array(
-        'create' => array(
-          'help' => 'Searches Grants',
-          'callback' => '_gnl_api_search_grants',
+        'index' => array(
+          'help' => 'Lists Grants',
+          'callback' => '_gnl_api_index_grants',
           'access arguments' => array('access content'),
-          'access arguments append' => FALSE,
           'args' => array(
-            array(
-              'name' => 'filters',
-              'type' => 'string',
-              'description' => 'Filter repsonses @todo',
-              'source' => array('data' => 'filters'),
-              'optional' => TRUE,
-              'default' => NULL,
-            ),
             array(
               'name' => 'limit',
               'type' => 'int',
               'description' => 'Limit response count (default ' . GNL_API_DEFAULT_LIMIT . ')',
-              'source' => array('data' => 'limit'),
+              'source' => array('param' => 'limit'),
               'optional' => TRUE,
-              'default' => NULL,
+              'default value' => GNL_API_DEFAULT_LIMIT,
             ),
             array(
               'name' => 'offset',
               'type' => 'int',
               'description' => 'Offset starting record',
-              'source' => array('data' => 'offset'),
+              'source' => array('param' => 'offset'),
               'optional' => TRUE,
-              'default' => 0,
+              'default value' => 0,
             ),
           ),
         ),
@@ -131,16 +113,38 @@ function gnl_api_services_resources() {
   return $api;
 }
 
-function _gnl_api_get_node($id) {
-  return _gnl_api_clean_node(node_load($id));
+function _gnl_api_retrieve_org($id) {
+  return _gnl_api_retrieve('org', $id);
 }
 
-function _gnl_api_search_orgs($filters, $limit, $offset) {
-  return _gnl_api_get_nodes('org', $limit, $offset);
+function _gnl_api_retrieve_grant($id) {
+  return _gnl_api_retrieve('grant', $id);
 }
 
-function _gnl_api_search_grants($filters, $limit, $offset) {
-  return _gnl_api_get_nodes('grant', $limit, $offset);
+function _gnl_api_index_orgs($limit, $offset, $filters) {
+  return _gnl_api_index_nodes('org', $limit, $offset, $filters);
+}
+
+function _gnl_api_index_grants($limit, $offset, $filters) {
+  return _gnl_api_index_nodes('grant', $limit, $offset, $filters);
+}
+
+/**
+ * Helps retrieve a node.
+ *
+ * @param string $type
+ *
+ * @param int $id
+ *
+ * @return object
+ */
+function _gnl_api_retrieve($type, $id) {
+  $node = node_load($id);
+  if (!$node || $type !== $node->type) { // check the facts!
+    return services_error(t('@type @id does not exist.', array('@type' => $type, '@id' => $id)), 404);
+  } else {
+    return _gnl_api_clean_node($node);
+  }
 }
 
 /**
@@ -153,9 +157,14 @@ function _gnl_api_search_grants($filters, $limit, $offset) {
  *
  * @param int $offset
  *
+ * @param array $filters
+ *   array of property names (like title) to use as LIKE filters
+ *
  * @return array
  */
-function _gnl_api_get_nodes($bundle, $limit, $offset) {
+function _gnl_api_index_nodes($bundle, $limit, $offset, $filters) {
+  $limit = intval($limit);
+  $offset = intval($offset);
   $limit = (is_int($limit) && $limit < GNL_API_MAX_LIMIT) ? $limit : GNL_API_DEFAULT_LIMIT;
   $offset = (is_int($offset)) ? $offset : 0;
 
@@ -167,12 +176,19 @@ function _gnl_api_get_nodes($bundle, $limit, $offset) {
     ->range($offset, $limit)
     ->addMetaData('account', user_load(0));
 
+  foreach ($filters as $property => $str) {
+    $query->propertyCondition($property, '%' . db_like($str) . '%', 'LIKE');
+  }
+
   $res = $query->execute();
-  $org_nids = array_keys($res['node']);
 
-  $orgs = array_map('_gnl_api_clean_node', node_load_multiple($org_nids));
-
-  return $orgs;
+  if (!array_key_exists('node', $res)) {
+    return services_error(t('no results found'), 404);
+  } else {
+    $nids = array_keys($res['node']);
+    $nodes = array_map('_gnl_api_clean_node', node_load_multiple($nids));
+    return $nodes;
+  }
 }
 
 /**
