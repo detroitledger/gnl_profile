@@ -104,6 +104,14 @@ function gnl_api_services_resources() {
               'optional' => TRUE,
               'default value' => 0,
             ),
+            array(
+              'name' => 'filters',
+              'type' => 'array',
+              'description' => 'Filter properties',
+              'source' => array('param' => 'filters'),
+              'optional' => TRUE,
+              'default value' => array(),
+            ),
           ),
         ),
       ),
@@ -168,27 +176,59 @@ function _gnl_api_index_nodes($bundle, $limit, $offset, $filters) {
   $limit = (is_int($limit) && $limit < GNL_API_MAX_LIMIT) ? $limit : GNL_API_DEFAULT_LIMIT;
   $offset = (is_int($offset)) ? $offset : 0;
 
-  $query = new EntityFieldQuery();
-  $query->entityCondition('entity_type', 'node')
-    ->entityCondition('bundle', $bundle)
-    ->propertyCondition('status', 1)
-    ->propertyOrderBy('created', 'ASC')
-    ->range($offset, $limit)
-    ->addMetaData('account', user_load(0));
+  // base query
+  $query = db_select('node', 'n');
+  $query
+    ->condition('status', 1)
+    ->condition('type', $bundle, '=')
+    ->fields('n', array('nid'))
+    ->orderBy('n.created', 'ASC')
+    ->range($offset, $limit);
 
-  foreach ($filters as $property => $str) {
-    $query->propertyCondition($property, '%' . db_like($str) . '%', 'LIKE');
+  // if we're working with orgs and we want to filter on grant totals....
+  if ($bundle == 'org' && array_key_exists('org_grants_received', $filters)) {
+    $betweens = _gnl_api_parse_betweens($filters['org_grants_received']);
+    if (!$betweens) {
+      return services_error(t('malformed filter range'), 400);
+    }
+    $query->where("(SELECT SUM(fdffa.field_funded_amount_value) FROM {field_data_field_funded_amount} AS fdffa INNER JOIN {field_data_field_recipient} AS fdfr ON fdffa.entity_id=fdfr.entity_id WHERE fdfr.field_recipient_target_id=n.nid) BETWEEN :min AND :max", array(':min' => $betweens[0], ':max' => $betweens[1]));
+    unset($filters['org_grants_received']);
+  }
+  if ($bundle == 'org' && array_key_exists('org_grants_funded', $filters)) {
+    $betweens = _gnl_api_parse_betweens($filters['org_grants_funded']);
+    if (!$betweens) {
+      return services_error(t('malformed filter range'), 400);
+    }
+    $query->where("(SELECT SUM(fdffa.field_funded_amount_value) FROM {field_data_field_funded_amount} AS fdffa INNER JOIN {field_data_field_funder} AS fdff ON fdffa.entity_id=fdff.entity_id WHERE fdff.field_funder_target_id=n.nid) BETWEEN :min AND :max", array(':min' => $betweens[0], ':max' => $betweens[1]));
+    unset($filters['org_grants_funded']);
   }
 
-  $res = $query->execute();
+  foreach ($filters as $property => $str) {
+    $query->condition('n.' . $property, '%' . db_like($str) . '%', 'LIKE');
+  }
 
-  if (!array_key_exists('node', $res)) {
+  $res = $query->execute()->fetchAllAssoc('nid');
+
+  if (count($res) < 1) {
     return services_error(t('no results found'), 404);
   } else {
-    $nids = array_keys($res['node']);
+    $nids = array_keys($res);
+
     $nodes = array_map('_gnl_api_clean_node', node_load_multiple($nids));
     return $nodes;
   }
+}
+
+/**
+ * Changes 'n:n' to array(n,n) or FALSE
+ *
+ * @param str
+ *
+ * @return array or FALSE
+ */
+function _gnl_api_parse_betweens($arg) {
+  $betweens = explode(':', $arg);
+  return (count($betweens) === 2) ? $betweens : FALSE;
 }
 
 /**
