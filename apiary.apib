@@ -1,0 +1,147 @@
+FORMAT: 1A
+HOST: http://api.detroitledger.org/api/1.0
+
+# detroitledger
+Data about Detroit's philanthropy landscape: the probably-easily-realizable dream API!
+
+# Notes
+
+## Ledger Universe IDs
+
+Our system will associate an ID with each grant and organization - these IDs will stay the same during a session (i.e. you ask for orgs, query org/someid, then query org/anotherid, and query org/someid again)... but they may change eventually. Don't rely on them; instead run a search based on a global identifier like an EIN.
+
+TODO: how exactly do our UUIDs work / what causes them to change?
+
+## Boilerplate
+
+Single entities will contain the following content management- revision-related properties:
+    
+    "log": "fixed typo" // last revision's editing note
+    "name": "Basil Frankenweiler" // creator's username
+    "path": "http://data.detroitledger.org/permalink/forthis/thing", // html representation URI 4 humans
+    "revision_timestamp": "1381515552", // unix timestamp
+    "revision_uid": "0", // who authored last revision?
+    "type": "org", // entity type
+    "uid": "0", // user id who created this item (0 means it was imported)
+    "uuid": "6a62087a-c996-4e3b-bfbb-d2dd28d6f429", // unique id
+    "vid": "22033", // revision id
+    "vuuid": "7b3a962a-a2cb-49d4-abce-8fd61ae23ecb" // revision unique id
+    "changed": "1381515552", // unix timestamp of date last changed
+    "created": "1381515552", // unix timestamp of date created
+
+## Organization [/orgs/:id]
+### Retrieve a single Organization [GET]
++ Parameters
+
+    + id (number, required, `12345`) ... Organization ID.
+    
++ Response 200 (application/json)
+
+        {
+            "title": "Ptarmigan Petting For Good",
+            "description": "a description if there is one",
+            "ein": "222222222", // Federal IRS EIN
+            "ntee": [{
+                "und": [
+                    {
+                        "ntee_id": "5788", // our unique id for this ntee code - use this to search
+                        "ntee_code": "P44",
+                        "description": "Ptarmigan Petting People" 
+                    }
+                ]
+            }],
+            "address": {
+                "und": [{
+                    "administrative_area": "MI",
+                    "country": "US",
+                    "data": null,
+                    "dependent_locality": null,
+                    "first_name": null,
+                    "last_name": null,
+                    "locality": "Detroit",
+                    "name_line": null,
+                    "organisation_name": null,
+                    "postal_code": "",
+                    "premise": "",
+                    "sub_administrative_area": null,
+                    "sub_premise": null,
+                    "thoroughfare": ""
+                    }]
+            },
+            "lifespan": {
+                "founded": "2015-01-01T00:00:00-05:00", // or null if date is unknown
+                "dissolved": "2015-01-01T00:00:00-05:00" // or null if still active or unknown
+            },
+            "links": [{
+                "title": "link description",
+                "url": "http://alink.com"
+            }, {
+                // ...
+            }],
+            "tags": [{
+                "tag_id": 1232123,
+                "tag_name": "ptarmigan-related organizations"
+            }, {
+                // ...
+            }], 
+            "state_corp_id": "D33333333",
+            "id": "22029", 
+            "grants_datestart": 2009, // first grant was collected in this year
+            "grants_funded": 0, // total USD grants funded
+            "grants_received": 69060400, // total USD grants received
+            // boilerplate
+        }
+
+## Organizations Index [/orgs{?limit,offset,filter}]
+### List all Organizations [GET]
++ Parameters
+
+    + limit = `10` (number, optional) ... Limit response set to this many
+    + offset = `0` (number, optional) ... Begin results at this index
+    + filter (array, optional) ... Filter fields (e.g. `filter[title]=etroit`, `filter[org_grants_funded]=2000:100000`, or `filter[org_grants_received]=100:2000`
+
++ Response 200 (application/json)
+
+        {
+          "org_id": {
+              // see /orgs/:id for organization model
+           },
+          "org_id2": {
+              // ... more organizations
+          }
+        }
+
+## Grant [/grants/:id]
+### Retrieve a single Grant [GET]
++ Response 200 (application/json)
+
+        {
+            "amount": 2999923, // US dollars
+            "from": "Knight Foundation",
+            "from_id": 21751, // org id
+            "id": 23069,
+            "to": "Women of Tomorrow: Philadelphia, Detroit, Charlotte, Palm Beach - Women of Tomorrow Mentor and Scholarship Program", 
+            "to_id": 21995, // org id
+            "year_end": 2017,
+            "year_start": 2010,
+            // boilerplate
+        }
+
+## Grants Index [/grants{?limit,offset,filter}]
+### List all Grants [GET]
++ Parameters
+
+    + limit = `10` (number, optional) ... Limit response set to this many
+    + offset = `0` (number, optional) ... Begin results at this index
+    + filter (array, optional) ... Filter fields (e.g. `filter[title]=gift`)
+    
++ Response 200 (application/json)
+
+        {
+          "grant_id": {
+              // see /grants/:id for organization model
+           },
+          "grant_id2": {
+              // ... more grants
+          }
+        }
