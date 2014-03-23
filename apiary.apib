@@ -12,6 +12,12 @@ Our system will associate an ID with each grant and organization - these IDs wil
 
 TODO: how exactly do our UUIDs work / what causes them to change?
 
+## Response formats
+
+The default response format is XML. Other formats include bencode, json, jsonp, and serialized PHP (php). The format is selected by appending the format code to the URL, followed by a slash. For example, add ".json/" as a suffix to receive JSON data.
+
+JSONP callback can be specified with a callback argument: `http://data.detroitledger.org/api/1.0/orgs.jsonp/?limit=1&offset=2&filters[org_grants_received]=22220:99999&callback=cb`
+
 ## Boilerplate
 
 Single entities will contain the following content management- revision-related properties:
