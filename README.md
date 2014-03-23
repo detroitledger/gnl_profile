@@ -47,12 +47,19 @@ php composer.phar install # you need the php5-curl extension, among other extens
 ./bin/behat features/
 ```
 
+[API Documentation](http://docs.detroitledger.apiary.io/)
+------------------
+
+[API documentation is available on Apiary](http://docs.detroitledger.apiary.io/).
+
+
+
 More information
 ----------------
 
-http://detroitledger.org/
-https://twitter.com/detroitledger
-http://detroitledger.tumblr.com/
+* http://detroitledger.org/
+* https://twitter.com/detroitledger
+* http://detroitledger.tumblr.com/
 
 Credits
 -------
