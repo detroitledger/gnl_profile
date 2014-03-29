@@ -98,6 +98,42 @@ Single entities will contain the following content management- revision-related 
             // boilerplate
         }
 
+## Grants Funded by Organization [/orgs/:id/grants_funded]
+### Lists grants funded by a speific organization [GET]
++ Parameters
+
+    + id (number, required, `12345`) ... Organization ID.
+
++ Response 200 (application/json)
+        {
+          "grants_funded": [
+            {
+              // see /grants/:id for grant model
+            },
+            {
+              // ... more grants
+            }
+          ]
+        }
+
+## Grants Received by Organization [/orgs/:id/grants_received]
+### Lists grants received by a speific organization [GET]
++ Parameters
+
+    + id (number, required, `12345`) ... Organization ID.
+
++ Response 200 (application/json)
+        {
+          "grants_received": [
+            {
+              // see /grants/:id for grant model
+            },
+            {
+              // ... more grants
+            }
+          ]
+        }
+
 ## Organizations Index [/orgs{?limit,offset,filter}]
 ### List all Organizations [GET]
 + Parameters
@@ -109,12 +145,14 @@ Single entities will contain the following content management- revision-related 
 + Response 200 (application/json)
 
         {
-          "org_id": {
+          "orgs": [
+            {
               // see /orgs/:id for organization model
-           },
-          "org_id2": {
+            },
+            {
               // ... more organizations
-          }
+            }
+          ]
         }
 
 ## Grant [/grants/:id]
@@ -144,10 +182,12 @@ Single entities will contain the following content management- revision-related 
 + Response 200 (application/json)
 
         {
-          "grant_id": {
-              // see /grants/:id for organization model
-           },
-          "grant_id2": {
+          "grants": [
+            {
+              // see /grants/:id for grant model
+            },
+            {
               // ... more grants
-          }
+            }
+          ]
         }
