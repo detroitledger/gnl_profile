@@ -35,68 +35,70 @@ Single entities will contain the following content management- revision-related 
     "changed": "1381515552", // unix timestamp of date last changed
     "created": "1381515552", // unix timestamp of date created
 
+# Group Organization
 ## Organization [/orgs/:id]
-### Retrieve a single Organization [GET]
+
 + Parameters
 
     + id (number, required, `12345`) ... Organization ID.
-    
-+ Response 200 (application/json)
+
++ Model
+
+    + Body
 
         {
-            "title": "Ptarmigan Petting For Good",
-            "description": "a description if there is one",
-            "ein": "222222222", // Federal IRS EIN
-            "ntee": [{
-                "und": [
-                    {
-                        "ntee_id": "5788", // our unique id for this ntee code - use this to search
-                        "ntee_code": "P44",
-                        "description": "Ptarmigan Petting People" 
-                    }
-                ]
-            }],
-            "address": {
-                "und": [{
-                    "administrative_area": "MI",
-                    "country": "US",
-                    "data": null,
-                    "dependent_locality": null,
-                    "first_name": null,
-                    "last_name": null,
-                    "locality": "Detroit",
-                    "name_line": null,
-                    "organisation_name": null,
-                    "postal_code": "",
-                    "premise": "",
-                    "sub_administrative_area": null,
-                    "sub_premise": null,
-                    "thoroughfare": ""
-                    }]
+            "body": null,
+            "changed": "1390276370",
+            "comment": "0",
+            "created": "1390276370",
+            "field_ein": null,
+            "field_ntee": {
+                "tid": "591"
             },
-            "lifespan": {
-                "founded": "2015-01-01T00:00:00-05:00", // or null if date is unknown
-                "dissolved": "2015-01-01T00:00:00-05:00" // or null if still active or unknown
+            "field_org_address": {
+                "administrative_area": "MI",
+                "country": "US",
+                "data": null,
+                "dependent_locality": null,
+                "first_name": null,
+                "last_name": null,
+                "locality": "Detroit",
+                "name_line": null,
+                "organisation_name": null,
+                "postal_code": "",
+                "premise": "",
+                "sub_administrative_area": null,
+                "sub_premise": null,
+                "thoroughfare": ""
             },
-            "links": [{
-                "title": "link description",
-                "url": "http://alink.com"
-            }, {
-                // ...
-            }],
-            "tags": [{
-                "tag_id": 1232123,
-                "tag_name": "ptarmigan-related organizations"
-            }, {
-                // ...
-            }], 
-            "state_corp_id": "D33333333",
-            "id": "22029", 
-            "grants_datestart": 2009, // first grant was collected in this year
-            "grants_funded": 0, // total USD grants funded
-            "grants_received": 69060400, // total USD grants received
-            // boilerplate
+            "field_org_lifespan": null,
+            "field_org_links": null,
+            "field_org_tags": null,
+            "field_state_corp_id": null,
+            "id": "592",
+            "log": "",
+            "name": "",
+            "org_grants_datestart": 2011,
+            "org_grants_funded": 2552025,
+            "org_grants_received": 0,
+            "revision_timestamp": "1390276370",
+            "revision_uid": "0",
+            "status": "1",
+            "title": "Carls Foundation",
+            "tnid": "0",
+            "translate": "0",
+            "type": "org",
+            "uid": "0",
+            "uuid": "1bc3e07b-b0c4-4a0c-869c-5e883f3861fa",
+            "vid": "592",
+            "vuuid": "91070591-de16-48b8-a293-2f73735ab100"
         }
+
+
+### Retrieve a single Organization [GET]
++ Response 200 (application/json)
+
+    [Organization][]
 
 ## Grants Funded by Organization [/orgs/:id/grants_funded]
 ### Lists grants funded by a speific organization [GET]
@@ -108,7 +110,7 @@ Single entities will contain the following content management- revision-related 
         {
           "grants_funded": [
             {
-              // see /grants/:id for grant model
+              [Grant][]
             },
             {
               // ... more grants
@@ -147,7 +149,7 @@ Single entities will contain the following content management- revision-related 
         {
           "orgs": [
             {
-              // see /orgs/:id for organization model
+              [Organization][]
             },
             {
               // ... more organizations
@@ -156,20 +158,67 @@ Single entities will contain the following content management- revision-related 
         }
 
 ## Grant [/grants/:id]
++ Parameters
+
+    + id (number, required, `12345`) ... Grant ID.
+
++ Model
+
+    + Body
+
+        {
+            "body": null,
+            "changed": "1390276395",
+            "comment": "0",
+            "created": "1390276395",
+            "field_funded_amount": {
+                "value": "750000"
+            },
+            "field_funder": {
+                "target_id": "592"
+            },
+            "field_grant_tags": null,
+            "field_grant_types": null,
+            "field_internal_notes": {
+                "format": null,
+                "safe_value": "{&quot;impact_area&quot;:&quot;Detroit&quot;}",
+                "value": "{\"impact_area\":\"Detroit\"}"
+            },
+            "field_recipient": {
+                "target_id": "226"
+            },
+            "field_source": {
+                "format": null,
+                "safe_value": "IRS 990 2011",
+                "value": "IRS 990 2011"
+            },
+            "field_year": {
+                "date_type": "datetime",
+                "timezone": "America/Detroit",
+                "timezone_db": "America/Detroit",
+                "value": "2011-01-01 05:00:00",
+                "value2": "2012-01-01 05:00:00"
+            },
+            "id": "1821",
+            "log": "",
+            "name": "",
+            "revision_timestamp": "1390276395",
+            "revision_uid": "0",
+            "status": "1",
+            "title": "Carls Foundation -> Forgotten Harvest, Inc",
+            "tnid": "0",
+            "translate": "0",
+            "type": "grant",
+            "uid": "0",
+            "uuid": "d0fd3190-8b99-44ab-92fc-c678ca9cd1fb",
+            "vid": "1821",
+            "vuuid": "09d53741-a264-496c-9d3f-56c4a3cb83cf"
+        }
+
 ### Retrieve a single Grant [GET]
 + Response 200 (application/json)
 
-        {
-            "amount": 2999923, // US dollars
-            "from": "Knight Foundation",
-            "from_id": 21751, // org id
-            "id": 23069,
-            "to": "Women of Tomorrow: Philadelphia, Detroit, Charlotte, Palm Beach - Women of Tomorrow Mentor and Scholarship Program", 
-            "to_id": 21995, // org id
-            "year_end": 2017,
-            "year_start": 2010,
-            // boilerplate
-        }
+    [Grant][]
 
 ## Grants Index [/grants{?limit,offset,filter}]
 ### List all Grants [GET]
@@ -178,13 +227,13 @@ Single entities will contain the following content management- revision-related 
     + limit = `10` (number, optional) ... Limit response set to this many
     + offset = `0` (number, optional) ... Begin results at this index
     + filter (array, optional) ... Filter fields (e.g. `filter[title]=gift`)
-    
+ 
 + Response 200 (application/json)
 
         {
           "grants": [
             {
-              // see /grants/:id for grant model
+              [Grant][]
             },
             {
               // ... more grants
