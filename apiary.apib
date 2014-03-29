@@ -128,7 +128,7 @@ Single entities will contain the following content management- revision-related 
         {
           "grants_received": [
             {
-              // see /grants/:id for grant model
+              [Grant][]
             },
             {
               // ... more grants
@@ -228,7 +228,7 @@ Single entities will contain the following content management- revision-related 
     + limit = `10` (number, optional) ... Limit response set to this many
     + offset = `0` (number, optional) ... Begin results at this index
     + filter (array, optional) ... Filter fields (e.g. `filter[title]=gift`)
- 
+
 + Response 200 (application/json)
 
         {
