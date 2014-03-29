@@ -181,7 +181,9 @@ function _gnl_api_related_org_grants_funded($id) {
 
   $grants = array_map('_gnl_api_clean_node', node_load_multiple($nids));
 
-  return array_values($grants);
+  return array(
+    'grants_funded' => array_values($grants)
+  );
 }
 
 function _gnl_api_related_org_grants_received($id) {
@@ -198,7 +200,9 @@ function _gnl_api_related_org_grants_received($id) {
 
   $grants = array_map('_gnl_api_clean_node', node_load_multiple($nids));
 
-  return array_values($grants);
+  return array(
+    'grants_received' => array_values($grants)
+  );
 }
 
 /**
