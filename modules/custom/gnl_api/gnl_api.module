@@ -63,6 +63,36 @@ function gnl_api_services_resources() {
           ),
         ),
       ),
+      'relationships' => array(
+        'grants_funded' => array(
+          'help' => 'Lists grants given by this Organization',
+          'callback' => '_gnl_api_related_org_grants_funded',
+          'access arguments' => array('access content'),
+          'args' => array(
+            array(
+              'name' => 'org_id',
+              'optional' => 'false',
+              'source' => array('path' => 0),
+              'type' => 'int',
+              'description' => 'Organization ID',
+            ),
+          ),
+        ),
+        'grants_received' => array(
+          'help' => 'Lists grants received by this Organization',
+          'callback' => '_gnl_api_related_org_grants_received',
+          'access arguments' => array('access content'),
+          'args' => array(
+            array(
+              'name' => 'org_id',
+              'optional' => 'false',
+              'source' => array('path' => 0),
+              'type' => 'int',
+              'description' => 'Organization ID',
+            ),
+          ),
+        ),
+      ),
     ),
     'grants' => array(
       'operations' => array(
@@ -135,6 +165,40 @@ function _gnl_api_index_orgs($limit, $offset, $filters) {
 
 function _gnl_api_index_grants($limit, $offset, $filters) {
   return _gnl_api_index_nodes('grant', $limit, $offset, $filters);
+}
+
+function _gnl_api_related_org_grants_funded($id) {
+  $id = intval($id);
+
+  $query = db_select('field_data_field_funder', 'fdff');
+  $query
+    ->condition('field_funder_target_id', $id, '=')
+    ->fields('fdff', array('entity_id'));
+
+  $res = $query->execute()->fetchAllAssoc('entity_id');
+
+  $nids = array_keys($res);
+
+  $grants = array_map('_gnl_api_clean_node', node_load_multiple($nids));
+
+  return array_values($grants);
+}
+
+function _gnl_api_related_org_grants_received($id) {
+  $id = intval($id);
+
+  $query = db_select('field_data_field_recipient', 'fdfr');
+  $query
+    ->condition('field_recipient_target_id', $id, '=')
+    ->fields('fdfr', array('entity_id'));
+
+  $res = $query->execute()->fetchAllAssoc('entity_id');
+
+  $nids = array_keys($res);
+
+  $grants = array_map('_gnl_api_clean_node', node_load_multiple($nids));
+
+  return array_values($grants);
 }
 
 /**
