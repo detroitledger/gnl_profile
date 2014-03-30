@@ -341,6 +341,33 @@ function _gnl_api_clean_node($node) {
     }
   }
 
+  $ints = array(
+    'changed',
+    'comment',
+    'created',
+    'id',
+    'revision_timestamp',
+    'revision_uid',
+    'status',
+    'tnid',
+    'translate',
+    'uid',
+    'vid'
+  );
+
+  if ($node->type == 'org') {
+    array_push($ints, 'field_ein');
+  }
+
+  if ($node->type == 'grant') {
+    $node->field_funded_amount = $node->field_funded_amount['value'];
+    array_push($ints, 'field_funded_amount');
+  }
+
+  foreach ($ints as $prop) {
+    $node->{$prop} = (int) $node->{$prop};
+  }
+
   return $node;
 }
 
