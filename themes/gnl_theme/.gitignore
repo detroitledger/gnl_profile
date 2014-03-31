@@ -1,0 +1,5 @@
+# We absolutely don't want to have the .sass-cache in git.
+.sass-cache
+css
+Gemfile.lock
+libraries
