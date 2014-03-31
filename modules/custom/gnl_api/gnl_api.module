@@ -1,0 +1,373 @@
+<?php
+
+/**
+ * @file gnl_api.module
+ */
+
+define("GNL_API_DEFAULT_LIMIT", 10);
+define("GNL_API_MAX_LIMIT", 100);
+
+/**
+ * Implements hook_services_resources().
+ */
+function gnl_api_services_resources() {
+  $api = array(
+    'orgs' => array(
+      'operations' => array(
+        'retrieve' => array(
+          'help' => 'Retrieves Organization',
+          'callback' => '_gnl_api_retrieve_org',
+          'access callback' => 'user_access',
+          'access arguments' => array('access content'),
+          'access arguments append' => FALSE,
+          'args' => array(
+            array(
+              'name' => 'id',
+              'type' => 'int',
+              'description' => 'Organization ID',
+              'source' => array('path' => '0'),
+              'optional' => FALSE,
+              'default value' => NULL,
+            ),
+          ),
+        ),
+        'index' => array(
+          'help' => 'Lists Organizations',
+          'callback' => '_gnl_api_index_orgs',
+          'access arguments' => array('access content'),
+          'args' => array(
+            array(
+              'name' => 'limit',
+              'type' => 'int',
+              'description' => 'Limit response count (default ' . GNL_API_DEFAULT_LIMIT . ')',
+              'source' => array('param' => 'limit'),
+              'optional' => TRUE,
+              'default value' => GNL_API_DEFAULT_LIMIT,
+            ),
+            array(
+              'name' => 'offset',
+              'type' => 'int',
+              'description' => 'Offset starting record',
+              'source' => array('param' => 'offset'),
+              'optional' => TRUE,
+              'default value' => 0,
+            ),
+            array(
+              'name' => 'filters',
+              'type' => 'array',
+              'description' => 'Filter properties',
+              'source' => array('param' => 'filters'),
+              'optional' => TRUE,
+              'default value' => array(),
+            ),
+          ),
+        ),
+      ),
+      'relationships' => array(
+        'grants_funded' => array(
+          'help' => 'Lists grants given by this Organization',
+          'callback' => '_gnl_api_related_org_grants_funded',
+          'access arguments' => array('access content'),
+          'args' => array(
+            array(
+              'name' => 'org_id',
+              'optional' => 'false',
+              'source' => array('path' => 0),
+              'type' => 'int',
+              'description' => 'Organization ID',
+            ),
+          ),
+        ),
+        'grants_received' => array(
+          'help' => 'Lists grants received by this Organization',
+          'callback' => '_gnl_api_related_org_grants_received',
+          'access arguments' => array('access content'),
+          'args' => array(
+            array(
+              'name' => 'org_id',
+              'optional' => 'false',
+              'source' => array('path' => 0),
+              'type' => 'int',
+              'description' => 'Organization ID',
+            ),
+          ),
+        ),
+      ),
+    ),
+    'grants' => array(
+      'operations' => array(
+        'retrieve' => array(
+          'help' => 'Retrieves Grant',
+          'callback' => '_gnl_api_retrieve_grant',
+          'access callback' => 'user_access',
+          'access arguments' => array('access content'),
+          'access arguments append' => FALSE,
+          'args' => array(
+            array(
+              'name' => 'id',
+              'type' => 'int',
+              'description' => 'Grant ID',
+              'source' => array('path' => '0'),
+              'optional' => FALSE,
+              'default value' => NULL,
+            ),
+          ),
+        ),
+        'index' => array(
+          'help' => 'Lists Grants',
+          'callback' => '_gnl_api_index_grants',
+          'access arguments' => array('access content'),
+          'args' => array(
+            array(
+              'name' => 'limit',
+              'type' => 'int',
+              'description' => 'Limit response count (default ' . GNL_API_DEFAULT_LIMIT . ')',
+              'source' => array('param' => 'limit'),
+              'optional' => TRUE,
+              'default value' => GNL_API_DEFAULT_LIMIT,
+            ),
+            array(
+              'name' => 'offset',
+              'type' => 'int',
+              'description' => 'Offset starting record',
+              'source' => array('param' => 'offset'),
+              'optional' => TRUE,
+              'default value' => 0,
+            ),
+            array(
+              'name' => 'filters',
+              'type' => 'array',
+              'description' => 'Filter properties',
+              'source' => array('param' => 'filters'),
+              'optional' => TRUE,
+              'default value' => array(),
+            ),
+          ),
+        ),
+      ),
+    ),
+  );
+
+  return $api;
+}
+
+function _gnl_api_retrieve_org($id) {
+  return _gnl_api_retrieve('org', $id);
+}
+
+function _gnl_api_retrieve_grant($id) {
+  return _gnl_api_retrieve('grant', $id);
+}
+
+function _gnl_api_index_orgs($limit, $offset, $filters) {
+  return _gnl_api_index_nodes('org', $limit, $offset, $filters);
+}
+
+function _gnl_api_index_grants($limit, $offset, $filters) {
+  return _gnl_api_index_nodes('grant', $limit, $offset, $filters);
+}
+
+function _gnl_api_related_org_grants_funded($id) {
+  $id = intval($id);
+
+  $query = db_select('field_data_field_funder', 'fdff');
+  $query
+    ->condition('field_funder_target_id', $id, '=')
+    ->fields('fdff', array('entity_id'));
+
+  $res = $query->execute()->fetchAllAssoc('entity_id');
+
+  $nids = array_keys($res);
+
+  $grants = array_map('_gnl_api_clean_node', node_load_multiple($nids));
+
+  return array(
+    'grants_funded' => array_values($grants)
+  );
+}
+
+function _gnl_api_related_org_grants_received($id) {
+  $id = intval($id);
+
+  $query = db_select('field_data_field_recipient', 'fdfr');
+  $query
+    ->condition('field_recipient_target_id', $id, '=')
+    ->fields('fdfr', array('entity_id'));
+
+  $res = $query->execute()->fetchAllAssoc('entity_id');
+
+  $nids = array_keys($res);
+
+  $grants = array_map('_gnl_api_clean_node', node_load_multiple($nids));
+
+  return array(
+    'grants_received' => array_values($grants)
+  );
+}
+
+/**
+ * Helps retrieve a node.
+ *
+ * @param string $type
+ *
+ * @param int $id
+ *
+ * @return object
+ */
+function _gnl_api_retrieve($type, $id) {
+  $node = node_load($id);
+  if (!$node || $type !== $node->type) { // check the facts!
+    return services_error(t('@type @id does not exist.', array('@type' => $type, '@id' => $id)), 404);
+  } else {
+    return _gnl_api_clean_node($node);
+  }
+}
+
+/**
+ * Helps get a set of nodes.
+ *
+ * @param string $bundle
+ *   Drupal entity bundle
+ *
+ * @param int $limit
+ *
+ * @param int $offset
+ *
+ * @param array $filters
+ *   array of property names (like title) to use as LIKE filters
+ *
+ * @return array
+ */
+function _gnl_api_index_nodes($bundle, $limit, $offset, $filters) {
+  $limit = intval($limit);
+  $offset = intval($offset);
+  $limit = (is_int($limit) && $limit < GNL_API_MAX_LIMIT) ? $limit : GNL_API_DEFAULT_LIMIT;
+  $offset = (is_int($offset)) ? $offset : 0;
+
+  // base query
+  $query = db_select('node', 'n');
+  $query
+    ->condition('status', 1)
+    ->condition('type', $bundle, '=')
+    ->fields('n', array('nid'))
+    ->orderBy('n.created', 'ASC')
+    ->range($offset, $limit);
+
+  // if we're working with orgs and we want to filter on grant totals....
+  if ($bundle == 'org' && array_key_exists('org_grants_received', $filters)) {
+    $betweens = _gnl_api_parse_betweens($filters['org_grants_received']);
+    if (!$betweens) {
+      return services_error(t('malformed filter range'), 400);
+    }
+    $query->where("(SELECT SUM(fdffa.field_funded_amount_value) FROM {field_data_field_funded_amount} AS fdffa INNER JOIN {field_data_field_recipient} AS fdfr ON fdffa.entity_id=fdfr.entity_id WHERE fdfr.field_recipient_target_id=n.nid) BETWEEN :min AND :max", array(':min' => $betweens[0], ':max' => $betweens[1]));
+    unset($filters['org_grants_received']);
+  }
+  if ($bundle == 'org' && array_key_exists('org_grants_funded', $filters)) {
+    $betweens = _gnl_api_parse_betweens($filters['org_grants_funded']);
+    if (!$betweens) {
+      return services_error(t('malformed filter range'), 400);
+    }
+    $query->where("(SELECT SUM(fdffa.field_funded_amount_value) FROM {field_data_field_funded_amount} AS fdffa INNER JOIN {field_data_field_funder} AS fdff ON fdffa.entity_id=fdff.entity_id WHERE fdff.field_funder_target_id=n.nid) BETWEEN :min AND :max", array(':min' => $betweens[0], ':max' => $betweens[1]));
+    unset($filters['org_grants_funded']);
+  }
+
+  foreach ($filters as $property => $str) {
+    $query->condition('n.' . $property, '%' . db_like($str) . '%', 'LIKE');
+  }
+
+  $res = $query->execute()->fetchAllAssoc('nid');
+
+  if (count($res) < 1) {
+    return services_error(t('no results found'), 404);
+  } else {
+    $nids = array_keys($res);
+
+    $nodes = array_map('_gnl_api_clean_node', node_load_multiple($nids));
+    return array(
+      $bundle . 's' => array_values($nodes)
+    );
+  }
+}
+
+/**
+ * Changes 'n:n' to array(n,n) or FALSE
+ *
+ * @param str
+ *
+ * @return array or FALSE
+ */
+function _gnl_api_parse_betweens($arg) {
+  $betweens = explode(':', $arg);
+  return (count($betweens) === 2) ? $betweens : FALSE;
+}
+
+/**
+ * Unsets Drupally things from nodes.
+ *
+ * @param object $node
+ *
+ * @return $node
+ */
+function _gnl_api_clean_node($node) {
+  // first, unset things
+  $unwanted_properties = array(
+    'data',
+    'language',
+    'picture',
+    'promote',
+    'sticky',
+  );
+
+  foreach ($unwanted_properties as $prop) {
+    unset($node->{$prop});
+  }
+
+  // set framework-friendly ID
+  $node->id = $node->nid;
+  unset($node->nid);
+
+  // then, remove language from things that just don't need it
+  foreach ($node as $key => $val) {
+    if (is_array($val)) {
+      // change empty arrays to NULL
+      if (count($val) === 0) {
+        $node->{$key} = NULL;
+      }
+      // remove translations
+      // @todo change this in future l10n work
+      if (strpos($key, 'field_') === 0 && array_key_exists('und', $val) && array_key_exists(0, $val['und'])) {
+        $node->{$key} = $val['und'][0];
+      }
+    }
+  }
+
+  $ints = array(
+    'changed',
+    'comment',
+    'created',
+    'id',
+    'revision_timestamp',
+    'revision_uid',
+    'status',
+    'tnid',
+    'translate',
+    'uid',
+    'vid'
+  );
+
+  if ($node->type == 'org') {
+    array_push($ints, 'field_ein');
+  }
+
+  if ($node->type == 'grant') {
+    $node->field_funded_amount = $node->field_funded_amount['value'];
+    array_push($ints, 'field_funded_amount');
+  }
+
+  foreach ($ints as $prop) {
+    $node->{$prop} = (int) $node->{$prop};
+  }
+
+  return $node;
+}
+
