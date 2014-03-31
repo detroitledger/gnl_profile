@@ -47,18 +47,6 @@ projects[features][version] = "2.0"
 projects[git_deploy][subdir] = "contrib"
 projects[git_deploy][version] = "2.x-dev"
 
-projects[gnl_fields][download][type] = "git"
-projects[gnl_fields][download][url] = "https://github.com/detroitledger/gnl_fields.git"
-projects[gnl_fields][download][branch] = "7.x-1.x"
-projects[gnl_fields][type] = "module"
-projects[gnl_fields][subdir] = "custom"
-
-projects[gnl_schema][download][type] = "git"
-projects[gnl_schema][download][url] = "https://github.com/detroitledger/gnl_schema.git"
-projects[gnl_schema][download][branch] = "7.x-1.x"
-projects[gnl_schema][type] = "module"
-projects[gnl_schema][subdir] = "features"
-
 projects[google_analytics][subdir] = "contrib"
 projects[google_analytics][version] = "1.4"
 
@@ -73,12 +61,6 @@ projects[migrate][subdir] = "contrib"
 projects[migrate][download][type] = "git"
 projects[migrate][download][url] = "git://git.drupal.org/project/migrate.git"
 projects[migrate][download][branch] = "7.x-2.x"
-
-projects[migrate_gnl][download][type] = "git"
-projects[migrate_gnl][download][url] = "https://github.com/detroitledger/migrate_gnl.git"
-projects[migrate_gnl][download][branch] = "7.x-1.x"
-projects[migrate_gnl][type] = "module"
-projects[migrate_gnl][subdir] = "custom"
 
 projects[pathauto][subdir] = "contrib"
 projects[pathauto][version] = "1.2"
@@ -128,9 +110,4 @@ projects[omega][type] = "theme"
 projects[omega][download][type] = "git"
 projects[omega][download][url] = "git://git.drupal.org/project/omega.git"
 projects[omega][download][revision] = "4555f2fdd5af24e086ec3dadf2a49e8ee6348889"
-
-projects[gnl_theme][type] = "theme"
-projects[gnl_theme][download][type] = "git"
-projects[gnl_theme][download][url] = "https://github.com/detroitledger/gnl_theme.git"
-projects[gnl_theme][download][branch] = "7.x-1.x"
 
