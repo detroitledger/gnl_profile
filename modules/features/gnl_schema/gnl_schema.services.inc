@@ -35,7 +35,7 @@ function gnl_schema_default_services_endpoint() {
     ),
   );
   $endpoint->resources = array(
-    'node' => array(
+    'orgs' => array(
       'operations' => array(
         'retrieve' => array(
           'enabled' => '1',
@@ -45,57 +45,19 @@ function gnl_schema_default_services_endpoint() {
         ),
       ),
       'relationships' => array(
-        'files' => array(
+        'grants_funded' => array(
+          'enabled' => '1',
+        ),
+        'grants_received' => array(
           'enabled' => '1',
         ),
       ),
     ),
-    'taxonomy_term' => array(
+    'grants' => array(
       'operations' => array(
         'retrieve' => array(
           'enabled' => '1',
         ),
-        'index' => array(
-          'enabled' => '1',
-        ),
-      ),
-      'actions' => array(
-        'selectNodes' => array(
-          'enabled' => '1',
-        ),
-      ),
-    ),
-    'taxonomy_vocabulary' => array(
-      'operations' => array(
-        'retrieve' => array(
-          'enabled' => '1',
-        ),
-        'index' => array(
-          'enabled' => '1',
-        ),
-      ),
-      'actions' => array(
-        'getTree' => array(
-          'enabled' => '1',
-        ),
-      ),
-    ),
-    'views' => array(
-      'operations' => array(
-        'retrieve' => array(
-          'enabled' => '1',
-        ),
-      ),
-    ),
-    'grants_services' => array(
-      'operations' => array(
-        'index' => array(
-          'enabled' => '1',
-        ),
-      ),
-    ),
-    'org_totals_services' => array(
-      'operations' => array(
         'index' => array(
           'enabled' => '1',
         ),

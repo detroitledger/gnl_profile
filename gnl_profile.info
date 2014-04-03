@@ -15,6 +15,7 @@ dependencies[] = diff
 dependencies[] = entityreference
 dependencies[] = features
 dependencies[] = field_ui
+dependencies[] = gnl_api
 dependencies[] = gnl_fields
 dependencies[] = gnl_schema
 dependencies[] = googleanalytics
