@@ -14,9 +14,9 @@ TODO: how exactly do our UUIDs work / what causes them to change?
 
 ## Response formats
 
-The default response format is XML. Other formats include bencode, json, jsonp, and serialized PHP (php). The format is selected by appending the format code to the URL, followed by a slash. For example, add ".json/" as a suffix to receive JSON data.
+The default response format is XML. Other formats include bencode, json, jsonp, and serialized PHP (php). The format is selected by appending the format code to the URL, followed by a slash. For example, add ".json" as a suffix to receive JSON data.
 
-JSONP callback can be specified with a callback argument: `http://data.detroitledger.org/api/1.0/orgs.jsonp/?limit=1&offset=2&filters[org_grants_received]=22220:99999&callback=cb`
+JSONP callback can be specified with a callback argument: `http://data.detroitledger.org/api/1.0/orgs.jsonp?limit=1&offset=2&filters[org_grants_received]=22220:99999&callback=cb`
 
 ## Boilerplate
 
@@ -136,13 +136,13 @@ Single entities will contain the following content management- revision-related 
           ]
         }
 
-## Organizations Index [/orgs{?limit,offset,filter}]
+## Organizations Index [/orgs{?limit,offset,filters}]
 ### List all Organizations [GET]
 + Parameters
 
     + limit = `10` (number, optional) ... Limit response set to this many
     + offset = `0` (number, optional) ... Begin results at this index
-    + filter (array, optional) ... Filter fields (e.g. `filter[title]=etroit`, `filter[org_grants_funded]=2000:100000`, or `filter[org_grants_received]=100:2000`
+    + filters (array, optional) ... Filter fields (e.g. `filters[title]=etroit`, `filters[org_grants_funded]=2000:100000`, or `filters[org_grants_received]=100:2000`
 
 + Response 200 (application/json)
 
@@ -221,13 +221,13 @@ Single entities will contain the following content management- revision-related 
 
     [Grant][]
 
-## Grants Index [/grants{?limit,offset,filter}]
+## Grants Index [/grants{?limit,offset,filters}]
 ### List all Grants [GET]
 + Parameters
 
     + limit = `10` (number, optional) ... Limit response set to this many
     + offset = `0` (number, optional) ... Begin results at this index
-    + filter (array, optional) ... Filter fields (e.g. `filter[title]=gift`)
+    + filters (array, optional) ... Filter fields (e.g. `filters[title]=gift`)
 
 + Response 200 (application/json)
 
