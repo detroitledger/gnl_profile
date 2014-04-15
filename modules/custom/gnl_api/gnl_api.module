@@ -384,10 +384,10 @@ function _gnl_api_clean_node($node) {
 
   // add grantor/grantee names to grants
   if ($node->type == 'grant') {
-    $funder = taxonomy_term_load($node->field_funder['target_id']);
-    $node->field_funder['name'] = $funder->name;
-    $recipient = taxonomy_term_load($node->field_recipient['target_id']);
-    $node->field_recipient['name'] = $recipient->name;
+    $funder = node_load($node->field_funder['target_id']);
+    $node->field_funder['name'] = $funder->title;
+    $recipient = node_load($node->field_recipient['target_id']);
+    $node->field_recipient['name'] = $recipient->title;
   }
 
   return $node;
