@@ -368,6 +368,20 @@ function _gnl_api_clean_node($node) {
     $node->{$prop} = (int) $node->{$prop};
   }
 
+  // remove safe_values from some properties
+  $simplify_props = array();
+
+  if ($node->type == 'grant') {
+    array_push($simplify_props, 'field_source');
+    array_push($simplify_props, 'field_internal_notes');
+  }
+
+  foreach ($simplify_props as $prop) {
+    if ($node->{$prop}['value']) {
+      $node->{$prop} = $node->{$prop}['value'];
+    }
+  }
+
   return $node;
 }
 
