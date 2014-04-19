@@ -3,7 +3,12 @@ Detroit Ledger: Drupal install profile
 
 This Drupal install profile is used by detroitledger.org.
 
-Install
+Docker install
+--------------
+
+Use Docker to easily roll out the site. See `docker-deploy.sh`.
+
+Local install
 -------
 
 With PHP>5.4 and Drush 6:
