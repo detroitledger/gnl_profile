@@ -10,7 +10,7 @@ chmod 600 /var/lib/docker/containers/`docker inspect --format="{{.ID}}" gnl-www`
 cp /etc/nginx/sites-available/site.conf /etc/nginx/sites-enabled/gnl.detriot.org.conf
 chmod 755 /srv/www
 cd /srv/www
-drush make --working-copy https://raw.github.com/detroitledger/gnl_profile/7.x-1.x/distro.make gnl_webroot
+drush make --working-copy https://raw.github.com/detroitledger/gnl_profile/7.x-1.x/distro.make drupal
 chown -R www-data:www-data drupal
 cd drupal
 mysql -uroot -h$DB_PORT_3306_TCP_ADDR -e'create database gnl'
