@@ -44,16 +44,21 @@ function gnl_schema_uuid_features_default_content() {
 
 <p>Fundraising campaign</p>',
         'summary' => '',
-        'format' => 'full_html',
+        'format' => 'raw_html',
         'safe_value' => '<p>Our goal is to make this project as transparent as possible. To that end, we\'re committed to sharing as many details as possible. Please peruse our project\'s planning and documentation:</p>
-<ul><li><a href="https://drive.google.com/#folders/0B9y9maMoYSDFTTdGSWdBemZWUGM">Our Google Drive documents</a></li>
-<li><a href="https://trello.com/board/detroit-ledger-sprints/51ad360e37bb425f76000cf7">Our todo list</a></li>
-<li><a href="https://github.com/detroitledger">Github</a></li>
-</ul><h2>Our mistakes</h2>
+        <ul>
+          <li><a href="https://drive.google.com/#folders/0B9y9maMoYSDFTTdGSWdBemZWUGM">Our Google Drive documents</a></li>
+          <li><a href="https://trello.com/board/detroit-ledger-sprints/51ad360e37bb425f76000cf7">Our todo list</a></li>
+          <li><a href="https://github.com/detroitledger">Github</a></li>
+        </ul>
+
+<h2>Our mistakes</h2>
+
 <p>The nonprofit <a href="http://www.givewell.org/about/shortcomings">GiveWell</a> shares "mistakes we\'ve made, strategies we should have planned and executed differently, and lessons we\'ve learned." We\'ll do the same here.</p>
+
 <p>Website timing issues</p>
-<p>Fundraising campaign</p>
-',
+
+<p>Fundraising campaign</p>',
         'safe_summary' => '',
       ),
     ),
