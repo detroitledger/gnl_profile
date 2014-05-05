@@ -112,7 +112,7 @@ function gnl_schema_field_default_field_instances() {
     'bundle' => 'grant',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Can\'t find the funder? <a href="/node/add/org">Add them here.</a>',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -146,10 +146,6 @@ function gnl_schema_field_default_field_instances() {
       'settings' => array(
         'match_operator' => 'CONTAINS',
         'path' => '',
-        'references_dialog_add' => 1,
-        'references_dialog_edit' => 0,
-        'references_dialog_search' => 0,
-        'references_dialog_search_view' => '',
         'size' => 60,
       ),
       'type' => 'entityreference_autocomplete',
@@ -282,7 +278,7 @@ function gnl_schema_field_default_field_instances() {
     'bundle' => 'grant',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Can\'t find the recipient? <a href="/node/add/org">Add them here.</a>',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -316,10 +312,6 @@ function gnl_schema_field_default_field_instances() {
       'settings' => array(
         'match_operator' => 'CONTAINS',
         'path' => '',
-        'references_dialog_add' => 1,
-        'references_dialog_edit' => 0,
-        'references_dialog_search' => 0,
-        'references_dialog_search_view' => '',
         'size' => 60,
       ),
       'type' => 'entityreference_autocomplete',
@@ -405,9 +397,9 @@ function gnl_schema_field_default_field_instances() {
     'required' => 0,
     'settings' => array(
       'default_value' => 'now',
-      'default_value2' => 'same',
+      'default_value2' => 'strtotime',
       'default_value_code' => '',
-      'default_value_code2' => '',
+      'default_value_code2' => '+1 year',
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -881,6 +873,8 @@ function gnl_schema_field_default_field_instances() {
   t('Address');
   t('Amount');
   t('Body');
+  t('Can\'t find the funder? <a href="/node/add/org">Add them here.</a>');
+  t('Can\'t find the recipient? <a href="/node/add/org">Add them here.</a>');
   t('Description');
   t('EIN');
   t('Federal Employer Identification Number');
