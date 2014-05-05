@@ -89,6 +89,7 @@ features[taxonomy][] = org_tags
 features[uuid_node][] = 22c6d32e-d297-46d0-8050-95c9d49ef1ca
 features[uuid_node][] = 7ea570ba-598c-436c-9c7b-29e7e974f14b
 features[uuid_node][] = d0766f2c-35c8-4338-b8fc-28cee03b2dd5
+features[variable][] = error_level
 features[variable][] = field_bundle_settings_node__grant
 features[variable][] = field_bundle_settings_node__org
 features[variable][] = menu_options_grant
