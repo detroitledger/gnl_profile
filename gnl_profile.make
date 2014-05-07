@@ -11,6 +11,12 @@ projects[drupal][download][url] = "http://files.aegir.cc/dev/drupal-7.23.1.tar.g
 projects[addressfield][subdir] = "contrib"
 projects[addressfield][version] = "1.0-beta4"
 
+projects[auto_entitylabel][download][type] = "git"
+projects[auto_entitylabel][download][url] = "git://git.drupal.org/project/auto_entitylabel.git"
+projects[auto_entitylabel][download][branch] = "7.x-1.x"
+projects[auto_entitylabel][type] = "module"
+projects[auto_entitylabel][subdir] = "contrib"
+
 projects[boxes][subdir] = "contrib"
 projects[boxes][version] = "1.1"
 
