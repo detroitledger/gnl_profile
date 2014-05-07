@@ -1,6 +1,7 @@
 .DS_STORE
 modules/contrib
-themes
+themes/omega
+themes/contrib
 tests/*report*.html
 tests/vendor
 tests/bin
