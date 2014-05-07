@@ -11,6 +11,11 @@ $year = $content['field_year'][0]['#markup'];
       <?php if (!$page): ?>
           <a href="<?php print $node_url; ?>" rel="bookmark"><?php print $amount; ?> from <?php print $funder; ?> in <?php print $year; ?></a>
       <?php endif; ?>
+      <?php
+      if (node_access('update', $node)) {
+        print l('edit', 'node/' . $node->nid . '/edit', array('query' => drupal_get_destination()));
+      }
+      ?>
       <?php print render($title_suffix); ?>
   <?php endif; ?>
 </article>
