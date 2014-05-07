@@ -390,6 +390,14 @@ function _gnl_api_clean_node($node) {
     $node->field_recipient['name'] = $recipient->title;
   }
 
+  // make dates js-friendly
+  if ($node->type == 'grant') {
+    $start_date = new DateObject($node->field_year['value'], $node->field_year['timezone']);
+    $node->field_start_date = date_format_date($start_date, 'custom', 'r');
+    $end_date = new DateObject($node->field_year['value2'], $node->field_year['timezone']);
+    $node->field_end_date = date_format_date($end_date, 'custom', 'r');
+  }
+
   return $node;
 }
 
