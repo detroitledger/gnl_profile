@@ -100,11 +100,13 @@ Single entities will contain the following content management- revision-related 
 
     [Organization][]
 
-## Grants Funded by Organization [/orgs/:id/grants_funded]
+## Grants Funded by Organization [/orgs/:id/grants_funded{?limit,offset}]
 ### Lists grants funded by a speific organization [GET]
 + Parameters
 
     + id (number, required, `12345`) ... Organization ID.
+    + limit = `10` (number, optional) ... Limit response set to this many
+    + offset = `0` (number, optional) ... Begin results at this index
 
 + Response 200 (application/json)
         {
@@ -118,11 +120,13 @@ Single entities will contain the following content management- revision-related 
           ]
         }
 
-## Grants Received by Organization [/orgs/:id/grants_received]
+## Grants Received by Organization [/orgs/:id/grants_received{?limit,offset}]
 ### Lists grants received by a speific organization [GET]
 + Parameters
 
     + id (number, required, `12345`) ... Organization ID.
+    + limit = `10` (number, optional) ... Limit response set to this many
+    + offset = `0` (number, optional) ... Begin results at this index
 
 + Response 200 (application/json)
         {
