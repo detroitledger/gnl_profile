@@ -112,6 +112,7 @@ features[variable][] = node_submitted_grant
 features[variable][] = node_submitted_org
 features[variable][] = node_submitted_page
 features[variable][] = site_frontpage
+features[views_view][] = admin_grants
 features[views_view][] = all_grants
 features[views_view][] = org_grants
 features[views_view][] = organization_grants_received
