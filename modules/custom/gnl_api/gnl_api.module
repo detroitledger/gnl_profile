@@ -76,6 +76,22 @@ function gnl_api_services_resources() {
               'type' => 'int',
               'description' => 'Organization ID',
             ),
+            array(
+              'name' => 'limit',
+              'type' => 'int',
+              'description' => 'Limit response count (default ' . GNL_API_DEFAULT_LIMIT . ')',
+              'source' => array('param' => 'limit'),
+              'optional' => TRUE,
+              'default value' => GNL_API_DEFAULT_LIMIT,
+            ),
+            array(
+              'name' => 'offset',
+              'type' => 'int',
+              'description' => 'Offset starting record',
+              'source' => array('param' => 'offset'),
+              'optional' => TRUE,
+              'default value' => 0,
+            ),
           ),
         ),
         'grants_received' => array(
@@ -89,6 +105,22 @@ function gnl_api_services_resources() {
               'source' => array('path' => 0),
               'type' => 'int',
               'description' => 'Organization ID',
+            ),
+            array(
+              'name' => 'limit',
+              'type' => 'int',
+              'description' => 'Limit response count (default ' . GNL_API_DEFAULT_LIMIT . ')',
+              'source' => array('param' => 'limit'),
+              'optional' => TRUE,
+              'default value' => GNL_API_DEFAULT_LIMIT,
+            ),
+            array(
+              'name' => 'offset',
+              'type' => 'int',
+              'description' => 'Offset starting record',
+              'source' => array('param' => 'offset'),
+              'optional' => TRUE,
+              'default value' => 0,
             ),
           ),
         ),
@@ -167,13 +199,14 @@ function _gnl_api_index_grants($limit, $offset, $filters) {
   return _gnl_api_index_nodes('grant', $limit, $offset, $filters);
 }
 
-function _gnl_api_related_org_grants_funded($id) {
+function _gnl_api_related_org_grants_funded($id, $limit, $offset) {
   $id = intval($id);
 
   $query = db_select('field_data_field_funder', 'fdff');
   $query
     ->condition('field_funder_target_id', $id, '=')
-    ->fields('fdff', array('entity_id'));
+    ->fields('fdff', array('entity_id'))
+    ->range($offset, $limit);
 
   $res = $query->execute()->fetchAllAssoc('entity_id');
 
@@ -186,13 +219,14 @@ function _gnl_api_related_org_grants_funded($id) {
   );
 }
 
-function _gnl_api_related_org_grants_received($id) {
+function _gnl_api_related_org_grants_received($id, $limit, $offset) {
   $id = intval($id);
 
   $query = db_select('field_data_field_recipient', 'fdfr');
   $query
     ->condition('field_recipient_target_id', $id, '=')
-    ->fields('fdfr', array('entity_id'));
+    ->fields('fdfr', array('entity_id'))
+    ->range($offset, $limit);
 
   $res = $query->execute()->fetchAllAssoc('entity_id');
 
