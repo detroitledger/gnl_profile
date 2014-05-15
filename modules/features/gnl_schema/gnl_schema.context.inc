@@ -49,6 +49,12 @@ function gnl_schema_context_default_contexts() {
           'region' => 'navigation',
           'weight' => '-10',
         ),
+        'boxes-mailinglist_subscribe' => array(
+          'module' => 'boxes',
+          'delta' => 'mailinglist_subscribe',
+          'region' => 'sidebar_first',
+          'weight' => '-10',
+        ),
       ),
     ),
   );
