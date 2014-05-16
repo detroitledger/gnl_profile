@@ -2,8 +2,8 @@ docker run -v /var/lib/mysql --name=gnl-db-data busybox true
 docker run -d --volumes-from=gnl-db-data --name=gnl-db bnchdrff/mariadb
 docker run -v /srv/www -v /etc/nginx/sites-enabled --name=gnl-www-data busybox true
 docker run -d -p 80:80 -p 2222:22 --link=gnl-db:db --volumes-from=gnl-www-data --name=gnl-www bnchdrff/nginx-php5-drupal
-cat ~/.ssh/authorized_keys > /var/lib/docker/containers/`docker inspect  --format="{{.ID}}" gnl-www`/root/root/.ssh/authorized_keys
-chmod 600 /var/lib/docker/containers/`docker inspect --format="{{.ID}}" gnl-www`/root/root/.ssh/authorized_keys
+cat ~/.ssh/authorized_keys > /var/lib/docker/aufs/mnt/`docker inspect  --format="{{.ID}}" gnl-www`/root/.ssh/authorized_keys
+chmod 600 /var/lib/docker/aufs/mnt/`docker inspect --format="{{.ID}}" gnl-www`/root/.ssh/authorized_keys
 # these steps are only required for a from-scratch build (not re-using a data container)
 # ssh into gnl-www
 #ssh root@`docker inspect --format="{{.NetworkSettings.IPAddress}}" gnl-www`
