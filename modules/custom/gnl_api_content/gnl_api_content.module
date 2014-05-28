@@ -1,0 +1,147 @@
+<?php
+
+/**
+ * @file gnl_api_content.module
+ */
+
+/**
+ * Implements hook_menu().
+ *
+ * Provide link to config pages.
+ */
+function gnl_api_content_menu() {
+  $items = array();
+
+  $items['admin/config/gnl_api_content'] = array(
+    'title' => 'Detroit Ledger API content settings',
+    'description' => 'Configure Detroit Ledger API content settings.',
+    'position' => 'left',
+    'weight' => -20,
+    'page callback' => 'system_admin_menu_block_page',
+    'access arguments' => array('access administration pages'),
+    'file' => 'system.admin.inc',
+    'file path' => drupal_get_path('module', 'system'),
+  );
+
+  $items['admin/config/gnl_api_content/donation'] = array(
+    'title' => 'Donation settings',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('_gnl_api_content_donation_settings_form'),
+    'access arguments' => array('access administration pages'),
+  );
+
+  return $items;
+}
+
+/**
+ * Builds a settings form for the stripe donation API.
+ */
+function _gnl_api_content_donation_settings_form($form, &$form_state) {
+  $form['#tree'] = TRUE;
+
+  $stripe_settings = variable_get('gnl_api_content_donation_settings_stripe', array());
+
+  $form['gnl_api_content_donation_settings_stripe'] = array(
+    '#title' => t('Stripe settings'),
+    '#description' => l('Get them here', 'https://manage.stripe.com/account/apikeys'),
+    '#type'  => 'fieldset',
+    '#collapsible' => FALSE,
+  );
+  $form['gnl_api_content_donation_settings_stripe']['stripe_publickey'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Stripe public key'),
+    '#default_value' => (!empty($stripe_settings['stripe_publickey']) ? $stripe_settings['stripe_publickey'] : ''),
+    '#size' => 33,
+    '#maxlength' => 33,
+    '#description' => t('Stripe public API key'),
+    '#required' => FALSE,
+  );
+  $form['gnl_api_content_donation_settings_stripe']['stripe_privatekey'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Stripe private key'),
+    '#default_value' => (!empty($stripe_settings['stripe_privatekey']) ? $stripe_settings['stripe_privatekey'] : ''),
+    '#size' => 33,
+    '#maxlength' => 33,
+    '#description' => t('Stripe private API key'),
+    '#required' => FALSE,
+  );
+
+  return system_settings_form($form);
+}
+
+/**
+ * Implements hook_services_resources().
+ */
+function gnl_api_content_services_resources() {
+  $api = array(
+    'donations' => array(
+      'operations' => array(
+        'create' => array(
+          'help' => 'Post a donation to Stripe',
+          'callback' => '_gnl_api_content_create_donation',
+          'access callback' => 'user_access',
+          'access arguments' => array('access content'),
+          'access arguments append' => FALSE,
+          'args' => array(
+            array(
+              'name' => 'payload',
+              'type' => 'array',
+              'description' => 'Stripe payload (token, amount, email)',
+              'source' => 'data',
+              'optional' => FALSE,
+            ),
+          ),
+        ),
+      ),
+    ),
+    'stripe_publickey' => array(
+      'operations' => array(
+        'index' => array(
+          'help' => 'Get Stripe API public key',
+          'callback' => '_gnl_api_content_stripe_publickey',
+          'access arguments' => array('access content'),
+        ),
+      ),
+    ),
+  );
+  return $api;
+}
+
+/**
+ * Get stripe api public key
+ */
+function _gnl_api_content_stripe_publickey() {
+  $stripe_settings = variable_get('gnl_api_content_donation_settings_stripe', array());
+  return $stripe_settings['stripe_publickey'];
+}
+
+/**
+ *
+ * @param payload
+ *   Stripe token, amount and email, as an array
+ * @return array
+ *   key is either "success" or "error"
+ */
+function _gnl_api_content_create_donation($payload) {
+  require_once(dirname(__FILE__) . '/vendor/stripe/stripe-php/lib/Stripe.php');
+
+  try {
+    $stripe_settings = variable_get('gnl_api_content_donation_settings_stripe', array());
+    Stripe::setApiKey($stripe_settings['stripe_privatekey']);
+
+    $customer = Stripe_Customer::create(array(
+      'email' => $payload['email'],
+      'card'  => $payload['token'],
+    ));
+
+    $charge = Stripe_Charge::create(array(
+      'customer' => $customer->id,
+      'amount'   => $payload['amount'],
+      'currency' => 'usd',
+    ));
+  } catch (Stripe_CardError $err) {
+    $json = $err->getJsonBody();
+    $error = $json['error'];
+    return array("error" => $error);
+  }
+}
