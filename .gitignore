@@ -3,7 +3,7 @@ modules/contrib
 themes/omega
 themes/contrib
 tests/*report*.html
-tests/vendor
 tests/bin
 tests/composer.lock
 tests/composer.phar
+vendor
