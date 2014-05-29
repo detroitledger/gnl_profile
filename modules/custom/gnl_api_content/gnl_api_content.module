@@ -74,7 +74,7 @@ function _gnl_api_content_donation_settings_form($form, &$form_state) {
  */
 function gnl_api_content_services_resources() {
   $api = array(
-    'donations' => array(
+    'stripe_donations' => array(
       'operations' => array(
         'create' => array(
           'help' => 'Post a donation to Stripe',
@@ -158,6 +158,19 @@ function gnl_api_content_services_resources() {
   );
 
   return $api;
+}
+
+/**
+ * Implements hook_node_load().
+ *
+ * Add path to pages.
+ */
+function gnl_api_content_node_load($nodes, $types) {
+  foreach ($nodes as $node) {
+    if ($node->type == 'page') {
+      $node->path = url("node/$node->nid");
+    }
+  }
 }
 
 function _gnl_api_content_retrieve_page($id) {

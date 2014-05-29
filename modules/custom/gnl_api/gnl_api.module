@@ -305,8 +305,22 @@ function _gnl_api_index_nodes($bundle, $limit, $offset, $filters) {
     unset($filters['org_grants_funded']);
   }
 
+  $sql_filters = array(
+    'title',
+    'nid',
+    'status',
+    'promote',
+    'sticky',
+    'uuid',
+  );
+  $post_filters = array();
+
   foreach ($filters as $property => $str) {
-    $query->condition('n.' . $property, '%' . db_like($str) . '%', 'LIKE');
+    if (in_array($property, $sql_filters)) {
+      $query->condition('n.' . $property, '%' . db_like($str) . '%', 'LIKE');
+    } else {
+      $post_filters[$property] = $str;
+    }
   }
 
   $res = $query->execute()->fetchAllAssoc('nid');
@@ -317,6 +331,18 @@ function _gnl_api_index_nodes($bundle, $limit, $offset, $filters) {
     $nids = array_keys($res);
 
     $nodes = array_map('_gnl_api_clean_node', node_load_multiple($nids));
+
+    // apply non-sql filters
+    foreach ($post_filters as $property => $str) {
+      $nodes = array_filter($nodes, function($node) use ($property, $str) {
+        if (!isset($node->{$property})) {
+          return false;
+        } else {
+          return ($node->{$property} == $str);
+        }
+      });
+    }
+
     return array(
       $bundle . 's' => array_values($nodes)
     );
