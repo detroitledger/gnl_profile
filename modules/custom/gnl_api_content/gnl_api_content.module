@@ -103,8 +103,69 @@ function gnl_api_content_services_resources() {
         ),
       ),
     ),
+    'pages' => array(
+      'operations' => array(
+        'retrieve' => array(
+          'help' => 'Retrieves page',
+          'callback' => '_gnl_api_content_retrieve_page',
+          'access callback' => 'user_access',
+          'access arguments' => array('access content'),
+          'access arguments append' => FALSE,
+          'args' => array(
+            array(
+              'name' => 'id',
+              'type' => 'int',
+              'description' => 'page ID',
+              'source' => array('path' => '0'),
+              'optional' => FALSE,
+              'default value' => NULL,
+            ),
+          ),
+        ),
+        'index' => array(
+          'help' => 'Lists pages',
+          'callback' => '_gnl_api_content_index_pages',
+          'access arguments' => array('access content'),
+          'args' => array(
+            array(
+              'name' => 'limit',
+              'type' => 'int',
+              'description' => 'Limit response count (default ' . GNL_API_DEFAULT_LIMIT . ')',
+              'source' => array('param' => 'limit'),
+              'optional' => TRUE,
+              'default value' => GNL_API_DEFAULT_LIMIT,
+            ),
+            array(
+              'name' => 'offset',
+              'type' => 'int',
+              'description' => 'Offset starting record',
+              'source' => array('param' => 'offset'),
+              'optional' => TRUE,
+              'default value' => 0,
+            ),
+            array(
+              'name' => 'filters',
+              'type' => 'array',
+              'description' => 'Filter properties',
+              'source' => array('param' => 'filters'),
+              'optional' => TRUE,
+              'default value' => array(),
+            ),
+          ),
+        ),
+      ),
+    ),
   );
+
   return $api;
+}
+
+function _gnl_api_content_retrieve_page($id) {
+  return _gnl_api_retrieve('page', $id);
+}
+
+function _gnl_api_content_index_pages($limit, $offset, $filters) {
+  return _gnl_api_index_nodes('page', $limit, $offset, $filters);
 }
 
 /**

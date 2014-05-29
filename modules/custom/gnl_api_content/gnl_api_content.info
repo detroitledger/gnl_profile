@@ -1,5 +1,6 @@
 name = "gnl_api_content"
 description = "Provides an API for Detroit Ledger site content and other non-database-related things"
 core = "7.x"
+dependencies[] = "gnl_api"
 
 configure = admin/config/gnl_api_content
