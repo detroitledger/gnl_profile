@@ -436,6 +436,10 @@ function _gnl_api_clean_node($node) {
     array_push($simplify_props, 'field_internal_notes');
   }
 
+  if ($node->type == 'page') {
+    $node->body = $node->body['und'][0]['value'];
+  }
+
   foreach ($simplify_props as $prop) {
     if ($node->{$prop}['value']) {
       $node->{$prop} = $node->{$prop}['value'];
