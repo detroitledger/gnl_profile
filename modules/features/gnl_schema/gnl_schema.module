@@ -36,3 +36,24 @@ function gnl_schema_preprocess_node(&$vars) {
   }
 }
 
+/**
+ * Implements hook_form_alter().
+ *
+ * Dupe some fields from the previously-added grant.
+ */
+function gnl_schema_form_alter(&$form, $form_state, $form_id) {
+  if ($form_id == 'grant_node_form') {
+    $q = new EntityFieldQuery();
+    $q->entityCondition('entity_type', 'node')
+      ->propertyCondition('type', 'grant')
+      ->range(0, 1)
+      ->propertyOrderBy('changed', 'DESC');
+    $res = $q->execute();
+    $node = node_load(current(array_keys($res['node'])));
+    $mru = entity_metadata_wrapper('node', $node);
+    $mru_dates = $mru->field_year->value();
+    $form['field_year'][LANGUAGE_NONE][0]['#default_value']['value'] = $mru_dates['value'];
+    $form['field_year'][LANGUAGE_NONE][0]['#default_value']['value2'] = $mru_dates['value2'];
+  }
+}
+
