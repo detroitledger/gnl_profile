@@ -54,6 +54,9 @@ function gnl_schema_form_alter(&$form, $form_state, $form_id) {
     $mru_dates = $mru->field_year->value();
     $form['field_year'][LANGUAGE_NONE][0]['#default_value']['value'] = $mru_dates['value'];
     $form['field_year'][LANGUAGE_NONE][0]['#default_value']['value2'] = $mru_dates['value2'];
+    $form['field_source'][LANGUAGE_NONE][0]['value']['#default_value'] = $mru->field_source->value();
+    // kludge-ville USA: https://drupal.org/node/1514444
+    $form['field_funder'][LANGUAGE_NONE][0]['target_id']['#default_value'] = $mru->field_funder->value()->title . " (" . $mru->field_funder->value()->nid . ")";
   }
 }
 
