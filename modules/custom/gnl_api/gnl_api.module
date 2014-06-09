@@ -178,9 +178,37 @@ function gnl_api_services_resources() {
         ),
       ),
     ),
+    'stats' => array(
+      'operations' => array(
+        'index' => array(
+          'help' => 'Get statistics about all the data',
+          'callback' => '_gnl_api_index_stats',
+          'access arguments' => array('access content'),
+        ),
+      ),
+    ),
   );
 
   return $api;
+}
+
+function _gnl_api_index_stats() {
+  $stats = &drupal_static(__FUNCTION__);
+  if (!isset($stats)) {
+    if ($cache = cache_get('gnl_api_stats')) {
+      $stats = $cache->data;
+    } else {
+      $stats = array(
+        'total_num_grants' => (int) db_query("SELECT COUNT(*) FROM {node} WHERE type='grant' AND STATUS=1")->fetchField(),
+        'total_num_orgs' => (int) db_query("SELECT COUNT(*) FROM {node} WHERE type='org' AND STATUS=1")->fetchField(),
+        'total_num_funders' => (int) db_query("SELECT COUNT(DISTINCT(fdff.field_funder_target_id)) FROM {field_data_field_funder} AS fdff INNER JOIN {node} AS n ON fdff.entity_id=n.nid WHERE n.status=1")->fetchField(),
+        'total_num_recipients' => (int) db_query("SELECT COUNT(DISTINCT(fdfr.field_recipient_target_id)) FROM {field_data_field_recipient} AS fdfr INNER JOIN {node} AS n ON fdfr.entity_id=n.nid WHERE n.status=1")->fetchField(),
+        'total_grants_dollars' => (int) db_query("SELECT SUM(fdffa.field_funded_amount_value) FROM {field_data_field_funded_amount} AS fdffa INNER JOIN {node} AS n ON fdffa.entity_id=n.nid WHERE n.status=1")->fetchField(),
+      );
+      cache_set('gnl_api_stats', $stats, 'cache');
+    }
+  }
+  return $stats;
 }
 
 function _gnl_api_retrieve_org($id) {
