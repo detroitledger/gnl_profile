@@ -114,8 +114,8 @@ function gnl_api_content_services_resources() {
           'args' => array(
             array(
               'name' => 'id',
-              'type' => 'int',
-              'description' => 'page ID',
+              //'type' => 'int',
+              'description' => 'page ID or exact slug',
               'source' => array('path' => '0'),
               'optional' => FALSE,
               'default value' => NULL,
@@ -173,8 +173,16 @@ function gnl_api_content_node_load($nodes, $types) {
   }
 }
 
-function _gnl_api_content_retrieve_page($id) {
-  return _gnl_api_retrieve('page', $id);
+function _gnl_api_content_retrieve_page($id_or_slug) {
+  if (is_numeric($id_or_slug)) {
+    return _gnl_api_retrieve('page', $id_or_slug);
+  } else {
+    $matches = _gnl_api_index_nodes('page', 1, 0, array('path' => '/' . $id_or_slug));
+    if (count($matches['pages']) == 1) {
+      return $matches['pages'][0];
+    }
+  }
+  services_error(t('page @id_or_slug does not exist.', array('@id_or_slug' => $id_or_slug)), 404);
 }
 
 function _gnl_api_content_index_pages($limit, $offset, $filters) {
