@@ -60,6 +60,14 @@ function gnl_api_services_resources() {
               'optional' => TRUE,
               'default value' => array(),
             ),
+            array(
+              'name' => 'sort',
+              'type' => 'array',
+              'description' => 'Sort by property and order by value (ASC or DESC)',
+              'source' => array('param' => 'sort'),
+              'optional' => TRUE,
+              'default value' => array(),
+            ),
           ),
         ),
       ),
@@ -174,6 +182,14 @@ function gnl_api_services_resources() {
               'optional' => TRUE,
               'default value' => array(),
             ),
+            array(
+              'name' => 'sort',
+              'type' => 'array',
+              'description' => 'Sort by property and order by value (ASC or DESC)',
+              'source' => array('param' => 'sort'),
+              'optional' => TRUE,
+              'default value' => array(),
+            ),
           ),
         ),
       ),
@@ -219,12 +235,12 @@ function _gnl_api_retrieve_grant($id) {
   return _gnl_api_retrieve('grant', $id);
 }
 
-function _gnl_api_index_orgs($limit, $offset, $filters) {
-  return _gnl_api_index_nodes('org', $limit, $offset, $filters);
+function _gnl_api_index_orgs($limit, $offset, $filters, $sort) {
+  return _gnl_api_index_nodes('org', $limit, $offset, $filters, $sort);
 }
 
-function _gnl_api_index_grants($limit, $offset, $filters) {
-  return _gnl_api_index_nodes('grant', $limit, $offset, $filters);
+function _gnl_api_index_grants($limit, $offset, $filters, $sort) {
+  return _gnl_api_index_nodes('grant', $limit, $offset, $filters, $sort);
 }
 
 function _gnl_api_related_org_grants_funded($id, $limit, $offset) {
@@ -298,9 +314,12 @@ function _gnl_api_retrieve($type, $id) {
  * @param array $filters
  *   array of property names (like title) to use as LIKE filters
  *
+ * @param array $sort
+ *   array of property name key (like title) and ASC/DESC val to SORT
+ *
  * @return array
  */
-function _gnl_api_index_nodes($bundle, $limit, $offset, $filters) {
+function _gnl_api_index_nodes($bundle, $limit, $offset, $filters, $sort) {
   $limit = intval($limit);
   $offset = intval($offset);
   $limit = (is_int($limit) && $limit < GNL_API_MAX_LIMIT) ? $limit : GNL_API_DEFAULT_LIMIT;
@@ -312,8 +331,18 @@ function _gnl_api_index_nodes($bundle, $limit, $offset, $filters) {
     ->condition('status', 1)
     ->condition('type', $bundle, '=')
     ->fields('n', array('nid'))
-    ->orderBy('n.created', 'ASC')
     ->range($offset, $limit);
+
+  // add sort
+  if (current($sort) == 'ASC' || current($sort) == 'DESC') {
+    // order grants by amount? add join!
+    if ($bundle == 'grant' && key($sort) == 'fdffa.field_funded_amount_value') {
+      $query->join('field_data_field_funded_amount', 'fdffa', 'fdffa.entity_id=n.nid');
+    }
+    $query->orderBy(key($sort), current($sort));
+  } else {
+    $query->orderBy('n.created', 'ASC');
+  }
 
   // if we're working with orgs and we want to filter on grant totals....
   if ($bundle == 'org' && array_key_exists('org_grants_received', $filters)) {
@@ -351,7 +380,12 @@ function _gnl_api_index_nodes($bundle, $limit, $offset, $filters) {
     }
   }
 
-  $res = $query->execute()->fetchAllAssoc('nid');
+  try {
+    $res = $query->execute()->fetchAllAssoc('nid');
+  } catch (Exception $e) {
+    watchdog('gnl_api', 'SQL error at @request', array('@request' => request_uri()));
+    return services_error(t('SQL error at @request', array('@request' => request_uri())), 400);
+  }
 
   if (count($res) < 1) {
     return services_error(t('no results found'), 404);
