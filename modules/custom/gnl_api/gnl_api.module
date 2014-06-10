@@ -392,7 +392,6 @@ function _gnl_api_index_nodes($bundle, $limit, $offset, $filters, $sort) {
     $res = $query->execute()->fetchAllAssoc('nid');
   } catch (Exception $e) {
     watchdog('gnl_api', 'SQL error at @request', array('@request' => request_uri()));
-    print_r($e);
     return services_error(t('SQL error at @request', array('@request' => request_uri())), 400);
   }
 
