@@ -339,6 +339,14 @@ function _gnl_api_index_nodes($bundle, $limit, $offset, $filters, $sort) {
     if ($bundle == 'grant' && key($sort) == 'fdffa.field_funded_amount_value') {
       $query->join('field_data_field_funded_amount', 'fdffa', 'fdffa.entity_id=n.nid');
     }
+    // order orgs by received
+    if ($bundle == 'org' && key($sort) == 'received') {
+      $query->addExpression("(SELECT SUM(fdffa.field_funded_amount_value) FROM {field_data_field_funded_amount} AS fdffa INNER JOIN {field_data_field_recipient} AS fdfr ON fdffa.entity_id=fdfr.entity_id WHERE fdfr.field_recipient_target_id=n.nid)", 'received');
+    }
+    // order orgs by funded
+    if ($bundle == 'org' && key($sort) == 'funded') {
+      $query->addExpression("(SELECT SUM(fdffa.field_funded_amount_value) FROM {field_data_field_funded_amount} AS fdffa INNER JOIN {field_data_field_funder} AS fdff ON fdffa.entity_id=fdff.entity_id WHERE fdff.field_funder_target_id=n.nid)", 'funded');
+    }
     $query->orderBy(key($sort), current($sort));
   } else {
     $query->orderBy('n.created', 'ASC');
@@ -384,6 +392,7 @@ function _gnl_api_index_nodes($bundle, $limit, $offset, $filters, $sort) {
     $res = $query->execute()->fetchAllAssoc('nid');
   } catch (Exception $e) {
     watchdog('gnl_api', 'SQL error at @request', array('@request' => request_uri()));
+    print_r($e);
     return services_error(t('SQL error at @request', array('@request' => request_uri())), 400);
   }
 
