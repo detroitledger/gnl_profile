@@ -60,3 +60,16 @@ function gnl_schema_form_alter(&$form, $form_state, $form_id) {
   }
 }
 
+/**
+ * Implements hook_init().
+ *
+ * Redirect all anonymous requests to the public site.
+ *
+ * Allow users to log in at /user
+ */
+function gnl_schema_init() {
+  if (user_is_anonymous() && arg(0) !== 'user' && !function_exists('drush_main')) {
+    drupal_goto('http://detroitledger.org');
+  }
+}
+
