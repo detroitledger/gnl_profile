@@ -396,7 +396,7 @@ function _gnl_api_index_nodes($bundle, $limit, $offset, $filters, $sort) {
   }
 
   if (count($res) < 1) {
-    return services_error(t('no results found'), 404);
+    return services_error(t('no results found'), 200);
   } else {
     $nids = array_keys($res);
 
