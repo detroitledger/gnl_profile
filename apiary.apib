@@ -257,8 +257,30 @@ Single entities will contain the following content management- revision-related 
           "total_grants_dollars": 1
       }
 
-# Group Flags
-## Flag a Grant or Organization [POST]
+# Group Flag
+## Flag [/flags/:id]
++ Parameters
+
+    + id (number, required, `12345`) ... Flag ID.
+
++ Model (application/json)
+
+    + Body
+
+        {
+            "flag": {
+                "id": 9999,
+                "target_id": 1821, // entity id of grant or organization
+                "note": "This is a duplicate of grant id 1822"
+            }
+        }
+
+### Retrieve a single Flag [GET]
++ Response 200 (application/json)
+
+    [Flag][]
+
+### Flag a Grant or Organization [POST]
 + Request
 
     + Headers
@@ -270,12 +292,16 @@ Single entities will contain the following content management- revision-related 
 
         {
             "flag": {
-                "id": 1821, // entity id of grant or organization
+                "target_id": 1821,
                 "note": "This is a duplicate of grant id 1822"
             }
         }
 
 + Response 201
+
+    + Body
+
+        [Flag][]
 
 + Response 400
 
