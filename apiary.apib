@@ -256,3 +256,29 @@ Single entities will contain the following content management- revision-related 
           "total_num_recipients": 1,
           "total_grants_dollars": 1
       }
+
+# Group Flags
+## Flag a Grant or Organization [POST]
++ Request
+
+    + Headers
+
+        Content-Type: application/json
+        Accept: application/json
+
+    + Body
+
+        {
+            "flag": {
+                "id": 1821, // entity id of grant or organization
+                "note": "This is a duplicate of grant id 1822"
+            }
+        }
+
++ Response 201
+
++ Response 400
+
+    + Body
+
+        entity id 1821 does not exist.
