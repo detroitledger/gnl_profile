@@ -20,6 +20,7 @@ dependencies[] = pathauto
 dependencies[] = search
 dependencies[] = services
 dependencies[] = services_views
+dependencies[] = session_api
 dependencies[] = strongarm
 dependencies[] = taxonomy
 dependencies[] = text
