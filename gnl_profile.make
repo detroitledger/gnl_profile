@@ -50,6 +50,9 @@ projects[entityreference][subdir] = "contrib"
 projects[features][subdir] = "contrib"
 projects[features][version] = "2.0"
 
+projects[flag][subdir] = "contrib"
+projects[flag][version] = "3.5"
+
 projects[git_deploy][subdir] = "contrib"
 projects[git_deploy][version] = "2.x-dev"
 
@@ -76,6 +79,9 @@ projects[services][version] = "3.5"
 
 projects[services_views][subdir] = "contrib"
 projects[services_views][version] = "1.0-beta2"
+
+projects[session_api][subdir] = "contrib"
+projects[session_api][version] = "1.0-rc1"
 
 projects[strongarm][subdir] = "contrib"
 projects[strongarm][version] = "2.0"

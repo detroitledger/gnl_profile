@@ -6,6 +6,7 @@
 
 define("GNL_API_DEFAULT_LIMIT", 10);
 define("GNL_API_MAX_LIMIT", 100);
+define("GNL_API_FLAG_NAME", "flag");
 
 /**
  * Implements hook_services_resources().
@@ -203,9 +204,79 @@ function gnl_api_services_resources() {
         ),
       ),
     ),
+    'flags' => array(
+      'operations' => array(
+        'retrieve' => array(
+          'help' => 'Retrieves Flag',
+          'callback' => '_gnl_api_retrieve_flag',
+          'access callback' => 'user_access',
+          'access arguments' => array('access flag'), // @todo who can access flags via public API?
+          'access arguments append' => FALSE,
+          'args' => array(
+            array(
+              'name' => 'id',
+              'type' => 'int',
+              'description' => 'Organization ID',
+              'source' => array('path' => '0'),
+              'optional' => FALSE,
+              'default value' => NULL,
+            ),
+          ),
+        ),
+        'create' => array(
+          'help' => 'Creates Flag',
+          'callback' => '_gnl_api_create_flag',
+          'access callback' => 'user_access',
+          'access arguments' => array('access content'),
+          'access arguments append' => FALSE,
+          'args' => array(
+            array(
+              'name' => 'data',
+              'type' => 'struct',
+              'description' => 'Object containing target_id and note properties',
+              'source' => 'data',
+              'optional' => FALSE,
+            ),
+          ),
+        ),
+      ),
+    ),
   );
 
   return $api;
+}
+
+function _gnl_api_create_flag($data) {
+  if (!isset($data["target_id"]) || !isset($data["note"])) {
+    return services_error('missing required property', 400);
+  }
+
+  // @todo change this when we do API auth
+  $_COOKIE = true;
+
+  $flagging = entity_create('flagging', array('flag_name' => GNL_API_FLAG_NAME));
+  $flagging->entity_id = $data["target_id"];
+  $flagging_wrapper = entity_metadata_wrapper('flagging', $flagging);
+  $flagging_wrapper->field_note->set($data["note"]);
+  $flagging_wrapper->field_ip->set(ip2long(ip_address()));
+
+  $flag = flag_get_flag(GNL_API_FLAG_NAME);
+
+  $flagging->entity_type = $flag->entity_type;
+  $flagging->fid = $flag->fid;
+
+  try {
+    field_attach_validate('flagging', $flagging);
+  } catch (Exception $e) {
+    return services_error('field validation error', 400);
+  }
+  $ret = $flag->flag('flag', $data["target_id"], NULL, FALSE, $flagging);
+
+  return array(
+    "id" => $flagging->flagging_id,
+    "target_id" => $flagging->entity_id,
+    "note" => $flagging->field_note[LANGUAGE_NONE][0]['value'],
+  );
 }
 
 function _gnl_api_index_stats() {
