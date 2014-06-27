@@ -40,9 +40,9 @@ function gnl_schema_uuid_features_default_content() {
 
 <p>The nonprofit <a href="http://www.givewell.org/about/shortcomings">GiveWell</a> shares "mistakes we\'ve made, strategies we should have planned and executed differently, and lessons we\'ve learned." We\'ll do the same here.</p>
 
-<p>Website timing issues</p>
+<h3>Website wording issues</h3>
 
-<p>Fundraising campaign</p>',
+<p>From late 2013 through June 2014, our website included some outdated and ambiguous wording about the work the Ledger does. We used aspirational phrasing long after the work was completed. We also made references to a fundraising campaign that was completed.</p>',
         'summary' => '',
         'format' => 'raw_html',
         'safe_value' => '<p>Our goal is to make this project as transparent as possible. To that end, we\'re committed to sharing as many details as possible. Please peruse our project\'s planning and documentation:</p>
@@ -56,16 +56,18 @@ function gnl_schema_uuid_features_default_content() {
 
 <p>The nonprofit <a href="http://www.givewell.org/about/shortcomings">GiveWell</a> shares "mistakes we\'ve made, strategies we should have planned and executed differently, and lessons we\'ve learned." We\'ll do the same here.</p>
 
-<p>Website timing issues</p>
+<h3>Website wording issues</h3>
 
-<p>Fundraising campaign</p>',
+<p>From late 2013 through June 2014, our website included some outdated and ambiguous wording about the work the Ledger does. We used aspirational phrasing long after the work was completed. We also made references to a fundraising campaign that was completed.</p>',
         'safe_summary' => '',
       ),
     ),
   ),
+  'path' => '/transparency',
   'name' => '',
   'picture' => 0,
   'data' => NULL,
+  'pathauto_perform_alias' => FALSE,
   'date' => '2013-07-30 20:29:10 -0400',
 );
   $nodes[] = array(
@@ -87,27 +89,21 @@ function gnl_schema_uuid_features_default_content() {
   'body' => array(
     'und' => array(
       0 => array(
-        'value' => 'We\'re building  a picture of philanthropy in Detroit. We’re keeping track of grants and loans given to organizations in the city of Detroit, focusing on non-profits and civic projects that receive money from foundations, and need your help to get to the next level.
+        'value' => '<p>The Detroit Ledger provides a picture of philanthropy in Detroit. We collect data on grants and loans given to organizations in the city of Detroit, focusing on non-profits and civic projects that receive money from foundations.  All the data is available for free, online, in bulk, under a copyright-free license.</p>
 
-There’s a lot of talk about the reach and impact of nonprofits and foundations in Detroit. We find ourselves curious about how much money comes into the city and how it is used. We see many amazing non-profit organizations doing great work and want to show how they put resources to good use.
+<!--<p>There’s a lot of talk about the reach and impact of nonprofits and foundations in Detroit. We find ourselves curious about how much money comes into the city and how it is used. We see many amazing non-profit organizations doing great work and want to show how they put resources to good use.</p>
 
-For all of the good work that organizations are doing in Detroit, much of it happens sight unseen. It’s difficult for nonprofits, residents, and scholars to see the bigger picture of the funding system they inhabit. Some funders do a great job of listing their grants online, but many don’t. Some non-profit organizations post annual reports online, but the digital divide can make this task difficult and expensive.
+<p>For all of the good work that organizations are doing in Detroit, much of it happens sight unseen. It’s difficult for nonprofits, residents, and scholars to see the bigger picture of the funding system they inhabit. Some funders do a great job of listing their grants online, but many don’t. Some non-profit organizations post annual reports online, but the digital divide can make this task difficult and expensive.</p>-->
 
-We’ve built a spreadsheet that lists close to 300 grants made in Detroit in the last year or so. It’s been a valuable resource, but it’s time to take the next step.
-
-This summer, we\'re expanding the data and making it easy for everyone to access. As technologists in Detroit, we will build an awesome website to showcase grants and funders. All the data will be available for free, online, in bulk, under a copyright-free license.
-
-But to get a comprehensive dataset, we need someone dedicated to getting the information. That’s why we’re sponsoring an internship. Here\'s where the funding will go: entirely to an intern\'s summer stipend.
-
-<h2>Who we are</h2>
-
-<h3>Matt Hampel</h3>
-
-<p>"In 2012, I worked through Code for America with the City of Detroit to help build TextMyBus, a real-time bus arrival system for Detroit. My company, LocalData, is making tech tools for neighborhood organizations that allow groups to quickly collect and map important information. I’ve previously worked on technology projects at the University of Michigan and Chicago Tribune, among other places."</p>
+<h2>The Ledger Team</h2>
 
 <h3>Benjamin Chodoroff</h3>
 
 <p>"I am a programmer who works with various free software projects. I co-own a small design/dev firm, http://theworkdept.com - we build websites and database-driven applications. Ever since highschool, I’ve been a technology activist. I am an advising member of the Detroit Digital Justice Coalition and help neighborhoods build wireless networks."</p>
+
+<h3>Matt Hampel</h3>
+
+<p>"In 2012, I worked through Code for America with the City of Detroit to help build TextMyBus, a real-time bus arrival system for Detroit. My company, LocalData, is making tech tools for neighborhood organizations that allow groups to quickly collect and map important information. I’ve previously worked on technology projects at the University of Michigan and Chicago Tribune, among other places."</p>
 
 <h3>Jessica McInchak</h3>
 
@@ -116,17 +112,15 @@ But to get a comprehensive dataset, we need someone dedicated to getting the inf
 ',
         'summary' => '',
         'format' => 'full_html',
-        'safe_value' => '<p>We\'re building  a picture of philanthropy in Detroit. We’re keeping track of grants and loans given to organizations in the city of Detroit, focusing on non-profits and civic projects that receive money from foundations, and need your help to get to the next level.</p>
-<p>There’s a lot of talk about the reach and impact of nonprofits and foundations in Detroit. We find ourselves curious about how much money comes into the city and how it is used. We see many amazing non-profit organizations doing great work and want to show how they put resources to good use.</p>
+        'safe_value' => '<p>The Detroit Ledger provides a picture of philanthropy in Detroit. We collect data on grants and loans given to organizations in the city of Detroit, focusing on non-profits and civic projects that receive money from foundations.  All the data is available for free, online, in bulk, under a copyright-free license.</p>
+<!--<p><p>There’s a lot of talk about the reach and impact of nonprofits and foundations in Detroit. We find ourselves curious about how much money comes into the city and how it is used. We see many amazing non-profit organizations doing great work and want to show how they put resources to good use.</p>
 <p>For all of the good work that organizations are doing in Detroit, much of it happens sight unseen. It’s difficult for nonprofits, residents, and scholars to see the bigger picture of the funding system they inhabit. Some funders do a great job of listing their grants online, but many don’t. Some non-profit organizations post annual reports online, but the digital divide can make this task difficult and expensive.</p>
-<p>We’ve built a spreadsheet that lists close to 300 grants made in Detroit in the last year or so. It’s been a valuable resource, but it’s time to take the next step.</p>
-<p>This summer, we\'re expanding the data and making it easy for everyone to access. As technologists in Detroit, we will build an awesome website to showcase grants and funders. All the data will be available for free, online, in bulk, under a copyright-free license.</p>
-<p>But to get a comprehensive dataset, we need someone dedicated to getting the information. That’s why we’re sponsoring an internship. Here\'s where the funding will go: entirely to an intern\'s summer stipend.</p>
-<h2>Who we are</h2>
-<h3>Matt Hampel</h3>
-<p>"In 2012, I worked through Code for America with the City of Detroit to help build TextMyBus, a real-time bus arrival system for Detroit. My company, LocalData, is making tech tools for neighborhood organizations that allow groups to quickly collect and map important information. I’ve previously worked on technology projects at the University of Michigan and Chicago Tribune, among other places."</p>
+<p>-->
+<h2>The Ledger Team</h2>
 <h3>Benjamin Chodoroff</h3>
 <p>"I am a programmer who works with various free software projects. I co-own a small design/dev firm, <a href="http://theworkdept.com">http://theworkdept.com</a> - we build websites and database-driven applications. Ever since highschool, I’ve been a technology activist. I am an advising member of the Detroit Digital Justice Coalition and help neighborhoods build wireless networks."</p>
+<h3>Matt Hampel</h3>
+<p>"In 2012, I worked through Code for America with the City of Detroit to help build TextMyBus, a real-time bus arrival system for Detroit. My company, LocalData, is making tech tools for neighborhood organizations that allow groups to quickly collect and map important information. I’ve previously worked on technology projects at the University of Michigan and Chicago Tribune, among other places."</p>
 <h3>Jessica McInchak</h3>
 <p>“I am a recent graduate in urban sociology and do a lot of my thinking at the intersections of place-making, open-data, and spatial justice.  So far, this has all made for a creative niche where I get to work doing data-inspired, community-focused projects, just like this one.  In past years, I’ve interned with National Neighborhood Indicator Partners in Detroit and Chicago.”</p>
 ',
@@ -134,9 +128,11 @@ But to get a comprehensive dataset, we need someone dedicated to getting the inf
       ),
     ),
   ),
+  'path' => '/about-detroit-ledger',
   'name' => '',
   'picture' => 0,
   'data' => NULL,
+  'pathauto_perform_alias' => FALSE,
   'date' => '2013-07-30 20:12:15 -0400',
 );
   $nodes[] = array(
@@ -158,39 +154,44 @@ But to get a comprehensive dataset, we need someone dedicated to getting the inf
   'body' => array(
     'und' => array(
       0 => array(
-        'value' => 'Detroit Ledger’s vision is to create a picture of philanthropy in Detroit through dynamic data about grants and loans.  We’re aiming for ultimate transparency around the big-money question -- who is making and who is receiving grants and loans in the city?  
+        'value' => '<p>The Ledger collects data, presents it in an easily digestible format, and talks with individuals and organizations working in the nonprofit sector.</p>
 
-<h2>Collecting Data</h2>
+<h2>Collecting data</h2>
 
-We are thinking about Detroit as we experience it today and are collecting data about grantees within city boundaries who have received funds from 2011 onward, with the exception of a few older grants still active today.  We’re building our database by scraping foundation websites and utilizing publicly reported IRS 990 forms.  In some cases, we are also directly contacting organizations with data inquiries and information requests.  
+<p>We collect data about grantees within city boundaries who have received funds from 2011 onward. A few older grants that are still active today are also in our collection.</p>
 
-We are coding data with the intent to provide many search keys to our end-users; including granter foundation, grantee organization, National Tax-Exempt Entity (NTEE) classification, year granted and length of funds, awarded amount, impacted neighborhoods, and more.  Whenever possible, each grant has a direct source link to follow for foundation-specific details.  Otherwise, each grant has a static source citation.
+<p>We’re building our database by scraping foundation websites and utilizing publicly reported IRS 990 forms.  In some cases, we are also reach out to organizations to ask for data and additional information. We welcome suggestions and data at <a href="mailto:hello@detroitledger.org">hello@detroitledger.org</a>.<p>
 
-If our data source has not specifically listed the end date of a grant, we record that grant as active for a single fiscal year.  Many grants we’ve come across seem to be allocated for the broad purposes of “general operations” and “areas of greatest need.”  This commonality is not specifically recorded, but we note all project-specific and re-granting details when applicable to our sources.  
+<p>We code the data with the intent to provide many search keys to our end-users. Fields collected including granter foundation, grantee organization, National Tax-Exempt Entity (NTEE) classification, year granted and length of funds, awarded amount, impacted neighborhoods, and several other categories.  Whenever possible, each grant has a direct source link to follow for foundation-specific details. Otherwise, each grant has a static source citation.</p>
+
+<p>If our data source has not specifically listed the end date of a grant, we record that grant as active for a single fiscal year.  Many grants we’ve come across seem to be allocated for the broad purposes of “general operations” and “areas of greatest need.”  This commonality is not specifically recorded, but we note all project-specific and re-granting details when applicable to our sources.  </p>
 
 <h2>Conversing with People</h2>
 
-In conjunction with the data and web components of our project, we are also conducting outreach to foundation representatives, funders, community experts, and our friends doing work relevant to philanthropy in the city.  We are compiling and publishing our “field journals” - scribbled with the conversations we share, the questions we ask, and the insights we note -  once approved by the folks involved.  Notes are typed and edited after our conversations to correct errors, maintain any agreed upon confidentiality, or add further detail. 
+<p>In addition to our data collection work, we also conduct outreach to foundation representatives, funders, community experts, and others doing work relevant to philanthropy in the city.  We are compiling and publishing our field notes once they are approved the interviewees.  Notes are transcribed and edited after our conversations to correct errors, maintain any agreed upon confidentiality, or add further detail. </p>
 
-We are doing outreach beginning in June and would love to chat and hear your perspective of grants, loans, and philanthropy in Detroit for twenty minutes or an hour.  If you want to be a contributing voice, email us at hello@detroitledger.org!',
+<p>We would love to hear your perspective of grants, loans, and philanthropy in Detroit. Conversations generally last 30 - 60 minutes. If you want to be a contributing voice, please email us at <a href="mailto:hello@detroitledger.org">hello@detroitledger.org</a>.</p>',
         'summary' => '',
         'format' => 'full_html',
-        'safe_value' => '<p>Detroit Ledger’s vision is to create a picture of philanthropy in Detroit through dynamic data about grants and loans.  We’re aiming for ultimate transparency around the big-money question -- who is making and who is receiving grants and loans in the city?  </p>
-<h2>Collecting Data</h2>
-<p>We are thinking about Detroit as we experience it today and are collecting data about grantees within city boundaries who have received funds from 2011 onward, with the exception of a few older grants still active today.  We’re building our database by scraping foundation websites and utilizing publicly reported IRS 990 forms.  In some cases, we are also directly contacting organizations with data inquiries and information requests.  </p>
-<p>We are coding data with the intent to provide many search keys to our end-users; including granter foundation, grantee organization, National Tax-Exempt Entity (NTEE) classification, year granted and length of funds, awarded amount, impacted neighborhoods, and more.  Whenever possible, each grant has a direct source link to follow for foundation-specific details.  Otherwise, each grant has a static source citation.</p>
+        'safe_value' => '<p>The Ledger collects data, presents it in an easily digestible format, and talks with individuals and organizations working in the nonprofit sector.</p>
+<h2>Collecting data</h2>
+<p>We collect data about grantees within city boundaries who have received funds from 2011 onward. A few older grants that are still active today are also in our collection.</p>
+<p>We’re building our database by scraping foundation websites and utilizing publicly reported IRS 990 forms.  In some cases, we are also reach out to organizations to ask for data and additional information. We welcome suggestions and data at <a href="mailto:hello@detroitledger.org">hello@detroitledger.org</a>.
+</p><p>We code the data with the intent to provide many search keys to our end-users. Fields collected including granter foundation, grantee organization, National Tax-Exempt Entity (NTEE) classification, year granted and length of funds, awarded amount, impacted neighborhoods, and several other categories.  Whenever possible, each grant has a direct source link to follow for foundation-specific details. Otherwise, each grant has a static source citation.</p>
 <p>If our data source has not specifically listed the end date of a grant, we record that grant as active for a single fiscal year.  Many grants we’ve come across seem to be allocated for the broad purposes of “general operations” and “areas of greatest need.”  This commonality is not specifically recorded, but we note all project-specific and re-granting details when applicable to our sources.  </p>
 <h2>Conversing with People</h2>
-<p>In conjunction with the data and web components of our project, we are also conducting outreach to foundation representatives, funders, community experts, and our friends doing work relevant to philanthropy in the city.  We are compiling and publishing our “field journals” - scribbled with the conversations we share, the questions we ask, and the insights we note -  once approved by the folks involved.  Notes are typed and edited after our conversations to correct errors, maintain any agreed upon confidentiality, or add further detail. </p>
-<p>We are doing outreach beginning in June and would love to chat and hear your perspective of grants, loans, and philanthropy in Detroit for twenty minutes or an hour.  If you want to be a contributing voice, email us at <a href="mailto:hello@detroitledger.org">hello@detroitledger.org</a>!</p>
+<p>In addition to our data collection work, we also conduct outreach to foundation representatives, funders, community experts, and others doing work relevant to philanthropy in the city.  We are compiling and publishing our field notes once they are approved the interviewees.  Notes are transcribed and edited after our conversations to correct errors, maintain any agreed upon confidentiality, or add further detail. </p>
+<p>We would love to hear your perspective of grants, loans, and philanthropy in Detroit. Conversations generally last 30 - 60 minutes. If you want to be a contributing voice, please email us at <a href="mailto:hello@detroitledger.org">hello@detroitledger.org</a>.</p>
 ',
         'safe_summary' => '',
       ),
     ),
   ),
+  'path' => '/our-methods',
   'name' => '',
   'picture' => 0,
   'data' => NULL,
+  'pathauto_perform_alias' => FALSE,
   'date' => '2013-07-30 20:23:50 -0400',
 );
   return $nodes;
