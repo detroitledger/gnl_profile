@@ -10,6 +10,80 @@
 function gnl_schema_field_default_field_instances() {
   $field_instances = array();
 
+  // Exported field_instance: 'flagging-flag-field_ip'
+  $field_instances['flagging-flag-field_ip'] = array(
+    'bundle' => 'flag',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'number',
+        'settings' => array(
+          'decimal_separator' => '.',
+          'prefix_suffix' => TRUE,
+          'scale' => 0,
+          'thousand_separator' => ' ',
+        ),
+        'type' => 'number_integer',
+        'weight' => 1,
+      ),
+    ),
+    'entity_type' => 'flagging',
+    'field_name' => 'field_ip',
+    'label' => 'Flagger IP address',
+    'required' => 1,
+    'settings' => array(
+      'max' => '',
+      'min' => '',
+      'prefix' => '',
+      'suffix' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'number',
+      'settings' => array(),
+      'type' => 'number',
+      'weight' => 2,
+    ),
+  );
+
+  // Exported field_instance: 'flagging-flag-field_note'
+  $field_instances['flagging-flag-field_note'] = array(
+    'bundle' => 'flag',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'flagging',
+    'field_name' => 'field_note',
+    'label' => 'Note',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 5,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 1,
+    ),
+  );
+
   // Exported field_instance: 'node-grant-body'
   $field_instances['node-grant-body'] = array(
     'bundle' => 'grant',
@@ -878,6 +952,7 @@ function gnl_schema_field_default_field_instances() {
   t('Description');
   t('EIN');
   t('Federal Employer Identification Number');
+  t('Flagger IP address');
   t('Founded/dissolved');
   t('Funder');
   t('Grant types');
@@ -885,6 +960,7 @@ function gnl_schema_field_default_field_instances() {
   t('Links');
   t('NTEE');
   t('NTEE code');
+  t('Note');
   t('Recipient');
   t('Source');
   t('Source: http://www.guidestar.org/rxg/help/ntee-codes.aspx');

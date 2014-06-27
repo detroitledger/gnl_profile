@@ -1,5 +1,5 @@
 FORMAT: 1A
-HOST: http://data.detroitledger.org/api/1.0
+HOST: https://data.detroitledger.org/api/1.0
 
 # detroitledger
 
@@ -256,3 +256,55 @@ Single entities will contain the following content management- revision-related 
           "total_num_recipients": 1,
           "total_grants_dollars": 1
       }
+
+# Group Flag
+## Flag [/flags/:id]
++ Parameters
+
+    + id (number, required, `12345`) ... Flag ID.
+
++ Model (application/json)
+
+    + Body
+
+        {
+            "flag": {
+                "id": 9999,
+                "target_id": 1821, // entity id of grant or organization
+                "note": "This is a duplicate of grant id 1822"
+            }
+        }
+
+### Retrieve a single Flag [GET]
++ Response 200 (application/json)
+
+    [Flag][]
+
+### Flag a Grant or Organization [POST]
++ Request
+
+    + Headers
+
+        Content-Type: application/json
+        Accept: application/json
+
+    + Body
+
+        {
+            "flag": {
+                "target_id": 1821,
+                "note": "This is a duplicate of grant id 1822"
+            }
+        }
+
++ Response 201
+
+    + Body
+
+        [Flag][]
+
++ Response 400
+
+    + Body
+
+        entity id 1821 does not exist.
