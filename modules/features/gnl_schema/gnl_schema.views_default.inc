@@ -277,6 +277,260 @@ function gnl_schema_views_default_views() {
   $export['admin_grants'] = $view;
 
   $view = new view();
+  $view->name = 'admin_orgs';
+  $view->description = '';
+  $view->tag = 'default';
+  $view->base_table = 'node';
+  $view->human_name = 'Administer organizations';
+  $view->core = 7;
+  $view->api_version = '3.0';
+  $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+
+  /* Display: Master */
+  $handler = $view->new_display('default', 'Master', 'default');
+  $handler->display->display_options['title'] = 'Administer organizations';
+  $handler->display->display_options['use_more_always'] = FALSE;
+  $handler->display->display_options['access']['type'] = 'perm';
+  $handler->display->display_options['cache']['type'] = 'none';
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['pager']['type'] = 'full';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '100';
+  $handler->display->display_options['style_plugin'] = 'table';
+  $handler->display->display_options['style_options']['columns'] = array(
+    'title' => 'title',
+    'field_ein' => 'field_ein',
+    'field_org_lifespan' => 'field_org_lifespan',
+    'field_ntee' => 'field_ntee',
+    'field_state_corp_id' => 'field_state_corp_id',
+    'field_org_tags' => 'field_org_tags',
+    'status' => 'status',
+  );
+  $handler->display->display_options['style_options']['default'] = 'title';
+  $handler->display->display_options['style_options']['info'] = array(
+    'title' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_ein' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_org_lifespan' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_ntee' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_state_corp_id' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_org_tags' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'status' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+  );
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = 'Name';
+  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  /* Field: Content: EIN */
+  $handler->display->display_options['fields']['field_ein']['id'] = 'field_ein';
+  $handler->display->display_options['fields']['field_ein']['table'] = 'field_data_field_ein';
+  $handler->display->display_options['fields']['field_ein']['field'] = 'field_ein';
+  $handler->display->display_options['fields']['field_ein']['settings'] = array(
+    'thousand_separator' => '',
+    'prefix_suffix' => 1,
+  );
+  /* Field: Content: Founded/dissolved */
+  $handler->display->display_options['fields']['field_org_lifespan']['id'] = 'field_org_lifespan';
+  $handler->display->display_options['fields']['field_org_lifespan']['table'] = 'field_data_field_org_lifespan';
+  $handler->display->display_options['fields']['field_org_lifespan']['field'] = 'field_org_lifespan';
+  $handler->display->display_options['fields']['field_org_lifespan']['settings'] = array(
+    'format_type' => 'short',
+    'fromto' => 'both',
+    'multiple_number' => '',
+    'multiple_from' => '',
+    'multiple_to' => '',
+  );
+  /* Field: Content: NTEE */
+  $handler->display->display_options['fields']['field_ntee']['id'] = 'field_ntee';
+  $handler->display->display_options['fields']['field_ntee']['table'] = 'field_data_field_ntee';
+  $handler->display->display_options['fields']['field_ntee']['field'] = 'field_ntee';
+  $handler->display->display_options['fields']['field_ntee']['type'] = 'hierarchical_term_formatter';
+  $handler->display->display_options['fields']['field_ntee']['settings'] = array(
+    'display' => 'all',
+    'link' => 1,
+    'wrap' => 'none',
+    'separator' => ' » ',
+  );
+  $handler->display->display_options['fields']['field_ntee']['delta_offset'] = '0';
+  /* Field: Content: State corp id */
+  $handler->display->display_options['fields']['field_state_corp_id']['id'] = 'field_state_corp_id';
+  $handler->display->display_options['fields']['field_state_corp_id']['table'] = 'field_data_field_state_corp_id';
+  $handler->display->display_options['fields']['field_state_corp_id']['field'] = 'field_state_corp_id';
+  /* Field: Content: Tags */
+  $handler->display->display_options['fields']['field_org_tags']['id'] = 'field_org_tags';
+  $handler->display->display_options['fields']['field_org_tags']['table'] = 'field_data_field_org_tags';
+  $handler->display->display_options['fields']['field_org_tags']['field'] = 'field_org_tags';
+  $handler->display->display_options['fields']['field_org_tags']['group_rows'] = FALSE;
+  $handler->display->display_options['fields']['field_org_tags']['delta_offset'] = '0';
+  /* Field: Content: Published */
+  $handler->display->display_options['fields']['status']['id'] = 'status';
+  $handler->display->display_options['fields']['status']['table'] = 'node';
+  $handler->display->display_options['fields']['status']['field'] = 'status';
+  $handler->display->display_options['fields']['status']['label'] = 'Pub';
+  $handler->display->display_options['fields']['status']['type'] = 'unicode-yes-no';
+  $handler->display->display_options['fields']['status']['type_custom_false'] = 'not published!';
+  $handler->display->display_options['fields']['status']['not'] = 0;
+  /* Sort criterion: Content: Post date */
+  $handler->display->display_options['sorts']['created']['id'] = 'created';
+  $handler->display->display_options['sorts']['created']['table'] = 'node';
+  $handler->display->display_options['sorts']['created']['field'] = 'created';
+  $handler->display->display_options['sorts']['created']['order'] = 'DESC';
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = '1';
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['status']['expose']['operator_id'] = '';
+  $handler->display->display_options['filters']['status']['expose']['label'] = 'Published?';
+  $handler->display->display_options['filters']['status']['expose']['operator'] = 'status_op';
+  $handler->display->display_options['filters']['status']['expose']['identifier'] = 'status';
+  $handler->display->display_options['filters']['status']['expose']['required'] = TRUE;
+  $handler->display->display_options['filters']['status']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+  );
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'org' => 'org',
+  );
+  /* Filter criterion: Content: Founded/dissolved (field_org_lifespan) */
+  $handler->display->display_options['filters']['field_org_lifespan_value']['id'] = 'field_org_lifespan_value';
+  $handler->display->display_options['filters']['field_org_lifespan_value']['table'] = 'field_data_field_org_lifespan';
+  $handler->display->display_options['filters']['field_org_lifespan_value']['field'] = 'field_org_lifespan_value';
+  $handler->display->display_options['filters']['field_org_lifespan_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_org_lifespan_value']['expose']['operator_id'] = 'field_org_lifespan_value_op';
+  $handler->display->display_options['filters']['field_org_lifespan_value']['expose']['label'] = 'Founded date';
+  $handler->display->display_options['filters']['field_org_lifespan_value']['expose']['use_operator'] = TRUE;
+  $handler->display->display_options['filters']['field_org_lifespan_value']['expose']['operator'] = 'field_org_lifespan_value_op';
+  $handler->display->display_options['filters']['field_org_lifespan_value']['expose']['identifier'] = 'field_org_lifespan_value';
+  $handler->display->display_options['filters']['field_org_lifespan_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+  );
+  $handler->display->display_options['filters']['field_org_lifespan_value']['expose']['autocomplete_items'] = '10';
+  $handler->display->display_options['filters']['field_org_lifespan_value']['expose']['autocomplete_field'] = 'field_org_lifespan';
+  $handler->display->display_options['filters']['field_org_lifespan_value']['expose']['autocomplete_raw_suggestion'] = 1;
+  $handler->display->display_options['filters']['field_org_lifespan_value']['expose']['autocomplete_raw_dropdown'] = 1;
+  $handler->display->display_options['filters']['field_org_lifespan_value']['expose']['autocomplete_dependent'] = 0;
+  /* Filter criterion: Content: Founded/dissolved (field_org_lifespan:value2) */
+  $handler->display->display_options['filters']['field_org_lifespan_value2']['id'] = 'field_org_lifespan_value2';
+  $handler->display->display_options['filters']['field_org_lifespan_value2']['table'] = 'field_data_field_org_lifespan';
+  $handler->display->display_options['filters']['field_org_lifespan_value2']['field'] = 'field_org_lifespan_value2';
+  $handler->display->display_options['filters']['field_org_lifespan_value2']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_org_lifespan_value2']['expose']['operator_id'] = 'field_org_lifespan_value2_op';
+  $handler->display->display_options['filters']['field_org_lifespan_value2']['expose']['label'] = 'Dissolved date';
+  $handler->display->display_options['filters']['field_org_lifespan_value2']['expose']['use_operator'] = TRUE;
+  $handler->display->display_options['filters']['field_org_lifespan_value2']['expose']['operator'] = 'field_org_lifespan_value2_op';
+  $handler->display->display_options['filters']['field_org_lifespan_value2']['expose']['identifier'] = 'field_org_lifespan_value2';
+  $handler->display->display_options['filters']['field_org_lifespan_value2']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+  );
+  $handler->display->display_options['filters']['field_org_lifespan_value2']['expose']['autocomplete_items'] = '10';
+  $handler->display->display_options['filters']['field_org_lifespan_value2']['expose']['autocomplete_raw_suggestion'] = 1;
+  $handler->display->display_options['filters']['field_org_lifespan_value2']['expose']['autocomplete_raw_dropdown'] = 1;
+  $handler->display->display_options['filters']['field_org_lifespan_value2']['expose']['autocomplete_dependent'] = 0;
+  /* Filter criterion: Content: NTEE (field_ntee) */
+  $handler->display->display_options['filters']['field_ntee_tid']['id'] = 'field_ntee_tid';
+  $handler->display->display_options['filters']['field_ntee_tid']['table'] = 'field_data_field_ntee';
+  $handler->display->display_options['filters']['field_ntee_tid']['field'] = 'field_ntee_tid';
+  $handler->display->display_options['filters']['field_ntee_tid']['value'] = '';
+  $handler->display->display_options['filters']['field_ntee_tid']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_ntee_tid']['expose']['operator_id'] = 'field_ntee_tid_op';
+  $handler->display->display_options['filters']['field_ntee_tid']['expose']['label'] = 'NTEE';
+  $handler->display->display_options['filters']['field_ntee_tid']['expose']['use_operator'] = TRUE;
+  $handler->display->display_options['filters']['field_ntee_tid']['expose']['operator'] = 'field_ntee_tid_op';
+  $handler->display->display_options['filters']['field_ntee_tid']['expose']['identifier'] = 'field_ntee_tid';
+  $handler->display->display_options['filters']['field_ntee_tid']['expose']['multiple'] = TRUE;
+  $handler->display->display_options['filters']['field_ntee_tid']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+  );
+  $handler->display->display_options['filters']['field_ntee_tid']['reduce_duplicates'] = TRUE;
+  $handler->display->display_options['filters']['field_ntee_tid']['vocabulary'] = 'ntee';
+  /* Filter criterion: Content: Title */
+  $handler->display->display_options['filters']['title']['id'] = 'title';
+  $handler->display->display_options['filters']['title']['table'] = 'node';
+  $handler->display->display_options['filters']['title']['field'] = 'title';
+  $handler->display->display_options['filters']['title']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['title']['expose']['operator_id'] = 'title_op';
+  $handler->display->display_options['filters']['title']['expose']['label'] = 'Name';
+  $handler->display->display_options['filters']['title']['expose']['use_operator'] = TRUE;
+  $handler->display->display_options['filters']['title']['expose']['operator'] = 'title_op';
+  $handler->display->display_options['filters']['title']['expose']['identifier'] = 'title';
+  $handler->display->display_options['filters']['title']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+  );
+  $handler->display->display_options['filters']['title']['expose']['autocomplete_items'] = '10';
+  $handler->display->display_options['filters']['title']['expose']['autocomplete_field'] = 'title';
+  $handler->display->display_options['filters']['title']['expose']['autocomplete_raw_suggestion'] = 1;
+  $handler->display->display_options['filters']['title']['expose']['autocomplete_raw_dropdown'] = 1;
+  $handler->display->display_options['filters']['title']['expose']['autocomplete_dependent'] = 0;
+
+  /* Display: Page */
+  $handler = $view->new_display('page', 'Page', 'page');
+  $handler->display->display_options['path'] = 'admin/orgs';
+  $export['admin_orgs'] = $view;
+
+  $view = new view();
   $view->name = 'all_grants';
   $view->description = '';
   $view->tag = 'default';

@@ -121,6 +121,7 @@ features[variable][] = node_submitted_org
 features[variable][] = node_submitted_page
 features[variable][] = site_frontpage
 features[views_view][] = admin_grants
+features[views_view][] = admin_orgs
 features[views_view][] = all_grants
 features[views_view][] = flags
 features[views_view][] = org_grants
