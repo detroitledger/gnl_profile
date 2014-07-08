@@ -12,6 +12,7 @@ dependencies[] = date
 dependencies[] = entityreference
 dependencies[] = features
 dependencies[] = flag
+dependencies[] = hierarchical_term_formatter
 dependencies[] = link
 dependencies[] = menu
 dependencies[] = number

@@ -59,6 +59,9 @@ projects[git_deploy][version] = "2.x-dev"
 projects[google_analytics][subdir] = "contrib"
 projects[google_analytics][version] = "1.4"
 
+projects[hierarchical_term_formatter][subdir] = "contrib"
+projects[hierarchical_term_formatter][version] = "1.0-alpha2"
+
 projects[link][subdir] = "contrib"
 projects[link][version] = "1.1"
 
