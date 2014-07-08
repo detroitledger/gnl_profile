@@ -441,7 +441,7 @@ function _gnl_api_index_nodes($bundle, $limit, $offset, $filters, $sort) {
     unset($filters['org_grants_funded']);
   }
 
-  $sql_filters = array(
+  $node_table_column_filters = array(
     'title',
     'nid',
     'status',
@@ -452,8 +452,11 @@ function _gnl_api_index_nodes($bundle, $limit, $offset, $filters, $sort) {
   $post_filters = array();
 
   foreach ($filters as $property => $str) {
-    if (in_array($property, $sql_filters)) {
+    if (in_array($property, $node_table_column_filters)) {
       $query->condition('n.' . $property, '%' . db_like($str) . '%', 'LIKE');
+    } else if ($property == 'tid') {
+      $query->join('taxonomy_index', 'ti', 'ti.nid=n.nid');
+      $query->condition('ti.tid', intval($str));
     } else {
       $post_filters[$property] = $str;
     }
