@@ -393,7 +393,7 @@ function _gnl_api_retrieve($type, $id) {
 function _gnl_api_index_nodes($bundle, $limit, $offset, $filters, $sort) {
   $limit = intval($limit);
   $offset = intval($offset);
-  $limit = (is_int($limit) && $limit < GNL_API_MAX_LIMIT) ? $limit : GNL_API_DEFAULT_LIMIT;
+  $limit = (is_int($limit) && $limit <= GNL_API_MAX_LIMIT) ? $limit : GNL_API_DEFAULT_LIMIT;
   $offset = (is_int($offset)) ? $offset : 0;
 
   // base query
