@@ -9,6 +9,13 @@ define("GNL_API_MAX_LIMIT", 1000);
 define("GNL_API_FLAG_NAME", "flag");
 
 /**
+ * Implements hook_boot().
+ */
+function gnl_api_boot() {
+  header('Access-Control-Allow-Origin: *');
+}
+
+/**
  * Implements hook_services_resources().
  */
 function gnl_api_services_resources() {
