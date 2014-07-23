@@ -9,6 +9,26 @@ define("GNL_API_MAX_LIMIT", 1000);
 define("GNL_API_FLAG_NAME", "flag");
 
 /**
+ * Implements hook_init().
+ * DIY CORS.
+ */
+function gnl_api_init() {
+  $method = $_SERVER['REQUEST_METHOD'];
+  if (isset($_SERVER['HTTP_ORIGIN'])) {
+    drupal_add_http_header('Access-Control-Allow-Origin', $_SERVER['HTTP_ORIGIN']);
+  }
+  if (isset($_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS'])) {
+    drupal_add_http_header('Access-Control-Allow-Headers', $_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']);
+  }
+  if (isset($_SERVER['HTTP_ACCESS_CONTROL_REQUEST_METHOD'])) {
+    drupal_add_http_header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+  }
+  if ($method == 'OPTIONS') {
+    exit; // CORS client gets what it wants
+  }
+}
+
+/**
  * Implements hook_services_resources().
  */
 function gnl_api_services_resources() {
@@ -247,7 +267,7 @@ function gnl_api_services_resources() {
 }
 
 function _gnl_api_create_flag($data) {
-  if (!isset($data["flag"]["target_id"]) || !isset($data["flag"]["note"])) {
+  if (!isset($data["target_id"]) || !isset($data["note"])) {
     return services_error('missing required property', 400);
   }
 
@@ -255,9 +275,9 @@ function _gnl_api_create_flag($data) {
   $_COOKIE = true;
 
   $flagging = entity_create('flagging', array('flag_name' => GNL_API_FLAG_NAME));
-  $flagging->entity_id = $data["flag"]["target_id"];
+  $flagging->entity_id = $data["target_id"];
   $flagging_wrapper = entity_metadata_wrapper('flagging', $flagging);
-  $flagging_wrapper->field_note->set($data["flag"]["note"]);
+  $flagging_wrapper->field_note->set($data["note"]);
   $flagging_wrapper->field_ip->set(ip2long(ip_address()));
 
   $flag = flag_get_flag(GNL_API_FLAG_NAME);
@@ -270,7 +290,7 @@ function _gnl_api_create_flag($data) {
   } catch (Exception $e) {
     return services_error('field validation error', 400);
   }
-  $ret = $flag->flag('flag', $data["flag"]["target_id"], NULL, FALSE, $flagging);
+  $ret = $flag->flag('flag', $data["target_id"], NULL, FALSE, $flagging);
 
   return array(
     "id" => $flagging->flagging_id,
