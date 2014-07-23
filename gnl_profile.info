@@ -20,6 +20,7 @@ dependencies[] = gnl_api
 dependencies[] = gnl_fields
 dependencies[] = gnl_schema
 dependencies[] = googleanalytics
+dependencies[] = hook_post_action
 dependencies[] = link
 dependencies[] = libraries
 dependencies[] = menu

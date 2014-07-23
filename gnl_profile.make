@@ -2,10 +2,8 @@ core = 7.x
 
 api = 2
 
-; omega8.cc core
-projects[drupal][type] = "core"
-projects[drupal][download][type] = "get"
-projects[drupal][download][url] = "http://files.aegir.cc/dev/drupal-7.23.1.tar.gz"
+; use latest default drupal 7
+projects[drupal][version] = "7.x"
 
 ; Modules
 projects[addressfield][subdir] = "contrib"
@@ -64,6 +62,9 @@ projects[google_analytics][version] = "1.4"
 
 projects[hierarchical_term_formatter][subdir] = "contrib"
 projects[hierarchical_term_formatter][version] = "1.0-alpha2"
+
+projects[hook_post_action][subdir] = "contrib"
+projects[hook_post_action][version] = "1.0-beta1"
 
 projects[link][subdir] = "contrib"
 projects[link][version] = "1.1"
