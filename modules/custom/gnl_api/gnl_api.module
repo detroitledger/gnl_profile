@@ -298,6 +298,17 @@ function _gnl_api_index_stats() {
   return $stats;
 }
 
+/**
+ * Implements hook_entity_postsave().
+ *
+ * Clear stats cache on grant entity save
+ */
+function gnl_api_entity_postsave($entity, $type, $op) {
+  if ($type = 'grant') {
+    cache_clear_all('gnl_api_stats', 'cache');
+  }
+}
+
 function _gnl_api_retrieve_org($id) {
   return _gnl_api_retrieve('org', $id);
 }
