@@ -9,6 +9,7 @@ dependencies[] = block
 dependencies[] = boxes
 dependencies[] = context
 dependencies[] = context_ui
+dependencies[] = cors
 dependencies[] = ctools
 dependencies[] = date
 dependencies[] = diff

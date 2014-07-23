@@ -23,6 +23,9 @@ projects[boxes][version] = "1.1"
 projects[context][subdir] = "contrib"
 projects[context][version] = "3.1"
 
+projects[cors][subdir] = "contrib"
+projects[cors][version] = "1.3"
+
 projects[ctools][subdir] = "contrib"
 projects[ctools][version] = "1.3"
 
