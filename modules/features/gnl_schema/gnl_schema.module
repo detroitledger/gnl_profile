@@ -72,6 +72,7 @@ function gnl_schema_init() {
   if (user_is_anonymous()
       && arg(0) !== 'user'
       && arg(0) !== 'api'
+      && arg(0) !== 'flags'
       && !function_exists('drush_main')) {
     drupal_goto('http://detroitledger.org');
   }
