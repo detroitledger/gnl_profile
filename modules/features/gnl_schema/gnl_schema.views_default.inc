@@ -832,8 +832,8 @@ function gnl_schema_views_default_views() {
   $handler->display->display_options['fields']['field_funded_amount']['field'] = 'field_funded_amount';
   $handler->display->display_options['fields']['field_funded_amount']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_funded_amount']['settings'] = array(
-    'thousand_separator' => ' ',
-    'prefix_suffix' => 1,
+    'thousand_separator' => '',
+    'prefix_suffix' => 0,
   );
   /* Field: Content: Recipient */
   $handler->display->display_options['fields']['field_recipient_1']['id'] = 'field_recipient_1';
@@ -857,9 +857,22 @@ function gnl_schema_views_default_views() {
   $handler->display->display_options['fields']['field_year']['id'] = 'field_year';
   $handler->display->display_options['fields']['field_year']['table'] = 'field_data_field_year';
   $handler->display->display_options['fields']['field_year']['field'] = 'field_year';
+  $handler->display->display_options['fields']['field_year']['label'] = 'Start year';
   $handler->display->display_options['fields']['field_year']['settings'] = array(
-    'format_type' => 'long',
-    'fromto' => 'both',
+    'format_type' => 'rfc2822',
+    'fromto' => 'value',
+    'multiple_number' => '',
+    'multiple_from' => '',
+    'multiple_to' => '',
+  );
+  /* Field: Content: Year */
+  $handler->display->display_options['fields']['field_year_1']['id'] = 'field_year_1';
+  $handler->display->display_options['fields']['field_year_1']['table'] = 'field_data_field_year';
+  $handler->display->display_options['fields']['field_year_1']['field'] = 'field_year';
+  $handler->display->display_options['fields']['field_year_1']['label'] = 'End year';
+  $handler->display->display_options['fields']['field_year_1']['settings'] = array(
+    'format_type' => 'rfc2822',
+    'fromto' => 'value2',
     'multiple_number' => '',
     'multiple_from' => '',
     'multiple_to' => '',
