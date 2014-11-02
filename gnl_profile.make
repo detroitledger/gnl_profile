@@ -8,6 +8,8 @@ projects[drupal][version] = "7.x"
 ; Modules
 projects[addressfield][subdir] = "contrib"
 projects[addressfield][version] = "1.0-beta4"
+projects[addressfield][patch][1493014][url] = "https://www.drupal.org/files/1493014-5.container_line_breaks.patch"
+projects[addressfield][patch][1493014][md5] = "239a33ad9edc9be2cb95c0603eee5f70"
 
 projects[auto_entitylabel][download][type] = "git"
 projects[auto_entitylabel][download][url] = "git://git.drupal.org/project/auto_entitylabel.git"

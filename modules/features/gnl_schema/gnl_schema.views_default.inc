@@ -1549,6 +1549,11 @@ function gnl_schema_views_default_views() {
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['style_plugin'] = 'views_data_export_csv';
   $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: Nid */
+  $handler->display->display_options['fields']['nid']['id'] = 'nid';
+  $handler->display->display_options['fields']['nid']['table'] = 'node';
+  $handler->display->display_options['fields']['nid']['field'] = 'nid';
+  $handler->display->display_options['fields']['nid']['label'] = 'Id';
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
@@ -1569,6 +1574,37 @@ function gnl_schema_views_default_views() {
   $handler->display->display_options['fields']['grants_received']['id'] = 'grants_received';
   $handler->display->display_options['fields']['grants_received']['table'] = 'node';
   $handler->display->display_options['fields']['grants_received']['field'] = 'grants_received';
+  /* Field: Content: Address */
+  $handler->display->display_options['fields']['field_org_address']['id'] = 'field_org_address';
+  $handler->display->display_options['fields']['field_org_address']['table'] = 'field_data_field_org_address';
+  $handler->display->display_options['fields']['field_org_address']['field'] = 'field_org_address';
+  $handler->display->display_options['fields']['field_org_address']['click_sort_column'] = 'country';
+  $handler->display->display_options['fields']['field_org_address']['settings'] = array(
+    'use_widget_handlers' => 0,
+    'format_handlers' => array(
+      'address' => 'address',
+    ),
+  );
+  /* Field: Content: EIN */
+  $handler->display->display_options['fields']['field_ein']['id'] = 'field_ein';
+  $handler->display->display_options['fields']['field_ein']['table'] = 'field_data_field_ein';
+  $handler->display->display_options['fields']['field_ein']['field'] = 'field_ein';
+  $handler->display->display_options['fields']['field_ein']['settings'] = array(
+    'thousand_separator' => '',
+    'prefix_suffix' => 0,
+  );
+  /* Field: Content: NTEE */
+  $handler->display->display_options['fields']['field_ntee']['id'] = 'field_ntee';
+  $handler->display->display_options['fields']['field_ntee']['table'] = 'field_data_field_ntee';
+  $handler->display->display_options['fields']['field_ntee']['field'] = 'field_ntee';
+  $handler->display->display_options['fields']['field_ntee']['type'] = 'hierarchical_term_formatter';
+  $handler->display->display_options['fields']['field_ntee']['settings'] = array(
+    'display' => 'all',
+    'link' => 1,
+    'wrap' => 'none',
+    'separator' => ' » ',
+  );
+  $handler->display->display_options['fields']['field_ntee']['delta_offset'] = '0';
   $handler->display->display_options['path'] = 'organizationscsv';
   $export['orgs'] = $view;
 
