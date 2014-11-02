@@ -312,6 +312,7 @@ function gnl_schema_views_default_views() {
     'field_state_corp_id' => 'field_state_corp_id',
     'field_org_tags' => 'field_org_tags',
     'status' => 'status',
+    'body' => 'body',
   );
   $handler->display->display_options['style_options']['default'] = 'title';
   $handler->display->display_options['style_options']['info'] = array(
@@ -356,6 +357,13 @@ function gnl_schema_views_default_views() {
       'empty_column' => 0,
     ),
     'status' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'body' => array(
       'sortable' => 1,
       'default_sort_order' => 'asc',
       'align' => '',
@@ -426,6 +434,12 @@ function gnl_schema_views_default_views() {
   $handler->display->display_options['fields']['status']['type'] = 'unicode-yes-no';
   $handler->display->display_options['fields']['status']['type_custom_false'] = 'not published!';
   $handler->display->display_options['fields']['status']['not'] = 0;
+  /* Field: Content: Description */
+  $handler->display->display_options['fields']['body']['id'] = 'body';
+  $handler->display->display_options['fields']['body']['table'] = 'field_data_body';
+  $handler->display->display_options['fields']['body']['field'] = 'body';
+  $handler->display->display_options['fields']['body']['alter']['max_length'] = '50';
+  $handler->display->display_options['fields']['body']['alter']['trim'] = TRUE;
   /* Sort criterion: Content: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'node';
