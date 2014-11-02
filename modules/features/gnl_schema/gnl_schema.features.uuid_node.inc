@@ -36,13 +36,27 @@ function gnl_schema_uuid_features_default_content() {
           <li><a href="https://github.com/detroitledger">Github</a></li>
         </ul>
 
+<h2>Our data</h2>
+
+<p><a href="http://docs.detroitledger.apiary.io/">Learn how to access our API.</a></p>
+
+<p>Downlaod CSV exports of <a href="https://data.detroitledger.org/sites/default/files/grants.csv">grants</a> and <a href="https://data.detroitledger.org/sites/default/files/organizations.csv">organizations</a>.</p>
+
 <h2>Our mistakes</h2>
 
 <p>The nonprofit <a href="http://www.givewell.org/about/shortcomings">GiveWell</a> shares "mistakes we\'ve made, strategies we should have planned and executed differently, and lessons we\'ve learned." We\'ll do the same here.</p>
 
 <h3>Website wording issues</h3>
 
-<p>From late 2013 through June 2014, our website included some outdated and ambiguous wording about the work the Ledger does. We used aspirational phrasing long after the work was completed. We also made references to a fundraising campaign that was completed.</p>',
+<p>From late 2013 through June 2014, our website included some outdated and ambiguous wording about the work the Ledger does. We used aspirational phrasing long after the work was completed. We also made references to a fundraising campaign that was completed.</p>
+
+<h3>Wrong title listed for HUD employees</h3>
+
+<p>For several months in the middle of 2014, the titles on our interview with <a href="https://data.detroitledger.org/keith-hernandez-and-ellen-chung-department-housing-and-urban-development-hud">Keith Hernandez and Ellen Chung</a> incorrectly called them employees of the City of Detroit. They work for the Department of Housing and Urban Development.</p>
+
+<h3>Poor search engine optimization</h3>
+
+<p>In June 2014, we redesigned this site to present more data to the public and make it easier for us develop. In this process, we failed to ensure that pages were easily crawlable by search engines, meaning people cannot easily find our organizational profiles. We are in the process of fixing the issue.</p>',
         'summary' => '',
         'format' => 'raw_html',
         'safe_value' => '<p>Our goal is to make this project as transparent as possible. To that end, we\'re committed to sharing as many details as possible. Please peruse our project\'s planning and documentation:</p>
@@ -52,13 +66,27 @@ function gnl_schema_uuid_features_default_content() {
           <li><a href="https://github.com/detroitledger">Github</a></li>
         </ul>
 
+<h2>Our data</h2>
+
+<p><a href="http://docs.detroitledger.apiary.io/">Learn how to access our API.</a></p>
+
+<p>Downlaod CSV exports of <a href="https://data.detroitledger.org/sites/default/files/grants.csv">grants</a> and <a href="https://data.detroitledger.org/sites/default/files/organizations.csv">organizations</a>.</p>
+
 <h2>Our mistakes</h2>
 
 <p>The nonprofit <a href="http://www.givewell.org/about/shortcomings">GiveWell</a> shares "mistakes we\'ve made, strategies we should have planned and executed differently, and lessons we\'ve learned." We\'ll do the same here.</p>
 
 <h3>Website wording issues</h3>
 
-<p>From late 2013 through June 2014, our website included some outdated and ambiguous wording about the work the Ledger does. We used aspirational phrasing long after the work was completed. We also made references to a fundraising campaign that was completed.</p>',
+<p>From late 2013 through June 2014, our website included some outdated and ambiguous wording about the work the Ledger does. We used aspirational phrasing long after the work was completed. We also made references to a fundraising campaign that was completed.</p>
+
+<h3>Wrong title listed for HUD employees</h3>
+
+<p>For several months in the middle of 2014, the titles on our interview with <a href="https://data.detroitledger.org/keith-hernandez-and-ellen-chung-department-housing-and-urban-development-hud">Keith Hernandez and Ellen Chung</a> incorrectly called them employees of the City of Detroit. They work for the Department of Housing and Urban Development.</p>
+
+<h3>Poor search engine optimization</h3>
+
+<p>In June 2014, we redesigned this site to present more data to the public and make it easier for us develop. In this process, we failed to ensure that pages were easily crawlable by search engines, meaning people cannot easily find our organizational profiles. We are in the process of fixing the issue.</p>',
         'safe_summary' => '',
       ),
     ),
