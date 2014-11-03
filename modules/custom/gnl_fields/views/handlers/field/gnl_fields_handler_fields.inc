@@ -11,8 +11,7 @@ class gnl_fields_handler_field_grants_funded extends views_handler_field_entity 
     $return = '';
     // node row handler?
     if (($entity = $this->get_value($values)) && entity_access('view', $this->entity_type, $entity)) {
-      setlocale(LC_MONETARY, 'en_US.UTF-8');
-      $return = money_format('%.0n', gnl_fields_org_grants_funded($entity));
+      $return = gnl_fields_org_grants_funded($entity);
     }
     // fields row handler?
     elseif ($values->nid /* add node_load-less access check for field here... */) {
@@ -27,8 +26,7 @@ class gnl_fields_handler_field_grants_received extends views_handler_field_entit
     $return = '';
     // node row handler?
     if (($entity = $this->get_value($values)) && entity_access('view', $this->entity_type, $entity)) {
-      setlocale(LC_MONETARY, 'en_US.UTF-8');
-      $return = money_format('%.0n', gnl_fields_org_grants_received($entity));
+      $return = gnl_fields_org_grants_received($entity);
     }
     // fields row handler?
     elseif ($values->nid /* add node_load-less access check for field here... */) {
@@ -43,7 +41,6 @@ class gnl_fields_handler_field_grants_datestart extends views_handler_field_enti
     $return = '';
     // node row handler?
     if (($entity = $this->get_value($values)) && entity_access('view', $this->entity_type, $entity)) {
-      setlocale(LC_MONETARY, 'en_US.UTF-8');
       $return = substr(gnl_fields_org_grants_datestart($entity), 0, 4);
     }
     // fields row handler?

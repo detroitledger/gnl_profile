@@ -140,10 +140,12 @@ function theme_gnl_fields_money_field($variables) {
   }
 
   if (isset($variables['element']['#items'])) {
-    $output .= money_format('%.0n', $variables['element']['#items'][0]['value']);
+    //$output .= money_format('%.0n', $variables['element']['#items'][0]['value']);
+    $output .= $variables['element']['#items'][0]['value'];
   }
   else {
-    $output .= money_format('%.0n', $variables['element']['#markup']);
+    //$output .= money_format('%.0n', $variables['element']['#markup']);
+    $output .= $variables['element']['#markup'];
   }
   $output .= '</span>';
 
