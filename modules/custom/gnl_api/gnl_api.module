@@ -609,6 +609,13 @@ function _gnl_api_clean_node($node) {
   if ($node->type == 'grant') {
     array_push($simplify_props, 'field_source');
     array_push($simplify_props, 'field_internal_notes');
+
+    $has_notes = (isset($node->body) && isset($node->body['und']) && isset($node->body['und'][0]) && isset($node->body['und'][0]['safe_value']));
+    if ($has_notes) {
+      $node->notes = $node->body['und'][0]['safe_value'];
+    } else {
+      $node->notes = null;
+    }
   }
 
   if ($node->type == 'page') {
