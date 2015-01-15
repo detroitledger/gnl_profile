@@ -42,7 +42,7 @@ function gnl_schema_preprocess_node(&$vars) {
  * Dupe some fields from the previously-added grant.
  */
 function gnl_schema_form_alter(&$form, $form_state, $form_id) {
-  if ($form_id == 'grant_node_form') {
+  if (arg(1) == 'add' && $form_id == 'grant_node_form') {
     $q = new EntityFieldQuery();
     $q->entityCondition('entity_type', 'node')
       ->propertyCondition('type', 'grant')
