@@ -957,7 +957,7 @@ function gnl_schema_views_default_views() {
   $handler->display->display_options['style_plugin'] = 'rss';
   $handler->display->display_options['row_plugin'] = 'rss_fields';
   $handler->display->display_options['row_options']['title_field'] = 'field_note';
-  $handler->display->display_options['row_options']['link_field'] = 'view_node';
+  $handler->display->display_options['row_options']['link_field'] = 'path';
   $handler->display->display_options['row_options']['description_field'] = 'title';
   $handler->display->display_options['row_options']['creator_field'] = 'field_ip';
   $handler->display->display_options['row_options']['date_field'] = 'timestamp';
@@ -975,10 +975,6 @@ function gnl_schema_views_default_views() {
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
   $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
-  /* Field: Content: Link */
-  $handler->display->display_options['fields']['view_node']['id'] = 'view_node';
-  $handler->display->display_options['fields']['view_node']['table'] = 'views_entity_node';
-  $handler->display->display_options['fields']['view_node']['field'] = 'view_node';
   /* Field: Flagging: Flagger IP address */
   $handler->display->display_options['fields']['field_ip']['id'] = 'field_ip';
   $handler->display->display_options['fields']['field_ip']['table'] = 'field_data_field_ip';
@@ -995,6 +991,10 @@ function gnl_schema_views_default_views() {
   $handler->display->display_options['fields']['timestamp']['field'] = 'timestamp';
   $handler->display->display_options['fields']['timestamp']['relationship'] = 'flag_content_rel';
   $handler->display->display_options['fields']['timestamp']['date_format'] = 'long';
+  /* Field: Content: Path */
+  $handler->display->display_options['fields']['path']['id'] = 'path';
+  $handler->display->display_options['fields']['path']['table'] = 'node';
+  $handler->display->display_options['fields']['path']['field'] = 'path';
   $handler->display->display_options['path'] = 'flags/recent-rss';
   $handler->display->display_options['sitename_title'] = 0;
   $export['flags'] = $view;
