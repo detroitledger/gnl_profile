@@ -123,6 +123,9 @@ projects[views_raw_sql][download][branch] = "7.x-1.x"
 projects[views_raw_sql][patch][2002288][url] = "https://drupal.org/files/0001-views_raw_sql-Issue-2002288-Fixed-Sort-default-not-i.patch"
 projects[views_raw_sql][patch][2002288][md5] = "ad778a5b1c44948d908dc0f5e12d3a8f"
 
+projects[views_tree][subdir] = "contrib"
+projects[views_tree][version] = "2.0"
+
 ; Themes
 projects[omega][type] = "theme"
 projects[omega][download][type] = "git"
