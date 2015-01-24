@@ -1272,8 +1272,8 @@ function gnl_schema_views_default_views() {
   $handler = $view->new_display('page', 'Page', 'page');
   $handler->display->display_options['path'] = 'org-ntee-codes';
 
-  /* Display: Page */
-  $handler = $view->new_display('page', 'Page', 'page_1');
+  /* Display: hier */
+  $handler = $view->new_display('page', 'hier', 'page_1');
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'tree';
   $handler->display->display_options['style_options']['main_field'] = 'tid';
@@ -1281,6 +1281,12 @@ function gnl_schema_views_default_views() {
   $handler->display->display_options['defaults']['style_options'] = FALSE;
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
   $handler->display->display_options['row_plugin'] = 'fields';
+  $handler->display->display_options['row_options']['inline'] = array(
+    'name' => 'name',
+    'field_ntee_code' => 'field_ntee_code',
+    'tid' => 'tid',
+    'tid_1' => 'tid_1',
+  );
   $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['relationships'] = FALSE;
   /* Relationship: Taxonomy term: Parent term */
@@ -1292,21 +1298,33 @@ function gnl_schema_views_default_views() {
   $handler->display->display_options['fields']['name']['id'] = 'name';
   $handler->display->display_options['fields']['name']['table'] = 'taxonomy_term_data';
   $handler->display->display_options['fields']['name']['field'] = 'name';
+  $handler->display->display_options['fields']['name']['label'] = '';
   $handler->display->display_options['fields']['name']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['name']['alter']['ellipsis'] = FALSE;
+  $handler->display->display_options['fields']['name']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['name']['link_to_taxonomy'] = TRUE;
   /* Field: Taxonomy term: NTEE code */
   $handler->display->display_options['fields']['field_ntee_code']['id'] = 'field_ntee_code';
   $handler->display->display_options['fields']['field_ntee_code']['table'] = 'field_data_field_ntee_code';
   $handler->display->display_options['fields']['field_ntee_code']['field'] = 'field_ntee_code';
+  $handler->display->display_options['fields']['field_ntee_code']['label'] = '';
+  $handler->display->display_options['fields']['field_ntee_code']['element_label_colon'] = FALSE;
   /* Field: Taxonomy term: Term ID */
   $handler->display->display_options['fields']['tid']['id'] = 'tid';
   $handler->display->display_options['fields']['tid']['table'] = 'taxonomy_term_data';
   $handler->display->display_options['fields']['tid']['field'] = 'tid';
+  $handler->display->display_options['fields']['tid']['label'] = '';
+  $handler->display->display_options['fields']['tid']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['tid']['separator'] = '';
+  $handler->display->display_options['fields']['tid']['prefix'] = '(';
+  $handler->display->display_options['fields']['tid']['suffix'] = ')';
   /* Field: Taxonomy term: Term ID */
   $handler->display->display_options['fields']['tid_1']['id'] = 'tid_1';
   $handler->display->display_options['fields']['tid_1']['table'] = 'taxonomy_term_data';
   $handler->display->display_options['fields']['tid_1']['field'] = 'tid';
+  $handler->display->display_options['fields']['tid_1']['relationship'] = 'parent';
+  $handler->display->display_options['fields']['tid_1']['label'] = 'parent Term ID';
+  $handler->display->display_options['fields']['tid_1']['exclude'] = TRUE;
   $handler->display->display_options['path'] = 'org-ntee-hier';
   $export['org_ntee_codes'] = $view;
 
