@@ -52,11 +52,11 @@ function gnl_schema_uuid_features_default_content() {
 
 <h3>Wrong title listed for HUD employees</h3>
 
-<p>For several months in the middle of 2014, the titles on our interview with <a href="https://data.detroitledger.org/keith-hernandez-and-ellen-chung-department-housing-and-urban-development-hud">Keith Hernandez and Ellen Chung</a> incorrectly called them employees of the City of Detroit. They work for the Department of Housing and Urban Development.</p>
+<p>For several months in the middle of 2014, the titles on our interview with <a href="/#!/keith-hernandez-and-ellen-chung-department-housing-and-urban-development-hud">Keith Hernandez and Ellen Chung</a> incorrectly called them employees of the City of Detroit. They work for the Department of Housing and Urban Development.</p>
 
 <h3>Poor search engine optimization</h3>
 
-<p>In June 2014, we redesigned this site to present more data to the public and make it easier for us develop. In this process, we failed to ensure that pages were easily crawlable by search engines, meaning people cannot easily find our organizational profiles. We are in the process of fixing the issue.</p>',
+<p>In June 2014, we redesigned this site to present more data to the public and make it easier for us develop. In this process, we failed to ensure that pages were easily crawlable by search engines, meaning people cannot easily find our organizational profiles. We fixed the issue in January 2015.</p>',
         'summary' => '',
         'format' => 'raw_html',
         'safe_value' => '<p>Our goal is to make this project as transparent as possible. To that end, we\'re committed to sharing as many details as possible. Please peruse our project\'s planning and documentation:</p>
@@ -82,11 +82,11 @@ function gnl_schema_uuid_features_default_content() {
 
 <h3>Wrong title listed for HUD employees</h3>
 
-<p>For several months in the middle of 2014, the titles on our interview with <a href="https://data.detroitledger.org/keith-hernandez-and-ellen-chung-department-housing-and-urban-development-hud">Keith Hernandez and Ellen Chung</a> incorrectly called them employees of the City of Detroit. They work for the Department of Housing and Urban Development.</p>
+<p>For several months in the middle of 2014, the titles on our interview with <a href="/#!/keith-hernandez-and-ellen-chung-department-housing-and-urban-development-hud">Keith Hernandez and Ellen Chung</a> incorrectly called them employees of the City of Detroit. They work for the Department of Housing and Urban Development.</p>
 
 <h3>Poor search engine optimization</h3>
 
-<p>In June 2014, we redesigned this site to present more data to the public and make it easier for us develop. In this process, we failed to ensure that pages were easily crawlable by search engines, meaning people cannot easily find our organizational profiles. We are in the process of fixing the issue.</p>',
+<p>In June 2014, we redesigned this site to present more data to the public and make it easier for us develop. In this process, we failed to ensure that pages were easily crawlable by search engines, meaning people cannot easily find our organizational profiles. We fixed the issue in January 2015.</p>',
         'safe_summary' => '',
       ),
     ),
