@@ -65,6 +65,9 @@ projects[hierarchical_term_formatter][version] = "1.0-alpha2"
 projects[hook_post_action][subdir] = "contrib"
 projects[hook_post_action][version] = "1.0-beta1"
 
+projects[inline_entity_form][subdir] = "contrib"
+projects[inline_entity_form][version] = "1.5"
+
 projects[link][subdir] = "contrib"
 projects[link][version] = "1.1"
 

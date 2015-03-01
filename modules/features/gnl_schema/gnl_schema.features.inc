@@ -83,6 +83,14 @@ function gnl_schema_flag_default_flags() {
  */
 function gnl_schema_node_info() {
   $items = array(
+    'board_term' => array(
+      'name' => t('Board term'),
+      'base' => 'node_content',
+      'description' => '',
+      'has_title' => '1',
+      'title_label' => t('Title (unused)'),
+      'help' => '',
+    ),
     'grant' => array(
       'name' => t('Grant'),
       'base' => 'node_content',
@@ -105,6 +113,14 @@ function gnl_schema_node_info() {
       'description' => t('Use <em>basic pages</em> for your static content, such as an \'About us\' page.'),
       'has_title' => '1',
       'title_label' => t('Title'),
+      'help' => '',
+    ),
+    'person' => array(
+      'name' => t('Person'),
+      'base' => 'node_content',
+      'description' => '',
+      'has_title' => '1',
+      'title_label' => t('Name'),
       'help' => '',
     ),
   );
