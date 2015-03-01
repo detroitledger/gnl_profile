@@ -149,6 +149,7 @@ features[variable][] = site_frontpage
 features[views_view][] = admin_grants
 features[views_view][] = admin_orgs
 features[views_view][] = all_grants
+features[views_view][] = board_terms
 features[views_view][] = flags
 features[views_view][] = org_grants
 features[views_view][] = org_ntee_codes

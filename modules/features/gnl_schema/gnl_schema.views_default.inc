@@ -897,6 +897,568 @@ function gnl_schema_views_default_views() {
   $export['all_grants'] = $view;
 
   $view = new view();
+  $view->name = 'board_terms';
+  $view->description = '';
+  $view->tag = 'default';
+  $view->base_table = 'node';
+  $view->human_name = 'Board terms';
+  $view->core = 7;
+  $view->api_version = '3.0';
+  $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+
+  /* Display: Master */
+  $handler = $view->new_display('default', 'Master', 'default');
+  $handler->display->display_options['title'] = 'Active board members';
+  $handler->display->display_options['use_more'] = TRUE;
+  $handler->display->display_options['use_more_always'] = TRUE;
+  $handler->display->display_options['use_more_text'] = 'search past and future members';
+  $handler->display->display_options['link_display'] = 'page_all';
+  $handler->display->display_options['access']['type'] = 'perm';
+  $handler->display->display_options['cache']['type'] = 'none';
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['pager']['type'] = 'none';
+  $handler->display->display_options['style_plugin'] = 'table';
+  $handler->display->display_options['style_options']['columns'] = array(
+    'field_person' => 'field_person',
+    'field_term_dates' => 'field_term_dates',
+    'edit_node' => 'edit_node',
+  );
+  $handler->display->display_options['style_options']['default'] = '-1';
+  $handler->display->display_options['style_options']['info'] = array(
+    'field_person' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_term_dates' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'edit_node' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+  );
+  /* No results behavior: Global: Text area */
+  $handler->display->display_options['empty']['area']['id'] = 'area';
+  $handler->display->display_options['empty']['area']['table'] = 'views';
+  $handler->display->display_options['empty']['area']['field'] = 'area';
+  $handler->display->display_options['empty']['area']['empty'] = TRUE;
+  $handler->display->display_options['empty']['area']['content'] = 'No active board terms';
+  $handler->display->display_options['empty']['area']['format'] = 'filtered_html';
+  /* Field: Content: Organization */
+  $handler->display->display_options['fields']['field_organization']['id'] = 'field_organization';
+  $handler->display->display_options['fields']['field_organization']['table'] = 'field_data_field_organization';
+  $handler->display->display_options['fields']['field_organization']['field'] = 'field_organization';
+  $handler->display->display_options['fields']['field_organization']['label'] = 'organization nid';
+  $handler->display->display_options['fields']['field_organization']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_organization']['type'] = 'entityreference_entity_id';
+  $handler->display->display_options['fields']['field_organization']['settings'] = array(
+    'link' => 0,
+  );
+  /* Field: Content: Nid */
+  $handler->display->display_options['fields']['nid']['id'] = 'nid';
+  $handler->display->display_options['fields']['nid']['table'] = 'node';
+  $handler->display->display_options['fields']['nid']['field'] = 'nid';
+  $handler->display->display_options['fields']['nid']['label'] = 'board term nid';
+  $handler->display->display_options['fields']['nid']['exclude'] = TRUE;
+  /* Field: Content: Person */
+  $handler->display->display_options['fields']['field_person']['id'] = 'field_person';
+  $handler->display->display_options['fields']['field_person']['table'] = 'field_data_field_person';
+  $handler->display->display_options['fields']['field_person']['field'] = 'field_person';
+  $handler->display->display_options['fields']['field_person']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['field_person']['alter']['text'] = '[field_person] <a href="/node/[field_person-target_id]/edit?destination=node/[field_board]" title="Edit member\'s contact information">edit</a>';
+  $handler->display->display_options['fields']['field_person']['settings'] = array(
+    'link' => 0,
+  );
+  /* Field: Content: Position */
+  $handler->display->display_options['fields']['field_position']['id'] = 'field_position';
+  $handler->display->display_options['fields']['field_position']['table'] = 'field_data_field_position';
+  $handler->display->display_options['fields']['field_position']['field'] = 'field_position';
+  /* Field: Content: Term dates */
+  $handler->display->display_options['fields']['field_term_dates']['id'] = 'field_term_dates';
+  $handler->display->display_options['fields']['field_term_dates']['table'] = 'field_data_field_term_dates';
+  $handler->display->display_options['fields']['field_term_dates']['field'] = 'field_term_dates';
+  $handler->display->display_options['fields']['field_term_dates']['label'] = 'Term';
+  $handler->display->display_options['fields']['field_term_dates']['settings'] = array(
+    'format_type' => 'gnl_date_type_human_short',
+    'fromto' => 'both',
+    'multiple_number' => '',
+    'multiple_from' => '',
+    'multiple_to' => '',
+  );
+  /* Field: Global: Custom text */
+  $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['table'] = 'views';
+  $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['label'] = '';
+  $handler->display->display_options['fields']['nothing']['alter']['text'] = '<a href="/node/[nid]/edit?destination=node/[field_board]">edit</a>';
+  $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
+  /* Field: Content: Term dates */
+  $handler->display->display_options['fields']['field_term_dates_1']['id'] = 'field_term_dates_1';
+  $handler->display->display_options['fields']['field_term_dates_1']['table'] = 'field_data_field_term_dates';
+  $handler->display->display_options['fields']['field_term_dates_1']['field'] = 'field_term_dates';
+  $handler->display->display_options['fields']['field_term_dates_1']['label'] = 'start date';
+  $handler->display->display_options['fields']['field_term_dates_1']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_term_dates_1']['type'] = 'date_plain';
+  $handler->display->display_options['fields']['field_term_dates_1']['settings'] = array(
+    'format_type' => 'gnl_date_type_human_short',
+    'fromto' => 'value',
+    'multiple_number' => '',
+    'multiple_from' => '',
+    'multiple_to' => '',
+  );
+  /* Field: Content: Term dates */
+  $handler->display->display_options['fields']['field_term_dates_2']['id'] = 'field_term_dates_2';
+  $handler->display->display_options['fields']['field_term_dates_2']['table'] = 'field_data_field_term_dates';
+  $handler->display->display_options['fields']['field_term_dates_2']['field'] = 'field_term_dates';
+  $handler->display->display_options['fields']['field_term_dates_2']['label'] = 'end date';
+  $handler->display->display_options['fields']['field_term_dates_2']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_term_dates_2']['type'] = 'date_plain';
+  $handler->display->display_options['fields']['field_term_dates_2']['settings'] = array(
+    'format_type' => 'gnl_date_type_human_short',
+    'fromto' => 'value2',
+    'multiple_number' => '',
+    'multiple_from' => '',
+    'multiple_to' => '',
+  );
+  /* Sort criterion: Content: Term dates (field_term_dates) */
+  $handler->display->display_options['sorts']['field_term_dates_value']['id'] = 'field_term_dates_value';
+  $handler->display->display_options['sorts']['field_term_dates_value']['table'] = 'field_data_field_term_dates';
+  $handler->display->display_options['sorts']['field_term_dates_value']['field'] = 'field_term_dates_value';
+  /* Contextual filter: Content: Organization (field_organization) */
+  $handler->display->display_options['arguments']['field_organization_target_id']['id'] = 'field_organization_target_id';
+  $handler->display->display_options['arguments']['field_organization_target_id']['table'] = 'field_data_field_organization';
+  $handler->display->display_options['arguments']['field_organization_target_id']['field'] = 'field_organization_target_id';
+  $handler->display->display_options['arguments']['field_organization_target_id']['default_action'] = 'empty';
+  $handler->display->display_options['arguments']['field_organization_target_id']['default_argument_type'] = 'raw';
+  $handler->display->display_options['arguments']['field_organization_target_id']['default_argument_options']['index'] = '0';
+  $handler->display->display_options['arguments']['field_organization_target_id']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['field_organization_target_id']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['field_organization_target_id']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['arguments']['field_organization_target_id']['specify_validation'] = TRUE;
+  $handler->display->display_options['arguments']['field_organization_target_id']['validate']['type'] = 'node';
+  $handler->display->display_options['arguments']['field_organization_target_id']['validate_options']['types'] = array(
+    'organization' => 'organization',
+  );
+  $handler->display->display_options['filter_groups']['groups'] = array(
+    1 => 'AND',
+    2 => 'AND',
+    3 => 'OR',
+  );
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'board_term' => 'board_term',
+  );
+  $handler->display->display_options['filters']['type']['group'] = 1;
+  /* Filter criterion: Content: Term dates (field_term_dates) */
+  $handler->display->display_options['filters']['field_term_dates_value']['id'] = 'field_term_dates_value';
+  $handler->display->display_options['filters']['field_term_dates_value']['table'] = 'field_data_field_term_dates';
+  $handler->display->display_options['filters']['field_term_dates_value']['field'] = 'field_term_dates_value';
+  $handler->display->display_options['filters']['field_term_dates_value']['operator'] = '<=';
+  $handler->display->display_options['filters']['field_term_dates_value']['group'] = 2;
+  $handler->display->display_options['filters']['field_term_dates_value']['expose']['operator_id'] = 'field_term_dates_value_op';
+  $handler->display->display_options['filters']['field_term_dates_value']['expose']['label'] = 'Term Dates -  start date (field_term_dates)';
+  $handler->display->display_options['filters']['field_term_dates_value']['expose']['operator'] = 'field_term_dates_value_op';
+  $handler->display->display_options['filters']['field_term_dates_value']['expose']['identifier'] = 'field_term_dates_value';
+  /* Filter criterion: Content: Term dates (field_term_dates:value2) */
+  $handler->display->display_options['filters']['field_term_dates_value2']['id'] = 'field_term_dates_value2';
+  $handler->display->display_options['filters']['field_term_dates_value2']['table'] = 'field_data_field_term_dates';
+  $handler->display->display_options['filters']['field_term_dates_value2']['field'] = 'field_term_dates_value2';
+  $handler->display->display_options['filters']['field_term_dates_value2']['operator'] = '>=';
+  $handler->display->display_options['filters']['field_term_dates_value2']['group'] = 3;
+  /* Filter criterion: Global: Fields comparison */
+  $handler->display->display_options['filters']['fields_compare']['id'] = 'fields_compare';
+  $handler->display->display_options['filters']['fields_compare']['table'] = 'views';
+  $handler->display->display_options['filters']['fields_compare']['field'] = 'fields_compare';
+  $handler->display->display_options['filters']['fields_compare']['group'] = 3;
+  $handler->display->display_options['filters']['fields_compare']['right_field'] = 'field_term_dates_1';
+  $handler->display->display_options['filters']['fields_compare']['left_field'] = 'field_term_dates_2';
+
+  /* Display: Active page */
+  $handler = $view->new_display('page', 'Active page', 'page');
+  $handler->display->display_options['defaults']['arguments'] = FALSE;
+  /* Contextual filter: Content: Organization (field_organization) */
+  $handler->display->display_options['arguments']['field_organization_target_id']['id'] = 'field_organization_target_id';
+  $handler->display->display_options['arguments']['field_organization_target_id']['table'] = 'field_data_field_organization';
+  $handler->display->display_options['arguments']['field_organization_target_id']['field'] = 'field_organization_target_id';
+  $handler->display->display_options['arguments']['field_organization_target_id']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['field_organization_target_id']['default_argument_type'] = 'node';
+  $handler->display->display_options['arguments']['field_organization_target_id']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['field_organization_target_id']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['field_organization_target_id']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['arguments']['field_organization_target_id']['specify_validation'] = TRUE;
+  $handler->display->display_options['arguments']['field_organization_target_id']['validate']['type'] = 'node';
+  $handler->display->display_options['arguments']['field_organization_target_id']['validate_options']['types'] = array(
+    'organization' => 'organization',
+  );
+  $handler->display->display_options['path'] = 'node/%/terms';
+
+  /* Display: Active block */
+  $handler = $view->new_display('block', 'Active block', 'block_1');
+  $handler->display->display_options['defaults']['arguments'] = FALSE;
+  /* Contextual filter: Content: Organization (field_organization) */
+  $handler->display->display_options['arguments']['field_organization_target_id']['id'] = 'field_organization_target_id';
+  $handler->display->display_options['arguments']['field_organization_target_id']['table'] = 'field_data_field_organization';
+  $handler->display->display_options['arguments']['field_organization_target_id']['field'] = 'field_organization_target_id';
+  $handler->display->display_options['arguments']['field_organization_target_id']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['field_organization_target_id']['default_argument_type'] = 'node';
+  $handler->display->display_options['arguments']['field_organization_target_id']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['field_organization_target_id']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['field_organization_target_id']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['arguments']['field_organization_target_id']['specify_validation'] = TRUE;
+  $handler->display->display_options['arguments']['field_organization_target_id']['validate']['type'] = 'node';
+  $handler->display->display_options['arguments']['field_organization_target_id']['validate_options']['types'] = array(
+    'organization' => 'organization',
+  );
+
+  /* Display: All page */
+  $handler = $view->new_display('page', 'All page', 'page_all');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'All board members';
+  $handler->display->display_options['defaults']['use_more'] = FALSE;
+  $handler->display->display_options['defaults']['use_more_always'] = FALSE;
+  $handler->display->display_options['defaults']['use_more_always'] = FALSE;
+  $handler->display->display_options['use_more_always'] = TRUE;
+  $handler->display->display_options['defaults']['use_more_text'] = FALSE;
+  $handler->display->display_options['use_more_text'] = 'search past and future members';
+  $handler->display->display_options['defaults']['pager'] = FALSE;
+  $handler->display->display_options['pager']['type'] = 'full';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '20';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['pager']['options']['id'] = '0';
+  $handler->display->display_options['pager']['options']['quantity'] = '9';
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'table';
+  $handler->display->display_options['style_options']['columns'] = array(
+    'field_person' => 'field_person',
+    'field_term_dates' => 'field_term_dates',
+    'edit_node' => 'edit_node',
+  );
+  $handler->display->display_options['style_options']['default'] = 'field_term_dates';
+  $handler->display->display_options['style_options']['info'] = array(
+    'field_person' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_term_dates' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'edit_node' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+  );
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['footer'] = FALSE;
+  $handler->display->display_options['defaults']['arguments'] = FALSE;
+  /* Contextual filter: Content: Organization (field_organization) */
+  $handler->display->display_options['arguments']['field_organization_target_id_1']['id'] = 'field_organization_target_id_1';
+  $handler->display->display_options['arguments']['field_organization_target_id_1']['table'] = 'field_data_field_organization';
+  $handler->display->display_options['arguments']['field_organization_target_id_1']['field'] = 'field_organization_target_id';
+  $handler->display->display_options['arguments']['field_organization_target_id_1']['default_action'] = 'not found';
+  $handler->display->display_options['arguments']['field_organization_target_id_1']['default_argument_type'] = 'fixed';
+  $handler->display->display_options['arguments']['field_organization_target_id_1']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['field_organization_target_id_1']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['field_organization_target_id_1']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['arguments']['field_organization_target_id_1']['specify_validation'] = TRUE;
+  $handler->display->display_options['arguments']['field_organization_target_id_1']['validate']['type'] = 'node';
+  $handler->display->display_options['arguments']['field_organization_target_id_1']['validate_options']['types'] = array(
+    'organization' => 'organization',
+  );
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'board_term' => 'board_term',
+  );
+  /* Filter criterion: Content: Term dates (field_term_dates) */
+  $handler->display->display_options['filters']['field_term_dates_value']['id'] = 'field_term_dates_value';
+  $handler->display->display_options['filters']['field_term_dates_value']['table'] = 'field_data_field_term_dates';
+  $handler->display->display_options['filters']['field_term_dates_value']['field'] = 'field_term_dates_value';
+  $handler->display->display_options['filters']['field_term_dates_value']['operator'] = '<=';
+  $handler->display->display_options['filters']['field_term_dates_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_term_dates_value']['expose']['operator_id'] = 'field_term_dates_value_op';
+  $handler->display->display_options['filters']['field_term_dates_value']['expose']['label'] = 'Start date before';
+  $handler->display->display_options['filters']['field_term_dates_value']['expose']['operator'] = 'field_term_dates_value_op';
+  $handler->display->display_options['filters']['field_term_dates_value']['expose']['identifier'] = 'field_term_dates_value';
+  $handler->display->display_options['filters']['field_term_dates_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    5 => 0,
+  );
+  /* Filter criterion: Content: Term dates (field_term_dates:value2) */
+  $handler->display->display_options['filters']['field_term_dates_value2']['id'] = 'field_term_dates_value2';
+  $handler->display->display_options['filters']['field_term_dates_value2']['table'] = 'field_data_field_term_dates';
+  $handler->display->display_options['filters']['field_term_dates_value2']['field'] = 'field_term_dates_value2';
+  $handler->display->display_options['filters']['field_term_dates_value2']['operator'] = '>=';
+  $handler->display->display_options['filters']['field_term_dates_value2']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_term_dates_value2']['expose']['operator_id'] = 'field_term_dates_value2_op';
+  $handler->display->display_options['filters']['field_term_dates_value2']['expose']['label'] = 'End date after';
+  $handler->display->display_options['filters']['field_term_dates_value2']['expose']['operator'] = 'field_term_dates_value2_op';
+  $handler->display->display_options['filters']['field_term_dates_value2']['expose']['identifier'] = 'field_term_dates_value2';
+  $handler->display->display_options['filters']['field_term_dates_value2']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    5 => 0,
+  );
+  $handler->display->display_options['filters']['field_term_dates_value2']['group_info']['label'] = 'Term Dates - end date (field_term_dates:value2)';
+  $handler->display->display_options['filters']['field_term_dates_value2']['group_info']['identifier'] = 'field_term_dates_value2';
+  $handler->display->display_options['filters']['field_term_dates_value2']['group_info']['remember'] = FALSE;
+  $handler->display->display_options['filters']['field_term_dates_value2']['group_info']['group_items'] = array(
+    1 => array(),
+    2 => array(),
+    3 => array(),
+  );
+  $handler->display->display_options['path'] = 'node/%/board_terms';
+
+  /* Display: public active block */
+  $handler = $view->new_display('block', 'public active block', 'block_2');
+  $handler->display->display_options['defaults']['use_more'] = FALSE;
+  $handler->display->display_options['defaults']['use_more_always'] = FALSE;
+  $handler->display->display_options['defaults']['use_more_always'] = FALSE;
+  $handler->display->display_options['use_more_always'] = TRUE;
+  $handler->display->display_options['defaults']['use_more_text'] = FALSE;
+  $handler->display->display_options['use_more_text'] = 'search past and future members';
+  $handler->display->display_options['defaults']['access'] = FALSE;
+  $handler->display->display_options['access']['type'] = 'perm';
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: Person */
+  $handler->display->display_options['fields']['field_person']['id'] = 'field_person';
+  $handler->display->display_options['fields']['field_person']['table'] = 'field_data_field_person';
+  $handler->display->display_options['fields']['field_person']['field'] = 'field_person';
+  $handler->display->display_options['fields']['field_person']['alter']['text'] = '[field_person] <a href="/node/[field_person-target_id]/edit?destination=node/[field_organization]" title="Edit member\'s contact information">edit</a>';
+  $handler->display->display_options['fields']['field_person']['settings'] = array(
+    'link' => 0,
+  );
+  /* Field: Content: Position */
+  $handler->display->display_options['fields']['field_position']['id'] = 'field_position';
+  $handler->display->display_options['fields']['field_position']['table'] = 'field_data_field_position';
+  $handler->display->display_options['fields']['field_position']['field'] = 'field_position';
+  /* Field: Content: Term dates */
+  $handler->display->display_options['fields']['field_term_dates']['id'] = 'field_term_dates';
+  $handler->display->display_options['fields']['field_term_dates']['table'] = 'field_data_field_term_dates';
+  $handler->display->display_options['fields']['field_term_dates']['field'] = 'field_term_dates';
+  $handler->display->display_options['fields']['field_term_dates']['label'] = 'Term';
+  $handler->display->display_options['fields']['field_term_dates']['settings'] = array(
+    'format_type' => 'gnl_date_type_human_short',
+    'fromto' => 'both',
+    'multiple_number' => '',
+    'multiple_from' => '',
+    'multiple_to' => '',
+  );
+  /* Field: Content: Term dates */
+  $handler->display->display_options['fields']['field_term_dates_1']['id'] = 'field_term_dates_1';
+  $handler->display->display_options['fields']['field_term_dates_1']['table'] = 'field_data_field_term_dates';
+  $handler->display->display_options['fields']['field_term_dates_1']['field'] = 'field_term_dates';
+  $handler->display->display_options['fields']['field_term_dates_1']['label'] = 'start date';
+  $handler->display->display_options['fields']['field_term_dates_1']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_term_dates_1']['settings'] = array(
+    'format_type' => 'long',
+    'fromto' => 'value',
+    'multiple_number' => '',
+    'multiple_from' => '',
+    'multiple_to' => '',
+  );
+  /* Field: Content: Term dates */
+  $handler->display->display_options['fields']['field_term_dates_2']['id'] = 'field_term_dates_2';
+  $handler->display->display_options['fields']['field_term_dates_2']['table'] = 'field_data_field_term_dates';
+  $handler->display->display_options['fields']['field_term_dates_2']['field'] = 'field_term_dates';
+  $handler->display->display_options['fields']['field_term_dates_2']['label'] = 'end date';
+  $handler->display->display_options['fields']['field_term_dates_2']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_term_dates_2']['settings'] = array(
+    'format_type' => 'long',
+    'fromto' => 'value2',
+    'multiple_number' => '',
+    'multiple_from' => '',
+    'multiple_to' => '',
+  );
+  $handler->display->display_options['defaults']['arguments'] = FALSE;
+  /* Contextual filter: Content: Organization (field_organization) */
+  $handler->display->display_options['arguments']['field_organization_target_id']['id'] = 'field_organization_target_id';
+  $handler->display->display_options['arguments']['field_organization_target_id']['table'] = 'field_data_field_organization';
+  $handler->display->display_options['arguments']['field_organization_target_id']['field'] = 'field_organization_target_id';
+  $handler->display->display_options['arguments']['field_organization_target_id']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['field_organization_target_id']['default_argument_type'] = 'node';
+  $handler->display->display_options['arguments']['field_organization_target_id']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['field_organization_target_id']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['field_organization_target_id']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['arguments']['field_organization_target_id']['specify_validation'] = TRUE;
+  $handler->display->display_options['arguments']['field_organization_target_id']['validate']['type'] = 'node';
+  $handler->display->display_options['arguments']['field_organization_target_id']['validate_options']['types'] = array(
+    'organization' => 'organization',
+  );
+
+  /* Display: Export all */
+  $handler = $view->new_display('views_data_export', 'Export all', 'views_data_export_1');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'Export all board members';
+  $handler->display->display_options['pager']['type'] = 'none';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['style_plugin'] = 'views_data_export_csv';
+  $handler->display->display_options['style_options']['provide_file'] = 1;
+  $handler->display->display_options['style_options']['filename'] = '%view_%1-title_%timestamp-full.csv';
+  $handler->display->display_options['style_options']['parent_sort'] = 0;
+  $handler->display->display_options['style_options']['quote'] = 1;
+  $handler->display->display_options['style_options']['trim'] = 0;
+  $handler->display->display_options['style_options']['replace_newlines'] = 0;
+  $handler->display->display_options['style_options']['header'] = 1;
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: Organization */
+  $handler->display->display_options['fields']['field_organization']['id'] = 'field_organization';
+  $handler->display->display_options['fields']['field_organization']['table'] = 'field_data_field_organization';
+  $handler->display->display_options['fields']['field_organization']['field'] = 'field_organization';
+  $handler->display->display_options['fields']['field_organization']['settings'] = array(
+    'link' => 0,
+  );
+  /* Field: Content: Person */
+  $handler->display->display_options['fields']['field_person']['id'] = 'field_person';
+  $handler->display->display_options['fields']['field_person']['table'] = 'field_data_field_person';
+  $handler->display->display_options['fields']['field_person']['field'] = 'field_person';
+  $handler->display->display_options['fields']['field_person']['alter']['text'] = '[field_person] <a href="/node/[field_person-target_id]/edit?destination=node/[field_organization]" title="Edit member\'s contact information">edit</a>';
+  $handler->display->display_options['fields']['field_person']['settings'] = array(
+    'link' => 0,
+  );
+  /* Field: Content: Position */
+  $handler->display->display_options['fields']['field_position']['id'] = 'field_position';
+  $handler->display->display_options['fields']['field_position']['table'] = 'field_data_field_position';
+  $handler->display->display_options['fields']['field_position']['field'] = 'field_position';
+  /* Field: Content: Term dates */
+  $handler->display->display_options['fields']['field_term_dates']['id'] = 'field_term_dates';
+  $handler->display->display_options['fields']['field_term_dates']['table'] = 'field_data_field_term_dates';
+  $handler->display->display_options['fields']['field_term_dates']['field'] = 'field_term_dates';
+  $handler->display->display_options['fields']['field_term_dates']['settings'] = array(
+    'format_type' => 'gnl_date_type_human_short',
+    'fromto' => 'both',
+    'multiple_number' => '',
+    'multiple_from' => '',
+    'multiple_to' => '',
+  );
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'board_term' => 'board_term',
+  );
+  $handler->display->display_options['filters']['type']['group'] = 1;
+  $handler->display->display_options['path'] = 'node/%/board_terms/csv';
+  $handler->display->display_options['displays'] = array(
+    'page_all' => 'page_all',
+    'default' => 0,
+    'page' => 0,
+    'block_1' => 0,
+    'block_2' => 0,
+  );
+  $handler->display->display_options['sitename_title'] = 0;
+
+  /* Display: Export active */
+  $handler = $view->new_display('views_data_export', 'Export active', 'views_data_export_2');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'Export active board members';
+  $handler->display->display_options['pager']['type'] = 'none';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['style_plugin'] = 'views_data_export_csv';
+  $handler->display->display_options['style_options']['provide_file'] = 1;
+  $handler->display->display_options['style_options']['filename'] = '%view_%1-title_%timestamp-full.csv';
+  $handler->display->display_options['style_options']['parent_sort'] = 0;
+  $handler->display->display_options['style_options']['quote'] = 1;
+  $handler->display->display_options['style_options']['trim'] = 0;
+  $handler->display->display_options['style_options']['replace_newlines'] = 0;
+  $handler->display->display_options['style_options']['header'] = 1;
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: Organization */
+  $handler->display->display_options['fields']['field_organization']['id'] = 'field_organization';
+  $handler->display->display_options['fields']['field_organization']['table'] = 'field_data_field_organization';
+  $handler->display->display_options['fields']['field_organization']['field'] = 'field_organization';
+  $handler->display->display_options['fields']['field_organization']['settings'] = array(
+    'link' => 0,
+  );
+  /* Field: Content: Person */
+  $handler->display->display_options['fields']['field_person']['id'] = 'field_person';
+  $handler->display->display_options['fields']['field_person']['table'] = 'field_data_field_person';
+  $handler->display->display_options['fields']['field_person']['field'] = 'field_person';
+  $handler->display->display_options['fields']['field_person']['alter']['text'] = '[field_person] <a href="/node/[field_person-target_id]/edit?destination=node/[field_organization]" title="Edit member\'s contact information">edit</a>';
+  $handler->display->display_options['fields']['field_person']['settings'] = array(
+    'link' => 0,
+  );
+  /* Field: Content: Position */
+  $handler->display->display_options['fields']['field_position']['id'] = 'field_position';
+  $handler->display->display_options['fields']['field_position']['table'] = 'field_data_field_position';
+  $handler->display->display_options['fields']['field_position']['field'] = 'field_position';
+  /* Field: Content: Term dates */
+  $handler->display->display_options['fields']['field_term_dates']['id'] = 'field_term_dates';
+  $handler->display->display_options['fields']['field_term_dates']['table'] = 'field_data_field_term_dates';
+  $handler->display->display_options['fields']['field_term_dates']['field'] = 'field_term_dates';
+  $handler->display->display_options['fields']['field_term_dates']['settings'] = array(
+    'format_type' => 'gnl_date_type_human_short',
+    'fromto' => 'both',
+    'multiple_number' => '',
+    'multiple_from' => '',
+    'multiple_to' => '',
+  );
+  $handler->display->display_options['path'] = 'node/%/board_terms/csv/active_only';
+  $handler->display->display_options['displays'] = array(
+    'page' => 'page',
+    'block_1' => 'block_1',
+    'default' => 0,
+    'page_all' => 0,
+    'block_2' => 0,
+  );
+  $handler->display->display_options['sitename_title'] = 0;
+  $export['board_terms'] = $view;
+
+  $view = new view();
   $view->name = 'flags';
   $view->description = '';
   $view->tag = 'default';
