@@ -14,7 +14,7 @@ Local install
 With PHP>5.4 and Drush 6:
 
 ```
-drush make --working-copy https://raw.githubusercontent.com/detroitledger/gnl_profile/7.x-1.x/distro.make gnl_webroot
+drush make --working-copy https://raw.githubusercontent.com/detroitledger/gnl_profile/boardmembers/distro.make gnl_webroot
 cd gnl_webroot
 mysql -uroot -e 'create database gnl_test'
 drush site-install gnl_profile  --account-name=admin --account-pass=admin --db-url=mysql://root@localhost/gnl_test --yes
