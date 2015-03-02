@@ -21,7 +21,7 @@ cat>>sites/default/settings.php<<'EOF'
 <?php
 $databases['default']['default'] = array(
   'driver' => 'mysql',
-  'database' => 'gnl_board',
+  'database' => 'gnl',
   'username' => 'root',
   'password' => '',
   'host' => 'localhost',
