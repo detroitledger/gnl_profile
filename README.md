@@ -40,6 +40,7 @@ On OS X, do this beforehand:
 ```
 brew tap homebrew/homebrew-php
 brew update
+brew install php56
 brew install --ignore-dependencies composer
 composer global require drush/drush:6.*
 # add export PATH="$PATH:~/.composer/vendor/bin" to .bashrc
