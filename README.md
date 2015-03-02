@@ -20,13 +20,23 @@ mysql -uroot -e 'create database gnl_test'
 drush site-install gnl_profile  --account-name=admin --account-pass=admin --db-url=mysql://root@localhost/gnl_test --yes
 (cd profiles/gnl_profile/themes/gnl_theme; compass compile)
 drush cc all
-bash ./profiles/gnl_profile/modules/custom/migrate_gnl/download.sh # requires write access to /tmp
 drush mreg
 drush mi OrgNTEETypes
 drush mi GrantTypes
 drush mi Orgs
 drush mi Grants
 drush runserver --server=builtin 8080
+```
+
+On OS X, do this beforehand:
+
+```
+brew tap homebrew/homebrew-php
+brew update
+brew install --ignore-dependencies composer
+composer global require drush/drush:6.*
+# add export PATH="$PATH:~/.composer/vendor/bin" to .bashrc
+# also, install mysql server like so: http://stackoverflow.com/a/6378429
 ```
 
 Test
