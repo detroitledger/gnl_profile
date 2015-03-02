@@ -16,16 +16,19 @@ With PHP>5.4 and Drush 6:
 ```
 drush make --working-copy https://raw.githubusercontent.com/detroitledger/gnl_profile/boardmembers/distro.make gnl_webroot
 cd gnl_webroot
-mysql -uroot -e 'create database gnl_test'
-drush site-install gnl_profile  --account-name=admin --account-pass=admin --db-url=mysql://root@localhost/gnl_test --yes
-(cd profiles/gnl_profile/themes/gnl_theme; compass compile)
-drush cc all
-drush mreg
-drush mi OrgNTEETypes
-drush mi GrantTypes
-drush mi Orgs
-drush mi Grants
-drush runserver --server=builtin 8080
+mysql -uroot -e 'create database gnl'
+cat>>sites/default/settings.php<<'EOF'
+<?php
+$databases['default']['default'] = array(
+  'driver' => 'mysql',
+  'database' => 'gnl_board',
+  'username' => 'root',
+  'password' => '',
+  'host' => 'localhost',
+);
+EOF
+ssh -A root@data.detroitledger.org 'ssh `docker inspect --format="{{.NetworkSettings.IPAddress}}" gnl-www` "cd /srv/www/drupal; drush sql-dump"' | drush sqlc
+drush rs
 ```
 
 On OS X, do this beforehand:
