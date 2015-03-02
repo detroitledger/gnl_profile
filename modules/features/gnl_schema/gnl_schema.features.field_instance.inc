@@ -84,6 +84,51 @@ function gnl_schema_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-board_term-field_compensation'
+  $field_instances['node-board_term-field_compensation'] = array(
+    'bundle' => 'board_term',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'number',
+        'settings' => array(
+          'decimal_separator' => '.',
+          'prefix_suffix' => TRUE,
+          'scale' => 0,
+          'thousand_separator' => ' ',
+        ),
+        'type' => 'number_integer',
+        'weight' => 5,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_compensation',
+    'label' => 'Compensation',
+    'required' => FALSE,
+    'settings' => array(
+      'max' => '',
+      'min' => '',
+      'prefix' => '',
+      'suffix' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'module' => 'number',
+      'settings' => array(),
+      'type' => 'number',
+      'weight' => 36,
+    ),
+  );
+
   // Exported field_instance: 'node-board_term-field_organization'
   $field_instances['node-board_term-field_organization'] = array(
     'bundle' => 'board_term',
@@ -1173,6 +1218,7 @@ function gnl_schema_field_default_field_instances() {
   t('Body');
   t('Can\'t find the funder? <a href="/node/add/org">Add them here.</a>');
   t('Can\'t find the recipient? <a href="/node/add/org">Add them here.</a>');
+  t('Compensation');
   t('Description');
   t('EIN');
   t('Federal Award ID');
