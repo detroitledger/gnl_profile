@@ -27,6 +27,10 @@ $databases['default']['default'] = array(
   'host' => 'localhost',
 );
 EOF
+# if you're on OS X using homebrew mysql, specify
+#   'unix_socket' => '/tmp/mysql.sock',
+# instead of
+#   'host' => 'localhost',
 ssh -A root@data.detroitledger.org 'ssh `docker inspect --format="{{.NetworkSettings.IPAddress}}" gnl-www` "cd /srv/www/drupal; drush sql-dump"' | drush sqlc
 drush rs
 ```
