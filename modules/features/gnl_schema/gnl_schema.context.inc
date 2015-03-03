@@ -112,11 +112,17 @@ function gnl_schema_context_default_contexts() {
   $context->reactions = array(
     'block' => array(
       'blocks' => array(
+        'views-board_terms-block_1' => array(
+          'module' => 'views',
+          'delta' => 'board_terms-block_1',
+          'region' => 'content',
+          'weight' => '-10',
+        ),
         'system-main' => array(
           'module' => 'system',
           'delta' => 'main',
           'region' => 'content',
-          'weight' => '-10',
+          'weight' => '-9',
         ),
       ),
     ),

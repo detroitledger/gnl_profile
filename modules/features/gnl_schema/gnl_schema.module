@@ -275,3 +275,95 @@ function gnl_schema_date_format_types() {
 function gnl_schema_flush_caches() {
   _gnl_schema_purge_date_formats();
 }
+
+/**
+ * Returns true if management links be shown for this node type and view.
+ */
+function gnl_schema_show_management_links($node, $view_mode) {
+  $visibility_conditions = array(
+    'org' => array(
+      'view_modes' => array('full', 'teaser',),
+      'permission' => 'create board_term content',
+    ),
+    'board_term' => array(
+      'view_modes' => array('full', 'teaser',),
+      'permission' => 'edit own board_term content',
+    ),
+  );
+
+  if (!array_key_exists($node->type, $visibility_conditions)) {
+    return FALSE;
+  }
+
+  if (!user_permission($visibility_conditions[$node->type]['permission'])) {
+    return FALSE;
+  }
+
+  return in_array($view_mode, $visibility_conditions[$node->type]['view_modes']);
+}
+
+function gnl_schema_management_links($node) {
+  if ($node->type == 'org') {
+    return array(
+      array(
+        'title' => 'create board term',
+        'href' => 'node/add/board-term',
+        'query' => array(
+          'field_org' => $node->nid,
+          'destination' => current_path(),
+        ),
+      ),
+    );
+  }
+  else if ($node->type == 'board_term') {
+    return array(
+      array(
+        'title' => 'edit',
+        'href' => 'node/' . $node->nid . '/edit',
+        'query' => array(
+          'destination' => current_path(),
+        ),
+      ),
+      array(
+        'title' => 'delete',
+        'href' => 'node/' . $node->nid . '/delete',
+        'query' => array(
+          'destination' => current_path(),
+        ),
+      ),
+    );
+  }
+  else {
+    return array();
+  }
+}
+
+/**
+ * Implements hook_node_view().
+ *
+ * Add management links to org type.
+ */
+function gnl_schema_node_view($node, $view_mode, $langcode) {
+  // only show management links during certain view modes
+  if (gnl_schema_show_management_links($node, $view_mode)) {
+    // remove "read more"
+    unset($node->content['links']['node']);
+
+    // @hack: Even though the view mode is checked in
+    // gnl_schema_show_management_links, we check again here.
+    // This is because the links should show up in the full view
+    // of an org node, but not in the links region. Instead,
+    // we render them below the list of board members
+    if ($node->type == 'org' && $view_mode != 'full') {
+      $node->content['links']['add_board_term'] = array(
+        '#links' => gnl_schema_management_links($node),
+      );
+    }
+    else if ($node->type == 'board_term') {
+      $node->content['links']['manage_board_term'] = array(
+          '#links' => gnl_schema_management_links($node),
+      );
+    }
+  }
+}
+
