@@ -1048,11 +1048,6 @@ function gnl_schema_views_default_views() {
   $handler->display->display_options['arguments']['field_organization_target_id']['validate_options']['types'] = array(
     'org' => 'org',
   );
-  $handler->display->display_options['filter_groups']['groups'] = array(
-    1 => 'AND',
-    2 => 'AND',
-    3 => 'OR',
-  );
   /* Filter criterion: Content: Published */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
@@ -1068,29 +1063,6 @@ function gnl_schema_views_default_views() {
     'board_term' => 'board_term',
   );
   $handler->display->display_options['filters']['type']['group'] = 1;
-  /* Filter criterion: Content: Term dates (field_term_dates) */
-  $handler->display->display_options['filters']['field_term_dates_value']['id'] = 'field_term_dates_value';
-  $handler->display->display_options['filters']['field_term_dates_value']['table'] = 'field_data_field_term_dates';
-  $handler->display->display_options['filters']['field_term_dates_value']['field'] = 'field_term_dates_value';
-  $handler->display->display_options['filters']['field_term_dates_value']['operator'] = '<=';
-  $handler->display->display_options['filters']['field_term_dates_value']['group'] = 2;
-  $handler->display->display_options['filters']['field_term_dates_value']['expose']['operator_id'] = 'field_term_dates_value_op';
-  $handler->display->display_options['filters']['field_term_dates_value']['expose']['label'] = 'Term Dates -  start date (field_term_dates)';
-  $handler->display->display_options['filters']['field_term_dates_value']['expose']['operator'] = 'field_term_dates_value_op';
-  $handler->display->display_options['filters']['field_term_dates_value']['expose']['identifier'] = 'field_term_dates_value';
-  /* Filter criterion: Content: Term dates (field_term_dates:value2) */
-  $handler->display->display_options['filters']['field_term_dates_value2']['id'] = 'field_term_dates_value2';
-  $handler->display->display_options['filters']['field_term_dates_value2']['table'] = 'field_data_field_term_dates';
-  $handler->display->display_options['filters']['field_term_dates_value2']['field'] = 'field_term_dates_value2';
-  $handler->display->display_options['filters']['field_term_dates_value2']['operator'] = '>=';
-  $handler->display->display_options['filters']['field_term_dates_value2']['group'] = 3;
-  /* Filter criterion: Global: Fields comparison */
-  $handler->display->display_options['filters']['fields_compare']['id'] = 'fields_compare';
-  $handler->display->display_options['filters']['fields_compare']['table'] = 'views';
-  $handler->display->display_options['filters']['fields_compare']['field'] = 'fields_compare';
-  $handler->display->display_options['filters']['fields_compare']['group'] = 3;
-  $handler->display->display_options['filters']['fields_compare']['right_field'] = 'field_term_dates_1';
-  $handler->display->display_options['filters']['fields_compare']['left_field'] = 'field_term_dates_2';
 
   /* Display: Active page */
   $handler = $view->new_display('page', 'Active page', 'page');
@@ -1111,8 +1083,10 @@ function gnl_schema_views_default_views() {
   );
   $handler->display->display_options['path'] = 'node/%/terms';
 
-  /* Display: Active block */
-  $handler = $view->new_display('block', 'Active block', 'block_1');
+  /* Display: All block */
+  $handler = $view->new_display('block', 'All block', 'block_1');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'All board members';
   $handler->display->display_options['defaults']['arguments'] = FALSE;
   /* Contextual filter: Content: Organization (field_organization) */
   $handler->display->display_options['arguments']['field_organization_target_id']['id'] = 'field_organization_target_id';
