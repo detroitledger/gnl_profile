@@ -84,6 +84,45 @@ function gnl_schema_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-board_term-field_board_source'
+  $field_instances['node-board_term-field_board_source'] = array(
+    'bundle' => 'board_term',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 6,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_board_source',
+    'label' => 'Source',
+    'required' => FALSE,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 37,
+    ),
+  );
+
   // Exported field_instance: 'node-board_term-field_compensation'
   $field_instances['node-board_term-field_compensation'] = array(
     'bundle' => 'board_term',
