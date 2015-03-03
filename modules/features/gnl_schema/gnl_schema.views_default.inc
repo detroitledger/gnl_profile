@@ -1046,7 +1046,7 @@ function gnl_schema_views_default_views() {
   $handler->display->display_options['arguments']['field_organization_target_id']['specify_validation'] = TRUE;
   $handler->display->display_options['arguments']['field_organization_target_id']['validate']['type'] = 'node';
   $handler->display->display_options['arguments']['field_organization_target_id']['validate_options']['types'] = array(
-    'organization' => 'organization',
+    'org' => 'org',
   );
   $handler->display->display_options['filter_groups']['groups'] = array(
     1 => 'AND',
@@ -1107,7 +1107,7 @@ function gnl_schema_views_default_views() {
   $handler->display->display_options['arguments']['field_organization_target_id']['specify_validation'] = TRUE;
   $handler->display->display_options['arguments']['field_organization_target_id']['validate']['type'] = 'node';
   $handler->display->display_options['arguments']['field_organization_target_id']['validate_options']['types'] = array(
-    'organization' => 'organization',
+    'org' => 'org',
   );
   $handler->display->display_options['path'] = 'node/%/terms';
 
@@ -1126,7 +1126,7 @@ function gnl_schema_views_default_views() {
   $handler->display->display_options['arguments']['field_organization_target_id']['specify_validation'] = TRUE;
   $handler->display->display_options['arguments']['field_organization_target_id']['validate']['type'] = 'node';
   $handler->display->display_options['arguments']['field_organization_target_id']['validate_options']['types'] = array(
-    'organization' => 'organization',
+    'org' => 'org',
   );
 
   /* Display: All page */
@@ -1191,7 +1191,7 @@ function gnl_schema_views_default_views() {
   $handler->display->display_options['arguments']['field_organization_target_id_1']['specify_validation'] = TRUE;
   $handler->display->display_options['arguments']['field_organization_target_id_1']['validate']['type'] = 'node';
   $handler->display->display_options['arguments']['field_organization_target_id_1']['validate_options']['types'] = array(
-    'organization' => 'organization',
+    'org' => 'org',
   );
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
@@ -1327,7 +1327,7 @@ function gnl_schema_views_default_views() {
   $handler->display->display_options['arguments']['field_organization_target_id']['specify_validation'] = TRUE;
   $handler->display->display_options['arguments']['field_organization_target_id']['validate']['type'] = 'node';
   $handler->display->display_options['arguments']['field_organization_target_id']['validate_options']['types'] = array(
-    'organization' => 'organization',
+    'org' => 'org',
   );
 
   /* Display: Export all */
