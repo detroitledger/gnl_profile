@@ -8,6 +8,7 @@ default:
         - Drupal\DrupalExtension\Context\MessageContext
         - Drupal\DrupalExtension\Context\DrushContext
   extensions:
+    Cjm\Behat\StepThroughExtension: ~
     Behat\MinkExtension:
       base_url: http://127.0.0.1:8888/
       goutte: ~
