@@ -15,4 +15,6 @@ default:
         wd_host: "http://localhost:8643/wd/hub"
     Drupal\DrupalExtension:
       blackbox: ~
-
+      api_driver: 'drupal'
+      drupal:
+        drupal_root: '../../../'
