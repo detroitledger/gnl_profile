@@ -66,16 +66,19 @@ function gnl_schema_form_alter(&$form, $form_state, $form_id) {
  * Allow people to log in at /user,
  * API users to access the API,
  * logged-in users to do anything,
- * and Drush to do anything.
+ * Drush to do anything,
+ * and cli server to do anything.
  */
 function gnl_schema_init() {
+  xdebug_break();
   if (user_is_anonymous()
       && arg(0) !== 'user'
       && arg(0) !== 'api'
       && arg(0) !== 'flags'
       && arg(0) !== 'grantscsv'
       && arg(0) !== 'organizationscsv'
-      && !function_exists('drush_main')) {
+      && !function_exists('drush_main')
+      && !drupal_is_cli()) {
     drupal_goto('http://detroitledger.org');
   }
 }
