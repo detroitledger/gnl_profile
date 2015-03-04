@@ -70,7 +70,6 @@ function gnl_schema_form_alter(&$form, $form_state, $form_id) {
  * and cli server to do anything.
  */
 function gnl_schema_init() {
-  xdebug_break();
   if (user_is_anonymous()
       && arg(0) !== 'user'
       && arg(0) !== 'api'
