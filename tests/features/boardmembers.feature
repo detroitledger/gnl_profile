@@ -1,6 +1,6 @@
-Feature: Manage people and board members
+Feature: Manage people and board memberships
   As an intern
-  I need to be able to add new board members to organizations
+  I need to be able to record relationships between people and organizations
   So that I can enhance the site's database.
 
   @api
