@@ -1,17 +1,18 @@
 default:
-  paths:
-      features: 'features'
+  suites:
+    default:
+      contexts:
+        - FeatureContext
+        - Drupal\DrupalExtension\Context\DrupalContext
+        - Drupal\DrupalExtension\Context\MinkContext
+        - Drupal\DrupalExtension\Context\MessageContext
+        - Drupal\DrupalExtension\Context\DrushContext
   extensions:
-    Behat\MinkExtension\Extension:
-      base_url: http://localhost:8080/
+    Behat\MinkExtension:
+      base_url: http://127.0.0.1:8888/
       goutte: ~
       selenium2:
         wd_host: "http://localhost:8643/wd/hub"
-    Drupal\DrupalExtension\Extension:
+    Drupal\DrupalExtension:
       blackbox: ~
-
-  formatter:
-    name: pretty,html
-    parameters:
-      output_path: null,behat_report.html
 
