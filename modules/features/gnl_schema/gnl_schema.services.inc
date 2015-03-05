@@ -63,6 +63,21 @@ function gnl_schema_default_services_endpoint() {
         ),
       ),
     ),
+    'people' => array(
+      'operations' => array(
+        'retrieve' => array(
+          'enabled' => '1',
+        ),
+        'index' => array(
+          'enabled' => '1',
+        ),
+      ),
+      'relationships' => array(
+        'board_memberships' => array(
+          'enabled' => '1',
+        ),
+      ),
+    ),
     'stats' => array(
       'operations' => array(
         'index' => array(

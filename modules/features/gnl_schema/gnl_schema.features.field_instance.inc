@@ -84,6 +84,271 @@ function gnl_schema_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-board_term-field_board_source'
+  $field_instances['node-board_term-field_board_source'] = array(
+    'bundle' => 'board_term',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 6,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_board_source',
+    'label' => 'Source',
+    'required' => FALSE,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 37,
+    ),
+  );
+
+  // Exported field_instance: 'node-board_term-field_compensation'
+  $field_instances['node-board_term-field_compensation'] = array(
+    'bundle' => 'board_term',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'number',
+        'settings' => array(
+          'decimal_separator' => '.',
+          'prefix_suffix' => TRUE,
+          'scale' => 0,
+          'thousand_separator' => ' ',
+        ),
+        'type' => 'number_integer',
+        'weight' => 5,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_compensation',
+    'label' => 'Compensation',
+    'required' => FALSE,
+    'settings' => array(
+      'max' => '',
+      'min' => '',
+      'prefix' => '',
+      'suffix' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'module' => 'number',
+      'settings' => array(),
+      'type' => 'number',
+      'weight' => 36,
+    ),
+  );
+
+  // Exported field_instance: 'node-board_term-field_organization'
+  $field_instances['node-board_term-field_organization'] = array(
+    'bundle' => 'board_term',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'entityreference',
+        'settings' => array(
+          'link' => 1,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 1,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_organization',
+    'label' => 'Organization',
+    'required' => 1,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'entityreference',
+      'settings' => array(
+        'match_operator' => 'CONTAINS',
+        'path' => '',
+        'size' => 60,
+      ),
+      'type' => 'entityreference_autocomplete',
+      'weight' => 32,
+    ),
+  );
+
+  // Exported field_instance: 'node-board_term-field_person'
+  $field_instances['node-board_term-field_person'] = array(
+    'bundle' => 'board_term',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'entityreference',
+        'settings' => array(
+          'link' => 1,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 2,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_person',
+    'label' => 'Person',
+    'required' => FALSE,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'module' => 'inline_entity_form',
+      'settings' => array(
+        'fields' => array(),
+        'match_operator' => 'CONTAINS',
+        'path' => '',
+        'size' => 60,
+        'type_settings' => array(),
+      ),
+      'type' => 'inline_entity_form',
+      'weight' => 33,
+    ),
+  );
+
+  // Exported field_instance: 'node-board_term-field_position'
+  $field_instances['node-board_term-field_position'] = array(
+    'bundle' => 'board_term',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 4,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_position',
+    'label' => 'Position',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 35,
+    ),
+  );
+
+  // Exported field_instance: 'node-board_term-field_term_dates'
+  $field_instances['node-board_term-field_term_dates'] = array(
+    'bundle' => 'board_term',
+    'deleted' => 0,
+    'description' => 'For indefinite or lifetime appointments, set the start and end dates to the same value.',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'date',
+        'settings' => array(
+          'format_type' => 'gnl_date_type_human_short',
+          'fromto' => 'both',
+          'multiple_from' => '',
+          'multiple_number' => '',
+          'multiple_to' => '',
+          'show_remaining_days' => 0,
+        ),
+        'type' => 'date_default',
+        'weight' => 3,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_term_dates',
+    'label' => 'Term dates',
+    'required' => 1,
+    'settings' => array(
+      'default_value' => 'blank',
+      'default_value2' => 'blank',
+      'default_value_code' => '',
+      'default_value_code2' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'date',
+      'settings' => array(
+        'increment' => 15,
+        'input_format' => 'Y-m-d H:i:s',
+        'input_format_custom' => '',
+        'label_position' => 'above',
+        'no_fieldset' => 0,
+        'text_parts' => array(),
+        'year_range' => '-5:+3',
+      ),
+      'type' => 'date_select',
+      'weight' => 34,
+    ),
+  );
+
   // Exported field_instance: 'node-grant-body'
   $field_instances['node-grant-body'] = array(
     'bundle' => 'grant',
@@ -487,6 +752,7 @@ function gnl_schema_field_default_field_instances() {
           'multiple_from' => '',
           'multiple_number' => '',
           'multiple_to' => '',
+          'show_remaining_days' => FALSE,
         ),
         'type' => 'date_default',
         'weight' => 7,
@@ -500,6 +766,7 @@ function gnl_schema_field_default_field_instances() {
           'multiple_from' => '',
           'multiple_number' => '',
           'multiple_to' => '',
+          'show_remaining_days' => FALSE,
         ),
         'type' => 'date_default',
         'weight' => 0,
@@ -732,6 +999,7 @@ function gnl_schema_field_default_field_instances() {
           'multiple_from' => '',
           'multiple_number' => '',
           'multiple_to' => '',
+          'show_remaining_days' => FALSE,
         ),
         'type' => 'date_default',
         'weight' => 5,
@@ -989,12 +1257,14 @@ function gnl_schema_field_default_field_instances() {
   t('Body');
   t('Can\'t find the funder? <a href="/node/add/org">Add them here.</a>');
   t('Can\'t find the recipient? <a href="/node/add/org">Add them here.</a>');
+  t('Compensation');
   t('Description');
   t('EIN');
   t('Federal Award ID');
   t('Federal Employer Identification Number');
   t('Federal grants listed on usaspending.gov have this special identifier.');
   t('Flagger IP address');
+  t('For indefinite or lifetime appointments, set the start and end dates to the same value.');
   t('Founded/dissolved');
   t('Funder');
   t('Grant types');
@@ -1003,11 +1273,15 @@ function gnl_schema_field_default_field_instances() {
   t('NTEE');
   t('NTEE code');
   t('Note');
+  t('Organization');
+  t('Person');
+  t('Position');
   t('Recipient');
   t('Source');
   t('Source: http://www.guidestar.org/rxg/help/ntee-codes.aspx');
   t('State corp id');
   t('Tags');
+  t('Term dates');
   t('Year');
 
   return $field_instances;

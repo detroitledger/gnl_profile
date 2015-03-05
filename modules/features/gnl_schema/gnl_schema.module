@@ -66,7 +66,8 @@ function gnl_schema_form_alter(&$form, $form_state, $form_id) {
  * Allow people to log in at /user,
  * API users to access the API,
  * logged-in users to do anything,
- * and Drush to do anything.
+ * Drush to do anything,
+ * and cli server to do anything.
  */
 function gnl_schema_init() {
   if (user_is_anonymous()
@@ -75,8 +76,296 @@ function gnl_schema_init() {
       && arg(0) !== 'flags'
       && arg(0) !== 'grantscsv'
       && arg(0) !== 'organizationscsv'
-      && !function_exists('drush_main')) {
+      && !function_exists('drush_main')
+      && !drupal_is_cli()) {
     drupal_goto('http://detroitledger.org');
+  }
+}
+
+function gnl_schema_get_organization($node) {
+  $organization_id = $node->field_organization['und'][0]['target_id'];
+  return entity_load_single('node', $organization_id);
+}
+
+function gnl_schema_get_person($node) {
+  $person_id = $node->field_person['und'][0]['target_id'];
+  return entity_load_single('node', $person_id);
+}
+
+/**
+ * Return a reasonable default title for a board term.
+ */
+function gnl_schema_board_term_title($node) {
+  $person = gnl_schema_get_person($node);
+  $organization = gnl_schema_get_organization($node);
+
+  if ($person && $organization) {
+    return $organization->title . " / " . $person->title;
+  }
+
+  return "Board membership";
+}
+
+function gnl_schema_node_presave_board_term($node) {
+  if (!isset($node->title) || $node->title == '') {
+    $node->title = gnl_schema_board_term_title($node);
+  }
+}
+
+function gnl_schema_node_presave($node) {
+  if ($node->type == 'board_term') {
+    gnl_schema_node_presave_board_term($node);
+  }
+}
+
+function gnl_schema_form_board_term_node_form_alter(&$form, &$form_state, $form_id) {
+  // Hide the ``title`` field and make it non-required.  Its value will
+  // be populated by ``gnl_schema_node_presave()`` above.
+  $form['title']['#access'] = FALSE;
+  $form['title']['#required'] = FALSE;
+}
+
+/**
+ * Alter the IEF reference form to provide a better UI/UX.
+ *
+ * DOES NOT implement hook_form_alter() as that hook never gets called for
+ * this section of the form tree. However, it's intent is the same as a
+ * hook_form_alter implementation.
+ *
+ */
+function gnl_schema_alter_inline_entity_form_reference_form(&$form) {
+  if ($form['#parents'][0] == 'field_person') {
+    // By default, for node entities, the term "Node" is used instead of the
+    // bundle name.  We want to use something more specific.
+    //
+    // @hack: Hard code the label name.  It would be more elegant to use the
+    // human-readable bundle name, but that's not easily accessable from this 
+    // context.
+    $type = 'Person';
+    $form['#title'] = t('Add existing @type', array('@type' => $type));
+    $form['entity_id']['#title'] = $type;
+    $form['actions']['ief_reference_save']['#value'] = t('Add @type', array('@type' => $type));
+
+    // Hide the "Cancel" button
+    $form['actions']['ief_reference_cancel']['#access'] = FALSE;
+  }
+}
+
+/**
+ * Alter the IEF add form to provide a better UI/UX.
+ *
+ * DOES NOT implement hook_form_alter() as that hook never gets called for
+ * this section of the form tree. However, it's intent is the same as a
+ * hook_form_alter implementation.
+ *
+ */
+function gnl_schema_alter_inline_entity_form_add_form(&$form) {
+  global $user;
+
+  if ($form['#parents'][0] == 'field_person') {
+    // By default, for node entities, the term "Node" is used instead of the
+    // bundle name.  We want to use something more specific.
+    //
+    // @hack: Hard code the label name.  It would be more elegant to use the
+    // human-readable bundle name, but that's not easily accessable from this 
+    // context.
+    $type = 'Person';
+    $form['#title'] = t('Add new @type', array('@type' => $type));
+    $form['actions']['ief_add_save']['#value'] = t('Create @type', array('@type' => $type));
+  }
+}
+
+/**
+ * Implements hook_field_widget_WIDGET_TYPE_form_alter().
+ *
+ * Always show the search form.
+ */
+function gnl_schema_field_widget_inline_entity_form_form_alter(&$element, &$form_state, $context) {
+  if ($element['#field_name'] == 'field_person') {
+    $ief_id = $element['#ief_id'];
+    // @hack: Hard code the label name.  It would be more elegant to use the
+    // human-readable bundle name, but that's not easily accessable from this 
+    // context.
+    $type = 'Person';
+
+    // No referenced entities are listed and no form is open
+    if (empty($form_state['inline_entity_form'][$ief_id]['entities']) &&
+       empty($form_state['inline_entity_form'][$ief_id]['form'])) {
+      $instance = $form_state['inline_entity_form'][$ief_id]['instance'];
+      $settings = inline_entity_form_settings($context['field'], $instance);
+      $controller = inline_entity_form_get_controller($instance);
+
+      // Build a parents array for this element's values in the form.
+      $parents = array_merge($element['#field_parents'], array($element['#field_name'], $element['#language']));
+
+      // Get the langcode of the parent entity.
+      $parent_langcode = entity_language($element['#entity_type'], $element['#entity']);
+
+      // Show the form for adding an existin element (reference form)
+      $form_state['inline_entity_form'][$ief_id]['form'] = 'ief_add_existing';
+      $element['form'] = array(
+        '#type' => 'fieldset',
+        '#attributes' => array('class' => array('ief-form', 'ief-form-bottom')),
+        // Identifies the IEF widget to which the form belongs.
+        '#ief_id' => $ief_id,
+        // Used by Field API and controller methods to find the relevant
+        // values in $form_state.
+        '#parents' => array_merge($parents, array('form')),
+        // Pass the current entity type.
+        '#entity_type' => $settings['entity_type'],
+        // Pass the langcode of the parent entity,
+        '#parent_language' => $parent_langcode,
+      );
+      $element['form'] += inline_entity_form_reference_form($controller, $element['form'], $form_state);
+      gnl_schema_alter_inline_entity_form_reference_form($element['form']);
+
+      // Remove the "Add existing" button
+      unset($element['actions']['ief_add_existing']);
+
+      // Replace "node" with "Person" in the "Add new ..." button
+      $element['actions']['ief_add']['#value'] = t('Add new @type', array('@type' => $type));
+    }
+    else if ($form_state['inline_entity_form'][$ief_id]['form'] == 'add') {
+      // Add form is shown
+      gnl_schema_alter_inline_entity_form_add_form($element['form']);
+    }
+  }
+}
+
+// See http://www.thedavidmeister.info/post/exporting-and-maintaining-custom-date-formats-drupal-7
+// for the date format hack backstory.
+
+/**
+ * Purge date formats cache.
+ *
+ * Call via hook_flush_caches() or something similar.
+ */
+function _gnl_schema_purge_date_formats() {
+  $formats = system_get_date_formats('gnl_date_type_human_short');
+  variable_set('date_format_' . 'gnl_date_type_human_short', 'F j, Y');
+
+  // Date formats without a dfid are being read directly from code. We can use
+  // the existence of this value to detect "ghost" formats that are not managed
+  // in this file.
+  if (!empty($format['dfid'])) {
+    system_date_format_delete($format['dfid']);
+  }
+}
+
+/**
+ * Implements hook_date_formats().
+ */
+function gnl_schema_date_formats() {
+  $formats = array();
+  $formats[] = array(
+    'type' => 'gnl_date_type_human_short',
+    'format' => 'F j, Y',
+    'locales' => array(),
+  );
+  return $formats;
+}
+
+/**
+ * Implements hook_date_format_types().
+ */
+function gnl_schema_date_format_types() {
+  $types = array();
+  $types['gnl_date_type_human_short'] = t('Human date (F j, Y)');
+  return $types;
+}
+
+function gnl_schema_flush_caches() {
+  _gnl_schema_purge_date_formats();
+}
+
+/**
+ * Returns true if management links be shown for this node type and view.
+ */
+function gnl_schema_show_management_links($node, $view_mode) {
+  $visibility_conditions = array(
+    'org' => array(
+      'view_modes' => array('full', 'teaser',),
+      'permission' => 'create board_term content',
+    ),
+    'board_term' => array(
+      'view_modes' => array('full', 'teaser',),
+      'permission' => 'edit own board_term content',
+    ),
+  );
+
+  if (!array_key_exists($node->type, $visibility_conditions)) {
+    return FALSE;
+  }
+
+  if (!user_permission($visibility_conditions[$node->type]['permission'])) {
+    return FALSE;
+  }
+
+  return in_array($view_mode, $visibility_conditions[$node->type]['view_modes']);
+}
+
+function gnl_schema_management_links($node) {
+  if ($node->type == 'org') {
+    return array(
+      array(
+        'title' => 'create board term',
+        'href' => 'node/add/board-term',
+        'query' => array(
+          'field_org' => $node->nid,
+          'destination' => current_path(),
+        ),
+      ),
+    );
+  }
+  else if ($node->type == 'board_term') {
+    return array(
+      array(
+        'title' => 'edit',
+        'href' => 'node/' . $node->nid . '/edit',
+        'query' => array(
+          'destination' => current_path(),
+        ),
+      ),
+      array(
+        'title' => 'delete',
+        'href' => 'node/' . $node->nid . '/delete',
+        'query' => array(
+          'destination' => current_path(),
+        ),
+      ),
+    );
+  }
+  else {
+    return array();
+  }
+}
+
+/**
+ * Implements hook_node_view().
+ *
+ * Add management links to org type.
+ */
+function gnl_schema_node_view($node, $view_mode, $langcode) {
+  // only show management links during certain view modes
+  if (gnl_schema_show_management_links($node, $view_mode)) {
+    // remove "read more"
+    unset($node->content['links']['node']);
+
+    // @hack: Even though the view mode is checked in
+    // gnl_schema_show_management_links, we check again here.
+    // This is because the links should show up in the full view
+    // of an org node, but not in the links region. Instead,
+    // we render them below the list of board members
+    if ($node->type == 'org' && $view_mode != 'full') {
+      $node->content['links']['add_board_term'] = array(
+        '#links' => gnl_schema_management_links($node),
+      );
+    }
+    else if ($node->type == 'board_term') {
+      $node->content['links']['manage_board_term'] = array(
+          '#links' => gnl_schema_management_links($node),
+      );
+    }
   }
 }
 

@@ -4,6 +4,5 @@ themes/omega
 themes/contrib
 tests/*report*.html
 tests/bin
-tests/composer.lock
 tests/composer.phar
 vendor

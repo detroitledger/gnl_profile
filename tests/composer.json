@@ -1,6 +1,7 @@
 {
-  "require": {
-    "drupal/drupal-extension": "*"
+  "require-dev": {
+    "drupal/drupal-extension": "~3.0",
+    "ciaranmcnulty/behat-stepthroughextension" : "dev-master"
   },
   "config": {
     "bin-dir": "bin/"

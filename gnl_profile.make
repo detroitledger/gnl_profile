@@ -65,6 +65,9 @@ projects[hierarchical_term_formatter][version] = "1.0-alpha2"
 projects[hook_post_action][subdir] = "contrib"
 projects[hook_post_action][version] = "1.0-beta1"
 
+projects[inline_entity_form][subdir] = "contrib"
+projects[inline_entity_form][version] = "1.5"
+
 projects[link][subdir] = "contrib"
 projects[link][version] = "1.1"
 
@@ -104,7 +107,11 @@ projects[uuid_features][download][url] = "git://git.drupal.org/project/uuid_feat
 projects[uuid_features][download][branch] = "7.x-1.x"
 
 projects[views][subdir] = "contrib"
-projects[views][version] = "3.7"
+projects[views][download][type] = "git"
+projects[views][download][url] = "git://git.drupal.org/project/views.git"
+projects[views][download][branch] = "7.x-3.x"
+projects[views][patch][6242858][url] = "https://drupal.org/files/issues/views-filter-compare-handler-for-duple-dates-6242858-37.patch"
+projects[views][patch][6242858][md5] = "7b3175436acf535a1369d6b04b80fee8"
 
 projects[views_autocomplete_filters][subdir] = "contrib"
 projects[views_autocomplete_filters][version] = "1.0"
