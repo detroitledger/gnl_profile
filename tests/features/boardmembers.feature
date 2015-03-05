@@ -64,7 +64,7 @@ Feature: Manage people and board memberships
     And I fill in "Sally" for "Person"
     And I wait 1 second
     Then I should not see "Sally" in the "Person" autocomplete field
-    And I select "Add person"
+    And I select "Add person" anyways
     Then I should see an error message "the selected node is not valid"
     And I select "Add new person"
     And I fill in "Sally"
