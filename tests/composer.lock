@@ -4,8 +4,9 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "2c7cf84d8993066ce42d7b6bdde4d7d5",
-    "packages": [
+    "hash": "a0c5968dda147d110ea8e18e76b1cf79",
+    "packages": [],
+    "packages-dev": [
         {
             "name": "behat/behat",
             "version": "v3.0.15",
@@ -465,17 +466,66 @@
             "time": "2014-05-15 22:08:22"
         },
         {
-            "name": "drupal/drupal-driver",
-            "version": "v1.0.7",
+            "name": "ciaranmcnulty/behat-stepthroughextension",
+            "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/jhedstrom/DrupalDriver.git",
-                "reference": "bcbd546b24886d5d61bc596c888776973fd510ea"
+                "url": "https://github.com/ciaranmcnulty/behat-stepthroughextension.git",
+                "reference": "a9989be0af0d509a91da194d26ad7039943ee111"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jhedstrom/DrupalDriver/zipball/bcbd546b24886d5d61bc596c888776973fd510ea",
-                "reference": "bcbd546b24886d5d61bc596c888776973fd510ea",
+                "url": "https://api.github.com/repos/ciaranmcnulty/behat-stepthroughextension/zipball/a9989be0af0d509a91da194d26ad7039943ee111",
+                "reference": "a9989be0af0d509a91da194d26ad7039943ee111",
+                "shasum": ""
+            },
+            "require": {
+                "behat/behat": "~3.0"
+            },
+            "require-dev": {
+                "phpspec/phpspec": "dev-master",
+                "symfony/filesystem": "~2.3",
+                "symfony/process": "~2.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ciaran McNulty",
+                    "email": "mail@ciaranmcnulty.com",
+                    "homepage": "http://ciaranmcnulty.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Extension for behat to help debug failing scenarios",
+            "homepage": "http://github.com/ciaranmcnulty/behat-stepthroughextension",
+            "keywords": [
+                "BDD",
+                "Behat",
+                "TDD"
+            ],
+            "time": "2014-09-07 14:32:13"
+        },
+        {
+            "name": "drupal/drupal-driver",
+            "version": "v1.0.8",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jhedstrom/DrupalDriver.git",
+                "reference": "d6bfd367127aa88aff53afdf8b788eab916eb472"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jhedstrom/DrupalDriver/zipball/d6bfd367127aa88aff53afdf8b788eab916eb472",
+                "reference": "d6bfd367127aa88aff53afdf8b788eab916eb472",
                 "shasum": ""
             },
             "require": {
@@ -509,7 +559,7 @@
                 "test",
                 "web"
             ],
-            "time": "2015-02-25 22:10:41"
+            "time": "2015-03-05 18:01:23"
         },
         {
             "name": "drupal/drupal-extension",
@@ -1509,57 +1559,6 @@
             "description": "Symfony Yaml Component",
             "homepage": "http://symfony.com",
             "time": "2015-01-25 04:39:26"
-        }
-    ],
-    "packages-dev": [
-        {
-            "name": "ciaranmcnulty/behat-stepthroughextension",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/ciaranmcnulty/behat-stepthroughextension.git",
-                "reference": "a9989be0af0d509a91da194d26ad7039943ee111"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/ciaranmcnulty/behat-stepthroughextension/zipball/a9989be0af0d509a91da194d26ad7039943ee111",
-                "reference": "a9989be0af0d509a91da194d26ad7039943ee111",
-                "shasum": ""
-            },
-            "require": {
-                "behat/behat": "~3.0"
-            },
-            "require-dev": {
-                "phpspec/phpspec": "dev-master",
-                "symfony/filesystem": "~2.3",
-                "symfony/process": "~2.3"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Ciaran McNulty",
-                    "email": "mail@ciaranmcnulty.com",
-                    "homepage": "http://ciaranmcnulty.com",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Extension for behat to help debug failing scenarios",
-            "homepage": "http://github.com/ciaranmcnulty/behat-stepthroughextension",
-            "keywords": [
-                "BDD",
-                "Behat",
-                "TDD"
-            ],
-            "time": "2014-09-07 14:32:13"
         }
     ],
     "aliases": [],
