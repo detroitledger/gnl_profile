@@ -443,7 +443,7 @@ function _gnl_api_index_grants($limit, $offset, $filters, $sort) {
 }
 
 function _gnl_api_index_people($limit, $offset, $filters, $sort) {
-  return _gnl_api_index_nodes('person', $limit, $offset, $filters, $sort);
+  return _gnl_api_index_nodes('person', $limit, $offset, $filters, $sort, 'people');
 }
 
 function _gnl_api_related_org_grants_funded($id, $limit, $offset) {
@@ -531,7 +531,8 @@ function _gnl_api_retrieve($type, $id) {
  *
  * @return array
  */
-function _gnl_api_index_nodes($bundle, $limit, $offset, $filters, $sort) {
+function _gnl_api_index_nodes($bundle, $limit, $offset, $filters, $sort, $plural) {
+  $plural = (isset($plural)) ? $plural : $bundle . 's';
   $limit = intval($limit);
   $offset = intval($offset);
   $limit = (is_int($limit) && $limit <= GNL_API_MAX_LIMIT) ? $limit : GNL_API_DEFAULT_LIMIT;
@@ -629,7 +630,7 @@ function _gnl_api_index_nodes($bundle, $limit, $offset, $filters, $sort) {
     }
 
     return array(
-      $bundle . 's' => array_values($nodes)
+      $plural => array_values($nodes)
     );
   }
 }
