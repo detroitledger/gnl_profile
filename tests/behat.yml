@@ -7,8 +7,11 @@ default:
         - Drupal\DrupalExtension\Context\MinkContext
         - Drupal\DrupalExtension\Context\MessageContext
         - Drupal\DrupalExtension\Context\DrushContext
+        - Behat\WebApiExtension\Context\WebApiContext
   extensions:
     Cjm\Behat\StepThroughExtension: ~
+    Behat\WebApiExtension:
+      base_url: "http://127.0.0.1:8888/api/1.0/"
     Behat\MinkExtension:
       base_url: http://127.0.0.1:8888/
       goutte: ~

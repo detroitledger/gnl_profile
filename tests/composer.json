@@ -1,5 +1,6 @@
 {
   "require-dev": {
+    "behat/web-api-extension": "~1.0@dev",
     "drupal/drupal-extension": "~3.0",
     "ciaranmcnulty/behat-stepthroughextension" : "dev-master"
   },
