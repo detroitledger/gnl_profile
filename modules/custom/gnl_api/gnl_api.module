@@ -433,11 +433,11 @@ function _gnl_api_retrieve_person($id) {
 }
 
 function _gnl_api_index_orgs($limit, $offset, $filters, $sort) {
-  return _gnl_api_index_nodes('org', $limit, $offset, $filters, $sort);
+  return _gnl_api_index_nodes('org', $limit, $offset, $filters, $sort, null);
 }
 
 function _gnl_api_index_grants($limit, $offset, $filters, $sort) {
-  return _gnl_api_index_nodes('grant', $limit, $offset, $filters, $sort);
+  return _gnl_api_index_nodes('grant', $limit, $offset, $filters, $sort, null);
 }
 
 function _gnl_api_index_people($limit, $offset, $filters, $sort) {
