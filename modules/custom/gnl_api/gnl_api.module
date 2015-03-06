@@ -153,6 +153,36 @@ function gnl_api_services_resources() {
             ),
           ),
         ),
+        'board_members' => array(
+          'help' => 'Lists people on the board of this Organization',
+          'callback' => '_gnl_api_related_org_board_members',
+          'access arguments' => array('access content'),
+          'args' => array(
+            array(
+              'name' => 'person_id',
+              'optional' => 'false',
+              'source' => array('path' => 0),
+              'type' => 'int',
+              'description' => 'Person ID',
+            ),
+            array(
+              'name' => 'limit',
+              'type' => 'int',
+              'description' => 'Limit response count (default ' . GNL_API_DEFAULT_LIMIT . ')',
+              'source' => array('param' => 'limit'),
+              'optional' => TRUE,
+              'default value' => GNL_API_DEFAULT_LIMIT,
+            ),
+            array(
+              'name' => 'offset',
+              'type' => 'int',
+              'description' => 'Offset starting record',
+              'source' => array('param' => 'offset'),
+              'optional' => TRUE,
+              'default value' => 0,
+            ),
+          ),
+        ),
       ),
     ),
     'grants' => array(
@@ -270,38 +300,6 @@ function gnl_api_services_resources() {
               'source' => array('param' => 'sort'),
               'optional' => TRUE,
               'default value' => array(),
-            ),
-          ),
-        ),
-      ),
-      'relationships' => array(
-        'board_memberships' => array(
-          'help' => 'Lists boards of which this person is a member',
-          'callback' => '_gnl_api_related_person_board_memberships',
-          'access arguments' => array('access content'),
-          'args' => array(
-            array(
-              'name' => 'person_id',
-              'optional' => 'false',
-              'source' => array('path' => 0),
-              'type' => 'int',
-              'description' => 'Person ID',
-            ),
-            array(
-              'name' => 'limit',
-              'type' => 'int',
-              'description' => 'Limit response count (default ' . GNL_API_DEFAULT_LIMIT . ')',
-              'source' => array('param' => 'limit'),
-              'optional' => TRUE,
-              'default value' => GNL_API_DEFAULT_LIMIT,
-            ),
-            array(
-              'name' => 'offset',
-              'type' => 'int',
-              'description' => 'Offset starting record',
-              'source' => array('param' => 'offset'),
-              'optional' => TRUE,
-              'default value' => 0,
             ),
           ),
         ),
@@ -486,12 +484,13 @@ function _gnl_api_related_org_grants_received($id, $limit, $offset) {
   );
 }
 
-function _gnl_api_related_person_board_memberships($id, $limit, $offset) {
-  $id = intval($id);
-  // @todo get board memberships
+function _gnl_api_related_org_board_members($org_id, $limit, $offset) {
+  $id = intval($org_id);
+
+  $people = db_query("SELECT person.field_person_target_id AS 'person_id', n.title AS 'name', position.field_position_value AS 'position', term.field_term_dates_value AS 'term_start', term.field_term_dates_value2 AS 'term_end' FROM {field_data_field_person} AS person INNER JOIN {node} AS n ON n.nid=person.field_person_target_id INNER JOIN {field_data_field_organization} AS org ON org.entity_id=person.entity_id INNER JOIN {field_data_field_position} AS position ON position.entity_id=org.entity_id INNER JOIN {field_data_field_term_dates} AS term ON term.entity_id=org.entity_id WHERE org.field_organization_target_id=:org_id", array(':org_id' => $id))->fetchAll();
 
   return array(
-    'board_memberships' => 'not yet implemented'
+    'board_members' => $people,
   );
 }
 
