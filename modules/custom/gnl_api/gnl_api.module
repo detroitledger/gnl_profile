@@ -598,6 +598,15 @@ function _gnl_api_index_nodes($bundle, $limit, $offset, $filters, $sort, $plural
     } else if ($property == 'tid') {
       $query->join('taxonomy_index', 'ti', 'ti.nid=n.nid');
       $query->condition('ti.tid', intval($str));
+    } else if ($property == 'has_boardmembers') {
+      if ($str == 'true') {
+        $query->join('field_data_field_organization', 'fdfo', 'fdfo.field_organization_target_id=n.nid');
+        $query->condition('fdfo.bundle', 'board_term');
+      }
+      if ($str == 'false') {
+        $query->leftJoin('field_data_field_organization', 'fdfo', 'n.nid=fdfo.field_organization_target_id');
+        $query->isNull('fdfo.entity_id');
+      }
     } else {
       $post_filters[$property] = $str;
     }
