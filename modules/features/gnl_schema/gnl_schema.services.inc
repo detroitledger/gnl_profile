@@ -51,6 +51,9 @@ function gnl_schema_default_services_endpoint() {
         'grants_received' => array(
           'enabled' => '1',
         ),
+        'board_members' => array(
+          'enabled' => '1',
+        ),
       ),
     ),
     'grants' => array(
@@ -69,11 +72,6 @@ function gnl_schema_default_services_endpoint() {
           'enabled' => '1',
         ),
         'index' => array(
-          'enabled' => '1',
-        ),
-      ),
-      'relationships' => array(
-        'board_memberships' => array(
           'enabled' => '1',
         ),
       ),
