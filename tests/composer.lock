@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "584fdf05311fb5f1e495953103a33e6f",
+    "hash": "22a3d34a8059a10dc5c4a7fc2269f8f4",
     "packages": [],
     "packages-dev": [
         {
@@ -470,13 +470,13 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/Behat/WebApiExtension.git",
-                "reference": "319db66092a66fee152e0809a05834005eef0010"
+                "url": "https://github.com/bnchdrff/WebApiExtension.git",
+                "reference": "b4a995ff3111367e402ffc7474e7263dbbb5e92d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Behat/WebApiExtension/zipball/319db66092a66fee152e0809a05834005eef0010",
-                "reference": "319db66092a66fee152e0809a05834005eef0010",
+                "url": "https://api.github.com/repos/bnchdrff/WebApiExtension/zipball/b4a995ff3111367e402ffc7474e7263dbbb5e92d",
+                "reference": "b4a995ff3111367e402ffc7474e7263dbbb5e92d",
                 "shasum": ""
             },
             "require": {
@@ -500,7 +500,6 @@
                     "Behat\\WebApiExtension\\": "src/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -520,7 +519,10 @@
                 "api",
                 "test"
             ],
-            "time": "2015-01-18 23:20:16"
+            "support": {
+                "source": "https://github.com/bnchdrff/WebApiExtension/tree/master"
+            },
+            "time": "2015-03-06 04:54:15"
         },
         {
             "name": "ciaranmcnulty/behat-stepthroughextension",

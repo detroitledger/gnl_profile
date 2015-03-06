@@ -4,6 +4,12 @@
     "drupal/drupal-extension": "~3.0",
     "ciaranmcnulty/behat-stepthroughextension" : "dev-master"
   },
+  "repositories": [
+    {
+      "type": "vcs",
+      "url":  "https://github.com/bnchdrff/WebApiExtension.git"
+    }
+  ],
   "config": {
     "bin-dir": "bin/"
   }
