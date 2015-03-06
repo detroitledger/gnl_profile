@@ -9,7 +9,7 @@ Feature: Retrieve board member data via the API
     | title      |
     | Boz Scaggs |
     When I send a GET request to "people?filters[title]=Boz Scaggs"
-    Then the "people" result should have an element with attributes:
+    Then the first element in the "people" result should contain attributes:
     """
     {
       "title": "Boz Scaggs"
