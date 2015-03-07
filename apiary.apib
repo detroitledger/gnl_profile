@@ -141,6 +141,35 @@ Single entities will contain the following content management- revision-related 
           ]
         }
 
+## Board Members of an Organization [/orgs/:id/board_members]
+### Lists board members of a specific organiztaion
+
+`person_id` refers to a [Person][].
+
++ Parameters
+
+    + id (number, required, `12345`) ... Organization ID.
+    + limit = `10` (number, optional) ... Limit response set to this many
+    + offset = `0` (number, optional) ... Begin results at this index
+
++ Response 200 (application/json)
+        {
+          "board_members": [
+            {
+              "compensation": null,
+              "name": "Allan D. Gilmour",
+              "person_id": "4797",
+              "position": "Chair",
+              "term_end": "2012-12-31 00:00:00",
+              "term_start": "2012-01-01 00:00:00"
+            },
+            {
+              // ... more board members
+            }
+          ]
+        }
+
+
 ## Organizations Index [/orgs{?limit,offset,filters,sort}]
 ### List all Organizations [GET]
 + Parameters
