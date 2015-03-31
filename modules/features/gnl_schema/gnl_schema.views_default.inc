@@ -32,6 +32,55 @@ function gnl_schema_views_default_views() {
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '100';
   $handler->display->display_options['style_plugin'] = 'table';
+  $handler->display->display_options['style_options']['columns'] = array(
+    'views_bulk_operations' => 'views_bulk_operations',
+    'field_funder' => 'field_funder',
+    'field_recipient' => 'field_recipient',
+    'field_funded_amount' => 'field_funded_amount',
+    'field_year' => 'field_year',
+    'edit_node' => 'edit_node',
+  );
+  $handler->display->display_options['style_options']['default'] = '-1';
+  $handler->display->display_options['style_options']['info'] = array(
+    'views_bulk_operations' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_funder' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_recipient' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_funded_amount' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_year' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'edit_node' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+  );
   /* Field: Bulk operations: Content */
   $handler->display->display_options['fields']['views_bulk_operations']['id'] = 'views_bulk_operations';
   $handler->display->display_options['fields']['views_bulk_operations']['table'] = 'node';
@@ -164,6 +213,13 @@ function gnl_schema_views_default_views() {
       'label' => '',
     ),
   );
+  /* Field: Content: Updated date */
+  $handler->display->display_options['fields']['changed']['id'] = 'changed';
+  $handler->display->display_options['fields']['changed']['table'] = 'node';
+  $handler->display->display_options['fields']['changed']['field'] = 'changed';
+  $handler->display->display_options['fields']['changed']['label'] = 'Updated';
+  $handler->display->display_options['fields']['changed']['date_format'] = 'gnl_date_type_human_short';
+  $handler->display->display_options['fields']['changed']['second_date_format'] = 'gnl_date_type_human_short';
   /* Field: Content: Funder */
   $handler->display->display_options['fields']['field_funder']['id'] = 'field_funder';
   $handler->display->display_options['fields']['field_funder']['table'] = 'field_data_field_funder';
@@ -277,6 +333,353 @@ function gnl_schema_views_default_views() {
   $handler->display->display_options['menu']['type'] = 'normal';
   $handler->display->display_options['menu']['title'] = 'Manage grants';
   $handler->display->display_options['menu']['weight'] = '0';
+  $handler->display->display_options['menu']['name'] = 'user-menu';
+  $handler->display->display_options['menu']['context'] = 0;
+  $handler->display->display_options['menu']['context_only_inline'] = 0;
+
+  /* Display: Dupefinder */
+  $handler = $view->new_display('page', 'Dupefinder', 'page_1');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'Find dupe grants based on Federal Award IDs';
+  $handler->display->display_options['defaults']['pager'] = FALSE;
+  $handler->display->display_options['pager']['type'] = 'full';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '100';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['pager']['options']['id'] = '0';
+  $handler->display->display_options['pager']['options']['quantity'] = '9';
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'table';
+  $handler->display->display_options['style_options']['grouping'] = array(
+    0 => array(
+      'field' => 'field_federal_award_id',
+      'rendered' => 1,
+      'rendered_strip' => 0,
+    ),
+  );
+  $handler->display->display_options['style_options']['columns'] = array(
+    'views_bulk_operations' => 'views_bulk_operations',
+    'changed' => 'changed',
+    'field_funder' => 'field_funder',
+    'field_recipient' => 'field_recipient',
+    'field_funded_amount' => 'field_funded_amount',
+    'field_year' => 'field_year',
+    'edit_node' => 'edit_node',
+    'field_federal_award_id' => 'field_federal_award_id',
+  );
+  $handler->display->display_options['style_options']['default'] = 'changed';
+  $handler->display->display_options['style_options']['info'] = array(
+    'views_bulk_operations' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'changed' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_funder' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_recipient' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_funded_amount' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_year' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'edit_node' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_federal_award_id' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+  );
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Bulk operations: Content */
+  $handler->display->display_options['fields']['views_bulk_operations']['id'] = 'views_bulk_operations';
+  $handler->display->display_options['fields']['views_bulk_operations']['table'] = 'node';
+  $handler->display->display_options['fields']['views_bulk_operations']['field'] = 'views_bulk_operations';
+  $handler->display->display_options['fields']['views_bulk_operations']['label'] = '';
+  $handler->display->display_options['fields']['views_bulk_operations']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['display_type'] = '0';
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['enable_select_all_pages'] = 1;
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['force_single'] = 0;
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['entity_load_capacity'] = '10';
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo_operations'] = array(
+    'action::node_publish_action' => array(
+      'selected' => 1,
+      'postpone_processing' => 0,
+      'skip_confirmation' => 0,
+      'override_label' => 0,
+      'label' => '',
+    ),
+    'action::node_unpublish_action' => array(
+      'selected' => 1,
+      'postpone_processing' => 0,
+      'skip_confirmation' => 0,
+      'override_label' => 0,
+      'label' => '',
+    ),
+    'action::node_make_sticky_action' => array(
+      'selected' => 0,
+      'postpone_processing' => 0,
+      'skip_confirmation' => 0,
+      'override_label' => 0,
+      'label' => '',
+    ),
+    'action::node_make_unsticky_action' => array(
+      'selected' => 0,
+      'postpone_processing' => 0,
+      'skip_confirmation' => 0,
+      'override_label' => 0,
+      'label' => '',
+    ),
+    'action::node_promote_action' => array(
+      'selected' => 0,
+      'postpone_processing' => 0,
+      'skip_confirmation' => 0,
+      'override_label' => 0,
+      'label' => '',
+    ),
+    'action::node_unpromote_action' => array(
+      'selected' => 0,
+      'postpone_processing' => 0,
+      'skip_confirmation' => 0,
+      'override_label' => 0,
+      'label' => '',
+    ),
+    'action::node_assign_owner_action' => array(
+      'selected' => 0,
+      'postpone_processing' => 0,
+      'skip_confirmation' => 0,
+      'override_label' => 0,
+      'label' => '',
+    ),
+    'action::node_save_action' => array(
+      'selected' => 0,
+      'postpone_processing' => 0,
+      'skip_confirmation' => 0,
+      'override_label' => 0,
+      'label' => '',
+    ),
+    'action::node_unpublish_by_keyword_action' => array(
+      'selected' => 0,
+      'postpone_processing' => 0,
+      'skip_confirmation' => 0,
+      'override_label' => 0,
+      'label' => '',
+    ),
+    'action::system_send_email_action' => array(
+      'selected' => 0,
+      'postpone_processing' => 0,
+      'skip_confirmation' => 0,
+      'override_label' => 0,
+      'label' => '',
+    ),
+    'action::views_bulk_operations_argument_selector_action' => array(
+      'selected' => 0,
+      'skip_confirmation' => 0,
+      'override_label' => 0,
+      'label' => '',
+      'settings' => array(
+        'url' => '',
+      ),
+    ),
+    'action::views_bulk_operations_delete_item' => array(
+      'selected' => 1,
+      'postpone_processing' => 0,
+      'skip_confirmation' => 0,
+      'override_label' => 0,
+      'label' => '',
+    ),
+    'action::views_bulk_operations_modify_action' => array(
+      'selected' => 1,
+      'postpone_processing' => 0,
+      'skip_confirmation' => 0,
+      'override_label' => 0,
+      'label' => '',
+      'settings' => array(
+        'show_all_tokens' => 1,
+        'display_values' => array(
+          '_all_' => '_all_',
+        ),
+      ),
+    ),
+    'action::views_bulk_operations_script_action' => array(
+      'selected' => 0,
+      'postpone_processing' => 0,
+      'skip_confirmation' => 0,
+      'override_label' => 0,
+      'label' => '',
+    ),
+    'action::pathauto_node_update_action' => array(
+      'selected' => 0,
+      'postpone_processing' => 0,
+      'skip_confirmation' => 0,
+      'override_label' => 0,
+      'label' => '',
+    ),
+    'action::auto_entitylabel_entity_update_action' => array(
+      'selected' => 0,
+      'postpone_processing' => 0,
+      'skip_confirmation' => 0,
+      'override_label' => 0,
+      'label' => '',
+    ),
+  );
+  /* Field: Content: Updated date */
+  $handler->display->display_options['fields']['changed']['id'] = 'changed';
+  $handler->display->display_options['fields']['changed']['table'] = 'node';
+  $handler->display->display_options['fields']['changed']['field'] = 'changed';
+  $handler->display->display_options['fields']['changed']['label'] = 'Updated';
+  $handler->display->display_options['fields']['changed']['date_format'] = 'gnl_date_type_human_short';
+  $handler->display->display_options['fields']['changed']['second_date_format'] = 'gnl_date_type_human_short';
+  /* Field: Content: Funder */
+  $handler->display->display_options['fields']['field_funder']['id'] = 'field_funder';
+  $handler->display->display_options['fields']['field_funder']['table'] = 'field_data_field_funder';
+  $handler->display->display_options['fields']['field_funder']['field'] = 'field_funder';
+  $handler->display->display_options['fields']['field_funder']['settings'] = array(
+    'link' => 0,
+  );
+  /* Field: Content: Recipient */
+  $handler->display->display_options['fields']['field_recipient']['id'] = 'field_recipient';
+  $handler->display->display_options['fields']['field_recipient']['table'] = 'field_data_field_recipient';
+  $handler->display->display_options['fields']['field_recipient']['field'] = 'field_recipient';
+  $handler->display->display_options['fields']['field_recipient']['settings'] = array(
+    'link' => 0,
+  );
+  /* Field: Content: Amount */
+  $handler->display->display_options['fields']['field_funded_amount']['id'] = 'field_funded_amount';
+  $handler->display->display_options['fields']['field_funded_amount']['table'] = 'field_data_field_funded_amount';
+  $handler->display->display_options['fields']['field_funded_amount']['field'] = 'field_funded_amount';
+  $handler->display->display_options['fields']['field_funded_amount']['settings'] = array(
+    'thousand_separator' => ',',
+    'prefix_suffix' => 1,
+  );
+  /* Field: Content: Year */
+  $handler->display->display_options['fields']['field_year']['id'] = 'field_year';
+  $handler->display->display_options['fields']['field_year']['table'] = 'field_data_field_year';
+  $handler->display->display_options['fields']['field_year']['field'] = 'field_year';
+  $handler->display->display_options['fields']['field_year']['settings'] = array(
+    'format_type' => 'short',
+    'fromto' => 'both',
+    'multiple_number' => '',
+    'multiple_from' => '',
+    'multiple_to' => '',
+  );
+  /* Field: Content: Edit link */
+  $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
+  $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
+  $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
+  $handler->display->display_options['fields']['edit_node']['label'] = '';
+  $handler->display->display_options['fields']['edit_node']['element_label_colon'] = FALSE;
+  /* Field: Content: Federal Award ID */
+  $handler->display->display_options['fields']['field_federal_award_id']['id'] = 'field_federal_award_id';
+  $handler->display->display_options['fields']['field_federal_award_id']['table'] = 'field_data_field_federal_award_id';
+  $handler->display->display_options['fields']['field_federal_award_id']['field'] = 'field_federal_award_id';
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'grant' => 'grant',
+  );
+  /* Filter criterion: Content: Amount (field_funded_amount) */
+  $handler->display->display_options['filters']['field_funded_amount_value']['id'] = 'field_funded_amount_value';
+  $handler->display->display_options['filters']['field_funded_amount_value']['table'] = 'field_data_field_funded_amount';
+  $handler->display->display_options['filters']['field_funded_amount_value']['field'] = 'field_funded_amount_value';
+  $handler->display->display_options['filters']['field_funded_amount_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_funded_amount_value']['expose']['operator_id'] = 'field_funded_amount_value_op';
+  $handler->display->display_options['filters']['field_funded_amount_value']['expose']['label'] = 'Amount';
+  $handler->display->display_options['filters']['field_funded_amount_value']['expose']['use_operator'] = TRUE;
+  $handler->display->display_options['filters']['field_funded_amount_value']['expose']['operator'] = 'field_funded_amount_value_op';
+  $handler->display->display_options['filters']['field_funded_amount_value']['expose']['identifier'] = 'field_funded_amount_value';
+  $handler->display->display_options['filters']['field_funded_amount_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+  );
+  /* Filter criterion: Content: Funder (field_funder) */
+  $handler->display->display_options['filters']['field_funder_target_id']['id'] = 'field_funder_target_id';
+  $handler->display->display_options['filters']['field_funder_target_id']['table'] = 'field_data_field_funder';
+  $handler->display->display_options['filters']['field_funder_target_id']['field'] = 'field_funder_target_id';
+  $handler->display->display_options['filters']['field_funder_target_id']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_funder_target_id']['expose']['operator_id'] = 'field_funder_target_id_op';
+  $handler->display->display_options['filters']['field_funder_target_id']['expose']['label'] = 'Funder';
+  $handler->display->display_options['filters']['field_funder_target_id']['expose']['use_operator'] = TRUE;
+  $handler->display->display_options['filters']['field_funder_target_id']['expose']['operator'] = 'field_funder_target_id_op';
+  $handler->display->display_options['filters']['field_funder_target_id']['expose']['identifier'] = 'field_funder_target_id';
+  $handler->display->display_options['filters']['field_funder_target_id']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+  );
+  /* Filter criterion: Content: Recipient (field_recipient) */
+  $handler->display->display_options['filters']['field_recipient_target_id']['id'] = 'field_recipient_target_id';
+  $handler->display->display_options['filters']['field_recipient_target_id']['table'] = 'field_data_field_recipient';
+  $handler->display->display_options['filters']['field_recipient_target_id']['field'] = 'field_recipient_target_id';
+  $handler->display->display_options['filters']['field_recipient_target_id']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_recipient_target_id']['expose']['operator_id'] = 'field_recipient_target_id_op';
+  $handler->display->display_options['filters']['field_recipient_target_id']['expose']['label'] = 'Recipient';
+  $handler->display->display_options['filters']['field_recipient_target_id']['expose']['use_operator'] = TRUE;
+  $handler->display->display_options['filters']['field_recipient_target_id']['expose']['operator'] = 'field_recipient_target_id_op';
+  $handler->display->display_options['filters']['field_recipient_target_id']['expose']['identifier'] = 'field_recipient_target_id';
+  $handler->display->display_options['filters']['field_recipient_target_id']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+  );
+  /* Filter criterion: Content: Federal Award ID (field_federal_award_id) */
+  $handler->display->display_options['filters']['field_federal_award_id_value']['id'] = 'field_federal_award_id_value';
+  $handler->display->display_options['filters']['field_federal_award_id_value']['table'] = 'field_data_field_federal_award_id';
+  $handler->display->display_options['filters']['field_federal_award_id_value']['field'] = 'field_federal_award_id_value';
+  $handler->display->display_options['filters']['field_federal_award_id_value']['operator'] = 'not empty';
+  $handler->display->display_options['path'] = 'admin/content/dupefinder-awardids';
+  $handler->display->display_options['menu']['type'] = 'normal';
+  $handler->display->display_options['menu']['title'] = 'Find dupe grants based on Federal Award IDs';
+  $handler->display->display_options['menu']['weight'] = '23';
   $handler->display->display_options['menu']['name'] = 'user-menu';
   $handler->display->display_options['menu']['context'] = 0;
   $handler->display->display_options['menu']['context_only_inline'] = 0;
