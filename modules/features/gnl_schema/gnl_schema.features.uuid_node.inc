@@ -63,7 +63,7 @@ function gnl_schema_uuid_features_default_content() {
   'path' => '/transparency',
   'pathauto_perform_alias' => FALSE,
   'date' => '2013-07-30 20:29:10 -0400',
-  'user_uuid' => '82f69e75-1464-4d59-af21-daeca65cef9b',
+  'user_uuid' => '4ce1c447-25d6-449f-a3ad-8976ce9efb0b',
 );
   $nodes[] = array(
   'title' => 'About the Detroit Ledger',
@@ -111,7 +111,7 @@ function gnl_schema_uuid_features_default_content() {
   'path' => '/about-detroit-ledger',
   'pathauto_perform_alias' => FALSE,
   'date' => '2013-07-30 20:12:15 -0400',
-  'user_uuid' => '82f69e75-1464-4d59-af21-daeca65cef9b',
+  'user_uuid' => '4ce1c447-25d6-449f-a3ad-8976ce9efb0b',
 );
   $nodes[] = array(
   'title' => 'Our Methods',
@@ -155,7 +155,7 @@ function gnl_schema_uuid_features_default_content() {
   'path' => '/our-methods',
   'pathauto_perform_alias' => FALSE,
   'date' => '2013-07-30 20:23:50 -0400',
-  'user_uuid' => '82f69e75-1464-4d59-af21-daeca65cef9b',
+  'user_uuid' => '4ce1c447-25d6-449f-a3ad-8976ce9efb0b',
 );
   return $nodes;
 }
