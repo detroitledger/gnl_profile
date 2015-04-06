@@ -489,6 +489,13 @@ function _gnl_api_related_org_board_members($org_id, $limit, $offset) {
 
   $people = db_query("SELECT person.field_person_target_id AS 'person_id', n.title AS 'name', position.field_position_value AS 'position', compensation.field_compensation_value AS 'compensation', term.field_term_dates_value AS 'term_start', term.field_term_dates_value2 AS 'term_end' FROM {field_data_field_person} AS person INNER JOIN {node} AS n ON n.nid=person.field_person_target_id INNER JOIN {field_data_field_organization} AS org ON org.entity_id=person.entity_id LEFT JOIN {field_data_field_position} AS position ON position.entity_id=org.entity_id LEFT JOIN {field_data_field_compensation} AS compensation ON compensation.entity_id=org.entity_id LEFT JOIN {field_data_field_term_dates} AS term ON term.entity_id=org.entity_id WHERE org.field_organization_target_id=:org_id AND org.bundle='board_term'", array(':org_id' => $id))->fetchAll();
 
+  foreach ($people as $term) {
+    $term_start = new DateObject($term->term_start);
+    $term->term_start = date_format_date($term_start, 'custom', 'r');
+    $term_end = new DateObject($term->term_end);
+    $term->term_end = date_format_date($term_end, 'custom', 'r');
+  }
+
   return array(
     'board_members' => $people,
   );
