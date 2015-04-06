@@ -118,8 +118,8 @@ class USA_Grants extends Migration {
           'unsigned' => TRUE,
           'not null' => TRUE,
           'description' => 'id',
-         ),
-       ),
+        ),
+      ),
       MigrateDestinationNode::getKeySchema()
     );
 
@@ -142,7 +142,7 @@ class USA_Grants extends Migration {
     $this->addFieldMapping('field_funder', 'granter_nid');
     $this->addFieldMapping('field_recipient', 'grantee_nid');
     $this->addFieldMapping('body', 'subaward_project_description');
-    $this->addFieldMapping('field_grant_tags', 'tags_blob');
+    $this->addFieldMapping('field_grant_tags', 'tags_blob'); // used by prepareRow()
     $this->addFieldMapping('field_grant_tags:create_term')->defaultValue(TRUE);
     $this->addFieldMapping('field_grant_tags:ignore_case')->defaultValue(TRUE);
   }
