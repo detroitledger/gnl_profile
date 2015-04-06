@@ -710,7 +710,10 @@ function _gnl_api_clean_node($node) {
   );
 
   if ($node->type == 'org') {
+    $node->field_ein = $node->field_ein['value'];
     array_push($ints, 'field_ein');
+    $node->field_duns = $node->field_duns['value'];
+    array_push($ints, 'field_duns');
   }
 
   if ($node->type == 'grant') {
