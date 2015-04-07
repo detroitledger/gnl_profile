@@ -198,13 +198,13 @@ class Grants extends Migration {
 
     // destination field is the first parameter
     // and the source field is the second parameter
+    // battlecreek uses 'start_date' and 'end_date' in mm/dd/yyyy format instead of 'year' and 'length'
     $this->addFieldMapping('title', 'title'); // should be auto generated...
     $this->addFieldMapping(NULL, 'granter'); // used by prepareRow()
     $this->addFieldMapping(NULL, 'grantee'); // used by prepareRow()
     $this->addFieldMapping(NULL, 'amount'); // used by prepareRow()
-    $this->addFieldMapping(NULL, 'year'); // used by prepareRow()
-    $this->addFieldMapping(NULL, 'impact_neighborhood'); // used by prepareRow()
-    $this->addFieldMapping(NULL, 'project_tags'); // used by prepareRow()
+    $this->addFieldMapping(NULL, 'start_date'); // used by prepareRow()
+    $this->addFieldMapping(NULL, 'end_date'); // used by prepareRow()
     $this->addFieldMapping(NULL, 'granter_program'); // used by prepareRow()
     $this->addFieldMapping('field_source', 'data_source');
     $this->addFieldMapping('field_funder', 'granter_nid');
@@ -266,20 +266,6 @@ class Grants extends Migration {
     foreach ($granter_programs as $program) {
       if (strlen($program) > 1) {
         $tags[] = 'Granter program: ' . $program;
-      }
-    }
-
-    $impact_neighborhoods = preg_split("/[\s]*[;][\s]*/", $row->impact_neighborhood);
-    foreach ($impact_neighborhoods as $neighborhood) {
-      if (strlen($neighborhood) > 1) {
-        $tags[] = 'Impact neighborhood: ' . $neighborhood;
-      }
-    }
-
-    $projects = preg_split("/[\s]*[;][\s]*/", $row->project_tags);
-    foreach ($projects as $project) {
-      if (strlen($project) > 1) {
-        $tags[] = 'Project: ' . $project;
       }
     }
     $row->tags_blob = $tags;
