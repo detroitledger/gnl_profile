@@ -36,6 +36,10 @@ function migrate_gnl_migrate_api() {
         'class_name' => 'Grants',
         'group_name' => 'nodes',
       ),
+      'IRSOrgData' => array(
+        'class_name' => 'IRSOrgData',
+        'group_name' => 'nodes',
+      ),
     ),
   );
   return $api;
@@ -267,5 +271,49 @@ class Grants extends Migration {
     foreach ($terms as $term) {
       taxonomy_term_delete($term->tid);
     }
+  }
+}
+
+class IRSOrgData extends Migration {
+  public function __construct($arguments) {
+    parent::__construct($arguments);
+    $this->systemOfRecord = Migration::DESTINATION;
+
+    $this->description = t('Add EINs to orgs from irs_eins table');
+
+    $source_fields = array(
+      'ein' => 'EIN',
+      'primary_name_of_organization' => 'Organization name',
+      'street_address' => 'street address',
+      'city' => 'city',
+      'state' => 'state',
+      'zip_code' => 'zip code',
+    );
+
+    $q = db_select('node', 'n');
+    $q->leftjoin('irs_eins', 'e', "UPPER(REPLACE(n.title, ',', ''))=UPPER(REPLACE(e.primary_name_of_organization, ',', ''))");
+    $q->fields('n', array('nid'))
+      ->fields('e', array('ein'))
+      ->condition('n.type', 'org', '=');
+
+    $this->source = new MigrateSourceSQL($q, $source_fields);
+
+    $this->map = new MigrateSQLMap($this->machineName,
+        array(
+          'nid' => array(
+            'type' => 'int',
+            'unsigned' => TRUE,
+            'not null' => TRUE,
+            'description' => 'nid',
+            'alias' => 'n',
+          )
+        ),
+        MigrateDestinationNode::getKeySchema()
+    );
+
+    $this->destination = new MigrateDestinationNode('org');
+
+    $this->addFieldMapping('nid', 'nid');
+    $this->addFieldMapping('field_ein', 'ein');
   }
 }
