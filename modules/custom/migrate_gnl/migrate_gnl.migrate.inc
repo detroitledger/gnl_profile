@@ -212,7 +212,6 @@ class Grants extends Migration {
     $this->addFieldMapping('field_funded_amount', 'amount_clean');
     $this->addFieldMapping('field_year', 'years_clean');
     $this->addFieldMapping('body', 'notes');
-    $this->addFieldMapping('field_internal_notes', 'internal_notes_blob');
     $this->addFieldMapping('field_grant_tags', 'tags_blob');
     $this->addFieldMapping('field_grant_tags:create_term')->defaultValue(TRUE);
     $this->addFieldMapping('field_grant_tags:ignore_case')->defaultValue(TRUE);
@@ -232,17 +231,9 @@ class Grants extends Migration {
     // Make a title
     $row->title = $row->granter . ' -> ' . $row->grantee;
 
-    // Get the start year
-    $year_raw = $row->year;
-    $year_start = intval($year_raw);
-
-    // Get the end year
-    $length = intval($row->length_years);
-    $year_end = $year_start + $length;
-
     $date_data = array(
-      'from' => (string) '01/01/' . $year_start . ' 00:00:00',
-      'to' => (string) '01/01/' . $year_end . ' 00:00:00',
+      'from' => (string) $row->start_date . ' 00:00:00',
+      'to' => (string) $row->end_date . ' 00:00:00',
     );
 
     $row->years_clean = drupal_json_encode($date_data);
@@ -252,12 +243,6 @@ class Grants extends Migration {
     $row->grantee_nid = $this->getNidByOrgName($row->grantee);
 
     $row->amount_clean = (int) str_replace('$', '', str_replace(' ', '', str_replace(',', '', $row->amount)));
-
-    // store extra infos as JSON in internal_notes
-    if (strlen($row->impact_area) > 1) {
-      $internal_noteses['impact_area'] = $row->impact_area;
-    }
-    $row->internal_notes_blob = drupal_json_encode($internal_noteses);
 
     // Tags
     $tags = array();
