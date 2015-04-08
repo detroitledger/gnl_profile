@@ -56,7 +56,7 @@ class GrantTypes extends Migration {
       ),
       MigrateDestinationTerm::getKeySchema()
     );
-    $this->source = new MigrateSourceCSV('/tmp/migrate_gnl/classify_grants.csv', $this->csvcols(), array('header_rows'=>4,'embedded_newlines'=>FALSE));
+    $this->source = new MigrateSourceCSV('/tmp/migrate_battlecreek/classify_grants.csv', $this->csvcols(), array('header_rows'=>4,'embedded_newlines'=>FALSE));
     $this->destination = new MigrateDestinationTerm('grant_types');
     $this->addFieldMapping('name', 'type');
     $this->addFieldMapping('description', 'description');
@@ -83,7 +83,7 @@ class OrgNTEETypes extends Migration {
       ),
       MigrateDestinationTerm::getKeySchema()
     );
-    $this->source = new MigrateSourceCSV('/tmp/migrate_gnl/classify_nonprofits_detail.csv', $this->csvcols(), array('header_rows'=>4,'embedded_newlines'=>FALSE));
+    $this->source = new MigrateSourceCSV('/tmp/migrate_battlecreek/classify_nonprofits_detail.csv', $this->csvcols(), array('header_rows'=>4,'embedded_newlines'=>FALSE));
     $this->destination = new MigrateDestinationTerm('ntee');
     $this->addFieldMapping('name', 'description');
     $this->addFieldMapping('field_ntee_code', 'code');
@@ -124,7 +124,7 @@ class Orgs extends Migration {
       ),
       MigrateDestinationNode::getKeySchema()
     );
-    $this->source = new MigrateSourceCSV('/tmp/migrate_gnl/orgs_masterlist_NTEE.csv', array(), array('header_rows'=>1, 'embedded_newlines'=>FALSE));
+    $this->source = new MigrateSourceCSV('/tmp/migrate_battlecreek/orgs_masterlist_NTEE.csv', array(), array('header_rows'=>1, 'embedded_newlines'=>FALSE));
     $this->destination = new MigrateDestinationNode('org');
     $this->addFieldMapping('title', 'ORGANIZATION_NAME');
     $this->addFieldMapping(NULL, 'ORG_NTEE'); // used by prepareRow()
@@ -175,7 +175,7 @@ class Grants extends Migration {
     $this->description = t('Import grants from a CSV');
 
     // Set up the source
-    $this->source = new MigrateSourceCSV('/tmp/migrate_gnl/allgrants.csv', array(), array('header_rows'=>1, 'embedded_newlines'=>FALSE));
+    $this->source = new MigrateSourceCSV('/tmp/migrate_battlecreek/allgrants.csv', array(), array('header_rows'=>1, 'embedded_newlines'=>FALSE));
 
     // Map fields in the source to the destination.
     // This defines the key fields for the source and the destination.
