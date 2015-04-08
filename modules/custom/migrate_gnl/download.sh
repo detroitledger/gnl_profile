@@ -32,7 +32,7 @@ sed 's/^/,/' $DESTDIR/allgrants-raw.csv > $DESTDIR/allgrants-raw-emptyfirst.csv
 awk -F, '$1=NR' OFS=, $DESTDIR/allgrants-raw-emptyfirst.csv > $DESTDIR/allgrants-raw-incremented.csv
 
 # add header row
-echo 'granter,granter_program,grantee,grantee_city,grantee_state,amount,notes,start_date,end_date,data_source' > $DESTDIR/allgrants.csv
+echo 'id,granter,granter_program,grantee,grantee_city,grantee_state,amount,notes,start_date,end_date,data_source' > $DESTDIR/allgrants.csv
 
 cat $DESTDIR/allgrants-raw-incremented.csv >> $DESTDIR/allgrants.csv
 
