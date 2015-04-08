@@ -9,7 +9,7 @@ DESTDIR=/tmp/migrate_battlecreek
 
 mkdir -p $DESTDIR
 
-$WGET -O $DESTDIR/orgs_masterlist_NTEE.csv "${CLASSIFICATIONS_BASE}4"
+$WGET -O $DESTDIR/orgs_masterlist_NTEE.csv "${GRANTS_BASE}859351734"
 
 $WGET -O $DESTDIR/classify_nonprofits_detail.csv "${CLASSIFICATIONS_BASE}1"
 
