@@ -74,6 +74,13 @@ projects[link][version] = "1.1"
 projects[libraries][subdir] = "contrib"
 projects[libraries][version] = "2.1"
 
+projects[loadtermnames][type] = "module"
+projects[loadtermnames][subdir] = "contrib"
+projects[loadtermnames][download][type] = "git"
+projects[loadtermnames][download][url] = "https://github.com/bnchdrff/loadtermnames"
+projects[loadtermnames][download][branch] = "7.x-1.x"
+
+projects[pathauto][subdir] = "contrib"
 projects[migrate][type] = "module"
 projects[migrate][subdir] = "contrib"
 projects[migrate][download][type] = "git"
