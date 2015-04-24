@@ -2,6 +2,7 @@
 
 CLASSIFICATIONS_BASE='https://docs.google.com/spreadsheets/d/1nriru1nAGTgy20JgbXLFweieCXYIrddFXIuSujLIKRU/export?format=csv&gid=';
 GRANTS_BASE='https://docs.google.com/spreadsheets/d/1h6Exjsz_VjgQn46qiNmnzsCoggjjpPDClYbKCP0qNhY/export?format=csv&gid=';
+NEW_GRANTS_BASE='https://docs.google.com/spreadsheets/d/1bqlmEC8Tj0ojOiZDLSJ2DiA7y7Khkz0oGpk3lwTFPJw/export?format=csv&gid=';
 
 WGET=`which wget`
 
@@ -9,21 +10,21 @@ DESTDIR=/tmp/migrate_battlecreek
 
 mkdir -p $DESTDIR
 
-$WGET -O $DESTDIR/orgs_masterlist_NTEE.csv "${GRANTS_BASE}859351734"
+$WGET -O $DESTDIR/orgs_masterlist_NTEE.csv "${NEW_GRANTS_BASE}589403007"
 
 $WGET -O $DESTDIR/classify_nonprofits_detail.csv "${CLASSIFICATIONS_BASE}1"
 
 $WGET -O $DESTDIR/classify_grants.csv "${CLASSIFICATIONS_BASE}0"
 
-for SHEET in 1051064171
+for SHEET in 0
 do
-  URL=$GRANTS_BASE$SHEET
+  URL=$NEW_GRANTS_BASE$SHEET
   $WGET -O $DESTDIR/grants$SHEET.csv "$URL"
   echo >> $DESTDIR/grants$SHEET.csv # ensure all sheets have a newline at end
 done
 
 # concatenate
-cat $DESTDIR/grants*.csv | grep -v 'granter,granter_program,grantee,grantee_city,grantee_state,amount,notes,start_date,end_date,data_source' > $DESTDIR/allgrants-raw.csv
+cat $DESTDIR/grants*.csv | grep -v 'Funding_type,Granter,Granter_program,Grantee,Grantee_city,Grantee_state,Amount,Grant_description,Start_date,Start_year,End_date,Grant_length_years,CSFW_sector,Data_source' > $DESTDIR/allgrants-raw.csv
 
 # add empty id field
 sed 's/^/,/' $DESTDIR/allgrants-raw.csv > $DESTDIR/allgrants-raw-emptyfirst.csv
@@ -32,7 +33,7 @@ sed 's/^/,/' $DESTDIR/allgrants-raw.csv > $DESTDIR/allgrants-raw-emptyfirst.csv
 awk -F, '$1=NR' OFS=, $DESTDIR/allgrants-raw-emptyfirst.csv > $DESTDIR/allgrants-raw-incremented.csv
 
 # add header row
-echo 'id,granter,granter_program,grantee,grantee_city,grantee_state,amount,notes,start_date,end_date,data_source' > $DESTDIR/allgrants.csv
+echo 'id,Funding_type,Granter,Granter_program,Grantee,Grantee_city,Grantee_state,Amount,Grant_description,Start_date,Start_year,End_date,Grant_length_years,CSFW_sector,Data_source' > $DESTDIR/allgrants.csv
 
 cat $DESTDIR/allgrants-raw-incremented.csv >> $DESTDIR/allgrants.csv
 

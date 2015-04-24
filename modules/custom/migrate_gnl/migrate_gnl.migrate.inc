@@ -1,5 +1,9 @@
 <?php
 
+include 'datamunger.php';
+
+use Drupal\migrate_gnl\Datamunger;
+
 /**
  * @file migrate_gnl.migrate.inc
  * Migrate content from CSVs into detroit ledger taxonomy terms
@@ -119,7 +123,7 @@ class Orgs extends Migration {
     $this->description = t('Import organizations from a CSV like orgs_masterlist_NTEE.csv');
     $this->map = new MigrateSQLMap($this->machineName,
       array(
-        "ORGANIZATION_NAME" => array(
+        'Recipients_unique' => array(
           'type' => 'varchar',
           'length' => '128',
           'not null' => TRUE,
@@ -130,9 +134,11 @@ class Orgs extends Migration {
     );
     $this->source = new MigrateSourceCSV('/tmp/migrate_battlecreek/orgs_masterlist_NTEE.csv', array(), array('header_rows'=>1, 'embedded_newlines'=>FALSE));
     $this->destination = new MigrateDestinationNode('org');
-    $this->addFieldMapping('title', 'ORGANIZATION_NAME');
-    $this->addFieldMapping(NULL, 'ORG_NTEE'); // used by prepareRow()
-    $this->addFieldMapping(NULL, 'TAGS'); // used by prepareRow()
+    $this->addFieldMapping('title', 'Recipients_unique');
+    $this->addFieldMapping(NULL, 'Org_type'); // used by prepareRow()
+    $this->addFieldMapping(NULL, 'NTEE_detail'); // used by prepareRow()
+    $this->addFieldMapping(NULL, 'CSFW_sector'); // used by prepareRow()
+    $this->addFieldMapping(NULL, 'CSFW_sub_sector'); // used by prepareRow()
     $this->addFieldMapping('field_ntee', 'ntees');
     $this->addFieldMapping('field_ntee:source_type')->defaultValue('tid');
     $this->addFieldMapping('field_org_tags', 'org_tags_blob');
@@ -141,26 +147,11 @@ class Orgs extends Migration {
   }
 
   public function prepareRow($row) {
-    $codes = array_map('trim', explode(';', $row->ORG_NTEE));
-    $tids = array();
-    foreach ($codes as $code) {
-      $tids[] = db_select('field_data_field_ntee_code', 'ntee')
-                  ->fields('ntee', array('entity_id'))
-                  ->condition('field_ntee_code_value', $code)
-                  ->execute()
-                  ->fetchField();
-    }
-    $row->ntees = $tids;
+    $dm = new Datamunger();
 
-    $tags = array();
-    $org_tags = preg_split("/[\s]*[;][\s]*/", $row->TAGS);
-    foreach ($org_tags as $org_tag) {
-      if (strlen($org_tag) > 1) {
-        $tags[] = $org_tag;
-      }
-    }
-    $row->org_tags_blob = $tags;
+    $row->ntees = $dm->derive_tids_from_ntee_string($row->NTEE_detail);
 
+    $row->org_tags_blob = array($row->Org_type, $row->CSFW_sector, $row->CSFW_sub_sector);
   }
 
   public function fields() {
@@ -204,18 +195,18 @@ class Grants extends Migration {
     // and the source field is the second parameter
     // battlecreek uses 'start_date' and 'end_date' in mm/dd/yyyy format instead of 'year' and 'length'
     $this->addFieldMapping('title', 'title'); // should be auto generated...
-    $this->addFieldMapping(NULL, 'granter'); // used by prepareRow()
-    $this->addFieldMapping(NULL, 'grantee'); // used by prepareRow()
-    $this->addFieldMapping(NULL, 'amount'); // used by prepareRow()
-    $this->addFieldMapping(NULL, 'start_date'); // used by prepareRow()
-    $this->addFieldMapping(NULL, 'end_date'); // used by prepareRow()
-    $this->addFieldMapping(NULL, 'granter_program'); // used by prepareRow()
-    $this->addFieldMapping('field_source', 'data_source');
-    $this->addFieldMapping('field_funder', 'granter_nid');
+    $this->addFieldMapping(NULL, 'Granter'); // used by prepareRow()
+    $this->addFieldMapping(NULL, 'Grantee'); // used by prepareRow()
+    $this->addFieldMapping(NULL, 'Amount'); // used by prepareRow()
+    $this->addFieldMapping(NULL, 'Start_date'); // used by prepareRow()
+    $this->addFieldMapping(NULL, 'End_date'); // used by prepareRow()
+    $this->addFieldMapping(NULL, 'Granter_program'); // used by prepareRow()
+    $this->addFieldMapping('field_source', 'Data_source');
+    $this->addFieldMapping('field_funder', 'ranter_nid');
     $this->addFieldMapping('field_recipient', 'grantee_nid');
     $this->addFieldMapping('field_funded_amount', 'amount_clean');
     $this->addFieldMapping('field_year', 'years_clean');
-    $this->addFieldMapping('body', 'notes');
+    $this->addFieldMapping('body', 'Grant_description');
     $this->addFieldMapping('field_grant_tags', 'tags_blob');
     $this->addFieldMapping('field_grant_tags:create_term')->defaultValue(TRUE);
     $this->addFieldMapping('field_grant_tags:ignore_case')->defaultValue(TRUE);
@@ -233,30 +224,45 @@ class Grants extends Migration {
 
   public function prepareRow($row) {
     // Make a title
-    $row->title = $row->granter . ' -> ' . $row->grantee;
+    $row->title = $row->Granter . ' -> ' . $row->Grantee;
 
     $date_data = array(
-      'from' => (string) $row->start_date . ' 00:00:00',
-      'to' => (string) $row->end_date . ' 00:00:00',
+      'from' => (string) $row->Start_date . ' 00:00:00',
+      'to' => (string) $row->Snd_date . ' 00:00:00',
     );
 
     $row->years_clean = drupal_json_encode($date_data);
 
     // Get the organziation's IDs
-    $row->granter_nid = $this->getNidByOrgName($row->granter);
-    $row->grantee_nid = $this->getNidByOrgName($row->grantee);
+    $row->granter_nid = $this->getNidByOrgName($row->Granter);
+    $row->grantee_nid = $this->getNidByOrgName($row->Grantee);
 
-    $row->amount_clean = (int) str_replace('$', '', str_replace(' ', '', str_replace(',', '', $row->amount)));
+    $row->amount_clean = (int) str_replace('$', '', str_replace(' ', '', str_replace(',', '', $row->Amount)));
 
     // Tags
     $tags = array();
 
-    $granter_programs = preg_split("/[\s]*[;][\s]*/", $row->granter_program);
+    $granter_programs = preg_split("/[\s]*[;][\s]*/", $row->Granter_program);
     foreach ($granter_programs as $program) {
       if (strlen($program) > 1) {
         $tags[] = 'Granter program: ' . $program;
       }
     }
+
+    $funding_types = preg_split("/[\s]*[;][\s]*/", $row->Funding_type);
+    foreach ($funding_types as $type) {
+      if (strlen($type) > 1) {
+        $tags[] = 'Funding type: ' . $type;
+      }
+    }
+
+    $CSFW_sectors = preg_split("/[\s]*[;][\s]*/", $row->CSFW_sector);
+    foreach ($CSFW_sectors as $sector) {
+      if (strlen($sector) > 1) {
+        $tags[] = 'CSFW sector: ' . $sector;
+      }
+    }
+
     $row->tags_blob = $tags;
   }
 
