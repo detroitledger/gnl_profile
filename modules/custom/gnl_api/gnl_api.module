@@ -305,6 +305,15 @@ function gnl_api_services_resources() {
         ),
       ),
     ),
+    'tags' => array(
+      'operations' => array(
+        'index' => array(
+          'help' => 'Get tags & tagged entities',
+          'callback' => '_gnl_api_index_tags',
+          'access arguments' => array('access content'),
+        ),
+      ),
+    ),
     'stats' => array(
       'operations' => array(
         'index' => array(
@@ -387,6 +396,10 @@ function _gnl_api_create_flag($data) {
     "target_id" => $flagging->entity_id,
     "note" => $flagging->field_note[LANGUAGE_NONE][0]['value'],
   );
+}
+
+function _gnl_api_index_tags() {
+
 }
 
 function _gnl_api_index_stats() {
