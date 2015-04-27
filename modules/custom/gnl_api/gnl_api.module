@@ -6,7 +6,7 @@
 
 use Tobscure\JsonApi\Document;
 use Tobscure\JsonApi\SerializerAbstract;
-use Drupal\gnl_api\Serializers\TagSerializer;
+use Drupal\gnl_api\Serializers\NteeSerializer;
 use Drupal\gnl_api\Utils;
 
 define("GNL_API_DEFAULT_LIMIT", 100);
@@ -316,6 +316,16 @@ function gnl_api_services_resources() {
           'help' => 'Get organization NTEE codes & their related orgs',
           'callback' => '_gnl_api_index_ntees',
           'access arguments' => array('access content'),
+          'args' => array(
+            array(
+              'name' => 'load_orgs',
+              'type' => 'int',
+              'description' => 'Load organiztion entities if true, otherwise return their IDs',
+              'source' => array('param' => 'load_orgs'),
+              'optional' => TRUE,
+              'default value' => 0,
+            ),
+          ),
         ),
       ),
     ),
@@ -403,14 +413,32 @@ function _gnl_api_create_flag($data) {
   );
 }
 
-function _gnl_api_index_ntees($include_orgs = false) {
-  $ntees = [];
-
+function _gnl_api_index_ntees($load_orgs = false) {
+  $utils = new Utils();
   $document = new Document;
-  $serializer = new NteeSerializer(['ntees']);
+  $serializer = new NteeSerializer();
+
+  $ntees = $utils->getTreeByMachineName('ntee');
+
+  foreach ($ntees as &$ntee) {
+    $ntee->org_ids = taxonomy_select_nodes($ntee->tid, FALSE);
+  }
+  unset($ntee);
+
+  if ($load_orgs) {
+    foreach ($ntees as $ntee) {
+      $ntee->orgs = [];
+      $ntee->orgs[] = array_map(function($org_id) {
+        return node_load($org_id);
+      }, $ntee->org_ids);
+    }
+  }
+
   $collection = $serializer->collection($ntees);
   $document->setData($collection);
   $document->addMeta('total', count($ntees));
+
+  return $document->toArray();
 }
 
 function _gnl_api_index_stats() {
