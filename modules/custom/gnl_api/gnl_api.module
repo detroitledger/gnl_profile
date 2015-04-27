@@ -5,7 +5,6 @@
  */
 
 use Tobscure\JsonApi\Document;
-use Tobscure\JsonApi\SerializerAbstract;
 use Drupal\gnl_api\Serializers\NteeSerializer;
 use Drupal\gnl_api\Utils;
 
@@ -416,7 +415,11 @@ function _gnl_api_create_flag($data) {
 function _gnl_api_index_ntees($load_orgs = false) {
   $utils = new Utils();
   $document = new Document;
-  $serializer = new NteeSerializer();
+  if ($load_orgs) {
+    $serializer = new NteeSerializer(['orgs']);
+  } else {
+    $serializer = new NteeSerializer([], ['orgs']);
+  }
 
   $ntees = $utils->getTreeByMachineName('ntee');
 
@@ -427,8 +430,7 @@ function _gnl_api_index_ntees($load_orgs = false) {
 
   if ($load_orgs) {
     foreach ($ntees as $ntee) {
-      $ntee->orgs = [];
-      $ntee->orgs[] = array_map(function($org_id) {
+      $ntee->orgs = array_map(function($org_id) {
         return node_load($org_id);
       }, $ntee->org_ids);
     }

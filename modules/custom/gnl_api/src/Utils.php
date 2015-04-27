@@ -55,7 +55,7 @@ class Utils {
 
     // set framework-friendly ID
     $node->id = $node->nid;
-    unset($node->nid);
+    //unset($node->nid);
 
     // then, remove language from things that just don't need it
     foreach ($node as $key => $val) {
