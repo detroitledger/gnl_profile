@@ -4,6 +4,11 @@
  * @file gnl_api.module
  */
 
+use Tobscure\JsonApi\Document;
+use Tobscure\JsonApi\SerializerAbstract;
+use Drupal\gnl_api\Serializers\NteeSerializer;
+use Drupal\gnl_api\Utils;
+
 define("GNL_API_DEFAULT_LIMIT", 100);
 define("GNL_API_MAX_LIMIT", 1000);
 define("GNL_API_FLAG_NAME", "flag");
@@ -305,6 +310,25 @@ function gnl_api_services_resources() {
         ),
       ),
     ),
+    'ntees' => array(
+      'operations' => array(
+        'index' => array(
+          'help' => 'Get organization NTEE codes & their related orgs',
+          'callback' => '_gnl_api_index_ntees',
+          'access arguments' => array('access content'),
+          'args' => array(
+            array(
+              'name' => 'load_orgs',
+              'type' => 'int',
+              'description' => 'Load organiztion entities if true, otherwise return their IDs',
+              'source' => array('param' => 'load_orgs'),
+              'optional' => TRUE,
+              'default value' => 0,
+            ),
+          ),
+        ),
+      ),
+    ),
     'stats' => array(
       'operations' => array(
         'index' => array(
@@ -389,6 +413,34 @@ function _gnl_api_create_flag($data) {
   );
 }
 
+function _gnl_api_index_ntees($load_orgs = false) {
+  $utils = new Utils();
+  $document = new Document;
+  $serializer = new NteeSerializer();
+
+  $ntees = $utils->getTreeByMachineName('ntee');
+
+  foreach ($ntees as &$ntee) {
+    $ntee->org_ids = taxonomy_select_nodes($ntee->tid, FALSE);
+  }
+  unset($ntee);
+
+  if ($load_orgs) {
+    foreach ($ntees as $ntee) {
+      $ntee->orgs = [];
+      $ntee->orgs[] = array_map(function($org_id) {
+        return node_load($org_id);
+      }, $ntee->org_ids);
+    }
+  }
+
+  $collection = $serializer->collection($ntees);
+  $document->setData($collection);
+  $document->addMeta('total', count($ntees));
+
+  return $document->toArray();
+}
+
 function _gnl_api_index_stats() {
   $stats = &drupal_static(__FUNCTION__);
   if (!isset($stats)) {
@@ -457,7 +509,7 @@ function _gnl_api_related_org_grants_funded($id, $limit, $offset) {
 
   $nids = array_keys($res);
 
-  $grants = array_map('_gnl_api_clean_node', node_load_multiple($nids));
+  $grants = array_map('\Drupal\gnl_api\Utils::cleanNode', node_load_multiple($nids));
 
   return array(
     'grants_funded' => array_values($grants)
@@ -477,7 +529,7 @@ function _gnl_api_related_org_grants_received($id, $limit, $offset) {
 
   $nids = array_keys($res);
 
-  $grants = array_map('_gnl_api_clean_node', node_load_multiple($nids));
+  $grants = array_map('\Drupal\gnl_api\Utils::cleanNode', node_load_multiple($nids));
 
   return array(
     'grants_received' => array_values($grants)
@@ -515,7 +567,7 @@ function _gnl_api_retrieve($type, $id) {
   if (!$node || $type !== $node->type) { // check the facts!
     return services_error(t('@type @id does not exist.', array('@type' => $type, '@id' => $id)), 404);
   } else {
-    return _gnl_api_clean_node($node);
+    return \Drupal\gnl_api\Utils::cleanNode($node);
   }
 }
 
@@ -631,7 +683,7 @@ function _gnl_api_index_nodes($bundle, $limit, $offset, $filters, $sort, $plural
   } else {
     $nids = array_keys($res);
 
-    $nodes = array_map('_gnl_api_clean_node', node_load_multiple($nids));
+    $nodes = array_map('\Drupal\gnl_api\Utils::cleanNode', node_load_multiple($nids));
 
     // apply non-sql filters
     foreach ($post_filters as $property => $str) {
@@ -660,119 +712,5 @@ function _gnl_api_index_nodes($bundle, $limit, $offset, $filters, $sort, $plural
 function _gnl_api_parse_betweens($arg) {
   $betweens = explode(':', $arg);
   return (count($betweens) === 2) ? $betweens : FALSE;
-}
-
-/**
- * Unsets Drupally things from nodes.
- *
- * @param object $node
- *
- * @return $node
- */
-function _gnl_api_clean_node($node) {
-  // first, unset things
-  $unwanted_properties = array(
-    'data',
-    'language',
-    'picture',
-    'promote',
-    'sticky',
-  );
-
-  foreach ($unwanted_properties as $prop) {
-    unset($node->{$prop});
-  }
-
-  // set framework-friendly ID
-  $node->id = $node->nid;
-  unset($node->nid);
-
-  // then, remove language from things that just don't need it
-  foreach ($node as $key => $val) {
-    if (is_array($val)) {
-      // change empty arrays to NULL
-      if (count($val) === 0) {
-        $node->{$key} = NULL;
-      }
-      // remove translations
-      // @todo change this in future l10n work
-      if (strpos($key, 'field_') === 0 && array_key_exists('und', $val) && array_key_exists(0, $val['und'])) {
-        $node->{$key} = $val['und'][0];
-      }
-    }
-  }
-
-  $ints = array(
-    'changed',
-    'comment',
-    'created',
-    'id',
-    'revision_timestamp',
-    'revision_uid',
-    'status',
-    'tnid',
-    'translate',
-    'uid',
-    'vid'
-  );
-
-  if ($node->type == 'org') {
-    $node->field_ein = $node->field_ein['value'];
-    array_push($ints, 'field_ein');
-    $node->field_duns = $node->field_duns['value'];
-    array_push($ints, 'field_duns');
-  }
-
-  if ($node->type == 'grant') {
-    $node->field_funded_amount = $node->field_funded_amount['value'];
-    array_push($ints, 'field_funded_amount');
-  }
-
-  foreach ($ints as $prop) {
-    $node->{$prop} = (int) $node->{$prop};
-  }
-
-  // remove safe_values from some properties
-  $simplify_props = array();
-
-  if ($node->type == 'grant') {
-    array_push($simplify_props, 'field_source');
-    array_push($simplify_props, 'field_internal_notes');
-
-    $has_notes = (isset($node->body) && isset($node->body['und']) && isset($node->body['und'][0]) && isset($node->body['und'][0]['safe_value']));
-    if ($has_notes) {
-      $node->notes = $node->body['und'][0]['safe_value'];
-    } else {
-      $node->notes = null;
-    }
-  }
-
-  if ($node->type == 'page') {
-    $node->body = $node->body['und'][0]['value'];
-  }
-
-  foreach ($simplify_props as $prop) {
-    if ($node->{$prop}['value']) {
-      $node->{$prop} = $node->{$prop}['value'];
-    }
-  }
-
-  // add grantor/grantee names to grants
-  if ($node->type == 'grant') {
-    $funder = node_load($node->field_funder['target_id']);
-    $node->field_funder['name'] = $funder->title;
-    $recipient = node_load($node->field_recipient['target_id']);
-    $node->field_recipient['name'] = $recipient->title;
-  }
-
-  // make dates js-friendly
-  if ($node->type == 'grant') {
-    $start_date = new DateObject($node->field_year['value'], $node->field_year['timezone']);
-    $node->field_start_date = date_format_date($start_date, 'custom', 'r');
-    $end_date = new DateObject($node->field_year['value2'], $node->field_year['timezone']);
-    $node->field_end_date = date_format_date($end_date, 'custom', 'r');
-  }
-
-  return $node;
 }
 

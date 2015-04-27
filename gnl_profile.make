@@ -20,8 +20,17 @@ projects[auto_entitylabel][subdir] = "contrib"
 projects[boxes][subdir] = "contrib"
 projects[boxes][version] = "1.1"
 
+projects[composer][type] = "module"
+projects[composer][subdir] = "contrib"
+projects[composer][download][type] = "git"
+projects[composer][download][url] = "git://git.drupal.org/project/composer.git"
+projects[composer][download][branch] = "8.x-1.x"
+
 projects[context][subdir] = "contrib"
 projects[context][version] = "3.1"
+
+projects[composer_manager][subdir] = "contrib"
+projects[composer_manager][version] = "1.7"
 
 projects[ctools][subdir] = "contrib"
 projects[ctools][version] = "1.3"
@@ -139,6 +148,9 @@ projects[views_raw_sql][patch][2002288][md5] = "ad778a5b1c44948d908dc0f5e12d3a8f
 
 projects[views_tree][subdir] = "contrib"
 projects[views_tree][version] = "2.0"
+
+projects[xautoload][subdir] = "contrib"
+projects[xautoload][version] = "5.1"
 
 ; Themes
 projects[omega][type] = "theme"

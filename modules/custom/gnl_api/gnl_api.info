@@ -2,7 +2,4 @@ name = "gnl_api"
 description = "Provides an API for Detroit Ledger data"
 core = "7.x"
 dependencies[] = "gnl_schema"
-
-files[] = "gnl_api.module"
-files[] = "gnl_api.inc"
-
+dependencies[] = "xautoload"
