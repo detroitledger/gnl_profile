@@ -76,6 +76,13 @@ function gnl_schema_default_services_endpoint() {
         ),
       ),
     ),
+    'ntees' => array(
+      'operations' => array(
+        'index' => array(
+          'enabled' => '1',
+        ),
+      ),
+    ),
     'stats' => array(
       'operations' => array(
         'index' => array(
