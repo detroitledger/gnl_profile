@@ -2,7 +2,7 @@ api = 2
 core = 7.x
 
 projects[drupal][type] = "core"
-projects[drupal][version] = "7.34"
+projects[drupal][version] = "7.36"
 
 projects[gnl_profile][type] = profile
 projects[gnl_profile][download][type] = git
