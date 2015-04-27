@@ -275,6 +275,75 @@ Single entities will contain the following content management- revision-related 
           ]
         }
 
+# Group NTEE
+## NTEE [/ntees/:id]
++ Parameters
+
+    + id (number, required, `12345`) ... NTEE ID (ledger-specific, not the actual code).
+
++ Model (application/json)
+
+    + Body
+
+        {
+            "depth": 0,
+            "description": null,
+            "field_ntee_code": {
+                "und": [
+                    {
+                        "format": null,
+                        "safe_value": "K",
+                        "value": "K"
+                    }
+                ]
+            },
+            "format": "plain_text",
+            "id": "276",
+            "name": "Agriculture, Food, Nutrition",
+            "org_ids": [
+                "3420",
+                "133"
+            ],
+            "orgs": [
+                [
+                   [Org][]
+                ]
+            ],
+            "parents": [
+                "0"
+            ],
+            "tid": "276",
+            "type": "ntees",
+            "uuid": "62dd848d-48c5-4eeb-aa72-8589d6ca9e42",
+            "vid": "3",
+            "vocabulary_machine_name": "ntee",
+            "weight": "0"
+        },
+
+
+## NTEE Index [/ntees{?load_orgs}]
+### List all Organization NTEE Codes [GET]
++ Parameters
+
+    + load_orgs = `false` (boolean, optional) ... Load organization entities?
+
++ Response 200 (application/json)
+
+        {
+          "data": [
+            {
+              [NTEE][]
+            },
+            {
+              // ... more NTEE objects
+            }
+          ],
+          "meta": {
+            "total": 643
+          }
+        }
+
+
 # GET /stats
 + Response 200 (application/json)
 
