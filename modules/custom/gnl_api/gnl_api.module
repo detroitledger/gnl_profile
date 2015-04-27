@@ -433,6 +433,11 @@ function _gnl_api_index_ntees($load_orgs = false) {
       $ntee->orgs = array_map(function($org_id) {
         return node_load($org_id);
       }, $ntee->org_ids);
+      $ntee->totals = array_reduce($ntee->orgs, function($totals, $org) {
+        $totals['received'] += $org->org_grants_received;
+        $totals['funded'] += $org->org_grants_funded;
+        return $totals;
+      }, array('received' => 0, 'funded' => 0));
     }
   }
 
