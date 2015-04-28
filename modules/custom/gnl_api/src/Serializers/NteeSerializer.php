@@ -17,6 +17,10 @@ class NteeSerializer extends SerializerAbstract {
   protected $type = 'ntees';
 
   protected function attributes($term) {
+    // these are placed in linkages
+    unset($term->orgs);
+    unset($term->org_ids);
+
     return $term;
   }
 
