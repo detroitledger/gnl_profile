@@ -571,7 +571,7 @@ function _gnl_api_related_org_board_members($org_id, $limit, $offset) {
  */
 function _gnl_api_retrieve($type, $id) {
   $node = node_load($id);
-  if (!$node || $type !== $node->type) { // check the facts!
+  if (!$node || $type !== $node->type || $node->status < 1) { // check the facts!
     return services_error(t('@type @id does not exist.', array('@type' => $type, '@id' => $id)), 404);
   } else {
     return \Drupal\gnl_api\Utils::cleanNode($node);
@@ -606,8 +606,8 @@ function _gnl_api_index_nodes($bundle, $limit, $offset, $filters, $sort, $plural
   // base query
   $query = db_select('node', 'n');
   $query
-    ->condition('status', 1)
-    ->condition('type', $bundle, '=')
+    ->condition('n.status', 0, '>')
+    ->condition('n.type', $bundle, '=')
     ->fields('n', array('nid'))
     ->range($offset, $limit);
 
