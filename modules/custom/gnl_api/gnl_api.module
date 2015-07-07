@@ -311,6 +311,23 @@ function gnl_api_services_resources() {
     ),
     'ntees' => array(
       'operations' => array(
+        'retrieve' => array(
+          'help' => 'Retrieves NTEE',
+          'callback' => '_gnl_api_retrieve_ntee',
+          'access callback' => 'user_access',
+          'access arguments' => array('access content'),
+          'access arguments append' => FALSE,
+          'args' => array(
+            array(
+              'name' => 'id',
+              'type' => 'int',
+              'description' => 'NTEE ID',
+              'source' => array('path' => '0'),
+              'optional' => FALSE,
+              'default value' => NULL,
+            ),
+          ),
+        ),
         'index' => array(
           'help' => 'Get organization NTEE codes & their related orgs',
           'callback' => '_gnl_api_index_ntees',
@@ -410,6 +427,34 @@ function _gnl_api_create_flag($data) {
     "target_id" => $flagging->entity_id,
     "note" => $flagging->field_note[LANGUAGE_NONE][0]['value'],
   );
+}
+
+function _gnl_api_retrieve_ntee($id) {
+  $document = new Document;
+  $serializer = new NteeSerializer(['orgs']);
+  $ntee = taxonomy_term_load($id);
+
+  if (!$ntee) {
+    return services_error(t('@id does not exist.', array('@id' => $id)), 404);
+  }
+
+  $ntee->org_ids = taxonomy_select_nodes($ntee->tid, FALSE);
+
+  $ntee->orgs = array_map(function($org_id) {
+    return node_load($org_id);
+  }, $ntee->org_ids);
+
+  $ntee->totals = array_reduce($ntee->orgs, function($totals, $org) {
+    $totals['received'] += $org->org_grants_received;
+    $totals['funded'] += $org->org_grants_funded;
+    return $totals;
+  }, array('received' => 0, 'funded' => 0));
+
+  $resource = $serializer->resource($ntee);
+
+  $document->setData($resource);
+
+  return $document->toArray();
 }
 
 function _gnl_api_index_ntees($load_orgs = false) {
