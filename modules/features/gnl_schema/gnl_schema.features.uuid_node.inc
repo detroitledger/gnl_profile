@@ -33,12 +33,6 @@ function gnl_schema_uuid_features_default_content() {
           <li><a href="https://github.com/detroitledger">Github</a></li>
         </ul>
 
-<h2>Our data</h2>
-
-<p><a href="http://docs.detroitledger.apiary.io/">Learn how to access our API.</a></p>
-
-<p>Downlaod CSV exports of <a href="https://data.detroitledger.org/sites/default/files/grants.csv">grants</a> and <a href="https://data.detroitledger.org/sites/default/files/organizations.csv">organizations</a>.</p>
-
 <h2>Our mistakes</h2>
 
 <p>The nonprofit <a href="http://www.givewell.org/about/shortcomings">GiveWell</a> shares "mistakes we\'ve made, strategies we should have planned and executed differently, and lessons we\'ve learned." We\'ll do the same here.</p>
@@ -114,7 +108,7 @@ function gnl_schema_uuid_features_default_content() {
   'user_uuid' => '4ce1c447-25d6-449f-a3ad-8976ce9efb0b',
 );
   $nodes[] = array(
-  'title' => 'Our Methods',
+  'title' => 'Our Data & Methods',
   'log' => '',
   'status' => 1,
   'comment' => 0,
@@ -131,7 +125,15 @@ function gnl_schema_uuid_features_default_content() {
       0 => array(
         'value' => '<p>The Ledger collects data, presents it in an easily digestible format, and talks with individuals and organizations working in the nonprofit sector.</p>
 
-<h2>Collecting data</h2>
+<h2>Our data</h2>
+
+<p>All of the Ledger\'s data is available for free for any use. Please contact us at <a href="mailto:hello@detroitledger.org">hello@detroitledger.org</a> if we can provide additional information about the data available, data in additional formats, or technical assistance.
+
+<p>You can download Excel-compatible <strong>CSV exports</strong> of <a href="https://data.detroitledger.org/sites/default/files/grants.csv">all grants</a> and <a href="https://data.detroitledger.org/sites/default/files/organizations.csv">all organizations</a>. We also offer a <strong>data API</strong> with endpoints for organizations, grants, NTEE codes, and broader stats. <a href="http://docs.detroitledger.apiary.io/">Read our API docs</a> for more information on how to access the data.</p>
+
+<p>The data is made available under the <a href="http://opendatacommons.org/licenses/odbl/1.0/">Open Database License</a>. Any rights in individual contents of the database are licensed under the <a href="http://opendatacommons.org/licenses/dbcl/1.0/">Database Contents License.</a></p>
+
+<h2>Our methods</h2>
 
 <p>We collect data about grantees within city boundaries who have received funds from 2011 onward. A few older grants that are still active today are also in our collection.</p>
 
