@@ -78,6 +78,9 @@ function gnl_schema_default_services_endpoint() {
     ),
     'ntees' => array(
       'operations' => array(
+        'retrieve' => array(
+          'enabled' => '1',
+        ),
         'index' => array(
           'enabled' => '1',
         ),

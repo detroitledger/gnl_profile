@@ -26,7 +26,7 @@ function gnl_schema_taxonomy_default_vocabularies() {
       'weight' => 0,
     ),
     'ntee' => array(
-      'name' => 'Nonprofit type',
+      'name' => 'NTEE (nonprofit type)',
       'machine_name' => 'ntee',
       'description' => 'National Taxonomy for Exempt Entities',
       'hierarchy' => 0,
