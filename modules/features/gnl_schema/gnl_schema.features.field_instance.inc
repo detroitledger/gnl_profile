@@ -577,7 +577,7 @@ function gnl_schema_field_default_field_instances() {
     'bundle' => 'grant',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'NTEE grant types; used in usaspending.gov data as well as certain funders such as CFSEM.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1320,6 +1320,7 @@ function gnl_schema_field_default_field_instances() {
   t('Links');
   t('NTEE');
   t('NTEE code');
+  t('NTEE grant types; used in usaspending.gov data as well as certain funders such as CFSEM.');
   t('Note');
   t('Organization');
   t('Person');
