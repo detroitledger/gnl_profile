@@ -261,8 +261,7 @@ function gnl_schema_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'node_options_board_term';
   $strongarm->value = array(
-    0 => 'status',
-    1 => 'promote',
+    0 => 'revision',
   );
   $export['node_options_board_term'] = $strongarm;
 
@@ -271,8 +270,7 @@ function gnl_schema_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'node_options_grant';
   $strongarm->value = array(
-    0 => 'status',
-    1 => 'revision',
+    0 => 'revision',
   );
   $export['node_options_grant'] = $strongarm;
 
@@ -281,8 +279,7 @@ function gnl_schema_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'node_options_org';
   $strongarm->value = array(
-    0 => 'status',
-    1 => 'revision',
+    0 => 'revision',
   );
   $export['node_options_org'] = $strongarm;
 
@@ -300,7 +297,7 @@ function gnl_schema_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'node_options_person';
   $strongarm->value = array(
-    0 => 'status',
+    0 => 'revision',
   );
   $export['node_options_person'] = $strongarm;
 
