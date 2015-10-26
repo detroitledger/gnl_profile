@@ -6,6 +6,9 @@ api = 2
 projects[drupal][version] = "7.x"
 
 ; Modules
+projects[addanother][subdir] = "contrib"
+projects[addanother][version] = "2.2"
+
 projects[addressfield][subdir] = "contrib"
 projects[addressfield][version] = "1.0-beta4"
 projects[addressfield][patch][1493014][url] = "https://www.drupal.org/files/1493014-5.container_line_breaks.patch"
