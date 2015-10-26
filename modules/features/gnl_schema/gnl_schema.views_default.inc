@@ -2230,7 +2230,7 @@ function gnl_schema_views_default_views() {
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
-  $handler->display->display_options['path'] = 'moderate-unpublished-content';
+  $handler->display->display_options['path'] = 'admin/moderate-unpublished-content';
   $handler->display->display_options['menu']['type'] = 'normal';
   $handler->display->display_options['menu']['title'] = 'Moderate Unpublished Content';
   $handler->display->display_options['menu']['name'] = 'user-menu';
