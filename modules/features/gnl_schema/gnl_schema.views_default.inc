@@ -955,6 +955,22 @@ function gnl_schema_views_default_views() {
   $handler->display->display_options['filters']['title']['expose']['autocomplete_raw_suggestion'] = 1;
   $handler->display->display_options['filters']['title']['expose']['autocomplete_raw_dropdown'] = 1;
   $handler->display->display_options['filters']['title']['expose']['autocomplete_dependent'] = 0;
+  /* Filter criterion: Content: EIN (field_ein) */
+  $handler->display->display_options['filters']['field_ein_value']['id'] = 'field_ein_value';
+  $handler->display->display_options['filters']['field_ein_value']['table'] = 'field_data_field_ein';
+  $handler->display->display_options['filters']['field_ein_value']['field'] = 'field_ein_value';
+  $handler->display->display_options['filters']['field_ein_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_ein_value']['expose']['operator_id'] = 'field_ein_value_op';
+  $handler->display->display_options['filters']['field_ein_value']['expose']['label'] = 'EIN';
+  $handler->display->display_options['filters']['field_ein_value']['expose']['use_operator'] = TRUE;
+  $handler->display->display_options['filters']['field_ein_value']['expose']['operator'] = 'field_ein_value_op';
+  $handler->display->display_options['filters']['field_ein_value']['expose']['identifier'] = 'field_ein_value';
+  $handler->display->display_options['filters']['field_ein_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+  );
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
