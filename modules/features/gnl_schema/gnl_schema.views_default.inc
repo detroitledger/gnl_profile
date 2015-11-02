@@ -31,6 +31,9 @@ function gnl_schema_views_default_views() {
   $handler->display->display_options['exposed_form']['type'] = 'basic';
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '100';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['pager']['options']['id'] = '0';
+  $handler->display->display_options['pager']['options']['quantity'] = '9';
   $handler->display->display_options['style_plugin'] = 'table';
   $handler->display->display_options['style_options']['columns'] = array(
     'views_bulk_operations' => 'views_bulk_operations',
@@ -81,6 +84,10 @@ function gnl_schema_views_default_views() {
       'empty_column' => 0,
     ),
   );
+  /* Relationship: Content: Author */
+  $handler->display->display_options['relationships']['uid']['id'] = 'uid';
+  $handler->display->display_options['relationships']['uid']['table'] = 'node';
+  $handler->display->display_options['relationships']['uid']['field'] = 'uid';
   /* Field: Bulk operations: Content */
   $handler->display->display_options['fields']['views_bulk_operations']['id'] = 'views_bulk_operations';
   $handler->display->display_options['fields']['views_bulk_operations']['table'] = 'node';
@@ -220,6 +227,12 @@ function gnl_schema_views_default_views() {
   $handler->display->display_options['fields']['changed']['label'] = 'Updated';
   $handler->display->display_options['fields']['changed']['date_format'] = 'gnl_date_type_human_short';
   $handler->display->display_options['fields']['changed']['second_date_format'] = 'gnl_date_type_human_short';
+  /* Field: User: Name */
+  $handler->display->display_options['fields']['name']['id'] = 'name';
+  $handler->display->display_options['fields']['name']['table'] = 'users';
+  $handler->display->display_options['fields']['name']['field'] = 'name';
+  $handler->display->display_options['fields']['name']['relationship'] = 'uid';
+  $handler->display->display_options['fields']['name']['label'] = 'User';
   /* Field: Content: Funder */
   $handler->display->display_options['fields']['field_funder']['id'] = 'field_funder';
   $handler->display->display_options['fields']['field_funder']['table'] = 'field_data_field_funder';
@@ -321,6 +334,23 @@ function gnl_schema_views_default_views() {
   $handler->display->display_options['filters']['field_recipient_target_id']['expose']['operator'] = 'field_recipient_target_id_op';
   $handler->display->display_options['filters']['field_recipient_target_id']['expose']['identifier'] = 'field_recipient_target_id';
   $handler->display->display_options['filters']['field_recipient_target_id']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+  );
+  /* Filter criterion: User: Name */
+  $handler->display->display_options['filters']['uid']['id'] = 'uid';
+  $handler->display->display_options['filters']['uid']['table'] = 'users';
+  $handler->display->display_options['filters']['uid']['field'] = 'uid';
+  $handler->display->display_options['filters']['uid']['relationship'] = 'uid';
+  $handler->display->display_options['filters']['uid']['value'] = '';
+  $handler->display->display_options['filters']['uid']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['uid']['expose']['operator_id'] = 'uid_op';
+  $handler->display->display_options['filters']['uid']['expose']['label'] = 'Creator';
+  $handler->display->display_options['filters']['uid']['expose']['operator'] = 'uid_op';
+  $handler->display->display_options['filters']['uid']['expose']['identifier'] = 'uid';
+  $handler->display->display_options['filters']['uid']['expose']['remember_roles'] = array(
     2 => '2',
     1 => 0,
     3 => 0,
@@ -680,6 +710,175 @@ function gnl_schema_views_default_views() {
   $handler->display->display_options['menu']['type'] = 'normal';
   $handler->display->display_options['menu']['title'] = 'Find dupe grants based on Federal Award IDs';
   $handler->display->display_options['menu']['weight'] = '23';
+  $handler->display->display_options['menu']['name'] = 'user-menu';
+  $handler->display->display_options['menu']['context'] = 0;
+  $handler->display->display_options['menu']['context_only_inline'] = 0;
+
+  /* Display: Grant totals */
+  $handler = $view->new_display('page', 'Grant totals', 'page_2');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'Grant totals';
+  $handler->display->display_options['defaults']['group_by'] = FALSE;
+  $handler->display->display_options['group_by'] = TRUE;
+  $handler->display->display_options['defaults']['pager'] = FALSE;
+  $handler->display->display_options['pager']['type'] = 'none';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'table';
+  $handler->display->display_options['style_options']['columns'] = array(
+    'type' => 'type',
+    'field_funded_amount' => 'field_funded_amount',
+  );
+  $handler->display->display_options['style_options']['default'] = '-1';
+  $handler->display->display_options['style_options']['info'] = array(
+    'type' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_funded_amount' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+  );
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: Type */
+  $handler->display->display_options['fields']['type']['id'] = 'type';
+  $handler->display->display_options['fields']['type']['table'] = 'node';
+  $handler->display->display_options['fields']['type']['field'] = 'type';
+  $handler->display->display_options['fields']['type']['group_type'] = 'count';
+  $handler->display->display_options['fields']['type']['label'] = 'Number of records';
+  /* Field: Content: Amount */
+  $handler->display->display_options['fields']['field_funded_amount']['id'] = 'field_funded_amount';
+  $handler->display->display_options['fields']['field_funded_amount']['table'] = 'field_data_field_funded_amount';
+  $handler->display->display_options['fields']['field_funded_amount']['field'] = 'field_funded_amount';
+  $handler->display->display_options['fields']['field_funded_amount']['group_type'] = 'sum';
+  $handler->display->display_options['fields']['field_funded_amount']['settings'] = array(
+    'thousand_separator' => ',',
+    'prefix_suffix' => 1,
+  );
+  /* Field: Content: Funder */
+  $handler->display->display_options['fields']['field_funder']['id'] = 'field_funder';
+  $handler->display->display_options['fields']['field_funder']['table'] = 'field_data_field_funder';
+  $handler->display->display_options['fields']['field_funder']['field'] = 'field_funder';
+  $handler->display->display_options['fields']['field_funder']['group_type'] = 'count_distinct';
+  $handler->display->display_options['fields']['field_funder']['separator'] = ', ';
+  /* Field: Content: Recipient */
+  $handler->display->display_options['fields']['field_recipient']['id'] = 'field_recipient';
+  $handler->display->display_options['fields']['field_recipient']['table'] = 'field_data_field_recipient';
+  $handler->display->display_options['fields']['field_recipient']['field'] = 'field_recipient';
+  $handler->display->display_options['fields']['field_recipient']['group_type'] = 'count_distinct';
+  $handler->display->display_options['fields']['field_recipient']['separator'] = ', ';
+  $handler->display->display_options['defaults']['sorts'] = FALSE;
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'grant' => 'grant',
+  );
+  /* Filter criterion: Content: Amount (field_funded_amount) */
+  $handler->display->display_options['filters']['field_funded_amount_value']['id'] = 'field_funded_amount_value';
+  $handler->display->display_options['filters']['field_funded_amount_value']['table'] = 'field_data_field_funded_amount';
+  $handler->display->display_options['filters']['field_funded_amount_value']['field'] = 'field_funded_amount_value';
+  $handler->display->display_options['filters']['field_funded_amount_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_funded_amount_value']['expose']['operator_id'] = 'field_funded_amount_value_op';
+  $handler->display->display_options['filters']['field_funded_amount_value']['expose']['label'] = 'Amount';
+  $handler->display->display_options['filters']['field_funded_amount_value']['expose']['use_operator'] = TRUE;
+  $handler->display->display_options['filters']['field_funded_amount_value']['expose']['operator'] = 'field_funded_amount_value_op';
+  $handler->display->display_options['filters']['field_funded_amount_value']['expose']['identifier'] = 'field_funded_amount_value';
+  $handler->display->display_options['filters']['field_funded_amount_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+  );
+  /* Filter criterion: Content: Funder (field_funder) */
+  $handler->display->display_options['filters']['field_funder_target_id']['id'] = 'field_funder_target_id';
+  $handler->display->display_options['filters']['field_funder_target_id']['table'] = 'field_data_field_funder';
+  $handler->display->display_options['filters']['field_funder_target_id']['field'] = 'field_funder_target_id';
+  $handler->display->display_options['filters']['field_funder_target_id']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_funder_target_id']['expose']['operator_id'] = 'field_funder_target_id_op';
+  $handler->display->display_options['filters']['field_funder_target_id']['expose']['label'] = 'Funder';
+  $handler->display->display_options['filters']['field_funder_target_id']['expose']['use_operator'] = TRUE;
+  $handler->display->display_options['filters']['field_funder_target_id']['expose']['operator'] = 'field_funder_target_id_op';
+  $handler->display->display_options['filters']['field_funder_target_id']['expose']['identifier'] = 'field_funder_target_id';
+  $handler->display->display_options['filters']['field_funder_target_id']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+  );
+  /* Filter criterion: Content: Recipient (field_recipient) */
+  $handler->display->display_options['filters']['field_recipient_target_id']['id'] = 'field_recipient_target_id';
+  $handler->display->display_options['filters']['field_recipient_target_id']['table'] = 'field_data_field_recipient';
+  $handler->display->display_options['filters']['field_recipient_target_id']['field'] = 'field_recipient_target_id';
+  $handler->display->display_options['filters']['field_recipient_target_id']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_recipient_target_id']['expose']['operator_id'] = 'field_recipient_target_id_op';
+  $handler->display->display_options['filters']['field_recipient_target_id']['expose']['label'] = 'Recipient';
+  $handler->display->display_options['filters']['field_recipient_target_id']['expose']['use_operator'] = TRUE;
+  $handler->display->display_options['filters']['field_recipient_target_id']['expose']['operator'] = 'field_recipient_target_id_op';
+  $handler->display->display_options['filters']['field_recipient_target_id']['expose']['identifier'] = 'field_recipient_target_id';
+  $handler->display->display_options['filters']['field_recipient_target_id']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+  );
+  /* Filter criterion: User: Name */
+  $handler->display->display_options['filters']['uid']['id'] = 'uid';
+  $handler->display->display_options['filters']['uid']['table'] = 'users';
+  $handler->display->display_options['filters']['uid']['field'] = 'uid';
+  $handler->display->display_options['filters']['uid']['relationship'] = 'uid';
+  $handler->display->display_options['filters']['uid']['value'] = '';
+  $handler->display->display_options['filters']['uid']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['uid']['expose']['operator_id'] = 'uid_op';
+  $handler->display->display_options['filters']['uid']['expose']['label'] = 'Creator';
+  $handler->display->display_options['filters']['uid']['expose']['operator'] = 'uid_op';
+  $handler->display->display_options['filters']['uid']['expose']['identifier'] = 'uid';
+  $handler->display->display_options['filters']['uid']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+  );
+  /* Filter criterion: Content: Updated date */
+  $handler->display->display_options['filters']['changed']['id'] = 'changed';
+  $handler->display->display_options['filters']['changed']['table'] = 'node';
+  $handler->display->display_options['filters']['changed']['field'] = 'changed';
+  $handler->display->display_options['filters']['changed']['operator'] = 'between';
+  $handler->display->display_options['filters']['changed']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['changed']['expose']['operator_id'] = 'changed_op';
+  $handler->display->display_options['filters']['changed']['expose']['label'] = 'Updated date';
+  $handler->display->display_options['filters']['changed']['expose']['operator'] = 'changed_op';
+  $handler->display->display_options['filters']['changed']['expose']['identifier'] = 'changed';
+  $handler->display->display_options['filters']['changed']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+  );
+  $handler->display->display_options['path'] = 'admin/grants/total';
+  $handler->display->display_options['menu']['type'] = 'normal';
+  $handler->display->display_options['menu']['title'] = 'Manage grants';
+  $handler->display->display_options['menu']['weight'] = '0';
   $handler->display->display_options['menu']['name'] = 'user-menu';
   $handler->display->display_options['menu']['context'] = 0;
   $handler->display->display_options['menu']['context_only_inline'] = 0;
