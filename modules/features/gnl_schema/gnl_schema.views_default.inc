@@ -1180,6 +1180,128 @@ function gnl_schema_views_default_views() {
   $handler->display->display_options['menu']['name'] = 'user-menu';
   $handler->display->display_options['menu']['context'] = 0;
   $handler->display->display_options['menu']['context_only_inline'] = 0;
+
+  /* Display: Manage EINs */
+  $handler = $view->new_display('page', 'Manage EINs', 'page_1');
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'editableviews_table';
+  $handler->display->display_options['style_options']['columns'] = array(
+    'title' => 'title',
+    'field_ein_editable' => 'field_ein_editable',
+    'field_org_address' => 'field_org_address',
+    'status' => 'status',
+    'created' => 'created',
+    'changed' => 'changed',
+  );
+  $handler->display->display_options['style_options']['default'] = 'created';
+  $handler->display->display_options['style_options']['info'] = array(
+    'title' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_ein_editable' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_org_address' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'status' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'created' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'desc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'changed' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'desc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+  );
+  $handler->display->display_options['style_options']['batch_size'] = '10';
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = 'Name';
+  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  /* Field: Content: EIN (editable) */
+  $handler->display->display_options['fields']['field_ein_editable']['id'] = 'field_ein_editable';
+  $handler->display->display_options['fields']['field_ein_editable']['table'] = 'field_data_field_ein';
+  $handler->display->display_options['fields']['field_ein_editable']['field'] = 'field_ein_editable';
+  $handler->display->display_options['fields']['field_ein_editable']['label'] = 'EIN';
+  $handler->display->display_options['fields']['field_ein_editable']['settings'] = array(
+    'thousand_separator' => '',
+    'prefix_suffix' => 1,
+  );
+  $handler->display->display_options['fields']['field_ein_editable']['widget_type'] = '0';
+  $handler->display->display_options['fields']['field_ein_editable']['suppress_label'] = 0;
+  $handler->display->display_options['fields']['field_ein_editable']['suppress_description'] = 0;
+  /* Field: Content: Address */
+  $handler->display->display_options['fields']['field_org_address']['id'] = 'field_org_address';
+  $handler->display->display_options['fields']['field_org_address']['table'] = 'field_data_field_org_address';
+  $handler->display->display_options['fields']['field_org_address']['field'] = 'field_org_address';
+  $handler->display->display_options['fields']['field_org_address']['click_sort_column'] = 'country';
+  $handler->display->display_options['fields']['field_org_address']['settings'] = array(
+    'use_widget_handlers' => 1,
+    'format_handlers' => array(
+      'address' => 'address',
+    ),
+  );
+  /* Field: Content: Published */
+  $handler->display->display_options['fields']['status']['id'] = 'status';
+  $handler->display->display_options['fields']['status']['table'] = 'node';
+  $handler->display->display_options['fields']['status']['field'] = 'status';
+  $handler->display->display_options['fields']['status']['label'] = 'Pub';
+  $handler->display->display_options['fields']['status']['type'] = 'unicode-yes-no';
+  $handler->display->display_options['fields']['status']['type_custom_false'] = 'not published!';
+  $handler->display->display_options['fields']['status']['not'] = 0;
+  /* Field: Content: Post date */
+  $handler->display->display_options['fields']['created']['id'] = 'created';
+  $handler->display->display_options['fields']['created']['table'] = 'node';
+  $handler->display->display_options['fields']['created']['field'] = 'created';
+  $handler->display->display_options['fields']['created']['label'] = 'created';
+  $handler->display->display_options['fields']['created']['date_format'] = 'gnl_date_type_human_short';
+  $handler->display->display_options['fields']['created']['second_date_format'] = 'gnl_date_type_human_short';
+  /* Field: Content: Updated date */
+  $handler->display->display_options['fields']['changed']['id'] = 'changed';
+  $handler->display->display_options['fields']['changed']['table'] = 'node';
+  $handler->display->display_options['fields']['changed']['field'] = 'changed';
+  $handler->display->display_options['fields']['changed']['label'] = 'updated';
+  $handler->display->display_options['fields']['changed']['date_format'] = 'gnl_date_type_human_short';
+  $handler->display->display_options['fields']['changed']['second_date_format'] = 'gnl_date_type_human_short';
+  $handler->display->display_options['path'] = 'admin/orgs/manage-eins';
+  $handler->display->display_options['menu']['type'] = 'normal';
+  $handler->display->display_options['menu']['title'] = 'Manage EINs';
+  $handler->display->display_options['menu']['weight'] = '0';
+  $handler->display->display_options['menu']['name'] = 'user-menu';
+  $handler->display->display_options['menu']['context'] = 0;
+  $handler->display->display_options['menu']['context_only_inline'] = 0;
   $export['admin_orgs'] = $view;
 
   $view = new view();
