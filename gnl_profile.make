@@ -38,6 +38,9 @@ projects[composer_manager][version] = "1.7"
 projects[ctools][subdir] = "contrib"
 projects[ctools][version] = "1.3"
 
+projects[data][subdir] = "contrib"
+projects[data][version] = "1.0-alpha7"
+
 projects[date][download][type] = "git"
 projects[date][download][url] = "git://git.drupal.org/project/date.git"
 projects[date][download][branch] = "7.x-2.x"
@@ -101,6 +104,9 @@ projects[migrate][download][branch] = "7.x-2.x"
 
 projects[pathauto][subdir] = "contrib"
 projects[pathauto][version] = "1.2"
+
+projects[schema][subdir] = "contrib"
+projects[schema][version] = "1.2"
 
 projects[services][subdir] = "contrib"
 projects[services][version] = "3.5"

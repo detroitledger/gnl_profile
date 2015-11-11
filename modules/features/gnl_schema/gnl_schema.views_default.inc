@@ -2800,6 +2800,86 @@ function gnl_schema_views_default_views() {
   $export['org_grants'] = $view;
 
   $view = new view();
+  $view->name = 'org_irsdata';
+  $view->description = '';
+  $view->tag = 'default';
+  $view->base_table = 'node';
+  $view->human_name = 'org_irsdata';
+  $view->core = 7;
+  $view->api_version = '3.0';
+  $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+
+  /* Display: Master */
+  $handler = $view->new_display('default', 'Master', 'default');
+  $handler->display->display_options['title'] = 'org_irsdata';
+  $handler->display->display_options['use_more_always'] = FALSE;
+  $handler->display->display_options['access']['type'] = 'perm';
+  $handler->display->display_options['cache']['type'] = 'none';
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['query']['options']['disable_sql_rewrite'] = TRUE;
+  $handler->display->display_options['query']['options']['distinct'] = TRUE;
+  $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['pager']['type'] = 'full';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '50';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['pager']['options']['id'] = '0';
+  $handler->display->display_options['pager']['options']['quantity'] = '9';
+  $handler->display->display_options['style_plugin'] = 'table';
+  /* Relationship: Irs eins: Ein */
+  $handler->display->display_options['relationships']['ein']['id'] = 'ein';
+  $handler->display->display_options['relationships']['ein']['table'] = 'irs_eins';
+  $handler->display->display_options['relationships']['ein']['field'] = 'ein';
+  $handler->display->display_options['relationships']['ein']['required'] = TRUE;
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  /* Field: Content: EIN */
+  $handler->display->display_options['fields']['field_ein']['id'] = 'field_ein';
+  $handler->display->display_options['fields']['field_ein']['table'] = 'field_data_field_ein';
+  $handler->display->display_options['fields']['field_ein']['field'] = 'field_ein';
+  $handler->display->display_options['fields']['field_ein']['settings'] = array(
+    'thousand_separator' => ' ',
+    'prefix_suffix' => 1,
+  );
+  /* Field: Irs eins: Accounting period */
+  $handler->display->display_options['fields']['accounting_period']['id'] = 'accounting_period';
+  $handler->display->display_options['fields']['accounting_period']['table'] = 'irs_eins';
+  $handler->display->display_options['fields']['accounting_period']['field'] = 'accounting_period';
+  $handler->display->display_options['fields']['accounting_period']['relationship'] = 'ein';
+  /* Sort criterion: Content: Post date */
+  $handler->display->display_options['sorts']['created']['id'] = 'created';
+  $handler->display->display_options['sorts']['created']['table'] = 'node';
+  $handler->display->display_options['sorts']['created']['field'] = 'created';
+  $handler->display->display_options['sorts']['created']['order'] = 'DESC';
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'org' => 'org',
+  );
+  /* Filter criterion: Content: EIN (field_ein) */
+  $handler->display->display_options['filters']['field_ein_value']['id'] = 'field_ein_value';
+  $handler->display->display_options['filters']['field_ein_value']['table'] = 'field_data_field_ein';
+  $handler->display->display_options['filters']['field_ein_value']['field'] = 'field_ein_value';
+  $handler->display->display_options['filters']['field_ein_value']['operator'] = 'not empty';
+
+  /* Display: Page */
+  $handler = $view->new_display('page', 'Page', 'page');
+  $handler->display->display_options['path'] = 'admin/org-irsdata';
+  $export['org_irsdata'] = $view;
+
+  $view = new view();
   $view->name = 'org_ntee_codes';
   $view->description = '';
   $view->tag = 'default';

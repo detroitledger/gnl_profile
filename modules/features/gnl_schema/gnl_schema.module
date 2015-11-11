@@ -369,3 +369,23 @@ function gnl_schema_node_view($node, $view_mode, $langcode) {
   }
 }
 
+/**
+ * Implements hook_views_data_alter().
+ *
+ * For tables with an EIN relationship defined, also join to the org entity.
+ */
+function gnl_schema_views_data_alter(&$data) {
+  foreach ($data as &$view) {
+    if (isset($view['table']['join']['field_data_field_ein'])) {
+      $field = $view['table']['join']['field_data_field_ein']['field'];
+      $view['table']['join']['node'] = array(
+        'left_table' => 'field_data_field_ein',
+        'left_field' => 'field_ein_value',
+        'field' => $field,
+      );
+    }
+  }
+}
+
+function gnl_schema_views_pre_execute(&$view) {
+}

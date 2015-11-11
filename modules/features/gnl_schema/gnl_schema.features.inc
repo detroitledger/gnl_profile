@@ -14,6 +14,9 @@ function gnl_schema_ctools_plugin_api($module = NULL, $api = NULL) {
   if ($module == "context" && $api == "context") {
     return array("version" => "3");
   }
+  if ($module == "data" && $api == "data_default") {
+    return array("version" => "1");
+  }
   if ($module == "services" && $api == "services") {
     return array("version" => "3");
   }
