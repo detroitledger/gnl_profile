@@ -1262,6 +1262,14 @@ function gnl_schema_views_default_views() {
   $handler->display->display_options['fields']['field_ein_editable']['widget_type'] = '0';
   $handler->display->display_options['fields']['field_ein_editable']['suppress_label'] = 0;
   $handler->display->display_options['fields']['field_ein_editable']['suppress_description'] = 0;
+  /* Field: Content: State corp id (editable) */
+  $handler->display->display_options['fields']['field_state_corp_id_editable']['id'] = 'field_state_corp_id_editable';
+  $handler->display->display_options['fields']['field_state_corp_id_editable']['table'] = 'field_data_field_state_corp_id';
+  $handler->display->display_options['fields']['field_state_corp_id_editable']['field'] = 'field_state_corp_id_editable';
+  $handler->display->display_options['fields']['field_state_corp_id_editable']['label'] = 'State corp id';
+  $handler->display->display_options['fields']['field_state_corp_id_editable']['widget_type'] = '0';
+  $handler->display->display_options['fields']['field_state_corp_id_editable']['suppress_label'] = 0;
+  $handler->display->display_options['fields']['field_state_corp_id_editable']['suppress_description'] = 0;
   /* Field: Content: Address */
   $handler->display->display_options['fields']['field_org_address']['id'] = 'field_org_address';
   $handler->display->display_options['fields']['field_org_address']['table'] = 'field_data_field_org_address';
@@ -1540,6 +1548,10 @@ function gnl_schema_views_default_views() {
 
   /* Display: Data export */
   $handler = $view->new_display('views_data_export', 'Data export', 'grants_csv');
+  $handler->display->display_options['defaults']['query'] = FALSE;
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['query']['options']['disable_sql_rewrite'] = TRUE;
+  $handler->display->display_options['query']['options']['distinct'] = TRUE;
   $handler->display->display_options['pager']['type'] = 'none';
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['style_plugin'] = 'views_data_export_csv';
@@ -1617,6 +1629,15 @@ function gnl_schema_views_default_views() {
     'multiple_from' => '',
     'multiple_to' => '',
   );
+  /* Field: Content: Tags */
+  $handler->display->display_options['fields']['field_grant_tags']['id'] = 'field_grant_tags';
+  $handler->display->display_options['fields']['field_grant_tags']['table'] = 'field_data_field_grant_tags';
+  $handler->display->display_options['fields']['field_grant_tags']['field'] = 'field_grant_tags';
+  $handler->display->display_options['fields']['field_grant_tags']['delta_offset'] = '0';
+  /* Field: Content: Description */
+  $handler->display->display_options['fields']['body']['id'] = 'body';
+  $handler->display->display_options['fields']['body']['table'] = 'field_data_body';
+  $handler->display->display_options['fields']['body']['field'] = 'body';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Content: Published */
