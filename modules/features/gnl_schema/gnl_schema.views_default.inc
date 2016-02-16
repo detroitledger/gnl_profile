@@ -2846,6 +2846,10 @@ function gnl_schema_views_default_views() {
   $handler->display->display_options['pager']['options']['id'] = '0';
   $handler->display->display_options['pager']['options']['quantity'] = '9';
   $handler->display->display_options['style_plugin'] = 'table';
+  /* Footer: Global: Result summary */
+  $handler->display->display_options['footer']['result']['id'] = 'result';
+  $handler->display->display_options['footer']['result']['table'] = 'views';
+  $handler->display->display_options['footer']['result']['field'] = 'result';
   /* Relationship: Irs eins: Ein */
   $handler->display->display_options['relationships']['ein']['id'] = 'ein';
   $handler->display->display_options['relationships']['ein']['table'] = 'irs_eins';
@@ -2889,11 +2893,6 @@ function gnl_schema_views_default_views() {
   $handler->display->display_options['filters']['type']['value'] = array(
     'org' => 'org',
   );
-  /* Filter criterion: Content: EIN (field_ein) */
-  $handler->display->display_options['filters']['field_ein_value']['id'] = 'field_ein_value';
-  $handler->display->display_options['filters']['field_ein_value']['table'] = 'field_data_field_ein';
-  $handler->display->display_options['filters']['field_ein_value']['field'] = 'field_ein_value';
-  $handler->display->display_options['filters']['field_ein_value']['operator'] = 'not empty';
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
