@@ -91,6 +91,11 @@ class Utils {
       array_push($ints, 'field_ein');
       $node->field_duns = $node->field_duns['value'];
       array_push($ints, 'field_duns');
+
+      // Add related news.
+      $news_ids = db_query("SELECT entity_id FROM field_data_field_news_org WHERE field_news_org_target_id = :org", [":org" => $node->nid])->fetchCol();
+      $newses = array_map('\Drupal\gnl_api\Utils::cleanNode', node_load_multiple($news_ids));
+      $node->news = array_values($newses);
     }
 
     if ($node->type == 'grant') {
@@ -141,6 +146,14 @@ class Utils {
       $node->field_start_date = date_format_date($start_date, 'custom', 'r');
       $end_date = new \DateObject($node->field_year['value2'], $node->field_year['timezone']);
       $node->field_end_date = date_format_date($end_date, 'custom', 'r');
+    }
+
+    if ($node->type == 'news') {
+      $news_date = new \DateObject($node->field_news_date['value'], $node->field_news_date['timezone']);
+      $node->field_news_date = date_format_date($news_date, 'custom', 'r');
+
+      $node->field_news_desc = $node->field_news_desc['value'];
+      $node->field_news_link = $node->field_news_link['value'];
     }
 
     return $node;

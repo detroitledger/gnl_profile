@@ -102,6 +102,14 @@ function gnl_schema_node_info() {
       'title_label' => t('Title'),
       'help' => '',
     ),
+    'news' => array(
+      'name' => t('News clipping'),
+      'base' => 'node_content',
+      'description' => '',
+      'has_title' => '1',
+      'title_label' => t('Title'),
+      'help' => '',
+    ),
     'org' => array(
       'name' => t('Organization'),
       'base' => 'node_content',
