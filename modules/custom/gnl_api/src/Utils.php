@@ -101,6 +101,11 @@ class Utils {
     if ($node->type == 'grant') {
       $node->field_funded_amount = $node->field_funded_amount['value'];
       array_push($ints, 'field_funded_amount');
+
+      // Add related news.
+      $news_ids = db_query("SELECT entity_id FROM field_data_field_news_grant WHERE field_news_grant_target_id = :grant", [":grant" => $node->nid])->fetchCol();
+      $newses = array_map('\Drupal\gnl_api\Utils::cleanNode', node_load_multiple($news_ids));
+      $node->news = array_values($newses);
     }
 
     foreach ($ints as $prop) {
@@ -132,16 +137,14 @@ class Utils {
       }
     }
 
-    // add grantor/grantee names to grants
     if ($node->type == 'grant') {
+      // add grantor/grantee names to grants
       $funder = node_load($node->field_funder['target_id']);
       $node->field_funder['name'] = $funder->title;
       $recipient = node_load($node->field_recipient['target_id']);
       $node->field_recipient['name'] = $recipient->title;
-    }
 
-    // make dates js-friendly
-    if ($node->type == 'grant') {
+      // make dates js-friendly
       $start_date = new \DateObject($node->field_year['value'], $node->field_year['timezone']);
       $node->field_start_date = date_format_date($start_date, 'custom', 'r');
       $end_date = new \DateObject($node->field_year['value2'], $node->field_year['timezone']);
