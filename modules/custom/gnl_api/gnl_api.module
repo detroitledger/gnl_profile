@@ -408,7 +408,7 @@ function _gnl_api_create_flag($data) {
   $flagging->entity_id = $data["target_id"];
   $flagging_wrapper = entity_metadata_wrapper('flagging', $flagging);
   $flagging_wrapper->field_note->set($data["note"]);
-  $flagging_wrapper->field_ip->set(ip2long(ip_address()));
+  $flagging_wrapper->field_ip->set(0);
 
   $flag = flag_get_flag(GNL_API_FLAG_NAME);
 
