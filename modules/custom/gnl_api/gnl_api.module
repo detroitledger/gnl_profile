@@ -555,6 +555,9 @@ function _gnl_api_related_org_grants_funded($id, $limit, $offset) {
   $query
     ->condition('field_funder_target_id', $id, '=')
     ->fields('fdff', array('entity_id'))
+    ->join('node', 'n', 'fdff.entity_id=n.nid');
+  $query
+    ->condition('n.status', 0, '>')
     ->range($offset, $limit);
 
   $res = $query->execute()->fetchAllAssoc('entity_id');
@@ -575,6 +578,9 @@ function _gnl_api_related_org_grants_received($id, $limit, $offset) {
   $query
     ->condition('field_recipient_target_id', $id, '=')
     ->fields('fdfr', array('entity_id'))
+    ->join('node', 'n', 'fdfr.entity_id=n.nid');
+  $query
+    ->condition('n.status', 0, '>')
     ->range($offset, $limit);
 
   $res = $query->execute()->fetchAllAssoc('entity_id');
