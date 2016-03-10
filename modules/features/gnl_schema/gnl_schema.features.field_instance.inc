@@ -698,6 +698,46 @@ function gnl_schema_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-grant-field_region'
+  $field_instances['node-grant-field_region'] = array(
+    'bundle' => 'grant',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'taxonomy',
+        'settings' => array(),
+        'type' => 'taxonomy_term_reference_link',
+        'weight' => 10,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_region',
+    'label' => 'Region',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'taxonomy',
+      'settings' => array(
+        'autocomplete_path' => 'taxonomy/autocomplete',
+        'size' => 60,
+      ),
+      'type' => 'taxonomy_autocomplete',
+      'weight' => 33,
+    ),
+  );
+
   // Exported field_instance: 'node-grant-field_source'
   $field_instances['node-grant-field_source'] = array(
     'bundle' => 'grant',
@@ -1549,6 +1589,7 @@ function gnl_schema_field_default_field_instances() {
   t('Person');
   t('Position');
   t('Recipient');
+  t('Region');
   t('Related grants');
   t('Related organizations');
   t('Source');

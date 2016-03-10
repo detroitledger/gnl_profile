@@ -41,5 +41,13 @@ function gnl_schema_taxonomy_default_vocabularies() {
       'module' => 'taxonomy',
       'weight' => 0,
     ),
+    'regions' => array(
+      'name' => 'Regions',
+      'machine_name' => 'regions',
+      'description' => '',
+      'hierarchy' => 0,
+      'module' => 'taxonomy',
+      'weight' => 0,
+    ),
   );
 }
