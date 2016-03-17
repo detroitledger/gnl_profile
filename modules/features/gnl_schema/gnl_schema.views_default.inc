@@ -3347,10 +3347,12 @@ function gnl_schema_views_default_views() {
   $handler->display->display_options['fields']['grants_funded']['id'] = 'grants_funded';
   $handler->display->display_options['fields']['grants_funded']['table'] = 'node';
   $handler->display->display_options['fields']['grants_funded']['field'] = 'grants_funded';
+  $handler->display->display_options['fields']['grants_funded']['label'] = 'Grants_funded';
   /* Field: Content: Grants received */
   $handler->display->display_options['fields']['grants_received']['id'] = 'grants_received';
   $handler->display->display_options['fields']['grants_received']['table'] = 'node';
   $handler->display->display_options['fields']['grants_received']['field'] = 'grants_received';
+  $handler->display->display_options['fields']['grants_received']['label'] = 'Grants_received';
   /* Field: Content: Address */
   $handler->display->display_options['fields']['field_org_address']['id'] = 'field_org_address';
   $handler->display->display_options['fields']['field_org_address']['table'] = 'field_data_field_org_address';
@@ -3382,6 +3384,16 @@ function gnl_schema_views_default_views() {
     'separator' => ' » ',
   );
   $handler->display->display_options['fields']['field_ntee']['delta_offset'] = '0';
+  /* Field: Content: State corp id */
+  $handler->display->display_options['fields']['field_state_corp_id']['id'] = 'field_state_corp_id';
+  $handler->display->display_options['fields']['field_state_corp_id']['table'] = 'field_data_field_state_corp_id';
+  $handler->display->display_options['fields']['field_state_corp_id']['field'] = 'field_state_corp_id';
+  $handler->display->display_options['fields']['field_state_corp_id']['label'] = 'State_id';
+  /* Field: Content: Description */
+  $handler->display->display_options['fields']['body']['id'] = 'body';
+  $handler->display->display_options['fields']['body']['table'] = 'field_data_body';
+  $handler->display->display_options['fields']['body']['field'] = 'body';
+  $handler->display->display_options['fields']['body']['label'] = 'Description_mission';
   $handler->display->display_options['path'] = 'organizationscsv';
   $export['orgs'] = $view;
 
