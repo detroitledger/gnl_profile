@@ -394,6 +394,43 @@ function gnl_schema_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-grant-field_client_project'
+  $field_instances['node-grant-field_client_project'] = array(
+    'bundle' => 'grant',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'taxonomy',
+        'settings' => array(),
+        'type' => 'taxonomy_term_reference_link',
+        'weight' => 11,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_client_project',
+    'label' => 'Client project',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 34,
+    ),
+  );
+
   // Exported field_instance: 'node-grant-field_federal_award_id'
   $field_instances['node-grant-field_federal_award_id'] = array(
     'bundle' => 'grant',
@@ -695,6 +732,46 @@ function gnl_schema_field_default_field_instances() {
       ),
       'type' => 'entityreference_autocomplete',
       'weight' => -1,
+    ),
+  );
+
+  // Exported field_instance: 'node-grant-field_region'
+  $field_instances['node-grant-field_region'] = array(
+    'bundle' => 'grant',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'taxonomy',
+        'settings' => array(),
+        'type' => 'taxonomy_term_reference_link',
+        'weight' => 10,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_region',
+    'label' => 'Region',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'taxonomy',
+      'settings' => array(
+        'autocomplete_path' => 'taxonomy/autocomplete',
+        'size' => 60,
+      ),
+      'type' => 'taxonomy_autocomplete',
+      'weight' => 33,
     ),
   );
 
@@ -1062,6 +1139,43 @@ function gnl_schema_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-org-field_client_project'
+  $field_instances['node-org-field_client_project'] = array(
+    'bundle' => 'org',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'taxonomy',
+        'settings' => array(),
+        'type' => 'taxonomy_term_reference_link',
+        'weight' => 12,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_client_project',
+    'label' => 'Client project',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 10,
+    ),
+  );
+
   // Exported field_instance: 'node-org-field_duns'
   $field_instances['node-org-field_duns'] = array(
     'bundle' => 'org',
@@ -1154,6 +1268,46 @@ function gnl_schema_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-org-field_major_program_areas'
+  $field_instances['node-org-field_major_program_areas'] = array(
+    'bundle' => 'org',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 13,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_major_program_areas',
+    'label' => 'Major program areas',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 2,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 11,
+    ),
+  );
+
   // Exported field_instance: 'node-org-field_ntee'
   $field_instances['node-org-field_ntee'] = array(
     'bundle' => 'org',
@@ -1202,7 +1356,7 @@ function gnl_schema_field_default_field_instances() {
         'element_key' => 'node|org|field_org_address|und|0',
         'thoroughfare' => '',
         'premise' => '',
-        'locality' => 'Detroit',
+        'locality' => '',
         'administrative_area' => 'MI',
         'postal_code' => '',
         'country' => 'US',
@@ -1524,6 +1678,7 @@ function gnl_schema_field_default_field_instances() {
   t('Body');
   t('Can\'t find the funder? <a href="/node/add/org">Add them here.</a>');
   t('Can\'t find the recipient? <a href="/node/add/org">Add them here.</a>');
+  t('Client project');
   t('Compensation');
   t('DUNS');
   t('DUNS number');
@@ -1541,6 +1696,7 @@ function gnl_schema_field_default_field_instances() {
   t('Internal notes');
   t('Link');
   t('Links');
+  t('Major program areas');
   t('NTEE');
   t('NTEE code');
   t('NTEE grant types; used in usaspending.gov data as well as certain funders such as CFSEM.');
@@ -1549,6 +1705,7 @@ function gnl_schema_field_default_field_instances() {
   t('Person');
   t('Position');
   t('Recipient');
+  t('Region');
   t('Related grants');
   t('Related organizations');
   t('Source');
