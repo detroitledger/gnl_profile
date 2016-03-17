@@ -1,0 +1,85 @@
+<?php
+/**
+ * @file
+ * gnl_schema.install
+ *
+ * Migrations.
+ */
+
+/**
+ * Creates Detroit and Greater Detroit taxonomy terms in the Regions vocabulary.
+ *
+ * Adds Detroit term to all existing grants.
+ */
+function gnl_schema_update_7100(&$sandbox) {
+  $bundle = 'news';
+  $vocab_name = 'regions';
+  $term_name = 'Detroit';
+  $field_name = 'field_region';
+
+  if (!isset($sandbox['progress'])) {
+    // Create the Regions vocabulary by reverting our feature.
+    features_revert_module('gnl_schema');
+
+    // Add some terms in a vocab so we can then add them to the entities.
+    $vocab = taxonomy_vocabulary_machine_name_load($vocab_name);
+
+    $term = new stdClass();
+    $term->name = $term_name;
+    $term->vid = $vocab->vid;
+    taxonomy_term_save($term);
+    $sandbox['tid'] = $term->tid;
+
+    $sandbox['progress'] = 0;
+    $sandbox['max'] = db_query("SELECT COUNT(nid) FROM {node} WHERE node.type='grant'")->fetchField();
+    $sandbox['current_node'] = -1;
+
+    // Set up field info to pass to _gnl_schema_update_add_terms_to_entities
+    $info = field_info_field($field_name);
+    $sandbox['field_infos'] = [$info['id']];
+  }
+
+  // Find entities.
+  $res = db_select('node', 'n')
+    ->fields('n', ['nid'])
+    ->orderBy('n.nid', 'ASC')
+    ->where("n.type = 'grant'")
+    ->where('n.nid > :nid', [':nid' => $sandbox['current_node']])
+    ->extend('PagerDefault')
+    ->limit(100)
+    ->execute();
+
+  foreach ($res as $row) {
+    $nid = $row->nid;
+    _gnl_schema_update_add_terms_to_entities($nid, $sandbox['tid'], $field_name, $sandbox['field_infos']);
+
+    $sandbox['progress']++;
+    $sandbox['current_node'] = $row->nid;
+  }
+
+  $sandbox['#finished'] = ($sandbox['progress'] >= $sandbox['max']) ? TRUE : ($sandbox['progress'] / $sandbox['max']);
+
+  if ($sandbox['#finished']) {
+    return t('Processed %count items', array('%count' => $sandbox['progress']));
+  }
+}
+
+/**
+ * Add vocab terms to entities.
+ *
+ * @param $nid
+ *   Node id to which we add terms.
+ * @param $tid
+ *   Term ID to add.
+ * @param $field_name
+ *   Field API fieldname to act on.
+ * @param $fields
+ *   Output of field_info_field for $field_name.
+ */
+function _gnl_schema_update_add_terms_to_entities($nid, $tid, $field_name, $field_infos) {
+  $node = node_load($nid);
+  $wrapped = entity_metadata_wrapper('node', $node);
+  $wrapped->{$field_name} = [$tid];
+
+  field_sql_storage_field_storage_write('node', $node, 'update', $field_infos);
+}
