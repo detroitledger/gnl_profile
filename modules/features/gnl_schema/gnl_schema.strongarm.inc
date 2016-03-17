@@ -299,7 +299,7 @@ function gnl_schema_strongarm() {
           'weight' => '0',
         ),
         'path' => array(
-          'weight' => '11',
+          'weight' => '12',
         ),
       ),
       'display' => array(

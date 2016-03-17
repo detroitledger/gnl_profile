@@ -1268,6 +1268,46 @@ function gnl_schema_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-org-field_major_program_areas'
+  $field_instances['node-org-field_major_program_areas'] = array(
+    'bundle' => 'org',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 13,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_major_program_areas',
+    'label' => 'Major program areas',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 2,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 11,
+    ),
+  );
+
   // Exported field_instance: 'node-org-field_ntee'
   $field_instances['node-org-field_ntee'] = array(
     'bundle' => 'org',
@@ -1316,7 +1356,7 @@ function gnl_schema_field_default_field_instances() {
         'element_key' => 'node|org|field_org_address|und|0',
         'thoroughfare' => '',
         'premise' => '',
-        'locality' => 'Detroit',
+        'locality' => '',
         'administrative_area' => 'MI',
         'postal_code' => '',
         'country' => 'US',
@@ -1656,6 +1696,7 @@ function gnl_schema_field_default_field_instances() {
   t('Internal notes');
   t('Link');
   t('Links');
+  t('Major program areas');
   t('NTEE');
   t('NTEE code');
   t('NTEE grant types; used in usaspending.gov data as well as certain funders such as CFSEM.');
