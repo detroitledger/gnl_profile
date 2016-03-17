@@ -394,6 +394,43 @@ function gnl_schema_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-grant-field_client_project'
+  $field_instances['node-grant-field_client_project'] = array(
+    'bundle' => 'grant',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'taxonomy',
+        'settings' => array(),
+        'type' => 'taxonomy_term_reference_link',
+        'weight' => 11,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_client_project',
+    'label' => 'Client project',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 34,
+    ),
+  );
+
   // Exported field_instance: 'node-grant-field_federal_award_id'
   $field_instances['node-grant-field_federal_award_id'] = array(
     'bundle' => 'grant',
@@ -1102,6 +1139,43 @@ function gnl_schema_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-org-field_client_project'
+  $field_instances['node-org-field_client_project'] = array(
+    'bundle' => 'org',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'taxonomy',
+        'settings' => array(),
+        'type' => 'taxonomy_term_reference_link',
+        'weight' => 12,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_client_project',
+    'label' => 'Client project',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 10,
+    ),
+  );
+
   // Exported field_instance: 'node-org-field_duns'
   $field_instances['node-org-field_duns'] = array(
     'bundle' => 'org',
@@ -1564,6 +1638,7 @@ function gnl_schema_field_default_field_instances() {
   t('Body');
   t('Can\'t find the funder? <a href="/node/add/org">Add them here.</a>');
   t('Can\'t find the recipient? <a href="/node/add/org">Add them here.</a>');
+  t('Client project');
   t('Compensation');
   t('DUNS');
   t('DUNS number');

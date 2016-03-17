@@ -9,6 +9,14 @@
  */
 function gnl_schema_taxonomy_default_vocabularies() {
   return array(
+    'client_projects' => array(
+      'name' => 'Client projects',
+      'machine_name' => 'client_projects',
+      'description' => '',
+      'hierarchy' => 0,
+      'module' => 'taxonomy',
+      'weight' => 0,
+    ),
     'grant_tags' => array(
       'name' => 'Grant tags',
       'machine_name' => 'grant_tags',
