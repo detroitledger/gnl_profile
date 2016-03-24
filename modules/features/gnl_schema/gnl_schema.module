@@ -78,7 +78,7 @@ function gnl_schema_init() {
       && arg(0) !== 'organizationscsv'
       && !function_exists('drush_main')
       && !drupal_is_cli()) {
-    drupal_set_message("drupal_goto('http://detroitledger.org');");
+    drupal_goto('http://detroitledger.org');
   }
 }
 
