@@ -1,0 +1,10 @@
+name = "migrate_usaspending_2016"
+description = "Imports new orgs & grants from USASpending sheet for 2016"
+core = "7.x"
+dependencies[] = "gnl_schema"
+dependencies[] = "migrate"
+package = "Migration"
+
+files[] = "migrate_usaspending_2016.module"
+files[] = "migrate_usaspending_2016.migrate.inc"
+
