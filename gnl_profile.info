@@ -43,5 +43,6 @@ dependencies[] = views
 dependencies[] = views_autocomplete_filters
 dependencies[] = views_data_export
 dependencies[] = views_raw_sql
+dependencies[] = views_rss
 dependencies[] = views_ui
 
