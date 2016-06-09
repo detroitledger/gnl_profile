@@ -73,7 +73,7 @@ function gnl_fields_node_view($node, $view_mode, $langcode) {
         '#label' => t('Grants funded total:'),
         '#markup' => $node->org_grants_funded,
         '#theme_wrappers' => array('gnl_fields_money_field'),
-        '#label_display' => 'hidden',
+        '#label_display' => 'visible',
       );
       $node->content['gnl_fields_org_grants_received'] = array(
         '#type' => 'item',
@@ -81,7 +81,7 @@ function gnl_fields_node_view($node, $view_mode, $langcode) {
         '#label' => t('Grants received total:'),
         '#markup' => $node->org_grants_received,
         '#theme_wrappers' => array('gnl_fields_money_field'),
-        '#label_display' => 'hidden',
+        '#label_display' => 'visible',
       );
       $node->content['gnl_fields_org_grants_datestart'] = array(
         '#type' => 'item',
@@ -89,7 +89,7 @@ function gnl_fields_node_view($node, $view_mode, $langcode) {
         '#label' => t('Grants cover years:'),
         '#markup' => $node->org_grants_datestart,
         '#theme_wrappers' => array('gnl_fields_datestart_field'),
-        '#label_display' => 'hidden',
+        '#label_display' => 'visible',
       );
       break;
     case 'grant':
@@ -208,5 +208,19 @@ function gnl_fields_org_grants_datestart($entity_or_nid) {
     $nid = $entity_or_nid;
   }
   return db_query('SELECT MIN(min) FROM ((SELECT MIN(fdfy.field_year_value) AS min FROM {field_data_field_year} AS fdfy INNER JOIN {field_data_field_funder} AS fdff ON fdfy.entity_id=fdff.entity_id WHERE fdff.field_funder_target_id=:nid) UNION (SELECT MIN(fdfy.field_year_value) AS min FROM {field_data_field_year} AS fdfy INNER JOIN {field_data_field_recipient} AS fdfr ON fdfy.entity_id=fdfr.entity_id WHERE fdfr.field_recipient_target_id=:nid)) AS combine', array(':nid' => $nid))->fetchField();
+}
+
+/**
+ * Implements hook_field_attach_view_alter().
+ */
+function gnl_fields_field_attach_view_alter(&$output, $context) {
+  if ($output['#bundle'] == 'org') {
+    // Undo the loadtermnames API futzery.
+    foreach ($output as &$field) {
+      if (isset($field['#field_type']) && $field['#field_type'] == 'taxonomy_term_reference') {
+        $field['#items'] = array_values($field['#items']);
+      }
+    }
+  }
 }
 
