@@ -36,6 +36,16 @@ function gnl_fields_field_extra_fields() {
       'description' => t('Year for which grant data starts'),
       'weight' => 0,
     ),
+    'gnl_fields_org_grants_dateend' => array(
+      'label' => t('Grant data date end'),
+      'description' => t('Year for which grant data ends'),
+      'weight' => 0,
+    ),
+    'gnl_fields_org_grants_dates' => array(
+      'label' => t('Grant data date span'),
+      'description' => t('Years for which grant data exists'),
+      'weight' => 0,
+    ),
   );
   return $fields;
 }
@@ -55,6 +65,8 @@ function gnl_fields_node_load($nodes, $types) {
       $node->org_grants_funded = (int) gnl_fields_org_grants_funded($node);
       $node->org_grants_received = (int) gnl_fields_org_grants_received($node);
       $node->org_grants_datestart = (int) gnl_fields_org_grants_datestart($node);
+      $node->org_grants_dateend = (int) gnl_fields_org_grants_dateend($node);
+      $node->org_grants_dates = gnl_fields_org_grants_datestart($node) . ' -> ' . gnl_fields_org_grants_dateend($node);
     }
   }
 }
@@ -86,9 +98,25 @@ function gnl_fields_node_view($node, $view_mode, $langcode) {
       $node->content['gnl_fields_org_grants_datestart'] = array(
         '#type' => 'item',
         '#field_name' => 'gnl_fields_org_grants_datestart',
-        '#label' => t('Grants cover years:'),
+        '#label' => t('Grants start in year:'),
         '#markup' => $node->org_grants_datestart,
         '#theme_wrappers' => array('gnl_fields_datestart_field'),
+        '#label_display' => 'visible',
+      );
+      $node->content['gnl_fields_org_grants_dateend'] = array(
+        '#type' => 'item',
+        '#field_name' => 'gnl_fields_org_grants_dateend',
+        '#label' => t('Grants end in year:'),
+        '#markup' => $node->org_grants_dateend,
+        '#theme_wrappers' => array('gnl_fields_dateend_field'),
+        '#label_display' => 'visible',
+      );
+      $node->content['gnl_fields_org_grants_dates'] = array(
+        '#type' => 'item',
+        '#field_name' => 'gnl_fields_org_grants_dates',
+        '#label' => t('Grants cover years:'),
+        '#markup' => $node->org_grants_dates,
+        '#theme_wrappers' => array('gnl_fields_dates_field'),
         '#label_display' => 'visible',
       );
       break;
@@ -109,6 +137,9 @@ function gnl_fields_theme() {
       'render element' => 'element',
     ),
     'gnl_fields_datestart_field' => array(
+      'render element' => 'element',
+    ),
+    'gnl_fields_dateend_field' => array(
       'render element' => 'element',
     ),
   );
@@ -151,12 +182,41 @@ function theme_gnl_fields_money_field($variables) {
 
   return $output;
 }
+
 /**
  * Theme datestart fields.
  *
  * @see http://drupal.org/node/1471706
  */
 function theme_gnl_fields_datestart_field($variables) {
+  $classes = array('field');
+
+  if (isset($variables['element']['#field_name'])) {
+    $classes[] = 'field--name-' . strtr($variables['element']['#field_name'], '_', '-');
+  }
+
+  if (isset($variables['element']['#label_display'])) {
+    $classes[] = 'field-label-' . $variables['element']['#label_display'];
+  }
+
+  $output = '<span class="' . implode(' ', $classes) . '">';
+
+  if (isset($variables['element']['#label']) && $variables['element']['#label_display'] != 'hidden') {
+    $output .= '<div class="field__label">' . $variables['element']['#label'] . '&nbsp;</div>';
+  }
+
+  $output .= substr($variables['element']['#markup'], 0, 4);
+  $output .= '</span>';
+
+  return $output;
+}
+
+/**
+ * Theme dateend fields.
+ *
+ * @see http://drupal.org/node/1471706
+ */
+function theme_gnl_fields_dateend_field($variables) {
   $classes = array('field');
 
   if (isset($variables['element']['#field_name'])) {
@@ -208,6 +268,15 @@ function gnl_fields_org_grants_datestart($entity_or_nid) {
     $nid = $entity_or_nid;
   }
   return db_query('SELECT MIN(min) FROM ((SELECT MIN(fdfy.field_year_value) AS min FROM {field_data_field_year} AS fdfy INNER JOIN {field_data_field_funder} AS fdff ON fdfy.entity_id=fdff.entity_id WHERE fdff.field_funder_target_id=:nid) UNION (SELECT MIN(fdfy.field_year_value) AS min FROM {field_data_field_year} AS fdfy INNER JOIN {field_data_field_recipient} AS fdfr ON fdfy.entity_id=fdfr.entity_id WHERE fdfr.field_recipient_target_id=:nid)) AS combine', array(':nid' => $nid))->fetchField();
+}
+
+function gnl_fields_org_grants_dateend($entity_or_nid) {
+  if (gettype($entity_or_nid) == 'object') {
+    $nid = $entity_or_nid->nid;
+  } else {
+    $nid = $entity_or_nid;
+  }
+  return db_query('SELECT MAX(max) FROM ((SELECT MAX(fdfy.field_year_value) AS max FROM {field_data_field_year} AS fdfy INNER JOIN {field_data_field_funder} AS fdff ON fdfy.entity_id=fdff.entity_id WHERE fdff.field_funder_target_id=:nid) UNION (SELECT MAX(fdfy.field_year_value) AS max FROM {field_data_field_year} AS fdfy INNER JOIN {field_data_field_recipient} AS fdfr ON fdfy.entity_id=fdfr.entity_id WHERE fdfr.field_recipient_target_id=:nid)) AS combine', array(':nid' => $nid))->fetchField();
 }
 
 /**

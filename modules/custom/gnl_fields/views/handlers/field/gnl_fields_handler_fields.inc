@@ -51,3 +51,18 @@ class gnl_fields_handler_field_grants_datestart extends views_handler_field_enti
   }
 }
 
+class gnl_fields_handler_field_grants_dateend extends views_handler_field_entity {
+  public function render($values) {
+    $return = '';
+    // node row handler?
+    if (($entity = $this->get_value($values)) && entity_access('view', $this->entity_type, $entity)) {
+      $return = substr(gnl_fields_org_grants_dateend($entity), 0, 4);
+    }
+    // fields row handler?
+    elseif ($values->nid /* add node_load-less access check for field here... */) {
+      $return = gnl_fields_org_grants_dateend($values->nid);
+    }
+    return $return;
+  }
+}
+
