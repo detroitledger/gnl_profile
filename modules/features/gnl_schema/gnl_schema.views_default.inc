@@ -2835,6 +2835,2522 @@ function gnl_schema_views_default_views() {
   $export['board_terms'] = $view;
 
   $view = new view();
+  $view->name = 'csw_detroit';
+  $view->description = '';
+  $view->tag = 'default';
+  $view->base_table = 'node';
+  $view->human_name = 'CSW-Detroit';
+  $view->core = 7;
+  $view->api_version = '3.0';
+  $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+
+  /* Display: Master */
+  $handler = $view->new_display('default', 'Master', 'default');
+  $handler->display->display_options['title'] = 'CSW-Detroit: grants';
+  $handler->display->display_options['use_more_always'] = FALSE;
+  $handler->display->display_options['group_by'] = TRUE;
+  $handler->display->display_options['access']['type'] = 'role';
+  $handler->display->display_options['access']['role'] = array(
+    3 => '3',
+    5 => '5',
+  );
+  $handler->display->display_options['cache']['type'] = 'none';
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['pager']['type'] = 'full';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '50';
+  $handler->display->display_options['style_plugin'] = 'table';
+  /* Header: Global: Result summary */
+  $handler->display->display_options['header']['result']['id'] = 'result';
+  $handler->display->display_options['header']['result']['table'] = 'views';
+  $handler->display->display_options['header']['result']['field'] = 'result';
+  /* Header: Global: Text area */
+  $handler->display->display_options['header']['area']['id'] = 'area';
+  $handler->display->display_options['header']['area']['table'] = 'views';
+  $handler->display->display_options['header']['area']['field'] = 'area';
+  /* Relationship: Entity Reference: Referenced Entity */
+  $handler->display->display_options['relationships']['field_recipient_target_id']['id'] = 'field_recipient_target_id';
+  $handler->display->display_options['relationships']['field_recipient_target_id']['table'] = 'field_data_field_recipient';
+  $handler->display->display_options['relationships']['field_recipient_target_id']['field'] = 'field_recipient_target_id';
+  $handler->display->display_options['relationships']['field_recipient_target_id']['label'] = 'Recipient';
+  /* Relationship: Entity Reference: Referenced Entity */
+  $handler->display->display_options['relationships']['field_funder_target_id']['id'] = 'field_funder_target_id';
+  $handler->display->display_options['relationships']['field_funder_target_id']['table'] = 'field_data_field_funder';
+  $handler->display->display_options['relationships']['field_funder_target_id']['field'] = 'field_funder_target_id';
+  $handler->display->display_options['relationships']['field_funder_target_id']['label'] = 'Funder';
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: Content: Client project (field_client_project) */
+  $handler->display->display_options['filters']['field_client_project_tid']['id'] = 'field_client_project_tid';
+  $handler->display->display_options['filters']['field_client_project_tid']['table'] = 'field_data_field_client_project';
+  $handler->display->display_options['filters']['field_client_project_tid']['field'] = 'field_client_project_tid';
+  $handler->display->display_options['filters']['field_client_project_tid']['value'] = array(
+    1390 => '1390',
+  );
+  $handler->display->display_options['filters']['field_client_project_tid']['type'] = 'select';
+  $handler->display->display_options['filters']['field_client_project_tid']['vocabulary'] = 'client_projects';
+
+  /* Display: recipient grants */
+  $handler = $view->new_display('page', 'recipient grants', 'grants');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'CSW-Detroit: recipient grants';
+  $handler->display->display_options['defaults']['group_by'] = FALSE;
+  $handler->display->display_options['defaults']['query'] = FALSE;
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['query']['options']['distinct'] = TRUE;
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'editableviews_table';
+  $handler->display->display_options['style_options']['columns'] = array(
+    'field_funder' => 'field_funder',
+    'field_recipient' => 'field_recipient',
+    'field_funded_amount' => 'field_funded_amount',
+    'field_year' => 'field_year',
+    'field_grant_tags_editable' => 'field_grant_tags_editable',
+    'field_grant_tags_editable_1' => 'field_grant_tags_editable_1',
+  );
+  $handler->display->display_options['style_options']['default'] = 'field_year';
+  $handler->display->display_options['style_options']['info'] = array(
+    'field_funder' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_recipient' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_funded_amount' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_year' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_grant_tags_editable' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_grant_tags_editable_1' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+  );
+  $handler->display->display_options['style_options']['batch_size'] = '10';
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['header'] = FALSE;
+  /* Header: Global: Result summary */
+  $handler->display->display_options['header']['result']['id'] = 'result';
+  $handler->display->display_options['header']['result']['table'] = 'views';
+  $handler->display->display_options['header']['result']['field'] = 'result';
+  /* Header: Global: Text area */
+  $handler->display->display_options['header']['area']['id'] = 'area';
+  $handler->display->display_options['header']['area']['table'] = 'views';
+  $handler->display->display_options['header']['area']['field'] = 'area';
+  $handler->display->display_options['header']['area']['label'] = 'Explainer';
+  $handler->display->display_options['header']['area']['content'] = 'A list of the grants received by organizations of interest in the dataset.
+
+This is an editable view accessible only to CSW administrators. 
+
+Use this view to store any custom tags or notes you’re collecting independently that are tied to the same organizations of interest that the Detroit Ledger has collected funding data for. You can add many tags using a comma-separated list. Click SAVE at the bottom of the page to apply tags.
+
+The total amounts tied to these custom tags are aggregated in other views.
+
+Click FUNDER, RECIPIENT, AMOUNT or YEAR to sort rows.';
+  $handler->display->display_options['header']['area']['format'] = 'filtered_html';
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: Funder */
+  $handler->display->display_options['fields']['field_funder']['id'] = 'field_funder';
+  $handler->display->display_options['fields']['field_funder']['table'] = 'field_data_field_funder';
+  $handler->display->display_options['fields']['field_funder']['field'] = 'field_funder';
+  $handler->display->display_options['fields']['field_funder']['settings'] = array(
+    'link' => 0,
+  );
+  /* Field: Content: Recipient */
+  $handler->display->display_options['fields']['field_recipient']['id'] = 'field_recipient';
+  $handler->display->display_options['fields']['field_recipient']['table'] = 'field_data_field_recipient';
+  $handler->display->display_options['fields']['field_recipient']['field'] = 'field_recipient';
+  $handler->display->display_options['fields']['field_recipient']['settings'] = array(
+    'link' => 0,
+  );
+  /* Field: Content: Amount */
+  $handler->display->display_options['fields']['field_funded_amount']['id'] = 'field_funded_amount';
+  $handler->display->display_options['fields']['field_funded_amount']['table'] = 'field_data_field_funded_amount';
+  $handler->display->display_options['fields']['field_funded_amount']['field'] = 'field_funded_amount';
+  $handler->display->display_options['fields']['field_funded_amount']['settings'] = array(
+    'thousand_separator' => ',',
+    'prefix_suffix' => 1,
+  );
+  /* Field: Content: Year */
+  $handler->display->display_options['fields']['field_year']['id'] = 'field_year';
+  $handler->display->display_options['fields']['field_year']['table'] = 'field_data_field_year';
+  $handler->display->display_options['fields']['field_year']['field'] = 'field_year';
+  $handler->display->display_options['fields']['field_year']['settings'] = array(
+    'format_type' => 'gnl_date_type_human_short',
+    'fromto' => 'both',
+    'multiple_number' => '',
+    'multiple_from' => '',
+    'multiple_to' => '',
+    'show_remaining_days' => 0,
+  );
+  /* Field: Content: Description */
+  $handler->display->display_options['fields']['body']['id'] = 'body';
+  $handler->display->display_options['fields']['body']['table'] = 'field_data_body';
+  $handler->display->display_options['fields']['body']['field'] = 'body';
+  /* Field: Content: Tags (editable) */
+  $handler->display->display_options['fields']['field_grant_tags_editable']['id'] = 'field_grant_tags_editable';
+  $handler->display->display_options['fields']['field_grant_tags_editable']['table'] = 'field_data_field_grant_tags';
+  $handler->display->display_options['fields']['field_grant_tags_editable']['field'] = 'field_grant_tags_editable';
+  $handler->display->display_options['fields']['field_grant_tags_editable']['label'] = 'Tags';
+  $handler->display->display_options['fields']['field_grant_tags_editable']['type'] = 'taxonomy_term_reference_plain';
+  $handler->display->display_options['fields']['field_grant_tags_editable']['delta_offset'] = '0';
+  $handler->display->display_options['fields']['field_grant_tags_editable']['widget_type'] = 'taxonomy_autocomplete';
+  $handler->display->display_options['fields']['field_grant_tags_editable']['suppress_label'] = 0;
+  $handler->display->display_options['fields']['field_grant_tags_editable']['suppress_description'] = 0;
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['filter_groups']['groups'] = array(
+    1 => 'AND',
+    2 => 'OR',
+  );
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'grant' => 'grant',
+  );
+  $handler->display->display_options['filters']['type']['group'] = 1;
+  /* Filter criterion: Content: Client project (field_client_project) */
+  $handler->display->display_options['filters']['field_client_project_tid_1']['id'] = 'field_client_project_tid_1';
+  $handler->display->display_options['filters']['field_client_project_tid_1']['table'] = 'field_data_field_client_project';
+  $handler->display->display_options['filters']['field_client_project_tid_1']['field'] = 'field_client_project_tid';
+  $handler->display->display_options['filters']['field_client_project_tid_1']['relationship'] = 'field_recipient_target_id';
+  $handler->display->display_options['filters']['field_client_project_tid_1']['value'] = array(
+    1390 => '1390',
+  );
+  $handler->display->display_options['filters']['field_client_project_tid_1']['group'] = 2;
+  $handler->display->display_options['filters']['field_client_project_tid_1']['type'] = 'select';
+  $handler->display->display_options['filters']['field_client_project_tid_1']['vocabulary'] = 'client_projects';
+  $handler->display->display_options['path'] = 'admin/clients/csw-detroit/recipient-grants';
+  $handler->display->display_options['menu']['title'] = 'Edit CSW-Detroit recipient grants';
+  $handler->display->display_options['menu']['weight'] = '0';
+  $handler->display->display_options['menu']['name'] = 'user-menu';
+  $handler->display->display_options['menu']['context'] = 0;
+  $handler->display->display_options['menu']['context_only_inline'] = 0;
+
+  /* Display: orgs */
+  $handler = $view->new_display('page', 'orgs', 'orgs');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'CSW-Detroit: organizations';
+  $handler->display->display_options['defaults']['group_by'] = FALSE;
+  $handler->display->display_options['defaults']['query'] = FALSE;
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['query']['options']['distinct'] = TRUE;
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'editableviews_table';
+  $handler->display->display_options['style_options']['columns'] = array(
+    'title' => 'title',
+    'field_org_tags_editable' => 'field_org_tags_editable',
+  );
+  $handler->display->display_options['style_options']['default'] = '-1';
+  $handler->display->display_options['style_options']['info'] = array(
+    'title' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_org_tags_editable' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+  );
+  $handler->display->display_options['style_options']['batch_size'] = '10';
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['header'] = FALSE;
+  /* Header: Global: Result summary */
+  $handler->display->display_options['header']['result']['id'] = 'result';
+  $handler->display->display_options['header']['result']['table'] = 'views';
+  $handler->display->display_options['header']['result']['field'] = 'result';
+  /* Header: Global: Text area */
+  $handler->display->display_options['header']['area']['id'] = 'area';
+  $handler->display->display_options['header']['area']['table'] = 'views';
+  $handler->display->display_options['header']['area']['field'] = 'area';
+  $handler->display->display_options['header']['area']['label'] = 'Explainer';
+  $handler->display->display_options['header']['area']['content'] = 'A list of the organizations of interest in the dataset.
+
+This is an editable view accessible only to CSW administrators.
+
+Use this view to store any custom tags or notes you’re collecting independently that are tied to the same organizations of interest that the Detroit Ledger has collected funding data for. You can add many tags using a comma-separated list. Click SAVE at the bottom of the page to apply tags.
+
+The total amounts tied to these custom tags are aggregated in other views.
+
+Click NAME to sort the rows. Click on an individual organization name to see that organization\'s attributes and funding records.';
+  $handler->display->display_options['header']['area']['format'] = 'filtered_html';
+  $handler->display->display_options['defaults']['relationships'] = FALSE;
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = 'Name';
+  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  /* Field: Content: Tags (editable) */
+  $handler->display->display_options['fields']['field_org_tags_editable']['id'] = 'field_org_tags_editable';
+  $handler->display->display_options['fields']['field_org_tags_editable']['table'] = 'field_data_field_org_tags';
+  $handler->display->display_options['fields']['field_org_tags_editable']['field'] = 'field_org_tags_editable';
+  $handler->display->display_options['fields']['field_org_tags_editable']['label'] = 'Tags';
+  $handler->display->display_options['fields']['field_org_tags_editable']['type'] = 'taxonomy_term_reference_plain';
+  $handler->display->display_options['fields']['field_org_tags_editable']['delta_offset'] = '0';
+  $handler->display->display_options['fields']['field_org_tags_editable']['widget_type'] = '0';
+  $handler->display->display_options['fields']['field_org_tags_editable']['suppress_label'] = 1;
+  $handler->display->display_options['fields']['field_org_tags_editable']['suppress_description'] = 1;
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Client project (field_client_project) */
+  $handler->display->display_options['filters']['field_client_project_tid']['id'] = 'field_client_project_tid';
+  $handler->display->display_options['filters']['field_client_project_tid']['table'] = 'field_data_field_client_project';
+  $handler->display->display_options['filters']['field_client_project_tid']['field'] = 'field_client_project_tid';
+  $handler->display->display_options['filters']['field_client_project_tid']['value'] = array(
+    1390 => '1390',
+  );
+  $handler->display->display_options['filters']['field_client_project_tid']['type'] = 'select';
+  $handler->display->display_options['filters']['field_client_project_tid']['vocabulary'] = 'client_projects';
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'org' => 'org',
+  );
+  /* Filter criterion: Content: Title */
+  $handler->display->display_options['filters']['title']['id'] = 'title';
+  $handler->display->display_options['filters']['title']['table'] = 'node';
+  $handler->display->display_options['filters']['title']['field'] = 'title';
+  $handler->display->display_options['filters']['title']['operator'] = 'contains';
+  $handler->display->display_options['filters']['title']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['title']['expose']['operator_id'] = 'title_op';
+  $handler->display->display_options['filters']['title']['expose']['label'] = 'Name contains';
+  $handler->display->display_options['filters']['title']['expose']['operator'] = 'title_op';
+  $handler->display->display_options['filters']['title']['expose']['identifier'] = 'title';
+  $handler->display->display_options['filters']['title']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    5 => 0,
+  );
+  $handler->display->display_options['filters']['title']['expose']['autocomplete_items'] = '10';
+  $handler->display->display_options['filters']['title']['expose']['autocomplete_field'] = 'title';
+  $handler->display->display_options['filters']['title']['expose']['autocomplete_raw_suggestion'] = 1;
+  $handler->display->display_options['filters']['title']['expose']['autocomplete_raw_dropdown'] = 1;
+  $handler->display->display_options['filters']['title']['expose']['autocomplete_dependent'] = 0;
+  /* Filter criterion: Content: Tags (field_org_tags) */
+  $handler->display->display_options['filters']['field_org_tags_tid']['id'] = 'field_org_tags_tid';
+  $handler->display->display_options['filters']['field_org_tags_tid']['table'] = 'field_data_field_org_tags';
+  $handler->display->display_options['filters']['field_org_tags_tid']['field'] = 'field_org_tags_tid';
+  $handler->display->display_options['filters']['field_org_tags_tid']['value'] = '';
+  $handler->display->display_options['filters']['field_org_tags_tid']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_org_tags_tid']['expose']['operator_id'] = 'field_org_tags_tid_op';
+  $handler->display->display_options['filters']['field_org_tags_tid']['expose']['label'] = 'Tags';
+  $handler->display->display_options['filters']['field_org_tags_tid']['expose']['operator'] = 'field_org_tags_tid_op';
+  $handler->display->display_options['filters']['field_org_tags_tid']['expose']['identifier'] = 'field_org_tags_tid';
+  $handler->display->display_options['filters']['field_org_tags_tid']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    5 => 0,
+  );
+  $handler->display->display_options['filters']['field_org_tags_tid']['vocabulary'] = 'org_tags';
+  $handler->display->display_options['path'] = 'admin/clients/csw-detroit/orgs';
+  $handler->display->display_options['menu']['type'] = 'normal';
+  $handler->display->display_options['menu']['title'] = 'Edit CSW-Detroit organizations';
+  $handler->display->display_options['menu']['weight'] = '0';
+  $handler->display->display_options['menu']['name'] = 'user-menu';
+  $handler->display->display_options['menu']['context'] = 0;
+  $handler->display->display_options['menu']['context_only_inline'] = 0;
+
+  /* Display: WIP org totals public vs private */
+  $handler = $view->new_display('page', 'WIP org totals public vs private', 'page_1');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'CSW-Detroit: organizations with totals';
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'table';
+  $handler->display->display_options['style_options']['grouping'] = array(
+    0 => array(
+      'field' => 'field_recipient',
+      'rendered' => 1,
+      'rendered_strip' => 0,
+    ),
+    1 => array(
+      'field' => 'field_publicfunder',
+      'rendered' => 1,
+      'rendered_strip' => 0,
+    ),
+  );
+  $handler->display->display_options['style_options']['columns'] = array(
+    'field_funder' => 'field_funder',
+    'field_recipient' => 'field_recipient',
+    'field_funded_amount' => 'field_funded_amount',
+    'field_publicfunder' => 'field_publicfunder',
+  );
+  $handler->display->display_options['style_options']['default'] = '-1';
+  $handler->display->display_options['style_options']['info'] = array(
+    'field_funder' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_recipient' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_funded_amount' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_publicfunder' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+  );
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['relationships'] = FALSE;
+  /* Relationship: Entity Reference: Referenced Entity */
+  $handler->display->display_options['relationships']['field_funder_target_id']['id'] = 'field_funder_target_id';
+  $handler->display->display_options['relationships']['field_funder_target_id']['table'] = 'field_data_field_funder';
+  $handler->display->display_options['relationships']['field_funder_target_id']['field'] = 'field_funder_target_id';
+  /* Relationship: Entity Reference: Referenced Entity */
+  $handler->display->display_options['relationships']['field_recipient_target_id']['id'] = 'field_recipient_target_id';
+  $handler->display->display_options['relationships']['field_recipient_target_id']['table'] = 'field_data_field_recipient';
+  $handler->display->display_options['relationships']['field_recipient_target_id']['field'] = 'field_recipient_target_id';
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: Funder */
+  $handler->display->display_options['fields']['field_funder']['id'] = 'field_funder';
+  $handler->display->display_options['fields']['field_funder']['table'] = 'field_data_field_funder';
+  $handler->display->display_options['fields']['field_funder']['field'] = 'field_funder';
+  $handler->display->display_options['fields']['field_funder']['settings'] = array(
+    'link' => 1,
+  );
+  /* Field: Content: Recipient */
+  $handler->display->display_options['fields']['field_recipient']['id'] = 'field_recipient';
+  $handler->display->display_options['fields']['field_recipient']['table'] = 'field_data_field_recipient';
+  $handler->display->display_options['fields']['field_recipient']['field'] = 'field_recipient';
+  $handler->display->display_options['fields']['field_recipient']['settings'] = array(
+    'link' => 0,
+  );
+  /* Field: Content: Amount */
+  $handler->display->display_options['fields']['field_funded_amount']['id'] = 'field_funded_amount';
+  $handler->display->display_options['fields']['field_funded_amount']['table'] = 'field_data_field_funded_amount';
+  $handler->display->display_options['fields']['field_funded_amount']['field'] = 'field_funded_amount';
+  $handler->display->display_options['fields']['field_funded_amount']['settings'] = array(
+    'thousand_separator' => ' ',
+    'prefix_suffix' => 1,
+  );
+  /* Field: Content: Public funder? */
+  $handler->display->display_options['fields']['field_publicfunder']['id'] = 'field_publicfunder';
+  $handler->display->display_options['fields']['field_publicfunder']['table'] = 'field_data_field_publicfunder';
+  $handler->display->display_options['fields']['field_publicfunder']['field'] = 'field_publicfunder';
+  $handler->display->display_options['fields']['field_publicfunder']['relationship'] = 'field_funder_target_id';
+  $handler->display->display_options['fields']['field_publicfunder']['type'] = 'list_key';
+  $handler->display->display_options['fields']['field_publicfunder']['group_columns'] = array(
+    'value' => 'value',
+  );
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'grant' => 'grant',
+  );
+  $handler->display->display_options['filters']['type']['group'] = 1;
+  /* Filter criterion: Content: Tags (field_org_tags) */
+  $handler->display->display_options['filters']['field_org_tags_tid']['id'] = 'field_org_tags_tid';
+  $handler->display->display_options['filters']['field_org_tags_tid']['table'] = 'field_data_field_org_tags';
+  $handler->display->display_options['filters']['field_org_tags_tid']['field'] = 'field_org_tags_tid';
+  $handler->display->display_options['filters']['field_org_tags_tid']['value'] = '';
+  $handler->display->display_options['filters']['field_org_tags_tid']['group'] = 1;
+  $handler->display->display_options['filters']['field_org_tags_tid']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_org_tags_tid']['expose']['operator_id'] = 'field_org_tags_tid_op';
+  $handler->display->display_options['filters']['field_org_tags_tid']['expose']['label'] = 'Tags';
+  $handler->display->display_options['filters']['field_org_tags_tid']['expose']['operator'] = 'field_org_tags_tid_op';
+  $handler->display->display_options['filters']['field_org_tags_tid']['expose']['identifier'] = 'field_org_tags_tid';
+  $handler->display->display_options['filters']['field_org_tags_tid']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    5 => 0,
+  );
+  $handler->display->display_options['filters']['field_org_tags_tid']['vocabulary'] = 'org_tags';
+  /* Filter criterion: Content: Client project (field_client_project) */
+  $handler->display->display_options['filters']['field_client_project_tid_1']['id'] = 'field_client_project_tid_1';
+  $handler->display->display_options['filters']['field_client_project_tid_1']['table'] = 'field_data_field_client_project';
+  $handler->display->display_options['filters']['field_client_project_tid_1']['field'] = 'field_client_project_tid';
+  $handler->display->display_options['filters']['field_client_project_tid_1']['relationship'] = 'field_funder_target_id';
+  $handler->display->display_options['filters']['field_client_project_tid_1']['value'] = array(
+    0 => '1390',
+  );
+  $handler->display->display_options['filters']['field_client_project_tid_1']['group'] = 1;
+  $handler->display->display_options['filters']['field_client_project_tid_1']['vocabulary'] = 'client_projects';
+  /* Filter criterion: Content: Title */
+  $handler->display->display_options['filters']['title']['id'] = 'title';
+  $handler->display->display_options['filters']['title']['table'] = 'node';
+  $handler->display->display_options['filters']['title']['field'] = 'title';
+  $handler->display->display_options['filters']['title']['relationship'] = 'field_recipient_target_id';
+  $handler->display->display_options['filters']['title']['operator'] = 'contains';
+  $handler->display->display_options['filters']['title']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['title']['expose']['operator_id'] = 'title_op';
+  $handler->display->display_options['filters']['title']['expose']['label'] = 'Recipient name contains';
+  $handler->display->display_options['filters']['title']['expose']['operator'] = 'title_op';
+  $handler->display->display_options['filters']['title']['expose']['identifier'] = 'title';
+  $handler->display->display_options['filters']['title']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    5 => 0,
+  );
+  $handler->display->display_options['filters']['title']['expose']['autocomplete_items'] = '10';
+  $handler->display->display_options['filters']['title']['expose']['autocomplete_raw_suggestion'] = 1;
+  $handler->display->display_options['filters']['title']['expose']['autocomplete_raw_dropdown'] = 1;
+  $handler->display->display_options['filters']['title']['expose']['autocomplete_dependent'] = 0;
+  $handler->display->display_options['path'] = 'admin/clients/csw-detroit/orgs/totals';
+  $handler->display->display_options['menu']['title'] = 'CSW-Detroit organizations with totals';
+  $handler->display->display_options['menu']['weight'] = '0';
+  $handler->display->display_options['menu']['name'] = 'user-menu';
+  $handler->display->display_options['menu']['context'] = 0;
+  $handler->display->display_options['menu']['context_only_inline'] = 0;
+
+  /* Display: CSW org totals from public funders */
+  $handler = $view->new_display('page', 'CSW org totals from public funders', 'page_2');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'CSW-Detroit: org totals: any, public or private';
+  $handler->display->display_options['defaults']['group_by'] = FALSE;
+  $handler->display->display_options['defaults']['pager'] = FALSE;
+  $handler->display->display_options['pager']['type'] = 'none';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'views_aggregator';
+  $handler->display->display_options['style_options']['columns'] = array(
+    'field_funder' => 'field_funder',
+    'field_recipient' => 'field_recipient',
+    'field_funded_amount' => 'field_funded_amount',
+    'field_publicfunder' => 'field_publicfunder',
+  );
+  $handler->display->display_options['style_options']['default'] = 'field_funded_amount';
+  $handler->display->display_options['style_options']['info'] = array(
+    'field_funder' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+      'has_aggr' => 0,
+      'aggr' => array(
+        'views_aggregator_first' => 'views_aggregator_first',
+      ),
+      'aggr_par' => '',
+      'has_aggr_column' => 0,
+      'aggr_column' => 'views_aggregator_sum',
+      'aggr_par_column' => '',
+    ),
+    'field_recipient' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+      'has_aggr' => 1,
+      'aggr' => array(
+        'views_aggregator_first' => 'views_aggregator_first',
+        'views_aggregator_group_and_compress' => 'views_aggregator_group_and_compress',
+      ),
+      'aggr_par' => '',
+      'has_aggr_column' => 0,
+      'aggr_column' => 'views_aggregator_sum',
+      'aggr_par_column' => '',
+    ),
+    'field_funded_amount' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'desc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+      'has_aggr' => 0,
+      'aggr' => array(
+        'views_aggregator_sum' => 'views_aggregator_sum',
+      ),
+      'aggr_par' => '',
+      'has_aggr_column' => 1,
+      'aggr_column' => 'views_aggregator_sum',
+      'aggr_par_column' => '',
+    ),
+    'field_publicfunder' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+      'has_aggr' => 0,
+      'aggr' => array(
+        'views_aggregator_enumerate' => 'views_aggregator_enumerate',
+      ),
+      'aggr_par' => '',
+      'has_aggr_column' => 0,
+      'aggr_column' => 'views_aggregator_sum',
+      'aggr_par_column' => '',
+    ),
+  );
+  $handler->display->display_options['style_options']['column_aggregation']['totals_per_page'] = '1';
+  $handler->display->display_options['style_options']['column_aggregation']['totals_row_position'] = array(
+    1 => 0,
+    2 => '2',
+  );
+  $handler->display->display_options['style_options']['column_aggregation']['precision'] = '2';
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['header'] = FALSE;
+  /* Header: Global: Result summary */
+  $handler->display->display_options['header']['result']['id'] = 'result';
+  $handler->display->display_options['header']['result']['table'] = 'views';
+  $handler->display->display_options['header']['result']['field'] = 'result';
+  /* Header: Global: Text area */
+  $handler->display->display_options['header']['area']['id'] = 'area';
+  $handler->display->display_options['header']['area']['table'] = 'views';
+  $handler->display->display_options['header']['area']['field'] = 'area';
+  $handler->display->display_options['header']['area']['label'] = 'Explainer';
+  $handler->display->display_options['header']['area']['content'] = 'Total amount of grants received by organizations (of interest and related) from funding sources that are CSW organizations of interest only.
+
+Totals are broken down by philanthropic or public (all public, federal or state).
+
+To see philanthropic totals: turn Non-philanthropic “Off” and set Federal or State to “Is none of”.
+To see public totals: turn Non-philanthropic “On” and set Federal or State to “Is all of”.
+To see federal or state totals: turn Non-philanthropic “On” and set Federal or State to “Is one of” and select from dropdown.
+
+Click RECIPIENT or TOTAL to sort the rows.';
+  $handler->display->display_options['header']['area']['format'] = 'filtered_html';
+  $handler->display->display_options['defaults']['relationships'] = FALSE;
+  /* Relationship: Entity Reference: Referenced Entity */
+  $handler->display->display_options['relationships']['field_funder_target_id']['id'] = 'field_funder_target_id';
+  $handler->display->display_options['relationships']['field_funder_target_id']['table'] = 'field_data_field_funder';
+  $handler->display->display_options['relationships']['field_funder_target_id']['field'] = 'field_funder_target_id';
+  /* Relationship: Entity Reference: Referenced Entity */
+  $handler->display->display_options['relationships']['field_recipient_target_id']['id'] = 'field_recipient_target_id';
+  $handler->display->display_options['relationships']['field_recipient_target_id']['table'] = 'field_data_field_recipient';
+  $handler->display->display_options['relationships']['field_recipient_target_id']['field'] = 'field_recipient_target_id';
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: Funder */
+  $handler->display->display_options['fields']['field_funder']['id'] = 'field_funder';
+  $handler->display->display_options['fields']['field_funder']['table'] = 'field_data_field_funder';
+  $handler->display->display_options['fields']['field_funder']['field'] = 'field_funder';
+  $handler->display->display_options['fields']['field_funder']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_funder']['settings'] = array(
+    'link' => 0,
+  );
+  /* Field: Content: Recipient */
+  $handler->display->display_options['fields']['field_recipient']['id'] = 'field_recipient';
+  $handler->display->display_options['fields']['field_recipient']['table'] = 'field_data_field_recipient';
+  $handler->display->display_options['fields']['field_recipient']['field'] = 'field_recipient';
+  $handler->display->display_options['fields']['field_recipient']['settings'] = array(
+    'link' => 0,
+  );
+  /* Field: Content: Amount */
+  $handler->display->display_options['fields']['field_funded_amount']['id'] = 'field_funded_amount';
+  $handler->display->display_options['fields']['field_funded_amount']['table'] = 'field_data_field_funded_amount';
+  $handler->display->display_options['fields']['field_funded_amount']['field'] = 'field_funded_amount';
+  $handler->display->display_options['fields']['field_funded_amount']['label'] = 'Total';
+  $handler->display->display_options['fields']['field_funded_amount']['settings'] = array(
+    'thousand_separator' => '',
+    'prefix_suffix' => 0,
+  );
+  /* Field: Content: Public funder? */
+  $handler->display->display_options['fields']['field_publicfunder']['id'] = 'field_publicfunder';
+  $handler->display->display_options['fields']['field_publicfunder']['table'] = 'field_data_field_publicfunder';
+  $handler->display->display_options['fields']['field_publicfunder']['field'] = 'field_publicfunder';
+  $handler->display->display_options['fields']['field_publicfunder']['relationship'] = 'field_funder_target_id';
+  $handler->display->display_options['fields']['field_publicfunder']['label'] = 'Non-philanthropic?';
+  $handler->display->display_options['fields']['field_publicfunder']['type'] = 'list_key';
+  $handler->display->display_options['fields']['field_publicfunder']['group_columns'] = array(
+    'value' => 'value',
+  );
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'grant' => 'grant',
+  );
+  $handler->display->display_options['filters']['type']['group'] = 1;
+  /* Filter criterion: Content: Client project (field_client_project) */
+  $handler->display->display_options['filters']['field_client_project_tid_1']['id'] = 'field_client_project_tid_1';
+  $handler->display->display_options['filters']['field_client_project_tid_1']['table'] = 'field_data_field_client_project';
+  $handler->display->display_options['filters']['field_client_project_tid_1']['field'] = 'field_client_project_tid';
+  $handler->display->display_options['filters']['field_client_project_tid_1']['relationship'] = 'field_funder_target_id';
+  $handler->display->display_options['filters']['field_client_project_tid_1']['value'] = array(
+    0 => '1390',
+  );
+  $handler->display->display_options['filters']['field_client_project_tid_1']['group'] = 1;
+  $handler->display->display_options['filters']['field_client_project_tid_1']['vocabulary'] = 'client_projects';
+  /* Filter criterion: Content: Title */
+  $handler->display->display_options['filters']['title']['id'] = 'title';
+  $handler->display->display_options['filters']['title']['table'] = 'node';
+  $handler->display->display_options['filters']['title']['field'] = 'title';
+  $handler->display->display_options['filters']['title']['relationship'] = 'field_recipient_target_id';
+  $handler->display->display_options['filters']['title']['operator'] = 'contains';
+  $handler->display->display_options['filters']['title']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['title']['expose']['operator_id'] = 'title_op';
+  $handler->display->display_options['filters']['title']['expose']['label'] = 'Recipient name contains';
+  $handler->display->display_options['filters']['title']['expose']['operator'] = 'title_op';
+  $handler->display->display_options['filters']['title']['expose']['identifier'] = 'title';
+  $handler->display->display_options['filters']['title']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    5 => 0,
+  );
+  $handler->display->display_options['filters']['title']['expose']['autocomplete_items'] = '10';
+  $handler->display->display_options['filters']['title']['expose']['autocomplete_raw_suggestion'] = 1;
+  $handler->display->display_options['filters']['title']['expose']['autocomplete_raw_dropdown'] = 1;
+  $handler->display->display_options['filters']['title']['expose']['autocomplete_dependent'] = 0;
+  /* Filter criterion: Content: Public funder? (field_publicfunder) */
+  $handler->display->display_options['filters']['field_publicfunder_value']['id'] = 'field_publicfunder_value';
+  $handler->display->display_options['filters']['field_publicfunder_value']['table'] = 'field_data_field_publicfunder';
+  $handler->display->display_options['filters']['field_publicfunder_value']['field'] = 'field_publicfunder_value';
+  $handler->display->display_options['filters']['field_publicfunder_value']['relationship'] = 'field_funder_target_id';
+  $handler->display->display_options['filters']['field_publicfunder_value']['value'] = array(
+    1 => '1',
+  );
+  $handler->display->display_options['filters']['field_publicfunder_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_publicfunder_value']['expose']['operator_id'] = 'field_publicfunder_value_op';
+  $handler->display->display_options['filters']['field_publicfunder_value']['expose']['label'] = 'Non-philanthropic?';
+  $handler->display->display_options['filters']['field_publicfunder_value']['expose']['operator'] = 'field_publicfunder_value_op';
+  $handler->display->display_options['filters']['field_publicfunder_value']['expose']['identifier'] = 'field_publicfunder_value';
+  $handler->display->display_options['filters']['field_publicfunder_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    5 => 0,
+  );
+  /* Filter criterion: Content: Tags (field_org_tags) */
+  $handler->display->display_options['filters']['field_org_tags_tid']['id'] = 'field_org_tags_tid';
+  $handler->display->display_options['filters']['field_org_tags_tid']['table'] = 'field_data_field_org_tags';
+  $handler->display->display_options['filters']['field_org_tags_tid']['field'] = 'field_org_tags_tid';
+  $handler->display->display_options['filters']['field_org_tags_tid']['relationship'] = 'field_funder_target_id';
+  $handler->display->display_options['filters']['field_org_tags_tid']['value'] = array(
+    717 => '717',
+    1440 => '1440',
+  );
+  $handler->display->display_options['filters']['field_org_tags_tid']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_org_tags_tid']['expose']['operator_id'] = 'field_org_tags_tid_op';
+  $handler->display->display_options['filters']['field_org_tags_tid']['expose']['label'] = 'Federal or State?';
+  $handler->display->display_options['filters']['field_org_tags_tid']['expose']['use_operator'] = TRUE;
+  $handler->display->display_options['filters']['field_org_tags_tid']['expose']['operator'] = 'field_org_tags_tid_op';
+  $handler->display->display_options['filters']['field_org_tags_tid']['expose']['identifier'] = 'field_org_tags_tid';
+  $handler->display->display_options['filters']['field_org_tags_tid']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    5 => 0,
+  );
+  $handler->display->display_options['filters']['field_org_tags_tid']['expose']['reduce'] = TRUE;
+  $handler->display->display_options['filters']['field_org_tags_tid']['type'] = 'select';
+  $handler->display->display_options['filters']['field_org_tags_tid']['vocabulary'] = 'org_tags';
+  $handler->display->display_options['filters']['field_org_tags_tid']['hierarchy'] = 1;
+  $handler->display->display_options['path'] = 'admin/clients/csw-detroit/orgs/aggregate';
+  $handler->display->display_options['menu']['type'] = 'normal';
+  $handler->display->display_options['menu']['title'] = 'CSW-Detroit: org totals: any, public or private';
+  $handler->display->display_options['menu']['weight'] = '0';
+  $handler->display->display_options['menu']['name'] = 'user-menu';
+  $handler->display->display_options['menu']['context'] = 0;
+  $handler->display->display_options['menu']['context_only_inline'] = 0;
+
+  /* Display: CSW-Location funder totals */
+  $handler = $view->new_display('page', 'CSW-Location funder totals', 'page_3');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'CSW-Detroit: CSW-Location funder totals ';
+  $handler->display->display_options['defaults']['pager'] = FALSE;
+  $handler->display->display_options['pager']['type'] = 'none';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'table';
+  $handler->display->display_options['style_options']['grouping'] = array(
+    0 => array(
+      'field' => 'field_csw_location',
+      'rendered' => 1,
+      'rendered_strip' => 0,
+    ),
+  );
+  $handler->display->display_options['style_options']['columns'] = array(
+    'field_csw_location' => 'field_csw_location',
+    'field_funded_amount' => 'field_funded_amount',
+  );
+  $handler->display->display_options['style_options']['default'] = 'field_funded_amount';
+  $handler->display->display_options['style_options']['info'] = array(
+    'field_csw_location' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_funded_amount' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'desc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+  );
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['header'] = FALSE;
+  /* Header: Global: Result summary */
+  $handler->display->display_options['header']['result']['id'] = 'result';
+  $handler->display->display_options['header']['result']['table'] = 'views';
+  $handler->display->display_options['header']['result']['field'] = 'result';
+  /* Header: Global: Text area */
+  $handler->display->display_options['header']['area']['id'] = 'area';
+  $handler->display->display_options['header']['area']['table'] = 'views';
+  $handler->display->display_options['header']['area']['field'] = 'area';
+  $handler->display->display_options['header']['area']['label'] = 'Explainer';
+  $handler->display->display_options['header']['area']['content'] = 'Total amount of grants funded by organizations of interest with a given location term assigned by CSW.
+
+The blank term refers to the total amount of grants funded by organizations of interest that did not join to CSW’s custom dataset (e.g. they do not have location, services, population or type filled out).
+
+Click TOTAL to sort the term amounts. Search for a specific term using CTRL+F.';
+  $handler->display->display_options['header']['area']['format'] = 'filtered_html';
+  $handler->display->display_options['defaults']['relationships'] = FALSE;
+  /* Relationship: Entity Reference: Referenced Entity */
+  $handler->display->display_options['relationships']['field_funder_target_id']['id'] = 'field_funder_target_id';
+  $handler->display->display_options['relationships']['field_funder_target_id']['table'] = 'field_data_field_funder';
+  $handler->display->display_options['relationships']['field_funder_target_id']['field'] = 'field_funder_target_id';
+  /* Relationship: Entity Reference: Referenced Entity */
+  $handler->display->display_options['relationships']['field_recipient_target_id']['id'] = 'field_recipient_target_id';
+  $handler->display->display_options['relationships']['field_recipient_target_id']['table'] = 'field_data_field_recipient';
+  $handler->display->display_options['relationships']['field_recipient_target_id']['field'] = 'field_recipient_target_id';
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: CSW Location */
+  $handler->display->display_options['fields']['field_csw_location']['id'] = 'field_csw_location';
+  $handler->display->display_options['fields']['field_csw_location']['table'] = 'field_data_field_csw_location';
+  $handler->display->display_options['fields']['field_csw_location']['field'] = 'field_csw_location';
+  $handler->display->display_options['fields']['field_csw_location']['relationship'] = 'field_funder_target_id';
+  $handler->display->display_options['fields']['field_csw_location']['label'] = 'Funder CSW Location';
+  $handler->display->display_options['fields']['field_csw_location']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_csw_location']['type'] = 'taxonomy_term_reference_plain';
+  $handler->display->display_options['fields']['field_csw_location']['group_rows'] = FALSE;
+  $handler->display->display_options['fields']['field_csw_location']['delta_offset'] = '0';
+  /* Field: SUM(Content: Amount) */
+  $handler->display->display_options['fields']['field_funded_amount']['id'] = 'field_funded_amount';
+  $handler->display->display_options['fields']['field_funded_amount']['table'] = 'field_data_field_funded_amount';
+  $handler->display->display_options['fields']['field_funded_amount']['field'] = 'field_funded_amount';
+  $handler->display->display_options['fields']['field_funded_amount']['group_type'] = 'sum';
+  $handler->display->display_options['fields']['field_funded_amount']['label'] = 'Total';
+  $handler->display->display_options['fields']['field_funded_amount']['settings'] = array(
+    'thousand_separator' => '',
+    'prefix_suffix' => 0,
+  );
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'grant' => 'grant',
+  );
+  $handler->display->display_options['filters']['type']['group'] = 1;
+  /* Filter criterion: Content: Client project (field_client_project) */
+  $handler->display->display_options['filters']['field_client_project_tid_1']['id'] = 'field_client_project_tid_1';
+  $handler->display->display_options['filters']['field_client_project_tid_1']['table'] = 'field_data_field_client_project';
+  $handler->display->display_options['filters']['field_client_project_tid_1']['field'] = 'field_client_project_tid';
+  $handler->display->display_options['filters']['field_client_project_tid_1']['relationship'] = 'field_funder_target_id';
+  $handler->display->display_options['filters']['field_client_project_tid_1']['value'] = array(
+    0 => '1390',
+  );
+  $handler->display->display_options['filters']['field_client_project_tid_1']['group'] = 1;
+  $handler->display->display_options['filters']['field_client_project_tid_1']['vocabulary'] = 'client_projects';
+  $handler->display->display_options['path'] = 'admin/clients/csw-detroit/grants/csw-location-funder-totals';
+  $handler->display->display_options['menu']['type'] = 'normal';
+  $handler->display->display_options['menu']['title'] = 'CSW-Detroit: CSW-Location funder totals';
+  $handler->display->display_options['menu']['weight'] = '0';
+  $handler->display->display_options['menu']['name'] = 'user-menu';
+  $handler->display->display_options['menu']['context'] = 0;
+  $handler->display->display_options['menu']['context_only_inline'] = 0;
+
+  /* Display: CSW-Location recipient totals */
+  $handler = $view->new_display('page', 'CSW-Location recipient totals', 'page_4');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'CSW-Detroit: CSW-Location recipient totals ';
+  $handler->display->display_options['defaults']['pager'] = FALSE;
+  $handler->display->display_options['pager']['type'] = 'none';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'table';
+  $handler->display->display_options['style_options']['grouping'] = array(
+    0 => array(
+      'field' => 'field_csw_location',
+      'rendered' => 1,
+      'rendered_strip' => 0,
+    ),
+  );
+  $handler->display->display_options['style_options']['columns'] = array(
+    'field_csw_location' => 'field_csw_location',
+    'field_funded_amount' => 'field_funded_amount',
+  );
+  $handler->display->display_options['style_options']['default'] = 'field_funded_amount';
+  $handler->display->display_options['style_options']['info'] = array(
+    'field_csw_location' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_funded_amount' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'desc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+  );
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['header'] = FALSE;
+  /* Header: Global: Result summary */
+  $handler->display->display_options['header']['result']['id'] = 'result';
+  $handler->display->display_options['header']['result']['table'] = 'views';
+  $handler->display->display_options['header']['result']['field'] = 'result';
+  /* Header: Global: Text area */
+  $handler->display->display_options['header']['area']['id'] = 'area';
+  $handler->display->display_options['header']['area']['table'] = 'views';
+  $handler->display->display_options['header']['area']['field'] = 'area';
+  $handler->display->display_options['header']['area']['label'] = 'Explainer';
+  $handler->display->display_options['header']['area']['content'] = 'Total amount of grants received by organizations of interest with a given location term assigned by CSW.
+
+The blank term refers to the total amount of grants received by organizations of interest that did not join to CSW’s custom dataset (e.g. they do not have location, services, population or type filled out).
+
+Click TOTAL to sort the term amounts. Search for a specific term using CTRL+F.';
+  $handler->display->display_options['header']['area']['format'] = 'filtered_html';
+  $handler->display->display_options['defaults']['relationships'] = FALSE;
+  /* Relationship: Entity Reference: Referenced Entity */
+  $handler->display->display_options['relationships']['field_funder_target_id']['id'] = 'field_funder_target_id';
+  $handler->display->display_options['relationships']['field_funder_target_id']['table'] = 'field_data_field_funder';
+  $handler->display->display_options['relationships']['field_funder_target_id']['field'] = 'field_funder_target_id';
+  /* Relationship: Entity Reference: Referenced Entity */
+  $handler->display->display_options['relationships']['field_recipient_target_id']['id'] = 'field_recipient_target_id';
+  $handler->display->display_options['relationships']['field_recipient_target_id']['table'] = 'field_data_field_recipient';
+  $handler->display->display_options['relationships']['field_recipient_target_id']['field'] = 'field_recipient_target_id';
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: CSW Location */
+  $handler->display->display_options['fields']['field_csw_location']['id'] = 'field_csw_location';
+  $handler->display->display_options['fields']['field_csw_location']['table'] = 'field_data_field_csw_location';
+  $handler->display->display_options['fields']['field_csw_location']['field'] = 'field_csw_location';
+  $handler->display->display_options['fields']['field_csw_location']['relationship'] = 'field_recipient_target_id';
+  $handler->display->display_options['fields']['field_csw_location']['label'] = 'Recipient CSW Location';
+  $handler->display->display_options['fields']['field_csw_location']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_csw_location']['type'] = 'taxonomy_term_reference_plain';
+  $handler->display->display_options['fields']['field_csw_location']['group_rows'] = FALSE;
+  $handler->display->display_options['fields']['field_csw_location']['delta_offset'] = '0';
+  /* Field: SUM(Content: Amount) */
+  $handler->display->display_options['fields']['field_funded_amount']['id'] = 'field_funded_amount';
+  $handler->display->display_options['fields']['field_funded_amount']['table'] = 'field_data_field_funded_amount';
+  $handler->display->display_options['fields']['field_funded_amount']['field'] = 'field_funded_amount';
+  $handler->display->display_options['fields']['field_funded_amount']['group_type'] = 'sum';
+  $handler->display->display_options['fields']['field_funded_amount']['label'] = 'Total';
+  $handler->display->display_options['fields']['field_funded_amount']['settings'] = array(
+    'thousand_separator' => '',
+    'prefix_suffix' => 0,
+  );
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'grant' => 'grant',
+  );
+  $handler->display->display_options['filters']['type']['group'] = 1;
+  /* Filter criterion: Content: Client project (field_client_project) */
+  $handler->display->display_options['filters']['field_client_project_tid_1']['id'] = 'field_client_project_tid_1';
+  $handler->display->display_options['filters']['field_client_project_tid_1']['table'] = 'field_data_field_client_project';
+  $handler->display->display_options['filters']['field_client_project_tid_1']['field'] = 'field_client_project_tid';
+  $handler->display->display_options['filters']['field_client_project_tid_1']['relationship'] = 'field_recipient_target_id';
+  $handler->display->display_options['filters']['field_client_project_tid_1']['value'] = array(
+    0 => '1390',
+  );
+  $handler->display->display_options['filters']['field_client_project_tid_1']['group'] = 1;
+  $handler->display->display_options['filters']['field_client_project_tid_1']['vocabulary'] = 'client_projects';
+  $handler->display->display_options['path'] = 'admin/clients/csw-detroit/grants/csw-location-recipient-totals';
+  $handler->display->display_options['menu']['type'] = 'normal';
+  $handler->display->display_options['menu']['title'] = 'CSW-Detroit: CSW-Location recipient totals';
+  $handler->display->display_options['menu']['weight'] = '0';
+  $handler->display->display_options['menu']['name'] = 'user-menu';
+  $handler->display->display_options['menu']['context'] = 0;
+  $handler->display->display_options['menu']['context_only_inline'] = 0;
+
+  /* Display: CSW-Population funder totals */
+  $handler = $view->new_display('page', 'CSW-Population funder totals', 'page_5');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'CSW-Detroit: CSW-Population funder totals ';
+  $handler->display->display_options['defaults']['pager'] = FALSE;
+  $handler->display->display_options['pager']['type'] = 'none';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'table';
+  $handler->display->display_options['style_options']['grouping'] = array(
+    0 => array(
+      'field' => 'field_csw_population',
+      'rendered' => 1,
+      'rendered_strip' => 0,
+    ),
+  );
+  $handler->display->display_options['style_options']['columns'] = array(
+    'field_csw_population' => 'field_csw_population',
+    'field_funded_amount' => 'field_funded_amount',
+  );
+  $handler->display->display_options['style_options']['default'] = 'field_funded_amount';
+  $handler->display->display_options['style_options']['info'] = array(
+    'field_csw_population' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_funded_amount' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'desc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+  );
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['header'] = FALSE;
+  /* Header: Global: Result summary */
+  $handler->display->display_options['header']['result']['id'] = 'result';
+  $handler->display->display_options['header']['result']['table'] = 'views';
+  $handler->display->display_options['header']['result']['field'] = 'result';
+  /* Header: Global: Text area */
+  $handler->display->display_options['header']['area']['id'] = 'area';
+  $handler->display->display_options['header']['area']['table'] = 'views';
+  $handler->display->display_options['header']['area']['field'] = 'area';
+  $handler->display->display_options['header']['area']['label'] = 'Explainer';
+  $handler->display->display_options['header']['area']['content'] = 'Total amount of grants funded by organizations of interest with a given population term assigned by CSW. This field allows many population terms to be selected, so the same organizations may be counted in multiple categories.
+
+The blank term refers to the total amount of grants funded by organizations of interest that did not join to CSW’s custom dataset (e.g. they do not have location, services, population or type filled out).
+
+Click TOTAL to sort the term amounts. Search for a specific term using CTRL+F.';
+  $handler->display->display_options['header']['area']['format'] = 'filtered_html';
+  $handler->display->display_options['defaults']['relationships'] = FALSE;
+  /* Relationship: Entity Reference: Referenced Entity */
+  $handler->display->display_options['relationships']['field_funder_target_id']['id'] = 'field_funder_target_id';
+  $handler->display->display_options['relationships']['field_funder_target_id']['table'] = 'field_data_field_funder';
+  $handler->display->display_options['relationships']['field_funder_target_id']['field'] = 'field_funder_target_id';
+  /* Relationship: Entity Reference: Referenced Entity */
+  $handler->display->display_options['relationships']['field_recipient_target_id']['id'] = 'field_recipient_target_id';
+  $handler->display->display_options['relationships']['field_recipient_target_id']['table'] = 'field_data_field_recipient';
+  $handler->display->display_options['relationships']['field_recipient_target_id']['field'] = 'field_recipient_target_id';
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: CSW Population */
+  $handler->display->display_options['fields']['field_csw_population']['id'] = 'field_csw_population';
+  $handler->display->display_options['fields']['field_csw_population']['table'] = 'field_data_field_csw_population';
+  $handler->display->display_options['fields']['field_csw_population']['field'] = 'field_csw_population';
+  $handler->display->display_options['fields']['field_csw_population']['relationship'] = 'field_funder_target_id';
+  $handler->display->display_options['fields']['field_csw_population']['label'] = 'Funder CSW Population';
+  $handler->display->display_options['fields']['field_csw_population']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_csw_population']['type'] = 'taxonomy_term_reference_plain';
+  $handler->display->display_options['fields']['field_csw_population']['group_rows'] = FALSE;
+  $handler->display->display_options['fields']['field_csw_population']['delta_offset'] = '0';
+  /* Field: SUM(Content: Amount) */
+  $handler->display->display_options['fields']['field_funded_amount']['id'] = 'field_funded_amount';
+  $handler->display->display_options['fields']['field_funded_amount']['table'] = 'field_data_field_funded_amount';
+  $handler->display->display_options['fields']['field_funded_amount']['field'] = 'field_funded_amount';
+  $handler->display->display_options['fields']['field_funded_amount']['group_type'] = 'sum';
+  $handler->display->display_options['fields']['field_funded_amount']['label'] = 'Total';
+  $handler->display->display_options['fields']['field_funded_amount']['settings'] = array(
+    'thousand_separator' => '',
+    'prefix_suffix' => 0,
+  );
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'grant' => 'grant',
+  );
+  $handler->display->display_options['filters']['type']['group'] = 1;
+  /* Filter criterion: Content: Client project (field_client_project) */
+  $handler->display->display_options['filters']['field_client_project_tid_1']['id'] = 'field_client_project_tid_1';
+  $handler->display->display_options['filters']['field_client_project_tid_1']['table'] = 'field_data_field_client_project';
+  $handler->display->display_options['filters']['field_client_project_tid_1']['field'] = 'field_client_project_tid';
+  $handler->display->display_options['filters']['field_client_project_tid_1']['relationship'] = 'field_funder_target_id';
+  $handler->display->display_options['filters']['field_client_project_tid_1']['value'] = array(
+    0 => '1390',
+  );
+  $handler->display->display_options['filters']['field_client_project_tid_1']['group'] = 1;
+  $handler->display->display_options['filters']['field_client_project_tid_1']['vocabulary'] = 'client_projects';
+  $handler->display->display_options['path'] = 'admin/clients/csw-detroit/grants/csw-population-funder-totals';
+  $handler->display->display_options['menu']['type'] = 'normal';
+  $handler->display->display_options['menu']['title'] = 'CSW-Detroit: CSW-Population funder totals';
+  $handler->display->display_options['menu']['weight'] = '0';
+  $handler->display->display_options['menu']['name'] = 'user-menu';
+  $handler->display->display_options['menu']['context'] = 0;
+  $handler->display->display_options['menu']['context_only_inline'] = 0;
+
+  /* Display: CSW-Population recipient totals */
+  $handler = $view->new_display('page', 'CSW-Population recipient totals', 'page_6');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'CSW-Detroit: CSW-Population recipient totals ';
+  $handler->display->display_options['defaults']['pager'] = FALSE;
+  $handler->display->display_options['pager']['type'] = 'none';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'table';
+  $handler->display->display_options['style_options']['grouping'] = array(
+    0 => array(
+      'field' => 'field_csw_population',
+      'rendered' => 1,
+      'rendered_strip' => 0,
+    ),
+  );
+  $handler->display->display_options['style_options']['columns'] = array(
+    'field_csw_population' => 'field_csw_population',
+    'field_funded_amount' => 'field_funded_amount',
+  );
+  $handler->display->display_options['style_options']['default'] = 'field_funded_amount';
+  $handler->display->display_options['style_options']['info'] = array(
+    'field_csw_population' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_funded_amount' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'desc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+  );
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['header'] = FALSE;
+  /* Header: Global: Result summary */
+  $handler->display->display_options['header']['result']['id'] = 'result';
+  $handler->display->display_options['header']['result']['table'] = 'views';
+  $handler->display->display_options['header']['result']['field'] = 'result';
+  /* Header: Global: Text area */
+  $handler->display->display_options['header']['area']['id'] = 'area';
+  $handler->display->display_options['header']['area']['table'] = 'views';
+  $handler->display->display_options['header']['area']['field'] = 'area';
+  $handler->display->display_options['header']['area']['label'] = 'Explainer';
+  $handler->display->display_options['header']['area']['content'] = 'Total amount of grants received by organizations of interest with a given population term assigned by CSW. This field allows many population terms to be selected, so the same organizations may be counted in multiple categories.
+
+The blank term refers to the total amount of grants received by organizations of interest that did not join to CSW’s custom dataset (e.g. they do not have location, services, population or type filled out).
+
+Click TOTAL to sort the term amounts. Search for a specific term using CTRL+F.';
+  $handler->display->display_options['header']['area']['format'] = 'filtered_html';
+  $handler->display->display_options['defaults']['relationships'] = FALSE;
+  /* Relationship: Entity Reference: Referenced Entity */
+  $handler->display->display_options['relationships']['field_funder_target_id']['id'] = 'field_funder_target_id';
+  $handler->display->display_options['relationships']['field_funder_target_id']['table'] = 'field_data_field_funder';
+  $handler->display->display_options['relationships']['field_funder_target_id']['field'] = 'field_funder_target_id';
+  /* Relationship: Entity Reference: Referenced Entity */
+  $handler->display->display_options['relationships']['field_recipient_target_id']['id'] = 'field_recipient_target_id';
+  $handler->display->display_options['relationships']['field_recipient_target_id']['table'] = 'field_data_field_recipient';
+  $handler->display->display_options['relationships']['field_recipient_target_id']['field'] = 'field_recipient_target_id';
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: CSW Population */
+  $handler->display->display_options['fields']['field_csw_population']['id'] = 'field_csw_population';
+  $handler->display->display_options['fields']['field_csw_population']['table'] = 'field_data_field_csw_population';
+  $handler->display->display_options['fields']['field_csw_population']['field'] = 'field_csw_population';
+  $handler->display->display_options['fields']['field_csw_population']['relationship'] = 'field_recipient_target_id';
+  $handler->display->display_options['fields']['field_csw_population']['label'] = 'Recipient CSW Population';
+  $handler->display->display_options['fields']['field_csw_population']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_csw_population']['type'] = 'taxonomy_term_reference_plain';
+  $handler->display->display_options['fields']['field_csw_population']['group_rows'] = FALSE;
+  $handler->display->display_options['fields']['field_csw_population']['delta_offset'] = '0';
+  /* Field: SUM(Content: Amount) */
+  $handler->display->display_options['fields']['field_funded_amount']['id'] = 'field_funded_amount';
+  $handler->display->display_options['fields']['field_funded_amount']['table'] = 'field_data_field_funded_amount';
+  $handler->display->display_options['fields']['field_funded_amount']['field'] = 'field_funded_amount';
+  $handler->display->display_options['fields']['field_funded_amount']['group_type'] = 'sum';
+  $handler->display->display_options['fields']['field_funded_amount']['label'] = 'Total';
+  $handler->display->display_options['fields']['field_funded_amount']['settings'] = array(
+    'thousand_separator' => '',
+    'prefix_suffix' => 0,
+  );
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'grant' => 'grant',
+  );
+  $handler->display->display_options['filters']['type']['group'] = 1;
+  /* Filter criterion: Content: Client project (field_client_project) */
+  $handler->display->display_options['filters']['field_client_project_tid_1']['id'] = 'field_client_project_tid_1';
+  $handler->display->display_options['filters']['field_client_project_tid_1']['table'] = 'field_data_field_client_project';
+  $handler->display->display_options['filters']['field_client_project_tid_1']['field'] = 'field_client_project_tid';
+  $handler->display->display_options['filters']['field_client_project_tid_1']['relationship'] = 'field_recipient_target_id';
+  $handler->display->display_options['filters']['field_client_project_tid_1']['value'] = array(
+    0 => '1390',
+  );
+  $handler->display->display_options['filters']['field_client_project_tid_1']['group'] = 1;
+  $handler->display->display_options['filters']['field_client_project_tid_1']['vocabulary'] = 'client_projects';
+  $handler->display->display_options['path'] = 'admin/clients/csw-detroit/grants/csw-population-recipient-totals';
+  $handler->display->display_options['menu']['type'] = 'normal';
+  $handler->display->display_options['menu']['title'] = 'CSW-Detroit: CSW-Population recipient totals';
+  $handler->display->display_options['menu']['weight'] = '0';
+  $handler->display->display_options['menu']['name'] = 'user-menu';
+  $handler->display->display_options['menu']['context'] = 0;
+  $handler->display->display_options['menu']['context_only_inline'] = 0;
+
+  /* Display: CSW-Type funder totals */
+  $handler = $view->new_display('page', 'CSW-Type funder totals', 'page_7');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'CSW-Detroit: CSW-Type funder totals ';
+  $handler->display->display_options['defaults']['pager'] = FALSE;
+  $handler->display->display_options['pager']['type'] = 'none';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'table';
+  $handler->display->display_options['style_options']['grouping'] = array(
+    0 => array(
+      'field' => 'field_csw_type',
+      'rendered' => 1,
+      'rendered_strip' => 0,
+    ),
+  );
+  $handler->display->display_options['style_options']['columns'] = array(
+    'field_csw_type' => 'field_csw_type',
+    'field_funded_amount' => 'field_funded_amount',
+  );
+  $handler->display->display_options['style_options']['default'] = 'field_funded_amount';
+  $handler->display->display_options['style_options']['info'] = array(
+    'field_csw_type' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_funded_amount' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'desc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+  );
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['header'] = FALSE;
+  /* Header: Global: Result summary */
+  $handler->display->display_options['header']['result']['id'] = 'result';
+  $handler->display->display_options['header']['result']['table'] = 'views';
+  $handler->display->display_options['header']['result']['field'] = 'result';
+  /* Header: Global: Text area */
+  $handler->display->display_options['header']['area']['id'] = 'area';
+  $handler->display->display_options['header']['area']['table'] = 'views';
+  $handler->display->display_options['header']['area']['field'] = 'area';
+  $handler->display->display_options['header']['area']['label'] = 'Explainer';
+  $handler->display->display_options['header']['area']['content'] = 'Total amount of grants funded by organizations of interest with a given type term assigned by CSW.
+
+The blank term refers to the total amount of grants funded by organizations of interest that did not join to CSW’s custom dataset (e.g. they do not have location, services, population or type filled out).
+
+Click TOTAL to sort the term amounts. Search for a specific term using CTRL+F.';
+  $handler->display->display_options['header']['area']['format'] = 'filtered_html';
+  $handler->display->display_options['defaults']['relationships'] = FALSE;
+  /* Relationship: Entity Reference: Referenced Entity */
+  $handler->display->display_options['relationships']['field_funder_target_id']['id'] = 'field_funder_target_id';
+  $handler->display->display_options['relationships']['field_funder_target_id']['table'] = 'field_data_field_funder';
+  $handler->display->display_options['relationships']['field_funder_target_id']['field'] = 'field_funder_target_id';
+  /* Relationship: Entity Reference: Referenced Entity */
+  $handler->display->display_options['relationships']['field_recipient_target_id']['id'] = 'field_recipient_target_id';
+  $handler->display->display_options['relationships']['field_recipient_target_id']['table'] = 'field_data_field_recipient';
+  $handler->display->display_options['relationships']['field_recipient_target_id']['field'] = 'field_recipient_target_id';
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: CSW Type */
+  $handler->display->display_options['fields']['field_csw_type']['id'] = 'field_csw_type';
+  $handler->display->display_options['fields']['field_csw_type']['table'] = 'field_data_field_csw_type';
+  $handler->display->display_options['fields']['field_csw_type']['field'] = 'field_csw_type';
+  $handler->display->display_options['fields']['field_csw_type']['relationship'] = 'field_funder_target_id';
+  $handler->display->display_options['fields']['field_csw_type']['label'] = 'Funder CSW Type';
+  $handler->display->display_options['fields']['field_csw_type']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_csw_type']['type'] = 'taxonomy_term_reference_plain';
+  $handler->display->display_options['fields']['field_csw_type']['group_rows'] = FALSE;
+  $handler->display->display_options['fields']['field_csw_type']['delta_offset'] = '0';
+  /* Field: SUM(Content: Amount) */
+  $handler->display->display_options['fields']['field_funded_amount']['id'] = 'field_funded_amount';
+  $handler->display->display_options['fields']['field_funded_amount']['table'] = 'field_data_field_funded_amount';
+  $handler->display->display_options['fields']['field_funded_amount']['field'] = 'field_funded_amount';
+  $handler->display->display_options['fields']['field_funded_amount']['group_type'] = 'sum';
+  $handler->display->display_options['fields']['field_funded_amount']['label'] = 'Total';
+  $handler->display->display_options['fields']['field_funded_amount']['settings'] = array(
+    'thousand_separator' => '',
+    'prefix_suffix' => 0,
+  );
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'grant' => 'grant',
+  );
+  $handler->display->display_options['filters']['type']['group'] = 1;
+  /* Filter criterion: Content: Client project (field_client_project) */
+  $handler->display->display_options['filters']['field_client_project_tid_1']['id'] = 'field_client_project_tid_1';
+  $handler->display->display_options['filters']['field_client_project_tid_1']['table'] = 'field_data_field_client_project';
+  $handler->display->display_options['filters']['field_client_project_tid_1']['field'] = 'field_client_project_tid';
+  $handler->display->display_options['filters']['field_client_project_tid_1']['relationship'] = 'field_funder_target_id';
+  $handler->display->display_options['filters']['field_client_project_tid_1']['value'] = array(
+    0 => '1390',
+  );
+  $handler->display->display_options['filters']['field_client_project_tid_1']['group'] = 1;
+  $handler->display->display_options['filters']['field_client_project_tid_1']['vocabulary'] = 'client_projects';
+  $handler->display->display_options['path'] = 'admin/clients/csw-detroit/grants/csw-type-funder-totals';
+  $handler->display->display_options['menu']['type'] = 'normal';
+  $handler->display->display_options['menu']['title'] = 'CSW-Detroit: CSW-Type funder totals';
+  $handler->display->display_options['menu']['weight'] = '0';
+  $handler->display->display_options['menu']['name'] = 'user-menu';
+  $handler->display->display_options['menu']['context'] = 0;
+  $handler->display->display_options['menu']['context_only_inline'] = 0;
+
+  /* Display: CSW-Type recipient totals */
+  $handler = $view->new_display('page', 'CSW-Type recipient totals', 'page_8');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'CSW-Detroit: CSW-Type recipient totals ';
+  $handler->display->display_options['defaults']['pager'] = FALSE;
+  $handler->display->display_options['pager']['type'] = 'none';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'table';
+  $handler->display->display_options['style_options']['grouping'] = array(
+    0 => array(
+      'field' => 'field_csw_type',
+      'rendered' => 1,
+      'rendered_strip' => 0,
+    ),
+  );
+  $handler->display->display_options['style_options']['columns'] = array(
+    'field_csw_type' => 'field_csw_type',
+    'field_funded_amount' => 'field_funded_amount',
+  );
+  $handler->display->display_options['style_options']['default'] = 'field_funded_amount';
+  $handler->display->display_options['style_options']['info'] = array(
+    'field_csw_type' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_funded_amount' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'desc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+  );
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['header'] = FALSE;
+  /* Header: Global: Result summary */
+  $handler->display->display_options['header']['result']['id'] = 'result';
+  $handler->display->display_options['header']['result']['table'] = 'views';
+  $handler->display->display_options['header']['result']['field'] = 'result';
+  /* Header: Global: Text area */
+  $handler->display->display_options['header']['area']['id'] = 'area';
+  $handler->display->display_options['header']['area']['table'] = 'views';
+  $handler->display->display_options['header']['area']['field'] = 'area';
+  $handler->display->display_options['header']['area']['label'] = 'Explainer';
+  $handler->display->display_options['header']['area']['content'] = 'Total amount of grants received by organizations of interest with a given type term assigned by CSW.
+
+The blank term refers to the total amount of grants received by organizations of interest that did not join to CSW’s custom dataset (e.g. they do not have location, services, population or type filled out).
+
+Click TOTAL to sort the term amounts. Search for a specific term using CTRL+F.';
+  $handler->display->display_options['header']['area']['format'] = 'filtered_html';
+  $handler->display->display_options['defaults']['relationships'] = FALSE;
+  /* Relationship: Entity Reference: Referenced Entity */
+  $handler->display->display_options['relationships']['field_funder_target_id']['id'] = 'field_funder_target_id';
+  $handler->display->display_options['relationships']['field_funder_target_id']['table'] = 'field_data_field_funder';
+  $handler->display->display_options['relationships']['field_funder_target_id']['field'] = 'field_funder_target_id';
+  /* Relationship: Entity Reference: Referenced Entity */
+  $handler->display->display_options['relationships']['field_recipient_target_id']['id'] = 'field_recipient_target_id';
+  $handler->display->display_options['relationships']['field_recipient_target_id']['table'] = 'field_data_field_recipient';
+  $handler->display->display_options['relationships']['field_recipient_target_id']['field'] = 'field_recipient_target_id';
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: CSW Type */
+  $handler->display->display_options['fields']['field_csw_type']['id'] = 'field_csw_type';
+  $handler->display->display_options['fields']['field_csw_type']['table'] = 'field_data_field_csw_type';
+  $handler->display->display_options['fields']['field_csw_type']['field'] = 'field_csw_type';
+  $handler->display->display_options['fields']['field_csw_type']['relationship'] = 'field_recipient_target_id';
+  $handler->display->display_options['fields']['field_csw_type']['label'] = 'Recipient CSW Type';
+  $handler->display->display_options['fields']['field_csw_type']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_csw_type']['type'] = 'taxonomy_term_reference_plain';
+  $handler->display->display_options['fields']['field_csw_type']['group_rows'] = FALSE;
+  $handler->display->display_options['fields']['field_csw_type']['delta_offset'] = '0';
+  /* Field: SUM(Content: Amount) */
+  $handler->display->display_options['fields']['field_funded_amount']['id'] = 'field_funded_amount';
+  $handler->display->display_options['fields']['field_funded_amount']['table'] = 'field_data_field_funded_amount';
+  $handler->display->display_options['fields']['field_funded_amount']['field'] = 'field_funded_amount';
+  $handler->display->display_options['fields']['field_funded_amount']['group_type'] = 'sum';
+  $handler->display->display_options['fields']['field_funded_amount']['label'] = 'Total';
+  $handler->display->display_options['fields']['field_funded_amount']['settings'] = array(
+    'thousand_separator' => '',
+    'prefix_suffix' => 0,
+  );
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'grant' => 'grant',
+  );
+  $handler->display->display_options['filters']['type']['group'] = 1;
+  /* Filter criterion: Content: Client project (field_client_project) */
+  $handler->display->display_options['filters']['field_client_project_tid_1']['id'] = 'field_client_project_tid_1';
+  $handler->display->display_options['filters']['field_client_project_tid_1']['table'] = 'field_data_field_client_project';
+  $handler->display->display_options['filters']['field_client_project_tid_1']['field'] = 'field_client_project_tid';
+  $handler->display->display_options['filters']['field_client_project_tid_1']['relationship'] = 'field_funder_target_id';
+  $handler->display->display_options['filters']['field_client_project_tid_1']['value'] = array(
+    0 => '1390',
+  );
+  $handler->display->display_options['filters']['field_client_project_tid_1']['group'] = 1;
+  $handler->display->display_options['filters']['field_client_project_tid_1']['vocabulary'] = 'client_projects';
+  $handler->display->display_options['path'] = 'admin/clients/csw-detroit/grants/csw-type-recipient-totals';
+  $handler->display->display_options['menu']['type'] = 'normal';
+  $handler->display->display_options['menu']['title'] = 'CSW-Detroit: CSW-Type recipient totals';
+  $handler->display->display_options['menu']['weight'] = '0';
+  $handler->display->display_options['menu']['name'] = 'user-menu';
+  $handler->display->display_options['menu']['context'] = 0;
+  $handler->display->display_options['menu']['context_only_inline'] = 0;
+
+  /* Display: Organization tags funder totals */
+  $handler = $view->new_display('page', 'Organization tags funder totals', 'page_9');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'CSW-Detroit: Organization tags funder totals ';
+  $handler->display->display_options['defaults']['pager'] = FALSE;
+  $handler->display->display_options['pager']['type'] = 'none';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'table';
+  $handler->display->display_options['style_options']['grouping'] = array(
+    0 => array(
+      'field' => 'field_org_tags',
+      'rendered' => 1,
+      'rendered_strip' => 0,
+    ),
+  );
+  $handler->display->display_options['style_options']['columns'] = array(
+    'field_org_tags' => 'field_org_tags',
+    'field_funded_amount' => 'field_funded_amount',
+  );
+  $handler->display->display_options['style_options']['default'] = 'field_funded_amount';
+  $handler->display->display_options['style_options']['info'] = array(
+    'field_org_tags' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_funded_amount' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'desc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+  );
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['header'] = FALSE;
+  /* Header: Global: Result summary */
+  $handler->display->display_options['header']['result']['id'] = 'result';
+  $handler->display->display_options['header']['result']['table'] = 'views';
+  $handler->display->display_options['header']['result']['field'] = 'result';
+  /* Header: Global: Text area */
+  $handler->display->display_options['header']['area']['id'] = 'area';
+  $handler->display->display_options['header']['area']['table'] = 'views';
+  $handler->display->display_options['header']['area']['field'] = 'area';
+  $handler->display->display_options['header']['area']['label'] = 'Explainer';
+  $handler->display->display_options['header']['area']['content'] = 'Total amount of grants funded by CSW organizations of interest with a given organization-level tag. This field allows many tags to be selected, so the same organizations may be counted in multiple categories.
+
+The blank term refers to the total amount of grants funded by organizations of interest that do not have any organization tags.
+
+Click TOTAL to sort the tag amounts. Search for a specific tag using CTRL+F.';
+  $handler->display->display_options['header']['area']['format'] = 'filtered_html';
+  $handler->display->display_options['defaults']['relationships'] = FALSE;
+  /* Relationship: Entity Reference: Referenced Entity */
+  $handler->display->display_options['relationships']['field_funder_target_id']['id'] = 'field_funder_target_id';
+  $handler->display->display_options['relationships']['field_funder_target_id']['table'] = 'field_data_field_funder';
+  $handler->display->display_options['relationships']['field_funder_target_id']['field'] = 'field_funder_target_id';
+  /* Relationship: Entity Reference: Referenced Entity */
+  $handler->display->display_options['relationships']['field_recipient_target_id']['id'] = 'field_recipient_target_id';
+  $handler->display->display_options['relationships']['field_recipient_target_id']['table'] = 'field_data_field_recipient';
+  $handler->display->display_options['relationships']['field_recipient_target_id']['field'] = 'field_recipient_target_id';
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: Tags */
+  $handler->display->display_options['fields']['field_org_tags']['id'] = 'field_org_tags';
+  $handler->display->display_options['fields']['field_org_tags']['table'] = 'field_data_field_org_tags';
+  $handler->display->display_options['fields']['field_org_tags']['field'] = 'field_org_tags';
+  $handler->display->display_options['fields']['field_org_tags']['relationship'] = 'field_funder_target_id';
+  $handler->display->display_options['fields']['field_org_tags']['label'] = 'Funder organization tags';
+  $handler->display->display_options['fields']['field_org_tags']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_org_tags']['type'] = 'taxonomy_term_reference_plain';
+  $handler->display->display_options['fields']['field_org_tags']['group_rows'] = FALSE;
+  $handler->display->display_options['fields']['field_org_tags']['delta_offset'] = '0';
+  /* Field: SUM(Content: Amount) */
+  $handler->display->display_options['fields']['field_funded_amount']['id'] = 'field_funded_amount';
+  $handler->display->display_options['fields']['field_funded_amount']['table'] = 'field_data_field_funded_amount';
+  $handler->display->display_options['fields']['field_funded_amount']['field'] = 'field_funded_amount';
+  $handler->display->display_options['fields']['field_funded_amount']['group_type'] = 'sum';
+  $handler->display->display_options['fields']['field_funded_amount']['label'] = 'Total';
+  $handler->display->display_options['fields']['field_funded_amount']['settings'] = array(
+    'thousand_separator' => '',
+    'prefix_suffix' => 0,
+  );
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'grant' => 'grant',
+  );
+  $handler->display->display_options['filters']['type']['group'] = 1;
+  /* Filter criterion: Content: Client project (field_client_project) */
+  $handler->display->display_options['filters']['field_client_project_tid_1']['id'] = 'field_client_project_tid_1';
+  $handler->display->display_options['filters']['field_client_project_tid_1']['table'] = 'field_data_field_client_project';
+  $handler->display->display_options['filters']['field_client_project_tid_1']['field'] = 'field_client_project_tid';
+  $handler->display->display_options['filters']['field_client_project_tid_1']['relationship'] = 'field_funder_target_id';
+  $handler->display->display_options['filters']['field_client_project_tid_1']['value'] = array(
+    0 => '1390',
+  );
+  $handler->display->display_options['filters']['field_client_project_tid_1']['group'] = 1;
+  $handler->display->display_options['filters']['field_client_project_tid_1']['vocabulary'] = 'client_projects';
+  $handler->display->display_options['path'] = 'admin/clients/csw-detroit/grants/organization-tags-funder-totals';
+  $handler->display->display_options['menu']['type'] = 'normal';
+  $handler->display->display_options['menu']['title'] = 'CSW-Detroit: Organization tags funder totals';
+  $handler->display->display_options['menu']['weight'] = '0';
+  $handler->display->display_options['menu']['name'] = 'user-menu';
+  $handler->display->display_options['menu']['context'] = 0;
+  $handler->display->display_options['menu']['context_only_inline'] = 0;
+
+  /* Display: Organization tags recipient totals */
+  $handler = $view->new_display('page', 'Organization tags recipient totals', 'page_10');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'CSW-Detroit: Organization tags recipient totals ';
+  $handler->display->display_options['defaults']['pager'] = FALSE;
+  $handler->display->display_options['pager']['type'] = 'none';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'table';
+  $handler->display->display_options['style_options']['grouping'] = array(
+    0 => array(
+      'field' => 'field_org_tags',
+      'rendered' => 1,
+      'rendered_strip' => 0,
+    ),
+  );
+  $handler->display->display_options['style_options']['columns'] = array(
+    'field_org_tags' => 'field_org_tags',
+    'field_funded_amount' => 'field_funded_amount',
+  );
+  $handler->display->display_options['style_options']['default'] = 'field_funded_amount';
+  $handler->display->display_options['style_options']['info'] = array(
+    'field_org_tags' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_funded_amount' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'desc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+  );
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['header'] = FALSE;
+  /* Header: Global: Result summary */
+  $handler->display->display_options['header']['result']['id'] = 'result';
+  $handler->display->display_options['header']['result']['table'] = 'views';
+  $handler->display->display_options['header']['result']['field'] = 'result';
+  /* Header: Global: Text area */
+  $handler->display->display_options['header']['area']['id'] = 'area';
+  $handler->display->display_options['header']['area']['table'] = 'views';
+  $handler->display->display_options['header']['area']['field'] = 'area';
+  $handler->display->display_options['header']['area']['label'] = 'Explainer';
+  $handler->display->display_options['header']['area']['content'] = 'Total amount of grants received by CSW organizations of interest with a given organization-level tag. This field allows many tags to be selected, so the same organizations may be counted in multiple categories.
+
+The blank term refers to the total amount of grants received by organizations of interest that do not have any organization tags.
+
+Click TOTAL to sort the tag amounts. Search for a specific tag using CTRL+F.';
+  $handler->display->display_options['header']['area']['format'] = 'filtered_html';
+  $handler->display->display_options['defaults']['relationships'] = FALSE;
+  /* Relationship: Entity Reference: Referenced Entity */
+  $handler->display->display_options['relationships']['field_funder_target_id']['id'] = 'field_funder_target_id';
+  $handler->display->display_options['relationships']['field_funder_target_id']['table'] = 'field_data_field_funder';
+  $handler->display->display_options['relationships']['field_funder_target_id']['field'] = 'field_funder_target_id';
+  /* Relationship: Entity Reference: Referenced Entity */
+  $handler->display->display_options['relationships']['field_recipient_target_id']['id'] = 'field_recipient_target_id';
+  $handler->display->display_options['relationships']['field_recipient_target_id']['table'] = 'field_data_field_recipient';
+  $handler->display->display_options['relationships']['field_recipient_target_id']['field'] = 'field_recipient_target_id';
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: Tags */
+  $handler->display->display_options['fields']['field_org_tags']['id'] = 'field_org_tags';
+  $handler->display->display_options['fields']['field_org_tags']['table'] = 'field_data_field_org_tags';
+  $handler->display->display_options['fields']['field_org_tags']['field'] = 'field_org_tags';
+  $handler->display->display_options['fields']['field_org_tags']['relationship'] = 'field_recipient_target_id';
+  $handler->display->display_options['fields']['field_org_tags']['label'] = 'Recipient organization tags';
+  $handler->display->display_options['fields']['field_org_tags']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_org_tags']['type'] = 'taxonomy_term_reference_plain';
+  $handler->display->display_options['fields']['field_org_tags']['group_rows'] = FALSE;
+  $handler->display->display_options['fields']['field_org_tags']['delta_offset'] = '0';
+  /* Field: SUM(Content: Amount) */
+  $handler->display->display_options['fields']['field_funded_amount']['id'] = 'field_funded_amount';
+  $handler->display->display_options['fields']['field_funded_amount']['table'] = 'field_data_field_funded_amount';
+  $handler->display->display_options['fields']['field_funded_amount']['field'] = 'field_funded_amount';
+  $handler->display->display_options['fields']['field_funded_amount']['group_type'] = 'sum';
+  $handler->display->display_options['fields']['field_funded_amount']['label'] = 'Total';
+  $handler->display->display_options['fields']['field_funded_amount']['settings'] = array(
+    'thousand_separator' => '',
+    'prefix_suffix' => 0,
+  );
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'grant' => 'grant',
+  );
+  $handler->display->display_options['filters']['type']['group'] = 1;
+  /* Filter criterion: Content: Client project (field_client_project) */
+  $handler->display->display_options['filters']['field_client_project_tid_1']['id'] = 'field_client_project_tid_1';
+  $handler->display->display_options['filters']['field_client_project_tid_1']['table'] = 'field_data_field_client_project';
+  $handler->display->display_options['filters']['field_client_project_tid_1']['field'] = 'field_client_project_tid';
+  $handler->display->display_options['filters']['field_client_project_tid_1']['relationship'] = 'field_recipient_target_id';
+  $handler->display->display_options['filters']['field_client_project_tid_1']['value'] = array(
+    0 => '1390',
+  );
+  $handler->display->display_options['filters']['field_client_project_tid_1']['group'] = 1;
+  $handler->display->display_options['filters']['field_client_project_tid_1']['vocabulary'] = 'client_projects';
+  $handler->display->display_options['path'] = 'admin/clients/csw-detroit/grants/organization-tags-recipient-totals';
+  $handler->display->display_options['menu']['type'] = 'normal';
+  $handler->display->display_options['menu']['title'] = 'CSW-Detroit: Organization tags recipient totals';
+  $handler->display->display_options['menu']['weight'] = '0';
+  $handler->display->display_options['menu']['name'] = 'user-menu';
+  $handler->display->display_options['menu']['context'] = 0;
+  $handler->display->display_options['menu']['context_only_inline'] = 0;
+
+  /* Display: Grant tags funder totals */
+  $handler = $view->new_display('page', 'Grant tags funder totals', 'page_11');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'CSW-Detroit: CSW organization-as-funder tags totals ';
+  $handler->display->display_options['defaults']['group_by'] = FALSE;
+  $handler->display->display_options['group_by'] = TRUE;
+  $handler->display->display_options['defaults']['pager'] = FALSE;
+  $handler->display->display_options['pager']['type'] = 'none';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'table';
+  $handler->display->display_options['style_options']['grouping'] = array(
+    0 => array(
+      'field' => 'field_grant_tags',
+      'rendered' => 1,
+      'rendered_strip' => 0,
+    ),
+  );
+  $handler->display->display_options['style_options']['columns'] = array(
+    'field_grant_tags' => 'field_grant_tags',
+    'field_funded_amount' => 'field_funded_amount',
+  );
+  $handler->display->display_options['style_options']['default'] = 'field_funded_amount';
+  $handler->display->display_options['style_options']['info'] = array(
+    'field_grant_tags' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_funded_amount' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+  );
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['header'] = FALSE;
+  /* Header: Global: Result summary */
+  $handler->display->display_options['header']['result']['id'] = 'result';
+  $handler->display->display_options['header']['result']['table'] = 'views';
+  $handler->display->display_options['header']['result']['field'] = 'result';
+  /* Header: Global: Text area */
+  $handler->display->display_options['header']['area']['id'] = 'area';
+  $handler->display->display_options['header']['area']['table'] = 'views';
+  $handler->display->display_options['header']['area']['field'] = 'area';
+  $handler->display->display_options['header']['area']['label'] = 'Explainer';
+  $handler->display->display_options['header']['area']['content'] = 'Total amount of grants funded by CSW organizations of interest with a given grant-level tag. This field allows many tags to be selected, so the same grants may be counted in multiple categories.
+
+The blank term refers to the total amount of grants funded by organizations of interest that do not have any grant tags.
+
+Click TOTAL to sort the tag amounts. Search for a specific tag using CTRL+F.';
+  $handler->display->display_options['header']['area']['format'] = 'filtered_html';
+  $handler->display->display_options['defaults']['relationships'] = FALSE;
+  /* Relationship: Entity Reference: Referenced Entity */
+  $handler->display->display_options['relationships']['field_funder_target_id']['id'] = 'field_funder_target_id';
+  $handler->display->display_options['relationships']['field_funder_target_id']['table'] = 'field_data_field_funder';
+  $handler->display->display_options['relationships']['field_funder_target_id']['field'] = 'field_funder_target_id';
+  /* Relationship: Entity Reference: Referenced Entity */
+  $handler->display->display_options['relationships']['field_recipient_target_id']['id'] = 'field_recipient_target_id';
+  $handler->display->display_options['relationships']['field_recipient_target_id']['table'] = 'field_data_field_recipient';
+  $handler->display->display_options['relationships']['field_recipient_target_id']['field'] = 'field_recipient_target_id';
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: Tags */
+  $handler->display->display_options['fields']['field_grant_tags']['id'] = 'field_grant_tags';
+  $handler->display->display_options['fields']['field_grant_tags']['table'] = 'field_data_field_grant_tags';
+  $handler->display->display_options['fields']['field_grant_tags']['field'] = 'field_grant_tags';
+  $handler->display->display_options['fields']['field_grant_tags']['label'] = 'Grant tags';
+  $handler->display->display_options['fields']['field_grant_tags']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_grant_tags']['type'] = 'taxonomy_term_reference_plain';
+  $handler->display->display_options['fields']['field_grant_tags']['group_rows'] = FALSE;
+  $handler->display->display_options['fields']['field_grant_tags']['delta_offset'] = '0';
+  /* Field: SUM(Content: Amount) */
+  $handler->display->display_options['fields']['field_funded_amount']['id'] = 'field_funded_amount';
+  $handler->display->display_options['fields']['field_funded_amount']['table'] = 'field_data_field_funded_amount';
+  $handler->display->display_options['fields']['field_funded_amount']['field'] = 'field_funded_amount';
+  $handler->display->display_options['fields']['field_funded_amount']['group_type'] = 'sum';
+  $handler->display->display_options['fields']['field_funded_amount']['label'] = 'Total';
+  $handler->display->display_options['fields']['field_funded_amount']['settings'] = array(
+    'thousand_separator' => '',
+    'prefix_suffix' => 0,
+  );
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'grant' => 'grant',
+  );
+  $handler->display->display_options['filters']['type']['group'] = 1;
+  /* Filter criterion: Content: Client project (field_client_project) */
+  $handler->display->display_options['filters']['field_client_project_tid_1']['id'] = 'field_client_project_tid_1';
+  $handler->display->display_options['filters']['field_client_project_tid_1']['table'] = 'field_data_field_client_project';
+  $handler->display->display_options['filters']['field_client_project_tid_1']['field'] = 'field_client_project_tid';
+  $handler->display->display_options['filters']['field_client_project_tid_1']['relationship'] = 'field_funder_target_id';
+  $handler->display->display_options['filters']['field_client_project_tid_1']['value'] = array(
+    0 => '1390',
+  );
+  $handler->display->display_options['filters']['field_client_project_tid_1']['group'] = 1;
+  $handler->display->display_options['filters']['field_client_project_tid_1']['vocabulary'] = 'client_projects';
+  $handler->display->display_options['path'] = 'admin/clients/csw-detroit/grants/csw-funder-tag-totals';
+  $handler->display->display_options['menu']['type'] = 'normal';
+  $handler->display->display_options['menu']['title'] = 'CSW-Detroit: CSW-funder tags totals';
+  $handler->display->display_options['menu']['weight'] = '0';
+  $handler->display->display_options['menu']['name'] = 'user-menu';
+  $handler->display->display_options['menu']['context'] = 0;
+  $handler->display->display_options['menu']['context_only_inline'] = 0;
+
+  /* Display: Grant tags recipient totals */
+  $handler = $view->new_display('page', 'Grant tags recipient totals', 'page_12');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'CSW-Detroit: CSW organization-as-recipient tags totals ';
+  $handler->display->display_options['defaults']['group_by'] = FALSE;
+  $handler->display->display_options['group_by'] = TRUE;
+  $handler->display->display_options['defaults']['pager'] = FALSE;
+  $handler->display->display_options['pager']['type'] = 'none';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'table';
+  $handler->display->display_options['style_options']['grouping'] = array(
+    0 => array(
+      'field' => 'field_grant_tags',
+      'rendered' => 1,
+      'rendered_strip' => 0,
+    ),
+  );
+  $handler->display->display_options['style_options']['columns'] = array(
+    'field_grant_tags' => 'field_grant_tags',
+    'field_funded_amount' => 'field_funded_amount',
+  );
+  $handler->display->display_options['style_options']['default'] = 'field_funded_amount';
+  $handler->display->display_options['style_options']['info'] = array(
+    'field_grant_tags' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_funded_amount' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'desc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+  );
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['header'] = FALSE;
+  /* Header: Global: Result summary */
+  $handler->display->display_options['header']['result']['id'] = 'result';
+  $handler->display->display_options['header']['result']['table'] = 'views';
+  $handler->display->display_options['header']['result']['field'] = 'result';
+  /* Header: Global: Text area */
+  $handler->display->display_options['header']['area']['id'] = 'area';
+  $handler->display->display_options['header']['area']['table'] = 'views';
+  $handler->display->display_options['header']['area']['field'] = 'area';
+  $handler->display->display_options['header']['area']['label'] = 'Explainer';
+  $handler->display->display_options['header']['area']['content'] = 'Total amount of grants received by CSW organizations of interest with a given grant-level tag. This field allows many tags to be selected, so the same grants may be counted in multiple categories.
+
+The blank term refers to the total amount of grants received by organizations of interest that do not have any grant tags.
+
+Click TOTAL to sort the tag amounts. Search for a specific tag using CTRL+F.';
+  $handler->display->display_options['header']['area']['format'] = 'filtered_html';
+  $handler->display->display_options['defaults']['relationships'] = FALSE;
+  /* Relationship: Entity Reference: Referenced Entity */
+  $handler->display->display_options['relationships']['field_funder_target_id']['id'] = 'field_funder_target_id';
+  $handler->display->display_options['relationships']['field_funder_target_id']['table'] = 'field_data_field_funder';
+  $handler->display->display_options['relationships']['field_funder_target_id']['field'] = 'field_funder_target_id';
+  /* Relationship: Entity Reference: Referenced Entity */
+  $handler->display->display_options['relationships']['field_recipient_target_id']['id'] = 'field_recipient_target_id';
+  $handler->display->display_options['relationships']['field_recipient_target_id']['table'] = 'field_data_field_recipient';
+  $handler->display->display_options['relationships']['field_recipient_target_id']['field'] = 'field_recipient_target_id';
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: Tags */
+  $handler->display->display_options['fields']['field_grant_tags']['id'] = 'field_grant_tags';
+  $handler->display->display_options['fields']['field_grant_tags']['table'] = 'field_data_field_grant_tags';
+  $handler->display->display_options['fields']['field_grant_tags']['field'] = 'field_grant_tags';
+  $handler->display->display_options['fields']['field_grant_tags']['label'] = 'Grant tags';
+  $handler->display->display_options['fields']['field_grant_tags']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_grant_tags']['type'] = 'taxonomy_term_reference_plain';
+  $handler->display->display_options['fields']['field_grant_tags']['group_rows'] = FALSE;
+  $handler->display->display_options['fields']['field_grant_tags']['delta_offset'] = '0';
+  /* Field: SUM(Content: Amount) */
+  $handler->display->display_options['fields']['field_funded_amount']['id'] = 'field_funded_amount';
+  $handler->display->display_options['fields']['field_funded_amount']['table'] = 'field_data_field_funded_amount';
+  $handler->display->display_options['fields']['field_funded_amount']['field'] = 'field_funded_amount';
+  $handler->display->display_options['fields']['field_funded_amount']['group_type'] = 'sum';
+  $handler->display->display_options['fields']['field_funded_amount']['label'] = 'Total';
+  $handler->display->display_options['fields']['field_funded_amount']['settings'] = array(
+    'thousand_separator' => '',
+    'prefix_suffix' => 0,
+  );
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'grant' => 'grant',
+  );
+  $handler->display->display_options['filters']['type']['group'] = 1;
+  /* Filter criterion: Content: Client project (field_client_project) */
+  $handler->display->display_options['filters']['field_client_project_tid_1']['id'] = 'field_client_project_tid_1';
+  $handler->display->display_options['filters']['field_client_project_tid_1']['table'] = 'field_data_field_client_project';
+  $handler->display->display_options['filters']['field_client_project_tid_1']['field'] = 'field_client_project_tid';
+  $handler->display->display_options['filters']['field_client_project_tid_1']['relationship'] = 'field_recipient_target_id';
+  $handler->display->display_options['filters']['field_client_project_tid_1']['value'] = array(
+    0 => '1390',
+  );
+  $handler->display->display_options['filters']['field_client_project_tid_1']['group'] = 1;
+  $handler->display->display_options['filters']['field_client_project_tid_1']['vocabulary'] = 'client_projects';
+  $handler->display->display_options['path'] = 'admin/clients/csw-detroit/grants/csw-recipient-tag-totals';
+  $handler->display->display_options['menu']['type'] = 'normal';
+  $handler->display->display_options['menu']['title'] = 'CSW-Detroit: CSW-recipient tags totals';
+  $handler->display->display_options['menu']['weight'] = '0';
+  $handler->display->display_options['menu']['name'] = 'user-menu';
+  $handler->display->display_options['menu']['context'] = 0;
+  $handler->display->display_options['menu']['context_only_inline'] = 0;
+
+  /* Display: CSW-Services funder totals */
+  $handler = $view->new_display('page', 'CSW-Services funder totals', 'page_13');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'CSW-Detroit: CSW-Services funder totals ';
+  $handler->display->display_options['defaults']['group_by'] = FALSE;
+  $handler->display->display_options['group_by'] = TRUE;
+  $handler->display->display_options['defaults']['pager'] = FALSE;
+  $handler->display->display_options['pager']['type'] = 'none';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'table';
+  $handler->display->display_options['style_options']['grouping'] = array(
+    0 => array(
+      'field' => 'field_csw_services',
+      'rendered' => 1,
+      'rendered_strip' => 0,
+    ),
+  );
+  $handler->display->display_options['style_options']['columns'] = array(
+    'field_csw_services' => 'field_csw_services',
+    'field_funded_amount' => 'field_funded_amount',
+  );
+  $handler->display->display_options['style_options']['default'] = 'field_funded_amount';
+  $handler->display->display_options['style_options']['info'] = array(
+    'field_csw_services' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_funded_amount' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'desc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+  );
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['header'] = FALSE;
+  /* Header: Global: Result summary */
+  $handler->display->display_options['header']['result']['id'] = 'result';
+  $handler->display->display_options['header']['result']['table'] = 'views';
+  $handler->display->display_options['header']['result']['field'] = 'result';
+  /* Header: Global: Text area */
+  $handler->display->display_options['header']['area']['id'] = 'area';
+  $handler->display->display_options['header']['area']['table'] = 'views';
+  $handler->display->display_options['header']['area']['field'] = 'area';
+  $handler->display->display_options['header']['area']['label'] = 'Explainer';
+  $handler->display->display_options['header']['area']['content'] = 'Total amount of grants funded by organizations of interest with a given services term assigned by CSW. This field allows many service terms to be selected, so the same organizations may be counted in multiple categories.
+
+The blank term refers to the total amount of grants funded by organizations of interest that did not join to CSW’s custom dataset (e.g. they do not have location, services, population or type filled out).
+
+Click TOTAL to sort the term amounts. Search for a specific term using CTRL+F.';
+  $handler->display->display_options['header']['area']['format'] = 'filtered_html';
+  $handler->display->display_options['defaults']['relationships'] = FALSE;
+  /* Relationship: Entity Reference: Referenced Entity */
+  $handler->display->display_options['relationships']['field_funder_target_id']['id'] = 'field_funder_target_id';
+  $handler->display->display_options['relationships']['field_funder_target_id']['table'] = 'field_data_field_funder';
+  $handler->display->display_options['relationships']['field_funder_target_id']['field'] = 'field_funder_target_id';
+  /* Relationship: Entity Reference: Referenced Entity */
+  $handler->display->display_options['relationships']['field_recipient_target_id']['id'] = 'field_recipient_target_id';
+  $handler->display->display_options['relationships']['field_recipient_target_id']['table'] = 'field_data_field_recipient';
+  $handler->display->display_options['relationships']['field_recipient_target_id']['field'] = 'field_recipient_target_id';
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: CSW Services */
+  $handler->display->display_options['fields']['field_csw_services']['id'] = 'field_csw_services';
+  $handler->display->display_options['fields']['field_csw_services']['table'] = 'field_data_field_csw_services';
+  $handler->display->display_options['fields']['field_csw_services']['field'] = 'field_csw_services';
+  $handler->display->display_options['fields']['field_csw_services']['relationship'] = 'field_funder_target_id';
+  $handler->display->display_options['fields']['field_csw_services']['label'] = 'Funder CSW Services';
+  $handler->display->display_options['fields']['field_csw_services']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_csw_services']['type'] = 'taxonomy_term_reference_plain';
+  $handler->display->display_options['fields']['field_csw_services']['group_rows'] = FALSE;
+  $handler->display->display_options['fields']['field_csw_services']['delta_offset'] = '0';
+  /* Field: SUM(Content: Amount) */
+  $handler->display->display_options['fields']['field_funded_amount']['id'] = 'field_funded_amount';
+  $handler->display->display_options['fields']['field_funded_amount']['table'] = 'field_data_field_funded_amount';
+  $handler->display->display_options['fields']['field_funded_amount']['field'] = 'field_funded_amount';
+  $handler->display->display_options['fields']['field_funded_amount']['group_type'] = 'sum';
+  $handler->display->display_options['fields']['field_funded_amount']['label'] = 'Total';
+  $handler->display->display_options['fields']['field_funded_amount']['settings'] = array(
+    'thousand_separator' => '',
+    'prefix_suffix' => 0,
+  );
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'grant' => 'grant',
+  );
+  $handler->display->display_options['filters']['type']['group'] = 1;
+  /* Filter criterion: Content: Client project (field_client_project) */
+  $handler->display->display_options['filters']['field_client_project_tid_1']['id'] = 'field_client_project_tid_1';
+  $handler->display->display_options['filters']['field_client_project_tid_1']['table'] = 'field_data_field_client_project';
+  $handler->display->display_options['filters']['field_client_project_tid_1']['field'] = 'field_client_project_tid';
+  $handler->display->display_options['filters']['field_client_project_tid_1']['relationship'] = 'field_funder_target_id';
+  $handler->display->display_options['filters']['field_client_project_tid_1']['value'] = array(
+    0 => '1390',
+  );
+  $handler->display->display_options['filters']['field_client_project_tid_1']['group'] = 1;
+  $handler->display->display_options['filters']['field_client_project_tid_1']['vocabulary'] = 'client_projects';
+  $handler->display->display_options['path'] = 'admin/clients/csw-detroit/grants/csw-services-funder-totals';
+  $handler->display->display_options['menu']['type'] = 'normal';
+  $handler->display->display_options['menu']['title'] = 'CSW-Detroit: CSW-Services funder totals';
+  $handler->display->display_options['menu']['weight'] = '0';
+  $handler->display->display_options['menu']['name'] = 'user-menu';
+  $handler->display->display_options['menu']['context'] = 0;
+  $handler->display->display_options['menu']['context_only_inline'] = 0;
+
+  /* Display: CSW-Services recipient totals */
+  $handler = $view->new_display('page', 'CSW-Services recipient totals', 'page_14');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'CSW-Detroit: CSW-Services recipient totals ';
+  $handler->display->display_options['defaults']['group_by'] = FALSE;
+  $handler->display->display_options['group_by'] = TRUE;
+  $handler->display->display_options['defaults']['query'] = FALSE;
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['defaults']['pager'] = FALSE;
+  $handler->display->display_options['pager']['type'] = 'none';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'table';
+  $handler->display->display_options['style_options']['grouping'] = array(
+    0 => array(
+      'field' => 'field_csw_services',
+      'rendered' => 1,
+      'rendered_strip' => 0,
+    ),
+  );
+  $handler->display->display_options['style_options']['columns'] = array(
+    'field_csw_services' => 'field_csw_services',
+    'field_funded_amount' => 'field_funded_amount',
+  );
+  $handler->display->display_options['style_options']['default'] = 'field_funded_amount';
+  $handler->display->display_options['style_options']['info'] = array(
+    'field_csw_services' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_funded_amount' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'desc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+  );
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['header'] = FALSE;
+  /* Header: Global: Result summary */
+  $handler->display->display_options['header']['result']['id'] = 'result';
+  $handler->display->display_options['header']['result']['table'] = 'views';
+  $handler->display->display_options['header']['result']['field'] = 'result';
+  /* Header: Global: Text area */
+  $handler->display->display_options['header']['area']['id'] = 'area';
+  $handler->display->display_options['header']['area']['table'] = 'views';
+  $handler->display->display_options['header']['area']['field'] = 'area';
+  $handler->display->display_options['header']['area']['label'] = 'Explainer';
+  $handler->display->display_options['header']['area']['content'] = 'Total amount of grants received by organizations of interest with a given services term assigned by CSW. This field allows many service terms to be selected, so the same organizations may be counted in multiple categories.
+
+The blank term refers to the total amount of grants received by organizations of interest that did not join to CSW’s custom dataset (e.g. they do not have location, services, population or type filled out).
+
+Click TOTAL to sort the term amounts. Search for a specific term using CTRL+F.';
+  $handler->display->display_options['header']['area']['format'] = 'filtered_html';
+  $handler->display->display_options['defaults']['relationships'] = FALSE;
+  /* Relationship: Entity Reference: Referenced Entity */
+  $handler->display->display_options['relationships']['field_funder_target_id']['id'] = 'field_funder_target_id';
+  $handler->display->display_options['relationships']['field_funder_target_id']['table'] = 'field_data_field_funder';
+  $handler->display->display_options['relationships']['field_funder_target_id']['field'] = 'field_funder_target_id';
+  /* Relationship: Entity Reference: Referenced Entity */
+  $handler->display->display_options['relationships']['field_recipient_target_id']['id'] = 'field_recipient_target_id';
+  $handler->display->display_options['relationships']['field_recipient_target_id']['table'] = 'field_data_field_recipient';
+  $handler->display->display_options['relationships']['field_recipient_target_id']['field'] = 'field_recipient_target_id';
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: CSW Services */
+  $handler->display->display_options['fields']['field_csw_services']['id'] = 'field_csw_services';
+  $handler->display->display_options['fields']['field_csw_services']['table'] = 'field_data_field_csw_services';
+  $handler->display->display_options['fields']['field_csw_services']['field'] = 'field_csw_services';
+  $handler->display->display_options['fields']['field_csw_services']['relationship'] = 'field_recipient_target_id';
+  $handler->display->display_options['fields']['field_csw_services']['label'] = 'Recipient CSW Services';
+  $handler->display->display_options['fields']['field_csw_services']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_csw_services']['type'] = 'taxonomy_term_reference_plain';
+  $handler->display->display_options['fields']['field_csw_services']['group_rows'] = FALSE;
+  $handler->display->display_options['fields']['field_csw_services']['delta_offset'] = '0';
+  /* Field: SUM(Content: Amount) */
+  $handler->display->display_options['fields']['field_funded_amount']['id'] = 'field_funded_amount';
+  $handler->display->display_options['fields']['field_funded_amount']['table'] = 'field_data_field_funded_amount';
+  $handler->display->display_options['fields']['field_funded_amount']['field'] = 'field_funded_amount';
+  $handler->display->display_options['fields']['field_funded_amount']['group_type'] = 'sum';
+  $handler->display->display_options['fields']['field_funded_amount']['label'] = 'Total';
+  $handler->display->display_options['fields']['field_funded_amount']['settings'] = array(
+    'thousand_separator' => '',
+    'prefix_suffix' => 0,
+  );
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'grant' => 'grant',
+  );
+  $handler->display->display_options['filters']['type']['group'] = 1;
+  /* Filter criterion: Content: Client project (field_client_project) */
+  $handler->display->display_options['filters']['field_client_project_tid_1']['id'] = 'field_client_project_tid_1';
+  $handler->display->display_options['filters']['field_client_project_tid_1']['table'] = 'field_data_field_client_project';
+  $handler->display->display_options['filters']['field_client_project_tid_1']['field'] = 'field_client_project_tid';
+  $handler->display->display_options['filters']['field_client_project_tid_1']['relationship'] = 'field_recipient_target_id';
+  $handler->display->display_options['filters']['field_client_project_tid_1']['value'] = array(
+    0 => '1390',
+  );
+  $handler->display->display_options['filters']['field_client_project_tid_1']['group'] = 1;
+  $handler->display->display_options['filters']['field_client_project_tid_1']['vocabulary'] = 'client_projects';
+  $handler->display->display_options['path'] = 'admin/clients/csw-detroit/grants/csw-services-recipient-totals';
+  $handler->display->display_options['menu']['type'] = 'normal';
+  $handler->display->display_options['menu']['title'] = 'CSW-Detroit: CSW-Services recipient totals';
+  $handler->display->display_options['menu']['weight'] = '0';
+  $handler->display->display_options['menu']['name'] = 'user-menu';
+  $handler->display->display_options['menu']['context'] = 0;
+  $handler->display->display_options['menu']['context_only_inline'] = 0;
+
+  /* Display: funder grants */
+  $handler = $view->new_display('page', 'funder grants', 'funder_grants');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'CSW-Detroit: funder grants';
+  $handler->display->display_options['defaults']['group_by'] = FALSE;
+  $handler->display->display_options['defaults']['query'] = FALSE;
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['query']['options']['distinct'] = TRUE;
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'editableviews_table';
+  $handler->display->display_options['style_options']['columns'] = array(
+    'field_funder' => 'field_funder',
+    'field_recipient' => 'field_recipient',
+    'field_funded_amount' => 'field_funded_amount',
+    'field_year' => 'field_year',
+    'field_grant_tags_editable' => 'field_grant_tags_editable',
+    'field_grant_tags_editable_1' => 'field_grant_tags_editable_1',
+  );
+  $handler->display->display_options['style_options']['default'] = 'field_year';
+  $handler->display->display_options['style_options']['info'] = array(
+    'field_funder' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_recipient' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_funded_amount' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_year' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_grant_tags_editable' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_grant_tags_editable_1' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+  );
+  $handler->display->display_options['style_options']['batch_size'] = '10';
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['header'] = FALSE;
+  /* Header: Global: Result summary */
+  $handler->display->display_options['header']['result']['id'] = 'result';
+  $handler->display->display_options['header']['result']['table'] = 'views';
+  $handler->display->display_options['header']['result']['field'] = 'result';
+  /* Header: Global: Text area */
+  $handler->display->display_options['header']['area']['id'] = 'area';
+  $handler->display->display_options['header']['area']['table'] = 'views';
+  $handler->display->display_options['header']['area']['field'] = 'area';
+  $handler->display->display_options['header']['area']['label'] = 'Explainer';
+  $handler->display->display_options['header']['area']['content'] = 'A list of the grants funded by organizations of interest in the dataset.
+
+This is an editable view accessible only to CSW administrators.
+
+Use this view to store any custom tags or notes you’re collecting independently that are tied to the same organizations of interest that the Detroit Ledger has collected funding data for. You can add many tags using a comma-separated list. Click SAVE at the bottom of the page to apply tags.
+
+The total amounts tied to these custom tags are aggregated in other views.
+
+Click FUNDER, RECIPIENT, AMOUNT or YEAR to sort rows.';
+  $handler->display->display_options['header']['area']['format'] = 'filtered_html';
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: Funder */
+  $handler->display->display_options['fields']['field_funder']['id'] = 'field_funder';
+  $handler->display->display_options['fields']['field_funder']['table'] = 'field_data_field_funder';
+  $handler->display->display_options['fields']['field_funder']['field'] = 'field_funder';
+  $handler->display->display_options['fields']['field_funder']['settings'] = array(
+    'link' => 0,
+  );
+  /* Field: Content: Recipient */
+  $handler->display->display_options['fields']['field_recipient']['id'] = 'field_recipient';
+  $handler->display->display_options['fields']['field_recipient']['table'] = 'field_data_field_recipient';
+  $handler->display->display_options['fields']['field_recipient']['field'] = 'field_recipient';
+  $handler->display->display_options['fields']['field_recipient']['settings'] = array(
+    'link' => 0,
+  );
+  /* Field: Content: Amount */
+  $handler->display->display_options['fields']['field_funded_amount']['id'] = 'field_funded_amount';
+  $handler->display->display_options['fields']['field_funded_amount']['table'] = 'field_data_field_funded_amount';
+  $handler->display->display_options['fields']['field_funded_amount']['field'] = 'field_funded_amount';
+  $handler->display->display_options['fields']['field_funded_amount']['settings'] = array(
+    'thousand_separator' => ',',
+    'prefix_suffix' => 1,
+  );
+  /* Field: Content: Year */
+  $handler->display->display_options['fields']['field_year']['id'] = 'field_year';
+  $handler->display->display_options['fields']['field_year']['table'] = 'field_data_field_year';
+  $handler->display->display_options['fields']['field_year']['field'] = 'field_year';
+  $handler->display->display_options['fields']['field_year']['settings'] = array(
+    'format_type' => 'gnl_date_type_human_short',
+    'fromto' => 'both',
+    'multiple_number' => '',
+    'multiple_from' => '',
+    'multiple_to' => '',
+    'show_remaining_days' => 0,
+  );
+  /* Field: Content: Description */
+  $handler->display->display_options['fields']['body']['id'] = 'body';
+  $handler->display->display_options['fields']['body']['table'] = 'field_data_body';
+  $handler->display->display_options['fields']['body']['field'] = 'body';
+  /* Field: Content: Tags (editable) */
+  $handler->display->display_options['fields']['field_grant_tags_editable']['id'] = 'field_grant_tags_editable';
+  $handler->display->display_options['fields']['field_grant_tags_editable']['table'] = 'field_data_field_grant_tags';
+  $handler->display->display_options['fields']['field_grant_tags_editable']['field'] = 'field_grant_tags_editable';
+  $handler->display->display_options['fields']['field_grant_tags_editable']['label'] = 'Tags';
+  $handler->display->display_options['fields']['field_grant_tags_editable']['type'] = 'taxonomy_term_reference_plain';
+  $handler->display->display_options['fields']['field_grant_tags_editable']['delta_offset'] = '0';
+  $handler->display->display_options['fields']['field_grant_tags_editable']['widget_type'] = 'taxonomy_autocomplete';
+  $handler->display->display_options['fields']['field_grant_tags_editable']['suppress_label'] = 0;
+  $handler->display->display_options['fields']['field_grant_tags_editable']['suppress_description'] = 0;
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['filter_groups']['groups'] = array(
+    1 => 'AND',
+    2 => 'OR',
+  );
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'grant' => 'grant',
+  );
+  $handler->display->display_options['filters']['type']['group'] = 1;
+  /* Filter criterion: Content: Client project (field_client_project) */
+  $handler->display->display_options['filters']['field_client_project_tid_1']['id'] = 'field_client_project_tid_1';
+  $handler->display->display_options['filters']['field_client_project_tid_1']['table'] = 'field_data_field_client_project';
+  $handler->display->display_options['filters']['field_client_project_tid_1']['field'] = 'field_client_project_tid';
+  $handler->display->display_options['filters']['field_client_project_tid_1']['relationship'] = 'field_funder_target_id';
+  $handler->display->display_options['filters']['field_client_project_tid_1']['value'] = array(
+    1390 => '1390',
+  );
+  $handler->display->display_options['filters']['field_client_project_tid_1']['group'] = 2;
+  $handler->display->display_options['filters']['field_client_project_tid_1']['type'] = 'select';
+  $handler->display->display_options['filters']['field_client_project_tid_1']['vocabulary'] = 'client_projects';
+  $handler->display->display_options['path'] = 'admin/clients/csw-detroit/funder-grants';
+  $handler->display->display_options['menu']['title'] = 'Edit CSW-Detroit funder grants';
+  $handler->display->display_options['menu']['weight'] = '0';
+  $handler->display->display_options['menu']['name'] = 'user-menu';
+  $handler->display->display_options['menu']['context'] = 0;
+  $handler->display->display_options['menu']['context_only_inline'] = 0;
+
+  /* Display: funder & recipient grants */
+  $handler = $view->new_display('page', 'funder & recipient grants', 'page_15');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'CSW-Detroit: funder & recipient grants';
+  $handler->display->display_options['defaults']['group_by'] = FALSE;
+  $handler->display->display_options['defaults']['query'] = FALSE;
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['query']['options']['distinct'] = TRUE;
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'editableviews_table';
+  $handler->display->display_options['style_options']['columns'] = array(
+    'field_funder' => 'field_funder',
+    'field_recipient' => 'field_recipient',
+    'field_funded_amount' => 'field_funded_amount',
+    'field_year' => 'field_year',
+    'field_grant_tags_editable' => 'field_grant_tags_editable',
+    'field_grant_tags_editable_1' => 'field_grant_tags_editable_1',
+  );
+  $handler->display->display_options['style_options']['default'] = 'field_year';
+  $handler->display->display_options['style_options']['info'] = array(
+    'field_funder' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_recipient' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_funded_amount' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_year' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_grant_tags_editable' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_grant_tags_editable_1' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+  );
+  $handler->display->display_options['style_options']['batch_size'] = '10';
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['header'] = FALSE;
+  /* Header: Global: Result summary */
+  $handler->display->display_options['header']['result']['id'] = 'result';
+  $handler->display->display_options['header']['result']['table'] = 'views';
+  $handler->display->display_options['header']['result']['field'] = 'result';
+  /* Header: Global: Text area */
+  $handler->display->display_options['header']['area']['id'] = 'area';
+  $handler->display->display_options['header']['area']['table'] = 'views';
+  $handler->display->display_options['header']['area']['field'] = 'area';
+  $handler->display->display_options['header']['area']['label'] = 'Explainer';
+  $handler->display->display_options['header']['area']['content'] = 'A list of the grants received or funded by organizations of interest in the dataset.
+
+This is an editable view accessible only to CSW administrators. 
+
+Use this view to store any custom tags or notes you’re collecting independently that are tied to the same organizations of interest that the Detroit Ledger has collected funding data for. You can add many tags using a comma-separated list. Click SAVE at the bottom of the page to apply tags.
+
+The total amounts tied to these custom tags are aggregated in other views.
+
+Click FUNDER, RECIPIENT, AMOUNT or YEAR to sort the rows.';
+  $handler->display->display_options['header']['area']['format'] = 'filtered_html';
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: Funder */
+  $handler->display->display_options['fields']['field_funder']['id'] = 'field_funder';
+  $handler->display->display_options['fields']['field_funder']['table'] = 'field_data_field_funder';
+  $handler->display->display_options['fields']['field_funder']['field'] = 'field_funder';
+  $handler->display->display_options['fields']['field_funder']['settings'] = array(
+    'link' => 0,
+  );
+  /* Field: Content: Recipient */
+  $handler->display->display_options['fields']['field_recipient']['id'] = 'field_recipient';
+  $handler->display->display_options['fields']['field_recipient']['table'] = 'field_data_field_recipient';
+  $handler->display->display_options['fields']['field_recipient']['field'] = 'field_recipient';
+  $handler->display->display_options['fields']['field_recipient']['settings'] = array(
+    'link' => 0,
+  );
+  /* Field: Content: Amount */
+  $handler->display->display_options['fields']['field_funded_amount']['id'] = 'field_funded_amount';
+  $handler->display->display_options['fields']['field_funded_amount']['table'] = 'field_data_field_funded_amount';
+  $handler->display->display_options['fields']['field_funded_amount']['field'] = 'field_funded_amount';
+  $handler->display->display_options['fields']['field_funded_amount']['settings'] = array(
+    'thousand_separator' => ',',
+    'prefix_suffix' => 1,
+  );
+  /* Field: Content: Year */
+  $handler->display->display_options['fields']['field_year']['id'] = 'field_year';
+  $handler->display->display_options['fields']['field_year']['table'] = 'field_data_field_year';
+  $handler->display->display_options['fields']['field_year']['field'] = 'field_year';
+  $handler->display->display_options['fields']['field_year']['settings'] = array(
+    'format_type' => 'gnl_date_type_human_short',
+    'fromto' => 'both',
+    'multiple_number' => '',
+    'multiple_from' => '',
+    'multiple_to' => '',
+    'show_remaining_days' => 0,
+  );
+  /* Field: Content: Description */
+  $handler->display->display_options['fields']['body']['id'] = 'body';
+  $handler->display->display_options['fields']['body']['table'] = 'field_data_body';
+  $handler->display->display_options['fields']['body']['field'] = 'body';
+  /* Field: Content: Tags (editable) */
+  $handler->display->display_options['fields']['field_grant_tags_editable']['id'] = 'field_grant_tags_editable';
+  $handler->display->display_options['fields']['field_grant_tags_editable']['table'] = 'field_data_field_grant_tags';
+  $handler->display->display_options['fields']['field_grant_tags_editable']['field'] = 'field_grant_tags_editable';
+  $handler->display->display_options['fields']['field_grant_tags_editable']['label'] = 'Tags';
+  $handler->display->display_options['fields']['field_grant_tags_editable']['type'] = 'taxonomy_term_reference_plain';
+  $handler->display->display_options['fields']['field_grant_tags_editable']['delta_offset'] = '0';
+  $handler->display->display_options['fields']['field_grant_tags_editable']['widget_type'] = 'taxonomy_autocomplete';
+  $handler->display->display_options['fields']['field_grant_tags_editable']['suppress_label'] = 0;
+  $handler->display->display_options['fields']['field_grant_tags_editable']['suppress_description'] = 0;
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['filter_groups']['groups'] = array(
+    1 => 'AND',
+    2 => 'OR',
+  );
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = '1';
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  /* Filter criterion: Content: Client project (field_client_project) */
+  $handler->display->display_options['filters']['field_client_project_tid']['id'] = 'field_client_project_tid';
+  $handler->display->display_options['filters']['field_client_project_tid']['table'] = 'field_data_field_client_project';
+  $handler->display->display_options['filters']['field_client_project_tid']['field'] = 'field_client_project_tid';
+  $handler->display->display_options['filters']['field_client_project_tid']['relationship'] = 'field_recipient_target_id';
+  $handler->display->display_options['filters']['field_client_project_tid']['value'] = array(
+    1390 => '1390',
+  );
+  $handler->display->display_options['filters']['field_client_project_tid']['group'] = 2;
+  $handler->display->display_options['filters']['field_client_project_tid']['reduce_duplicates'] = TRUE;
+  $handler->display->display_options['filters']['field_client_project_tid']['type'] = 'select';
+  $handler->display->display_options['filters']['field_client_project_tid']['vocabulary'] = 'client_projects';
+  /* Filter criterion: Content: Client project (field_client_project) */
+  $handler->display->display_options['filters']['field_client_project_tid_1']['id'] = 'field_client_project_tid_1';
+  $handler->display->display_options['filters']['field_client_project_tid_1']['table'] = 'field_data_field_client_project';
+  $handler->display->display_options['filters']['field_client_project_tid_1']['field'] = 'field_client_project_tid';
+  $handler->display->display_options['filters']['field_client_project_tid_1']['relationship'] = 'field_funder_target_id';
+  $handler->display->display_options['filters']['field_client_project_tid_1']['value'] = array(
+    1390 => '1390',
+  );
+  $handler->display->display_options['filters']['field_client_project_tid_1']['group'] = 2;
+  $handler->display->display_options['filters']['field_client_project_tid_1']['reduce_duplicates'] = TRUE;
+  $handler->display->display_options['filters']['field_client_project_tid_1']['type'] = 'select';
+  $handler->display->display_options['filters']['field_client_project_tid_1']['vocabulary'] = 'client_projects';
+  $handler->display->display_options['path'] = 'admin/clients/csw-detroit/grants';
+  $handler->display->display_options['menu']['type'] = 'normal';
+  $handler->display->display_options['menu']['title'] = 'Edit CSW-Detroit grants';
+  $handler->display->display_options['menu']['weight'] = '0';
+  $handler->display->display_options['menu']['name'] = 'user-menu';
+  $handler->display->display_options['menu']['context'] = 0;
+  $handler->display->display_options['menu']['context_only_inline'] = 0;
+  $export['csw_detroit'] = $view;
+
+  $view = new view();
   $view->name = 'flags';
   $view->description = '';
   $view->tag = 'default';
