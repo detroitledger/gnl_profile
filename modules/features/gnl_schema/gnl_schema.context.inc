@@ -106,17 +106,23 @@ function gnl_schema_context_default_contexts() {
   $context->reactions = array(
     'block' => array(
       'blocks' => array(
-        'views-board_terms-block_1' => array(
-          'module' => 'views',
-          'delta' => 'board_terms-block_1',
-          'region' => 'content',
-          'weight' => '-10',
-        ),
         'system-main' => array(
           'module' => 'system',
           'delta' => 'main',
           'region' => 'content',
           'weight' => '-9',
+        ),
+        'views-org_grants-funded' => array(
+          'module' => 'views',
+          'delta' => 'org_grants-funded',
+          'region' => 'content',
+          'weight' => '-8',
+        ),
+        'views-org_grants-received' => array(
+          'module' => 'views',
+          'delta' => 'org_grants-received',
+          'region' => 'content',
+          'weight' => '-7',
         ),
       ),
     ),

@@ -272,6 +272,11 @@ function gnl_schema_views_default_views() {
   $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
   $handler->display->display_options['fields']['edit_node']['label'] = '';
   $handler->display->display_options['fields']['edit_node']['element_label_colon'] = FALSE;
+  /* Field: Content: Federal Award ID */
+  $handler->display->display_options['fields']['field_federal_award_id']['id'] = 'field_federal_award_id';
+  $handler->display->display_options['fields']['field_federal_award_id']['table'] = 'field_data_field_federal_award_id';
+  $handler->display->display_options['fields']['field_federal_award_id']['field'] = 'field_federal_award_id';
+  $handler->display->display_options['fields']['field_federal_award_id']['label'] = 'Fed Award ID';
   /* Sort criterion: Content: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'node';
@@ -356,6 +361,28 @@ function gnl_schema_views_default_views() {
     3 => 0,
     4 => 0,
   );
+  /* Filter criterion: Content: Federal Award ID (field_federal_award_id) */
+  $handler->display->display_options['filters']['field_federal_award_id_value']['id'] = 'field_federal_award_id_value';
+  $handler->display->display_options['filters']['field_federal_award_id_value']['table'] = 'field_data_field_federal_award_id';
+  $handler->display->display_options['filters']['field_federal_award_id_value']['field'] = 'field_federal_award_id_value';
+  $handler->display->display_options['filters']['field_federal_award_id_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_federal_award_id_value']['expose']['operator_id'] = 'field_federal_award_id_value_op';
+  $handler->display->display_options['filters']['field_federal_award_id_value']['expose']['label'] = 'Fed Award ID';
+  $handler->display->display_options['filters']['field_federal_award_id_value']['expose']['use_operator'] = TRUE;
+  $handler->display->display_options['filters']['field_federal_award_id_value']['expose']['operator'] = 'field_federal_award_id_value_op';
+  $handler->display->display_options['filters']['field_federal_award_id_value']['expose']['identifier'] = 'field_federal_award_id_value';
+  $handler->display->display_options['filters']['field_federal_award_id_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    5 => 0,
+  );
+  $handler->display->display_options['filters']['field_federal_award_id_value']['expose']['autocomplete_items'] = '10';
+  $handler->display->display_options['filters']['field_federal_award_id_value']['expose']['autocomplete_field'] = 'field_federal_award_id';
+  $handler->display->display_options['filters']['field_federal_award_id_value']['expose']['autocomplete_raw_suggestion'] = 1;
+  $handler->display->display_options['filters']['field_federal_award_id_value']['expose']['autocomplete_raw_dropdown'] = 1;
+  $handler->display->display_options['filters']['field_federal_award_id_value']['expose']['autocomplete_dependent'] = 0;
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
@@ -896,7 +923,7 @@ function gnl_schema_views_default_views() {
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
-  $handler->display->display_options['title'] = 'Administer organizations';
+  $handler->display->display_options['title'] = 'CSW refinement';
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['access']['perm'] = 'delete any org content';
@@ -978,7 +1005,7 @@ function gnl_schema_views_default_views() {
   $handler->display->display_options['header']['area']['table'] = 'views';
   $handler->display->display_options['header']['area']['field'] = 'area';
   $handler->display->display_options['header']['area']['label'] = 'instructions';
-  $handler->display->display_options['header']['area']['content'] = 'Annoyingly, to search for "IS NULL" or "IS NOT NULL" you still need to specify something in the search box for that field, e.g. to find orgs with missing NTEE codes you select "Iis empty (NULL)" and then also select some value for the search box.';
+  $handler->display->display_options['header']['area']['content'] = 'Annoyingly, to search for "IS NULL" or "IS NOT NULL" you still need to specify something in the search box for that field, e.g. to find orgs with missing NTEE codes you select "is empty (NULL)" and then also select some value for the search box.';
   $handler->display->display_options['header']['area']['format'] = 'filtered_html';
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
@@ -1310,6 +1337,299 @@ function gnl_schema_views_default_views() {
   $handler->display->display_options['menu']['name'] = 'user-menu';
   $handler->display->display_options['menu']['context'] = 0;
   $handler->display->display_options['menu']['context_only_inline'] = 0;
+
+  /* Display: csw refinement */
+  $handler = $view->new_display('page', 'csw refinement', 'csw');
+  $handler->display->display_options['defaults']['pager'] = FALSE;
+  $handler->display->display_options['pager']['type'] = 'full';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '25';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['pager']['options']['id'] = '0';
+  $handler->display->display_options['pager']['options']['quantity'] = '9';
+  $handler->display->display_options['pager']['options']['expose']['items_per_page'] = TRUE;
+  $handler->display->display_options['pager']['options']['expose']['items_per_page_options'] = '5, 10, 25, 50, 75, 100, 125';
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'editableviews_table';
+  $handler->display->display_options['style_options']['columns'] = array(
+    'title' => 'title',
+    'field_org_tags' => 'field_org_tags',
+    'status' => 'status',
+    'field_org_address_editable' => 'field_org_address_editable',
+    'field_ein_editable' => 'field_ein_editable',
+    'field_state_corp_id_editable' => 'field_state_corp_id_editable',
+    'field_ntee_editable' => 'field_ntee_editable',
+    'body_editable' => 'body_editable',
+    'field_major_program_areas_editable' => 'field_major_program_areas_editable',
+  );
+  $handler->display->display_options['style_options']['default'] = 'title';
+  $handler->display->display_options['style_options']['info'] = array(
+    'title' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_org_tags' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'status' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_org_address_editable' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_ein_editable' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_state_corp_id_editable' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_ntee_editable' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'body_editable' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_major_program_areas_editable' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+  );
+  $handler->display->display_options['style_options']['sticky'] = TRUE;
+  $handler->display->display_options['style_options']['batch_size'] = '10';
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = 'Name';
+  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  /* Field: Content: Tags */
+  $handler->display->display_options['fields']['field_org_tags']['id'] = 'field_org_tags';
+  $handler->display->display_options['fields']['field_org_tags']['table'] = 'field_data_field_org_tags';
+  $handler->display->display_options['fields']['field_org_tags']['field'] = 'field_org_tags';
+  $handler->display->display_options['fields']['field_org_tags']['group_rows'] = FALSE;
+  $handler->display->display_options['fields']['field_org_tags']['delta_offset'] = '0';
+  /* Field: Content: Published */
+  $handler->display->display_options['fields']['status']['id'] = 'status';
+  $handler->display->display_options['fields']['status']['table'] = 'node';
+  $handler->display->display_options['fields']['status']['field'] = 'status';
+  $handler->display->display_options['fields']['status']['label'] = 'Pub';
+  $handler->display->display_options['fields']['status']['type'] = 'unicode-yes-no';
+  $handler->display->display_options['fields']['status']['type_custom_false'] = 'not published!';
+  $handler->display->display_options['fields']['status']['not'] = 0;
+  /* Field: Content: Address (editable) */
+  $handler->display->display_options['fields']['field_org_address_editable']['id'] = 'field_org_address_editable';
+  $handler->display->display_options['fields']['field_org_address_editable']['table'] = 'field_data_field_org_address';
+  $handler->display->display_options['fields']['field_org_address_editable']['field'] = 'field_org_address_editable';
+  $handler->display->display_options['fields']['field_org_address_editable']['label'] = 'Address';
+  $handler->display->display_options['fields']['field_org_address_editable']['click_sort_column'] = 'country';
+  $handler->display->display_options['fields']['field_org_address_editable']['settings'] = array(
+    'use_widget_handlers' => 1,
+    'format_handlers' => array(
+      'address' => 'address',
+    ),
+  );
+  $handler->display->display_options['fields']['field_org_address_editable']['widget_type'] = '0';
+  $handler->display->display_options['fields']['field_org_address_editable']['suppress_label'] = 0;
+  $handler->display->display_options['fields']['field_org_address_editable']['suppress_description'] = 0;
+  /* Field: Content: EIN (editable) */
+  $handler->display->display_options['fields']['field_ein_editable']['id'] = 'field_ein_editable';
+  $handler->display->display_options['fields']['field_ein_editable']['table'] = 'field_data_field_ein';
+  $handler->display->display_options['fields']['field_ein_editable']['field'] = 'field_ein_editable';
+  $handler->display->display_options['fields']['field_ein_editable']['label'] = 'EIN';
+  $handler->display->display_options['fields']['field_ein_editable']['settings'] = array(
+    'thousand_separator' => '',
+    'prefix_suffix' => 0,
+  );
+  $handler->display->display_options['fields']['field_ein_editable']['widget_type'] = '0';
+  $handler->display->display_options['fields']['field_ein_editable']['suppress_label'] = 1;
+  $handler->display->display_options['fields']['field_ein_editable']['suppress_description'] = 1;
+  /* Field: Content: State corp id (editable) */
+  $handler->display->display_options['fields']['field_state_corp_id_editable']['id'] = 'field_state_corp_id_editable';
+  $handler->display->display_options['fields']['field_state_corp_id_editable']['table'] = 'field_data_field_state_corp_id';
+  $handler->display->display_options['fields']['field_state_corp_id_editable']['field'] = 'field_state_corp_id_editable';
+  $handler->display->display_options['fields']['field_state_corp_id_editable']['label'] = 'State corp id';
+  $handler->display->display_options['fields']['field_state_corp_id_editable']['widget_type'] = '0';
+  $handler->display->display_options['fields']['field_state_corp_id_editable']['suppress_label'] = 1;
+  $handler->display->display_options['fields']['field_state_corp_id_editable']['suppress_description'] = 1;
+  /* Field: Content: NTEE (editable) */
+  $handler->display->display_options['fields']['field_ntee_editable']['id'] = 'field_ntee_editable';
+  $handler->display->display_options['fields']['field_ntee_editable']['table'] = 'field_data_field_ntee';
+  $handler->display->display_options['fields']['field_ntee_editable']['field'] = 'field_ntee_editable';
+  $handler->display->display_options['fields']['field_ntee_editable']['label'] = 'NTEE';
+  $handler->display->display_options['fields']['field_ntee_editable']['delta_offset'] = '0';
+  $handler->display->display_options['fields']['field_ntee_editable']['widget_type'] = 'taxonomy_autocomplete';
+  $handler->display->display_options['fields']['field_ntee_editable']['suppress_label'] = 1;
+  $handler->display->display_options['fields']['field_ntee_editable']['suppress_description'] = 1;
+  /* Field: Content: Description (editable) */
+  $handler->display->display_options['fields']['body_editable']['id'] = 'body_editable';
+  $handler->display->display_options['fields']['body_editable']['table'] = 'field_data_body';
+  $handler->display->display_options['fields']['body_editable']['field'] = 'body_editable';
+  $handler->display->display_options['fields']['body_editable']['label'] = 'Description';
+  $handler->display->display_options['fields']['body_editable']['widget_type'] = '0';
+  $handler->display->display_options['fields']['body_editable']['suppress_label'] = 1;
+  $handler->display->display_options['fields']['body_editable']['suppress_description'] = 1;
+  /* Field: Content: Major program areas (editable) */
+  $handler->display->display_options['fields']['field_major_program_areas_editable']['id'] = 'field_major_program_areas_editable';
+  $handler->display->display_options['fields']['field_major_program_areas_editable']['table'] = 'field_data_field_major_program_areas';
+  $handler->display->display_options['fields']['field_major_program_areas_editable']['field'] = 'field_major_program_areas_editable';
+  $handler->display->display_options['fields']['field_major_program_areas_editable']['label'] = 'Major program areas';
+  $handler->display->display_options['fields']['field_major_program_areas_editable']['widget_type'] = '0';
+  $handler->display->display_options['fields']['field_major_program_areas_editable']['suppress_label'] = 1;
+  $handler->display->display_options['fields']['field_major_program_areas_editable']['suppress_description'] = 1;
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = '1';
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['status']['expose']['operator_id'] = '';
+  $handler->display->display_options['filters']['status']['expose']['label'] = 'Published?';
+  $handler->display->display_options['filters']['status']['expose']['operator'] = 'status_op';
+  $handler->display->display_options['filters']['status']['expose']['identifier'] = 'status';
+  $handler->display->display_options['filters']['status']['expose']['required'] = TRUE;
+  $handler->display->display_options['filters']['status']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+  );
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'org' => 'org',
+  );
+  $handler->display->display_options['filters']['type']['group'] = 1;
+  /* Filter criterion: Content: Title */
+  $handler->display->display_options['filters']['title']['id'] = 'title';
+  $handler->display->display_options['filters']['title']['table'] = 'node';
+  $handler->display->display_options['filters']['title']['field'] = 'title';
+  $handler->display->display_options['filters']['title']['group'] = 1;
+  $handler->display->display_options['filters']['title']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['title']['expose']['operator_id'] = 'title_op';
+  $handler->display->display_options['filters']['title']['expose']['label'] = 'Name';
+  $handler->display->display_options['filters']['title']['expose']['use_operator'] = TRUE;
+  $handler->display->display_options['filters']['title']['expose']['operator'] = 'title_op';
+  $handler->display->display_options['filters']['title']['expose']['identifier'] = 'title';
+  $handler->display->display_options['filters']['title']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+  );
+  $handler->display->display_options['filters']['title']['expose']['autocomplete_items'] = '10';
+  $handler->display->display_options['filters']['title']['expose']['autocomplete_field'] = 'title';
+  $handler->display->display_options['filters']['title']['expose']['autocomplete_raw_suggestion'] = 1;
+  $handler->display->display_options['filters']['title']['expose']['autocomplete_raw_dropdown'] = 1;
+  $handler->display->display_options['filters']['title']['expose']['autocomplete_dependent'] = 0;
+  /* Filter criterion: Content: EIN (field_ein) */
+  $handler->display->display_options['filters']['field_ein_value']['id'] = 'field_ein_value';
+  $handler->display->display_options['filters']['field_ein_value']['table'] = 'field_data_field_ein';
+  $handler->display->display_options['filters']['field_ein_value']['field'] = 'field_ein_value';
+  $handler->display->display_options['filters']['field_ein_value']['group'] = 1;
+  $handler->display->display_options['filters']['field_ein_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_ein_value']['expose']['operator_id'] = 'field_ein_value_op';
+  $handler->display->display_options['filters']['field_ein_value']['expose']['label'] = 'EIN';
+  $handler->display->display_options['filters']['field_ein_value']['expose']['use_operator'] = TRUE;
+  $handler->display->display_options['filters']['field_ein_value']['expose']['operator'] = 'field_ein_value_op';
+  $handler->display->display_options['filters']['field_ein_value']['expose']['identifier'] = 'field_ein_value';
+  $handler->display->display_options['filters']['field_ein_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+  );
+  /* Filter criterion: Content: Address (field_org_address:thoroughfare) */
+  $handler->display->display_options['filters']['field_org_address_thoroughfare']['id'] = 'field_org_address_thoroughfare';
+  $handler->display->display_options['filters']['field_org_address_thoroughfare']['table'] = 'field_data_field_org_address';
+  $handler->display->display_options['filters']['field_org_address_thoroughfare']['field'] = 'field_org_address_thoroughfare';
+  $handler->display->display_options['filters']['field_org_address_thoroughfare']['operator'] = 'shorterthan';
+  $handler->display->display_options['filters']['field_org_address_thoroughfare']['value'] = '1';
+  $handler->display->display_options['filters']['field_org_address_thoroughfare']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_org_address_thoroughfare']['expose']['operator_id'] = 'field_org_address_thoroughfare_op';
+  $handler->display->display_options['filters']['field_org_address_thoroughfare']['expose']['label'] = 'Street address';
+  $handler->display->display_options['filters']['field_org_address_thoroughfare']['expose']['use_operator'] = TRUE;
+  $handler->display->display_options['filters']['field_org_address_thoroughfare']['expose']['operator'] = 'field_org_address_thoroughfare_op';
+  $handler->display->display_options['filters']['field_org_address_thoroughfare']['expose']['identifier'] = 'field_org_address_thoroughfare';
+  $handler->display->display_options['filters']['field_org_address_thoroughfare']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    5 => 0,
+  );
+  $handler->display->display_options['filters']['field_org_address_thoroughfare']['expose']['autocomplete_items'] = '10';
+  $handler->display->display_options['filters']['field_org_address_thoroughfare']['expose']['autocomplete_raw_suggestion'] = 1;
+  $handler->display->display_options['filters']['field_org_address_thoroughfare']['expose']['autocomplete_raw_dropdown'] = 1;
+  $handler->display->display_options['filters']['field_org_address_thoroughfare']['expose']['autocomplete_dependent'] = 0;
+  /* Filter criterion: Content: Client project (field_client_project) */
+  $handler->display->display_options['filters']['field_client_project_tid']['id'] = 'field_client_project_tid';
+  $handler->display->display_options['filters']['field_client_project_tid']['table'] = 'field_data_field_client_project';
+  $handler->display->display_options['filters']['field_client_project_tid']['field'] = 'field_client_project_tid';
+  $handler->display->display_options['filters']['field_client_project_tid']['value'] = array(
+    1390 => '1390',
+  );
+  $handler->display->display_options['filters']['field_client_project_tid']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_client_project_tid']['expose']['operator_id'] = 'field_client_project_tid_op';
+  $handler->display->display_options['filters']['field_client_project_tid']['expose']['label'] = 'Client project';
+  $handler->display->display_options['filters']['field_client_project_tid']['expose']['operator'] = 'field_client_project_tid_op';
+  $handler->display->display_options['filters']['field_client_project_tid']['expose']['identifier'] = 'field_client_project_tid';
+  $handler->display->display_options['filters']['field_client_project_tid']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    5 => 0,
+  );
+  $handler->display->display_options['filters']['field_client_project_tid']['type'] = 'select';
+  $handler->display->display_options['filters']['field_client_project_tid']['vocabulary'] = 'client_projects';
+  $handler->display->display_options['path'] = 'admin/orgs/csw-detroit-futzing';
+  $handler->display->display_options['menu']['type'] = 'normal';
+  $handler->display->display_options['menu']['title'] = 'CSW refinement';
+  $handler->display->display_options['menu']['weight'] = '30';
+  $handler->display->display_options['menu']['name'] = 'user-menu';
+  $handler->display->display_options['menu']['context'] = 0;
+  $handler->display->display_options['menu']['context_only_inline'] = 0;
   $export['admin_orgs'] = $view;
 
   $view = new view();
@@ -1555,6 +1875,7 @@ function gnl_schema_views_default_views() {
   $handler->display->display_options['pager']['type'] = 'none';
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['style_plugin'] = 'views_data_export_csv';
+  $handler->display->display_options['defaults']['relationships'] = FALSE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: Content: Nid */
   $handler->display->display_options['fields']['nid']['id'] = 'nid';
@@ -1639,6 +1960,10 @@ function gnl_schema_views_default_views() {
   $handler->display->display_options['fields']['body']['table'] = 'field_data_body';
   $handler->display->display_options['fields']['body']['field'] = 'body';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['filter_groups']['groups'] = array(
+    1 => 'AND',
+    2 => 'OR',
+  );
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Content: Published */
   $handler->display->display_options['filters']['status']['id'] = 'status';
@@ -1654,7 +1979,307 @@ function gnl_schema_views_default_views() {
   $handler->display->display_options['filters']['type']['value'] = array(
     'grant' => 'grant',
   );
+  $handler->display->display_options['filters']['type']['group'] = 1;
   $handler->display->display_options['path'] = 'grantscsv';
+  $handler->display->display_options['sitename_title'] = 0;
+
+  /* Display: CSV: grants funded by CSW orgs */
+  $handler = $view->new_display('views_data_export', 'CSV: grants funded by CSW orgs', 'views_data_export_1');
+  $handler->display->display_options['defaults']['query'] = FALSE;
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['query']['options']['disable_sql_rewrite'] = TRUE;
+  $handler->display->display_options['query']['options']['distinct'] = TRUE;
+  $handler->display->display_options['pager']['type'] = 'none';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['style_plugin'] = 'views_data_export_csv';
+  $handler->display->display_options['style_options']['provide_file'] = 1;
+  $handler->display->display_options['style_options']['filename'] = 'grants-funded-by-csw-orgs.csv';
+  $handler->display->display_options['style_options']['parent_sort'] = 0;
+  $handler->display->display_options['style_options']['quote'] = 1;
+  $handler->display->display_options['style_options']['trim'] = 0;
+  $handler->display->display_options['style_options']['replace_newlines'] = 0;
+  $handler->display->display_options['style_options']['newline_token'] = '1';
+  $handler->display->display_options['style_options']['header'] = 1;
+  $handler->display->display_options['style_options']['keep_html'] = 0;
+  $handler->display->display_options['defaults']['relationships'] = FALSE;
+  /* Relationship: Entity Reference: Referenced Entity */
+  $handler->display->display_options['relationships']['field_recipient_target_id']['id'] = 'field_recipient_target_id';
+  $handler->display->display_options['relationships']['field_recipient_target_id']['table'] = 'field_data_field_recipient';
+  $handler->display->display_options['relationships']['field_recipient_target_id']['field'] = 'field_recipient_target_id';
+  $handler->display->display_options['relationships']['field_recipient_target_id']['required'] = TRUE;
+  /* Relationship: Entity Reference: Referenced Entity */
+  $handler->display->display_options['relationships']['field_funder_target_id']['id'] = 'field_funder_target_id';
+  $handler->display->display_options['relationships']['field_funder_target_id']['table'] = 'field_data_field_funder';
+  $handler->display->display_options['relationships']['field_funder_target_id']['field'] = 'field_funder_target_id';
+  $handler->display->display_options['relationships']['field_funder_target_id']['required'] = TRUE;
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: Nid */
+  $handler->display->display_options['fields']['nid']['id'] = 'nid';
+  $handler->display->display_options['fields']['nid']['table'] = 'node';
+  $handler->display->display_options['fields']['nid']['field'] = 'nid';
+  $handler->display->display_options['fields']['nid']['label'] = 'Grant_id';
+  /* Field: Content: Recipient */
+  $handler->display->display_options['fields']['field_recipient_1']['id'] = 'field_recipient_1';
+  $handler->display->display_options['fields']['field_recipient_1']['table'] = 'field_data_field_recipient';
+  $handler->display->display_options['fields']['field_recipient_1']['field'] = 'field_recipient';
+  $handler->display->display_options['fields']['field_recipient_1']['label'] = 'Recipient_id';
+  $handler->display->display_options['fields']['field_recipient_1']['type'] = 'entityreference_entity_id';
+  $handler->display->display_options['fields']['field_recipient_1']['settings'] = array(
+    'link' => 0,
+  );
+  /* Field: Content: Funder */
+  $handler->display->display_options['fields']['field_funder_1']['id'] = 'field_funder_1';
+  $handler->display->display_options['fields']['field_funder_1']['table'] = 'field_data_field_funder';
+  $handler->display->display_options['fields']['field_funder_1']['field'] = 'field_funder';
+  $handler->display->display_options['fields']['field_funder_1']['label'] = 'Funder_id';
+  $handler->display->display_options['fields']['field_funder_1']['type'] = 'entityreference_entity_id';
+  $handler->display->display_options['fields']['field_funder_1']['settings'] = array(
+    'link' => 0,
+  );
+  /* Field: Content: Recipient */
+  $handler->display->display_options['fields']['field_recipient']['id'] = 'field_recipient';
+  $handler->display->display_options['fields']['field_recipient']['table'] = 'field_data_field_recipient';
+  $handler->display->display_options['fields']['field_recipient']['field'] = 'field_recipient';
+  $handler->display->display_options['fields']['field_recipient']['label'] = 'To';
+  $handler->display->display_options['fields']['field_recipient']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_recipient']['settings'] = array(
+    'link' => 0,
+  );
+  /* Field: Content: Funder */
+  $handler->display->display_options['fields']['field_funder']['id'] = 'field_funder';
+  $handler->display->display_options['fields']['field_funder']['table'] = 'field_data_field_funder';
+  $handler->display->display_options['fields']['field_funder']['field'] = 'field_funder';
+  $handler->display->display_options['fields']['field_funder']['label'] = 'From';
+  $handler->display->display_options['fields']['field_funder']['settings'] = array(
+    'link' => 0,
+  );
+  /* Field: Content: Amount */
+  $handler->display->display_options['fields']['field_funded_amount']['id'] = 'field_funded_amount';
+  $handler->display->display_options['fields']['field_funded_amount']['table'] = 'field_data_field_funded_amount';
+  $handler->display->display_options['fields']['field_funded_amount']['field'] = 'field_funded_amount';
+  $handler->display->display_options['fields']['field_funded_amount']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_funded_amount']['settings'] = array(
+    'thousand_separator' => '',
+    'prefix_suffix' => 0,
+  );
+  /* Field: Content: Year */
+  $handler->display->display_options['fields']['field_year']['id'] = 'field_year';
+  $handler->display->display_options['fields']['field_year']['table'] = 'field_data_field_year';
+  $handler->display->display_options['fields']['field_year']['field'] = 'field_year';
+  $handler->display->display_options['fields']['field_year']['label'] = 'Start_year';
+  $handler->display->display_options['fields']['field_year']['settings'] = array(
+    'format_type' => 'rfc2822',
+    'fromto' => 'value',
+    'multiple_number' => '',
+    'multiple_from' => '',
+    'multiple_to' => '',
+    'show_remaining_days' => 0,
+  );
+  /* Field: Content: Year */
+  $handler->display->display_options['fields']['field_year_1']['id'] = 'field_year_1';
+  $handler->display->display_options['fields']['field_year_1']['table'] = 'field_data_field_year';
+  $handler->display->display_options['fields']['field_year_1']['field'] = 'field_year';
+  $handler->display->display_options['fields']['field_year_1']['label'] = 'End_year';
+  $handler->display->display_options['fields']['field_year_1']['settings'] = array(
+    'format_type' => 'rfc2822',
+    'fromto' => 'value2',
+    'multiple_number' => '',
+    'multiple_from' => '',
+    'multiple_to' => '',
+    'show_remaining_days' => 0,
+  );
+  /* Field: Content: Description */
+  $handler->display->display_options['fields']['body']['id'] = 'body';
+  $handler->display->display_options['fields']['body']['table'] = 'field_data_body';
+  $handler->display->display_options['fields']['body']['field'] = 'body';
+  /* Field: Content: Tags */
+  $handler->display->display_options['fields']['field_grant_tags']['id'] = 'field_grant_tags';
+  $handler->display->display_options['fields']['field_grant_tags']['table'] = 'field_data_field_grant_tags';
+  $handler->display->display_options['fields']['field_grant_tags']['field'] = 'field_grant_tags';
+  $handler->display->display_options['fields']['field_grant_tags']['delta_offset'] = '0';
+  /* Field: Content: Source */
+  $handler->display->display_options['fields']['field_source']['id'] = 'field_source';
+  $handler->display->display_options['fields']['field_source']['table'] = 'field_data_field_source';
+  $handler->display->display_options['fields']['field_source']['field'] = 'field_source';
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Client project (field_client_project) */
+  $handler->display->display_options['filters']['field_client_project_tid_1']['id'] = 'field_client_project_tid_1';
+  $handler->display->display_options['filters']['field_client_project_tid_1']['table'] = 'field_data_field_client_project';
+  $handler->display->display_options['filters']['field_client_project_tid_1']['field'] = 'field_client_project_tid';
+  $handler->display->display_options['filters']['field_client_project_tid_1']['relationship'] = 'field_funder_target_id';
+  $handler->display->display_options['filters']['field_client_project_tid_1']['value'] = array(
+    1390 => '1390',
+  );
+  $handler->display->display_options['filters']['field_client_project_tid_1']['group'] = 1;
+  $handler->display->display_options['filters']['field_client_project_tid_1']['type'] = 'select';
+  $handler->display->display_options['filters']['field_client_project_tid_1']['vocabulary'] = 'client_projects';
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = '1';
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'grant' => 'grant',
+  );
+  $handler->display->display_options['filters']['type']['group'] = 1;
+  $handler->display->display_options['path'] = 'grantscsv/csw-detroit/funded';
+  $handler->display->display_options['sitename_title'] = 0;
+
+  /* Display: CSV: grants received by CSW orgs */
+  $handler = $view->new_display('views_data_export', 'CSV: grants received by CSW orgs', 'views_data_export_2');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'Grants received by CSW orgs';
+  $handler->display->display_options['defaults']['query'] = FALSE;
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['query']['options']['disable_sql_rewrite'] = TRUE;
+  $handler->display->display_options['query']['options']['distinct'] = TRUE;
+  $handler->display->display_options['pager']['type'] = 'none';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['style_plugin'] = 'views_data_export_csv';
+  $handler->display->display_options['style_options']['provide_file'] = 1;
+  $handler->display->display_options['style_options']['filename'] = 'grants-received-by-csw-orgs.csv';
+  $handler->display->display_options['style_options']['parent_sort'] = 0;
+  $handler->display->display_options['style_options']['quote'] = 1;
+  $handler->display->display_options['style_options']['trim'] = 0;
+  $handler->display->display_options['style_options']['replace_newlines'] = 0;
+  $handler->display->display_options['style_options']['newline_token'] = '1';
+  $handler->display->display_options['style_options']['header'] = 1;
+  $handler->display->display_options['style_options']['keep_html'] = 0;
+  $handler->display->display_options['defaults']['relationships'] = FALSE;
+  /* Relationship: Entity Reference: Referenced Entity */
+  $handler->display->display_options['relationships']['field_recipient_target_id']['id'] = 'field_recipient_target_id';
+  $handler->display->display_options['relationships']['field_recipient_target_id']['table'] = 'field_data_field_recipient';
+  $handler->display->display_options['relationships']['field_recipient_target_id']['field'] = 'field_recipient_target_id';
+  $handler->display->display_options['relationships']['field_recipient_target_id']['required'] = TRUE;
+  /* Relationship: Entity Reference: Referenced Entity */
+  $handler->display->display_options['relationships']['field_funder_target_id']['id'] = 'field_funder_target_id';
+  $handler->display->display_options['relationships']['field_funder_target_id']['table'] = 'field_data_field_funder';
+  $handler->display->display_options['relationships']['field_funder_target_id']['field'] = 'field_funder_target_id';
+  $handler->display->display_options['relationships']['field_funder_target_id']['required'] = TRUE;
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: Nid */
+  $handler->display->display_options['fields']['nid']['id'] = 'nid';
+  $handler->display->display_options['fields']['nid']['table'] = 'node';
+  $handler->display->display_options['fields']['nid']['field'] = 'nid';
+  $handler->display->display_options['fields']['nid']['label'] = 'Grant_id';
+  /* Field: Content: Recipient */
+  $handler->display->display_options['fields']['field_recipient_1']['id'] = 'field_recipient_1';
+  $handler->display->display_options['fields']['field_recipient_1']['table'] = 'field_data_field_recipient';
+  $handler->display->display_options['fields']['field_recipient_1']['field'] = 'field_recipient';
+  $handler->display->display_options['fields']['field_recipient_1']['label'] = 'Recipient_id';
+  $handler->display->display_options['fields']['field_recipient_1']['type'] = 'entityreference_entity_id';
+  $handler->display->display_options['fields']['field_recipient_1']['settings'] = array(
+    'link' => 0,
+  );
+  /* Field: Content: Funder */
+  $handler->display->display_options['fields']['field_funder_1']['id'] = 'field_funder_1';
+  $handler->display->display_options['fields']['field_funder_1']['table'] = 'field_data_field_funder';
+  $handler->display->display_options['fields']['field_funder_1']['field'] = 'field_funder';
+  $handler->display->display_options['fields']['field_funder_1']['label'] = 'Funder_id';
+  $handler->display->display_options['fields']['field_funder_1']['type'] = 'entityreference_entity_id';
+  $handler->display->display_options['fields']['field_funder_1']['settings'] = array(
+    'link' => 0,
+  );
+  /* Field: Content: Recipient */
+  $handler->display->display_options['fields']['field_recipient']['id'] = 'field_recipient';
+  $handler->display->display_options['fields']['field_recipient']['table'] = 'field_data_field_recipient';
+  $handler->display->display_options['fields']['field_recipient']['field'] = 'field_recipient';
+  $handler->display->display_options['fields']['field_recipient']['label'] = 'To';
+  $handler->display->display_options['fields']['field_recipient']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_recipient']['settings'] = array(
+    'link' => 0,
+  );
+  /* Field: Content: Funder */
+  $handler->display->display_options['fields']['field_funder']['id'] = 'field_funder';
+  $handler->display->display_options['fields']['field_funder']['table'] = 'field_data_field_funder';
+  $handler->display->display_options['fields']['field_funder']['field'] = 'field_funder';
+  $handler->display->display_options['fields']['field_funder']['label'] = 'From';
+  $handler->display->display_options['fields']['field_funder']['settings'] = array(
+    'link' => 0,
+  );
+  /* Field: Content: Amount */
+  $handler->display->display_options['fields']['field_funded_amount']['id'] = 'field_funded_amount';
+  $handler->display->display_options['fields']['field_funded_amount']['table'] = 'field_data_field_funded_amount';
+  $handler->display->display_options['fields']['field_funded_amount']['field'] = 'field_funded_amount';
+  $handler->display->display_options['fields']['field_funded_amount']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_funded_amount']['settings'] = array(
+    'thousand_separator' => '',
+    'prefix_suffix' => 0,
+  );
+  /* Field: Content: Year */
+  $handler->display->display_options['fields']['field_year']['id'] = 'field_year';
+  $handler->display->display_options['fields']['field_year']['table'] = 'field_data_field_year';
+  $handler->display->display_options['fields']['field_year']['field'] = 'field_year';
+  $handler->display->display_options['fields']['field_year']['label'] = 'Start_year';
+  $handler->display->display_options['fields']['field_year']['settings'] = array(
+    'format_type' => 'rfc2822',
+    'fromto' => 'value',
+    'multiple_number' => '',
+    'multiple_from' => '',
+    'multiple_to' => '',
+    'show_remaining_days' => 0,
+  );
+  /* Field: Content: Year */
+  $handler->display->display_options['fields']['field_year_1']['id'] = 'field_year_1';
+  $handler->display->display_options['fields']['field_year_1']['table'] = 'field_data_field_year';
+  $handler->display->display_options['fields']['field_year_1']['field'] = 'field_year';
+  $handler->display->display_options['fields']['field_year_1']['label'] = 'End_year';
+  $handler->display->display_options['fields']['field_year_1']['settings'] = array(
+    'format_type' => 'rfc2822',
+    'fromto' => 'value2',
+    'multiple_number' => '',
+    'multiple_from' => '',
+    'multiple_to' => '',
+    'show_remaining_days' => 0,
+  );
+  /* Field: Content: Description */
+  $handler->display->display_options['fields']['body']['id'] = 'body';
+  $handler->display->display_options['fields']['body']['table'] = 'field_data_body';
+  $handler->display->display_options['fields']['body']['field'] = 'body';
+  /* Field: Content: Tags */
+  $handler->display->display_options['fields']['field_grant_tags']['id'] = 'field_grant_tags';
+  $handler->display->display_options['fields']['field_grant_tags']['table'] = 'field_data_field_grant_tags';
+  $handler->display->display_options['fields']['field_grant_tags']['field'] = 'field_grant_tags';
+  $handler->display->display_options['fields']['field_grant_tags']['delta_offset'] = '0';
+  /* Field: Content: Source */
+  $handler->display->display_options['fields']['field_source']['id'] = 'field_source';
+  $handler->display->display_options['fields']['field_source']['table'] = 'field_data_field_source';
+  $handler->display->display_options['fields']['field_source']['field'] = 'field_source';
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Client project (field_client_project) */
+  $handler->display->display_options['filters']['field_client_project_tid_1']['id'] = 'field_client_project_tid_1';
+  $handler->display->display_options['filters']['field_client_project_tid_1']['table'] = 'field_data_field_client_project';
+  $handler->display->display_options['filters']['field_client_project_tid_1']['field'] = 'field_client_project_tid';
+  $handler->display->display_options['filters']['field_client_project_tid_1']['relationship'] = 'field_recipient_target_id';
+  $handler->display->display_options['filters']['field_client_project_tid_1']['value'] = array(
+    1390 => '1390',
+  );
+  $handler->display->display_options['filters']['field_client_project_tid_1']['group'] = 1;
+  $handler->display->display_options['filters']['field_client_project_tid_1']['type'] = 'select';
+  $handler->display->display_options['filters']['field_client_project_tid_1']['vocabulary'] = 'client_projects';
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = '1';
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'grant' => 'grant',
+  );
+  $handler->display->display_options['filters']['type']['group'] = 1;
+  $handler->display->display_options['path'] = 'grantscsv/csw-detroit/received';
+  $handler->display->display_options['sitename_title'] = 0;
   $export['all_grants'] = $view;
 
   $view = new view();
@@ -3395,6 +4020,155 @@ function gnl_schema_views_default_views() {
   $handler->display->display_options['fields']['body']['field'] = 'body';
   $handler->display->display_options['fields']['body']['label'] = 'Description_mission';
   $handler->display->display_options['path'] = 'organizationscsv';
+
+  /* Display: Data export for CSW-Detroit */
+  $handler = $view->new_display('views_data_export', 'Data export for CSW-Detroit', 'views_data_export_2');
+  $handler->display->display_options['pager']['type'] = 'none';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['style_plugin'] = 'views_data_export_csv';
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: Nid */
+  $handler->display->display_options['fields']['nid']['id'] = 'nid';
+  $handler->display->display_options['fields']['nid']['table'] = 'node';
+  $handler->display->display_options['fields']['nid']['field'] = 'nid';
+  $handler->display->display_options['fields']['nid']['label'] = 'Org_id';
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = 'Org_name';
+  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  $handler->display->display_options['fields']['title']['element_type'] = '0';
+  $handler->display->display_options['fields']['title']['element_label_type'] = '0';
+  $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['title']['element_wrapper_type'] = '0';
+  $handler->display->display_options['fields']['title']['element_default_classes'] = FALSE;
+  /* Field: Content: Grants funded */
+  $handler->display->display_options['fields']['grants_funded']['id'] = 'grants_funded';
+  $handler->display->display_options['fields']['grants_funded']['table'] = 'node';
+  $handler->display->display_options['fields']['grants_funded']['field'] = 'grants_funded';
+  $handler->display->display_options['fields']['grants_funded']['label'] = 'Grants_funded';
+  /* Field: Content: Grants received */
+  $handler->display->display_options['fields']['grants_received']['id'] = 'grants_received';
+  $handler->display->display_options['fields']['grants_received']['table'] = 'node';
+  $handler->display->display_options['fields']['grants_received']['field'] = 'grants_received';
+  $handler->display->display_options['fields']['grants_received']['label'] = 'Grants_received';
+  /* Field: Content: Address */
+  $handler->display->display_options['fields']['field_org_address']['id'] = 'field_org_address';
+  $handler->display->display_options['fields']['field_org_address']['table'] = 'field_data_field_org_address';
+  $handler->display->display_options['fields']['field_org_address']['field'] = 'field_org_address';
+  $handler->display->display_options['fields']['field_org_address']['click_sort_column'] = 'country';
+  $handler->display->display_options['fields']['field_org_address']['settings'] = array(
+    'use_widget_handlers' => 0,
+    'format_handlers' => array(
+      'address' => 'address',
+    ),
+  );
+  /* Field: Content: Public funder? */
+  $handler->display->display_options['fields']['field_publicfunder']['id'] = 'field_publicfunder';
+  $handler->display->display_options['fields']['field_publicfunder']['table'] = 'field_data_field_publicfunder';
+  $handler->display->display_options['fields']['field_publicfunder']['field'] = 'field_publicfunder';
+  $handler->display->display_options['fields']['field_publicfunder']['label'] = 'Public_funder';
+  $handler->display->display_options['fields']['field_publicfunder']['type'] = 'list_key';
+  /* Field: Content: EIN */
+  $handler->display->display_options['fields']['field_ein']['id'] = 'field_ein';
+  $handler->display->display_options['fields']['field_ein']['table'] = 'field_data_field_ein';
+  $handler->display->display_options['fields']['field_ein']['field'] = 'field_ein';
+  $handler->display->display_options['fields']['field_ein']['settings'] = array(
+    'thousand_separator' => ' ',
+    'prefix_suffix' => 1,
+  );
+  /* Field: Content: State corp id */
+  $handler->display->display_options['fields']['field_state_corp_id']['id'] = 'field_state_corp_id';
+  $handler->display->display_options['fields']['field_state_corp_id']['table'] = 'field_data_field_state_corp_id';
+  $handler->display->display_options['fields']['field_state_corp_id']['field'] = 'field_state_corp_id';
+  $handler->display->display_options['fields']['field_state_corp_id']['label'] = 'State_id';
+  /* Field: Content: NTEE */
+  $handler->display->display_options['fields']['field_ntee']['id'] = 'field_ntee';
+  $handler->display->display_options['fields']['field_ntee']['table'] = 'field_data_field_ntee';
+  $handler->display->display_options['fields']['field_ntee']['field'] = 'field_ntee';
+  $handler->display->display_options['fields']['field_ntee']['delta_offset'] = '0';
+  /* Field: Content: Description */
+  $handler->display->display_options['fields']['body']['id'] = 'body';
+  $handler->display->display_options['fields']['body']['table'] = 'field_data_body';
+  $handler->display->display_options['fields']['body']['field'] = 'body';
+  /* Field: Content: Major program areas */
+  $handler->display->display_options['fields']['field_major_program_areas']['id'] = 'field_major_program_areas';
+  $handler->display->display_options['fields']['field_major_program_areas']['table'] = 'field_data_field_major_program_areas';
+  $handler->display->display_options['fields']['field_major_program_areas']['field'] = 'field_major_program_areas';
+  $handler->display->display_options['fields']['field_major_program_areas']['label'] = 'Program_areas';
+  /* Field: Content: CSW Location */
+  $handler->display->display_options['fields']['field_csw_location']['id'] = 'field_csw_location';
+  $handler->display->display_options['fields']['field_csw_location']['table'] = 'field_data_field_csw_location';
+  $handler->display->display_options['fields']['field_csw_location']['field'] = 'field_csw_location';
+  $handler->display->display_options['fields']['field_csw_location']['label'] = 'CSW_location';
+  $handler->display->display_options['fields']['field_csw_location']['delta_offset'] = '0';
+  /* Field: Content: CSW Services */
+  $handler->display->display_options['fields']['field_csw_services']['id'] = 'field_csw_services';
+  $handler->display->display_options['fields']['field_csw_services']['table'] = 'field_data_field_csw_services';
+  $handler->display->display_options['fields']['field_csw_services']['field'] = 'field_csw_services';
+  $handler->display->display_options['fields']['field_csw_services']['label'] = 'CSW_services';
+  $handler->display->display_options['fields']['field_csw_services']['delta_offset'] = '0';
+  /* Field: Content: CSW Population */
+  $handler->display->display_options['fields']['field_csw_population']['id'] = 'field_csw_population';
+  $handler->display->display_options['fields']['field_csw_population']['table'] = 'field_data_field_csw_population';
+  $handler->display->display_options['fields']['field_csw_population']['field'] = 'field_csw_population';
+  $handler->display->display_options['fields']['field_csw_population']['label'] = 'CSW_population';
+  $handler->display->display_options['fields']['field_csw_population']['delta_offset'] = '0';
+  /* Field: Content: CSW Type */
+  $handler->display->display_options['fields']['field_csw_type']['id'] = 'field_csw_type';
+  $handler->display->display_options['fields']['field_csw_type']['table'] = 'field_data_field_csw_type';
+  $handler->display->display_options['fields']['field_csw_type']['field'] = 'field_csw_type';
+  $handler->display->display_options['fields']['field_csw_type']['label'] = 'CSW_type';
+  $handler->display->display_options['fields']['field_csw_type']['delta_offset'] = '0';
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'org' => 'org',
+  );
+  /* Filter criterion: Content: Title */
+  $handler->display->display_options['filters']['title']['id'] = 'title';
+  $handler->display->display_options['filters']['title']['table'] = 'node';
+  $handler->display->display_options['filters']['title']['field'] = 'title';
+  $handler->display->display_options['filters']['title']['operator'] = 'contains';
+  $handler->display->display_options['filters']['title']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['title']['expose']['operator_id'] = 'title_op';
+  $handler->display->display_options['filters']['title']['expose']['operator'] = 'title_op';
+  $handler->display->display_options['filters']['title']['expose']['identifier'] = 'title';
+  $handler->display->display_options['filters']['title']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+  );
+  $handler->display->display_options['filters']['title']['expose']['autocomplete_filter'] = 1;
+  $handler->display->display_options['filters']['title']['expose']['autocomplete_items'] = '10';
+  $handler->display->display_options['filters']['title']['expose']['autocomplete_field'] = 'title';
+  $handler->display->display_options['filters']['title']['expose']['autocomplete_raw_suggestion'] = 1;
+  $handler->display->display_options['filters']['title']['expose']['autocomplete_raw_dropdown'] = 1;
+  $handler->display->display_options['filters']['title']['expose']['autocomplete_dependent'] = 0;
+  /* Filter criterion: Content: Client project (field_client_project) */
+  $handler->display->display_options['filters']['field_client_project_tid']['id'] = 'field_client_project_tid';
+  $handler->display->display_options['filters']['field_client_project_tid']['table'] = 'field_data_field_client_project';
+  $handler->display->display_options['filters']['field_client_project_tid']['field'] = 'field_client_project_tid';
+  $handler->display->display_options['filters']['field_client_project_tid']['value'] = array(
+    1390 => '1390',
+  );
+  $handler->display->display_options['filters']['field_client_project_tid']['type'] = 'select';
+  $handler->display->display_options['filters']['field_client_project_tid']['vocabulary'] = 'client_projects';
+  $handler->display->display_options['path'] = 'organizationscsv/csw-detroit';
   $export['orgs'] = $view;
 
   return $export;

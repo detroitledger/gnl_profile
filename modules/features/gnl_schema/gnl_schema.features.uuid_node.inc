@@ -154,7 +154,7 @@ function gnl_schema_uuid_features_default_content() {
       ),
     ),
   ),
-  'path' => '/our-data-methods',
+  'path' => '/our-methods',
   'pathauto_perform_alias' => FALSE,
   'date' => '2013-07-30 20:23:50 -0400',
   'user_uuid' => '4ce1c447-25d6-449f-a3ad-8976ce9efb0b',
