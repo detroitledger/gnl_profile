@@ -1,0 +1,5 @@
+name = Editable Views Test
+description = Test module for Editable Views
+core = 7.x
+hidden = TRUE
+dependencies[] = editableviews
