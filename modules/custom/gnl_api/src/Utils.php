@@ -145,14 +145,14 @@ class Utils {
       $node->field_recipient['name'] = $recipient->title;
 
       // make dates js-friendly
-      $start_date = new \DateObject($node->field_year['value'], $node->field_year['timezone']);
+      $start_date = new \DateObject($node->field_year['value'], 'America/New_York');
       $node->field_start_date = date_format_date($start_date, 'custom', 'r');
-      $end_date = new \DateObject($node->field_year['value2'], $node->field_year['timezone']);
+      $end_date = new \DateObject($node->field_year['value2'], 'America/New_York');
       $node->field_end_date = date_format_date($end_date, 'custom', 'r');
     }
 
     if ($node->type == 'news') {
-      $news_date = new \DateObject($node->field_news_date['value'], $node->field_news_date['timezone']);
+      $news_date = new \DateObject($node->field_news_date['value'], 'America/New_York');
       $node->field_news_date = date_format_date($news_date, 'custom', 'r');
 
       $node->field_news_desc = $node->field_news_desc['value'];
