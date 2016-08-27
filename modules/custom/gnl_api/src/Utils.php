@@ -93,7 +93,7 @@ class Utils {
       array_push($ints, 'field_duns');
 
       // Add related news.
-      $news_ids = db_query("SELECT entity_id FROM field_data_field_news_org WHERE field_news_org_target_id = :org", [":org" => $node->nid])->fetchCol();
+      $news_ids = db_query("SELECT fdfno.entity_id FROM field_data_field_news_org AS fdfno INNER JOIN field_data_field_news_date AS fdfnd ON fdfno.entity_id=fdfnd.entity_id WHERE fdfno.field_news_org_target_id = :org ORDER BY fdfnd.field_news_date_value DESC", [":org" => $node->nid])->fetchCol();
       $newses = array_map('\Drupal\gnl_api\Utils::cleanNode', node_load_multiple($news_ids));
       $node->news = array_values($newses);
     }
