@@ -19,13 +19,15 @@ function gnl_api_userroles_menu() {
 function _gnl_api_userroles() {
   global $user;
 
-  header('Content-Type: application/json');
+  header("Access-control-allow-origin: *");
 
   $res = drupal_json_encode($user->roles);
 
   if (isset ($_GET['cb'])) {
+    header('Content-Type: application/javascript');
     print $_GET['cb'] . '('. $res . ')';
   } else {
+    header('Content-Type: application/json');
     print $res;
   }
 
