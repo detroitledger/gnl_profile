@@ -1,0 +1,33 @@
+<?php
+
+/**
+ * Provides a path within what is normally a services hierarchy
+ * to provide the currently authenticated user's roles.
+ *
+ * Inherits all the CORSy stuff applied to the services API hierarchy.
+ */
+function gnl_api_userroles_menu() {
+  $items['api/1.0/userroles'] = [
+    'title' => 'Outputs an array of role names assigned to the currently authenticated user',
+    'page callback' => '_gnl_api_userroles',
+    'access arguments' => ['access content'],
+  ];
+
+  return $items;
+}
+
+function _gnl_api_userroles() {
+  global $user;
+
+  header('Content-Type: application/json');
+
+  $res = drupal_json_encode($user->roles);
+
+  if (isset ($_GET['cb'])) {
+    print $_GET['cb'] . '('. $res . ')';
+  } else {
+    print $res;
+  }
+
+  exit();
+}
