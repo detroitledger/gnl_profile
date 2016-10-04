@@ -75,13 +75,13 @@ function gnl_schema_uuid_features_default_content() {
   'body' => array(
     'und' => array(
       0 => array(
-        'value' => '<p>The Detroit Ledger provides a picture of philanthropy in Detroit. We collect data on grants and loans given to organizations in the city of Detroit, focusing on non-profits and civic projects that receive money from foundations.  All the data is available for free, online, in bulk, under a copyright-free license.</p>
+        'value' => '<p>The Detroit Ledger provides a picture of philanthropy in Detroit. We collect data on grants given to organizations in the city of Detroit, focusing on non-profits and civic projects that receive money from foundations.  All of our data is available for free, online, in bulk, under a copyright-free license.</p>
 
 <!--<p>There’s a lot of talk about the reach and impact of nonprofits and foundations in Detroit. We find ourselves curious about how much money comes into the city and how it is used. We see many amazing non-profit organizations doing great work and want to show how they put resources to good use.</p>
 
 <p>For all of the good work that organizations are doing in Detroit, much of it happens sight unseen. It’s difficult for nonprofits, residents, and scholars to see the bigger picture of the funding system they inhabit. Some funders do a great job of listing their grants online, but many don’t. Some non-profit organizations post annual reports online, but the digital divide can make this task difficult and expensive.</p>-->
 
-<h2>The Ledger Team</h2>
+<h2>Our team</h2>
 
 <h3>Benjamin Chodoroff</h3>
 
@@ -93,8 +93,15 @@ function gnl_schema_uuid_features_default_content() {
 
 <h3>Jessica McInchak</h3>
 
-<p>“I am a recent graduate in urban sociology and do a lot of my thinking at the intersections of place-making, open-data, and spatial justice.  So far, this has all made for a creative niche where I get to work doing data-inspired, community-focused projects, just like this one.  In past years, I’ve interned with National Neighborhood Indicator Partners in Detroit and Chicago.”</p>
+<p>“I\'m a researcher and technologist in Detroit. My favorite projects to work on involve investigating how complex systems work, visualizing information, and making data more engaging and participatory.”</p>
 
+<p>The Ledger’s research efforts have also been supported by our Data Interns Sarah Breen, Molly Maher, and Colleen Marquis.</p>
+
+<h2>Contact us</h2>
+
+<p>You can always reach our team at <a href="mailto:hello@detroitledger.org">hello@detroitledger.org</a> with research inquiries, ideas, and tips.</p>
+
+<p>Or <a target="_blank" href="https://tinyletter.com/ledger">subscribe to our newsletter</a> to hear about our project updates, new data and features on our site, and local nonprofit news.</p>
 ',
         'summary' => '',
         'format' => 'full_html',
@@ -108,7 +115,7 @@ function gnl_schema_uuid_features_default_content() {
   'user_uuid' => '4ce1c447-25d6-449f-a3ad-8976ce9efb0b',
 );
   $nodes[] = array(
-  'title' => 'Our Data & Methods',
+  'title' => 'Data & Methods',
   'log' => '',
   'status' => 1,
   'comment' => 0,
@@ -127,27 +134,33 @@ function gnl_schema_uuid_features_default_content() {
 
 <h2>Our data</h2>
 
-<p>All of the Ledger\'s data is available for free for any use. Please contact us at <a href="mailto:hello@detroitledger.org">hello@detroitledger.org</a> if we can provide additional information about the data available, data in additional formats, or technical assistance.
+<p>All of the Ledger\'s data is available for free for any use.</p>
 
-<p>You can download Excel-compatible <strong>CSV exports</strong> of <a href="https://data.detroitledger.org/sites/default/files/grants.csv">all grants</a> and <a href="https://data.detroitledger.org/sites/default/files/organizations.csv">all organizations</a>. We also offer a <strong>data API</strong> with endpoints for organizations, grants, NTEE codes, and broader stats. <a href="http://docs.detroitledger.apiary.io/">Read our API docs</a> for more information on how to access the data.</p>
+<p>Our data is made available under the <a target="_blank" href="http://opendatacommons.org/licenses/odbl/1.0/">Open Database License</a>. Any rights in individual contents of the database are licensed under the <a target="_blank" href="http://opendatacommons.org/licenses/dbcl/1.0/">Database Contents License.</a></p>
 
-<p>The data is made available under the <a href="http://opendatacommons.org/licenses/odbl/1.0/">Open Database License</a>. Any rights in individual contents of the database are licensed under the <a href="http://opendatacommons.org/licenses/dbcl/1.0/">Database Contents License.</a></p>
+<p>You can download Excel-compatible <strong>CSV exports</strong> of <a href="https://data.detroitledger.org/sites/default/files/grants.csv">all grants</a> and <a href="https://data.detroitledger.org/sites/default/files/organizations.csv">all organizations</a>. Detailed field descriptions are provided in <a target="_blank" href="https://docs.google.com/spreadsheets/d/1ZLdaOLt49ZEYVcpTVLVVkYxlqrYPTIkZF26gMCo_DqY/edit?usp=sharing">our data dictionary</a>.</p>
+
+<p>We also offer a <strong>data API</strong> with endpoints for organizations, grants, NTEE codes, and broader stats. Learn how to access through <a target="_blank" href="http://docs.detroitledger.apiary.io/">our API docs</a>.</p>
+
+<p>Please contact us at <a href="mailto:hello@detroitledger.org">hello@detroitledger.org</a> if we can provide additional information, data in other formats, or technical assistance.</p>
 
 <h2>Our methods</h2>
 
-<p>We collect data about grantees within city boundaries who have received funds from 2011 onward. A few older grants that are still active today are also in our collection.</p>
+<p>We collect data about philanthropic and public grants awarded to organizations based in Detroit from 2010 onward. We include a handful of multi-year grants beginning prior to 2010 and relevant suburban organizations who are implementing grant-funded projects in the City.</p>
 
-<p>We’re building our database by scraping foundation websites and utilizing publicly reported IRS 990 forms.  In some cases, we are also reach out to organizations to ask for data and additional information. We welcome suggestions and data at <a href="mailto:hello@detroitledger.org">hello@detroitledger.org</a>.<p>
+<p>Beyond grant data, we curate nonprofit news related to our organizations, provide baseline statistics from the IRS like annual revenue and expenses, and collect data about board member relationships and terms.</p>
 
-<p>We code the data with the intent to provide many search keys to our end-users. Fields collected including granter foundation, grantee organization, National Tax-Exempt Entity (NTEE) classification, year granted and length of funds, awarded amount, impacted neighborhoods, and several other categories.  Whenever possible, each grant has a direct source link to follow for foundation-specific details. Otherwise, each grant has a static source citation.</p>
+<p>We’re building this database by utilizing public record IRS Form 990s for tax-exempt organizations, scraping foundation and government agency websites, importing bulk funding records from federal data portals like <a target="_blank" href="https://www.usaspending.gov/">USAspending.gov</a>, and scouring popular news sources. We welcome new data, corrections, and suggestions at <a href="mailto:hello@detroitledger.org">hello@detroitledger.org</a>.<p>
 
-<p>If our data source has not specifically listed the end date of a grant, we record that grant as active for a single fiscal year.  Many grants we’ve come across seem to be allocated for the broad purposes of “general operations” and “areas of greatest need.”  This commonality is not specifically recorded, but we note all project-specific and re-granting details when applicable to our sources.  </p>
+<p>We code our data to offer many search keys to our end-users. These attributes include: organization name and any known former names; <a target="_blank" href="http://nccs.urban.org/classification/ntee.cfm">National Taxonomy of Exempt Entities (NTEE)</a> classifications; grant start date and length; award amount; and several other categories as applicable. Each grant has a direct source link to follow for funder-specific details or a static citation.</p>
 
-<h2>Conversing with People</h2>
+<p>If our data source does not specify the end date of a grant, we record that grant as active for a single fiscal year. We also note all award purposes, project descriptions, and re-granting details connected to individual grants whenever possible, but this type of qualitative information is unfortunately one of the most inconsistently reported amongst our sources.</p>
 
-<p>In addition to our data collection work, we also conduct outreach to foundation representatives, funders, community experts, and others doing work relevant to philanthropy in the city.  We are compiling and publishing our field notes once they are approved the interviewees.  Notes are transcribed and edited after our conversations to correct errors, maintain any agreed upon confidentiality, or add further detail. </p>
+<h2>Our conversations</h2>
 
-<p>We would love to hear your perspective of grants, loans, and philanthropy in Detroit. Conversations generally last 30 - 60 minutes. If you want to be a contributing voice, please email us at <a href="mailto:hello@detroitledger.org">hello@detroitledger.org</a>.</p>',
+<p>Alongside data collection, we reach out to foundation representatives, funders, nonprofit staffers, community experts, and others doing work relevant to philanthropy in the city. We share <a href="https://www.detroitledger.org/#!/outreach">our field notes</a> once they are approved by the interviewees. These notes are transcribed and edited after our conversations to correct errors, maintain any agreed upon confidentiality, or add further detail.</p>
+
+<p>We would love to hear your perspective of grantmaking and philanthropy in Detroit. Conversations generally last 30-60 minutes. If you’d like to be a contributing voice, please get in touch at <a href="mailto:hello@detroitledger.org">hello@detroitledger.org</a>.</p>',
         'summary' => '',
         'format' => 'full_html',
         'safe_summary' => '',

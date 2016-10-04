@@ -5861,6 +5861,7 @@ Click FUNDER, RECIPIENT, AMOUNT or YEAR to sort the rows.';
   $handler->display->display_options['sorts']['field_year_value_1']['id'] = 'field_year_value_1';
   $handler->display->display_options['sorts']['field_year_value_1']['table'] = 'field_data_field_year';
   $handler->display->display_options['sorts']['field_year_value_1']['field'] = 'field_year_value';
+  $handler->display->display_options['sorts']['field_year_value_1']['order'] = 'DESC';
   /* Contextual filter: Content: Nid */
   $handler->display->display_options['arguments']['nid']['id'] = 'nid';
   $handler->display->display_options['arguments']['nid']['table'] = 'node';
@@ -5917,6 +5918,13 @@ Click FUNDER, RECIPIENT, AMOUNT or YEAR to sort the rows.';
   $handler->display->display_options['relationships']['reverse_field_funder_node']['field'] = 'reverse_field_funder_node';
   $handler->display->display_options['relationships']['reverse_field_funder_node']['required'] = TRUE;
   $handler->display->display_options['defaults']['sorts'] = FALSE;
+  /* Sort criterion: Content: Year (field_year) */
+  $handler->display->display_options['sorts']['field_year_value']['id'] = 'field_year_value';
+  $handler->display->display_options['sorts']['field_year_value']['table'] = 'field_data_field_year';
+  $handler->display->display_options['sorts']['field_year_value']['field'] = 'field_year_value';
+  $handler->display->display_options['sorts']['field_year_value']['order'] = 'DESC';
+  $handler->display->display_options['sorts']['field_year_value']['exposed'] = TRUE;
+  $handler->display->display_options['sorts']['field_year_value']['expose']['label'] = 'Year';
   /* Sort criterion: Content: Title */
   $handler->display->display_options['sorts']['title']['id'] = 'title';
   $handler->display->display_options['sorts']['title']['table'] = 'node';
@@ -5954,6 +5962,13 @@ Click FUNDER, RECIPIENT, AMOUNT or YEAR to sort the rows.';
   $handler->display->display_options['relationships']['reverse_field_recipient_node']['field'] = 'reverse_field_recipient_node';
   $handler->display->display_options['relationships']['reverse_field_recipient_node']['required'] = TRUE;
   $handler->display->display_options['defaults']['sorts'] = FALSE;
+  /* Sort criterion: Content: Year (field_year) */
+  $handler->display->display_options['sorts']['field_year_value']['id'] = 'field_year_value';
+  $handler->display->display_options['sorts']['field_year_value']['table'] = 'field_data_field_year';
+  $handler->display->display_options['sorts']['field_year_value']['field'] = 'field_year_value';
+  $handler->display->display_options['sorts']['field_year_value']['order'] = 'DESC';
+  $handler->display->display_options['sorts']['field_year_value']['exposed'] = TRUE;
+  $handler->display->display_options['sorts']['field_year_value']['expose']['label'] = 'Year';
   /* Sort criterion: Content: Year (field_year) */
   $handler->display->display_options['sorts']['field_year_value_1']['id'] = 'field_year_value_1';
   $handler->display->display_options['sorts']['field_year_value_1']['table'] = 'field_data_field_year';
