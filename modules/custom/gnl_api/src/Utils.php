@@ -67,7 +67,13 @@ class Utils {
         // remove translations
         // @todo change this in future l10n work
         if (strpos($key, 'field_') === 0 && array_key_exists('und', $val) && array_key_exists(0, $val['und'])) {
-          $node->{$key} = $val['und'][0];
+          // Determine cardinality
+          $field_info = field_info_field($key);
+          if ($field_info['cardinality'] == 1) {
+            $node->{$key} = $val['und'][0];
+          } else {
+            $node->{$key} = $val['und'];
+          }
         }
       }
     }
