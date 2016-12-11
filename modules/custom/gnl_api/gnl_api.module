@@ -503,18 +503,28 @@ function _gnl_api_retrieve_ntee($id) {
 function _gnl_api_index_ntees($load_orgs = false) {
   $utils = new Utils();
   $document = new Document;
+
   if ($load_orgs) {
     $serializer = new NteeSerializer(['orgs']);
   } else {
     $serializer = new NteeSerializer([], ['orgs']);
   }
 
-  $ntees = $utils->getTreeByMachineName('ntee');
+  $ntees = &drupal_static(__FUNCTION__);
 
-  foreach ($ntees as &$ntee) {
-    $ntee->org_ids = taxonomy_select_nodes($ntee->tid, FALSE);
+  if (!isset($ntees)) {
+    if ($cache = cache_get('gnl_api_ntees')) {
+      $ntees = $cache->data;
+    } else {
+      $ntees = $utils->getTreeByMachineName('ntee');
+
+      foreach ($ntees as &$ntee) {
+        $ntee->org_ids = taxonomy_select_nodes($ntee->tid, FALSE);
+      }
+      unset($ntee);
+    }
+    cache_set('gnl_api_ntees', $ntees, 'cache');
   }
-  unset($ntee);
 
   if ($load_orgs) {
     foreach ($ntees as $ntee) {
