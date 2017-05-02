@@ -767,7 +767,10 @@ function _gnl_api_index_nodes($bundle, $limit, $offset, $filters, $sort, $plural
   $post_filters = array();
 
   foreach ($filters as $property => $str) {
-    if (in_array($property, $node_table_column_filters)) {
+    if ($property === 'body') {
+      $query->join('field_data_body', 'b', 'n.nid = b.entity_id');
+      $query->condition('b.body_value', '%' . db_like($str) . '%', 'LIKE');
+    } else if (in_array($property, $node_table_column_filters)) {
       $query->condition('n.' . $property, '%' . db_like($str) . '%', 'LIKE');
     } else if ($property == 'tid') {
       $query->join('taxonomy_index', 'ti', 'ti.nid=n.nid');
