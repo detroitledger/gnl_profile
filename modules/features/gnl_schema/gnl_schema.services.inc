@@ -103,6 +103,13 @@ function gnl_schema_default_services_endpoint() {
         ),
       ),
     ),
+    'newsarticles' => array(
+      'operations' => array(
+        'index' => array(
+          'enabled' => '1',
+        ),
+      ),
+    ),
     'stripe_donations' => array(
       'operations' => array(
         'create' => array(
