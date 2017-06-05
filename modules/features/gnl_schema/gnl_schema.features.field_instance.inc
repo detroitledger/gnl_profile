@@ -738,7 +738,15 @@ function gnl_schema_field_default_field_instances() {
   // Exported field_instance: 'node-grant-field_region'
   $field_instances['node-grant-field_region'] = array(
     'bundle' => 'grant',
-    'default_value' => NULL,
+    'default_value' => array(
+      0 => array(
+        'name' => 'Detroit',
+        'tid' => 1460,
+        'uuid' => '14376131-98c0-4235-845f-7671c4f3fb5d',
+        'vid' => 6,
+        'vocabulary_machine_name' => 'regions',
+      ),
+    ),
     'deleted' => 0,
     'description' => '',
     'display' => array(
