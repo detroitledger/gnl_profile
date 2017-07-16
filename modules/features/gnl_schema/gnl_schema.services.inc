@@ -16,7 +16,9 @@ function gnl_schema_default_services_endpoint() {
   $endpoint->name = 'gnl_10';
   $endpoint->server = 'rest_server';
   $endpoint->path = 'api/1.0';
-  $endpoint->authentication = array();
+  $endpoint->authentication = array(
+    'services' => 'services',
+  );
   $endpoint->server_settings = array(
     'formatters' => array(
       'bencode' => TRUE,
@@ -130,6 +132,16 @@ function gnl_schema_default_services_endpoint() {
           'enabled' => '1',
         ),
         'index' => array(
+          'enabled' => '1',
+        ),
+      ),
+    ),
+    'assigned_pdfs' => array(
+      'operations' => array(
+        'index' => array(
+          'enabled' => '1',
+        ),
+        'update' => array(
           'enabled' => '1',
         ),
       ),

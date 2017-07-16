@@ -10,6 +10,194 @@
 function gnl_schema_field_default_field_instances() {
   $field_instances = array();
 
+  // Exported field_instance: 'field_collection_item-field_grantentry_todos-field_grantentry_currentpg'
+  $field_instances['field_collection_item-field_grantentry_todos-field_grantentry_currentpg'] = array(
+    'bundle' => 'field_grantentry_todos',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'number',
+        'settings' => array(
+          'decimal_separator' => '.',
+          'prefix_suffix' => TRUE,
+          'scale' => 0,
+          'thousand_separator' => '',
+        ),
+        'type' => 'number_integer',
+        'weight' => 5,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'field_name' => 'field_grantentry_currentpg',
+    'label' => 'Current page',
+    'required' => 0,
+    'settings' => array(
+      'max' => '',
+      'min' => '',
+      'prefix' => '',
+      'suffix' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'number',
+      'settings' => array(),
+      'type' => 'number',
+      'weight' => 3,
+    ),
+  );
+
+  // Exported field_instance: 'field_collection_item-field_grantentry_todos-field_grantentry_done'
+  $field_instances['field_collection_item-field_grantentry_todos-field_grantentry_done'] = array(
+    'bundle' => 'field_grantentry_todos',
+    'default_value' => array(
+      0 => array(
+        'value' => 0,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 2,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'field_name' => 'field_grantentry_done',
+    'label' => 'Done?',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(
+        'display_label' => 1,
+      ),
+      'type' => 'options_onoff',
+      'weight' => 4,
+    ),
+  );
+
+  // Exported field_instance: 'field_collection_item-field_grantentry_todos-field_grantentry_org'
+  $field_instances['field_collection_item-field_grantentry_todos-field_grantentry_org'] = array(
+    'bundle' => 'field_grantentry_todos',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'entityreference',
+        'settings' => array(
+          'link' => FALSE,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 1,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'field_name' => 'field_grantentry_org',
+    'label' => 'Related organization',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'entityreference',
+      'settings' => array(
+        'match_operator' => 'CONTAINS',
+        'path' => '',
+        'size' => 60,
+      ),
+      'type' => 'entityreference_autocomplete',
+      'weight' => 0,
+    ),
+  );
+
+  // Exported field_instance: 'field_collection_item-field_grantentry_todos-field_grantentry_pdfurl'
+  $field_instances['field_collection_item-field_grantentry_todos-field_grantentry_pdfurl'] = array(
+    'bundle' => 'field_grantentry_todos',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 6,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'field_name' => 'field_grantentry_pdfurl',
+    'label' => 'PDF',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 1,
+    ),
+  );
+
+  // Exported field_instance: 'field_collection_item-field_grantentry_todos-field_grantentry_year'
+  $field_instances['field_collection_item-field_grantentry_todos-field_grantentry_year'] = array(
+    'bundle' => 'field_grantentry_todos',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'number',
+        'settings' => array(
+          'decimal_separator' => '.',
+          'prefix_suffix' => TRUE,
+          'scale' => 0,
+          'thousand_separator' => '',
+        ),
+        'type' => 'number_integer',
+        'weight' => 4,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'field_name' => 'field_grantentry_year',
+    'label' => 'Year',
+    'required' => 0,
+    'settings' => array(
+      'max' => '',
+      'min' => '',
+      'prefix' => '',
+      'suffix' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'number',
+      'settings' => array(),
+      'type' => 'number',
+      'weight' => 2,
+    ),
+  );
+
   // Exported field_instance: 'flagging-flag-field_ip'
   $field_instances['flagging-flag-field_ip'] = array(
     'bundle' => 'flag',
@@ -2022,6 +2210,43 @@ function gnl_schema_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'user-user-field_grantentry_todos'
+  $field_instances['user-user-field_grantentry_todos'] = array(
+    'bundle' => 'user',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'field_collection',
+        'settings' => array(
+          'add' => 'Add',
+          'delete' => 'Delete',
+          'description' => TRUE,
+          'edit' => 'Edit',
+          'view_mode' => 'full',
+        ),
+        'type' => 'field_collection_view',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'user',
+    'field_name' => 'field_grantentry_todos',
+    'label' => 'PDFs to enter',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => 0,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'field_collection',
+      'settings' => array(),
+      'type' => 'field_collection_embed',
+      'weight' => 3,
+    ),
+  );
+
   // Translatables
   // Included for use with string extractors like potx.
   t('Address');
@@ -2035,10 +2260,12 @@ function gnl_schema_field_default_field_instances() {
   t('Can\'t find the recipient? <a href="/node/add/org">Add them here.</a>');
   t('Client project');
   t('Compensation');
+  t('Current page');
   t('DUNS');
   t('DUNS number');
   t('Date');
   t('Description');
+  t('Done?');
   t('EIN');
   t('Federal Award ID');
   t('Federal Employer Identification Number');
@@ -2057,12 +2284,15 @@ function gnl_schema_field_default_field_instances() {
   t('NTEE grant types; used in usaspending.gov data as well as certain funders such as CFSEM.');
   t('Note');
   t('Organization');
+  t('PDF');
+  t('PDFs to enter');
   t('Person');
   t('Position');
   t('Public funder?');
   t('Recipient');
   t('Region');
   t('Related grants');
+  t('Related organization');
   t('Related organizations');
   t('Source');
   t('Source: http://www.guidestar.org/rxg/help/ntee-codes.aspx');

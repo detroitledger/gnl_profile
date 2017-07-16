@@ -1,0 +1,3 @@
+name = Detroit Ledger data entry Dashboard
+description = Provide a page at /user/%/dashboard to expedite data entry tasks
+core = 7.x
