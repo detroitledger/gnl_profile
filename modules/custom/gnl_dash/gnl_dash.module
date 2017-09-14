@@ -13,7 +13,7 @@
  */
 function gnl_dash_user_login(&$edit, $account) {
   if (!isset($_POST['form_id']) || $_POST['form_id'] != 'user_pass_reset' && _gnl_dash_check_user($account)) {
-    $_GET['destination'] = 'profiles/gnl_profile/grantentry/';
+    $_GET['destination'] = 'profiles/gnl_profile/grantentry/build/';
   }
 }
 
