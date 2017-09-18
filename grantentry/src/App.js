@@ -10,20 +10,20 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <div className="Topbar-container">
+        <header className="Topbar-container">
           <Topbar/>
-        </div>
-        <div className="wrapper">
+        </header>
+        <main className="wrapper">
           <div className="Pdfviewer-container" role="complementary">
             <Pdfviewer pdfUrl="/203899187_2015_0d2284a6.PDF" />
           </div>
           <div className="Addgrantframe-container" role="main">
             <Addgrantframe orgName="Abayomi Community Development Corporation" orgId={6} year={2666} />
           </div>
-        </div>
-        <div className="Bottombar-container">
+        </main>
+        <footer className="Bottombar-container">
           <Bottombar/>
-        </div>
+        </footer>
       </div>
     );
   }
