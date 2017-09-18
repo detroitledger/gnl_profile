@@ -13,8 +13,7 @@
       "args": [
         "--runInBand",
         "--no-cache",
-        "--env=jsdom",
-        "src/reducers"
+        "--env=jsdom"
       ],
       "cwd": "${workspaceRoot}",
       "protocol": "inspector",
