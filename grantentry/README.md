@@ -1,3 +1,12 @@
+# grantentry docs
+## Debugging tests
+
+Open `chrome://inspect/#devices` in a Chrome tab
+Run `./node_modules/.bin/react-scripts --inspect-brk test --runInBand --no-cache --env=jsdom src/actions/index.test.js` (or whatever test you want to run, or just leave off the name to run all tests)
+Go to the Chrome tab and attach to the new target.
+
+# create-react-app docs
+
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 Below you will find some information on how to perform common tasks.<br>
