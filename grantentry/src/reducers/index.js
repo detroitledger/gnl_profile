@@ -1,4 +1,6 @@
 import { combineReducers } from 'redux';
+import { routerReducer as router } from 'react-router-redux';
+
 
 import byId, * as fromById from './byId';
 import createList, * as fromList from './createList';
@@ -12,6 +14,7 @@ const listByFilter = combineReducers({
 const userpdfs = combineReducers({
   byId,
   listByFilter,
+  router,
 });
 
 export default userpdfs;

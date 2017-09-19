@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import './App.css';
 
 import Pdfviewer from './components/Pdfviewer';
@@ -15,7 +16,7 @@ class App extends Component {
         </header>
         <main className="wrapper">
           <div className="Pdfviewer-container" role="complementary">
-            <Pdfviewer pdfUrl="/203899187_2015_0d2284a6.PDF" />
+            <Pdfviewer pdfUrl="./203899187_2015_0d2284a6.PDF" />
           </div>
           <div className="Addgrantframe-container" role="main">
             <Addgrantframe orgName="Abayomi Community Development Corporation" orgId={6} year={2666} />
@@ -28,5 +29,11 @@ class App extends Component {
     );
   }
 }
+
+App.propTypes = {
+  params: PropTypes.shape({
+    filter: PropTypes.string,
+  }),
+};
 
 export default App;

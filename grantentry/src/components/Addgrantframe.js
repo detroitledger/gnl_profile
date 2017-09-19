@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import { API_HOST } from '../api';
+
 import './Addgrantframe.css';
 
 class Addgrantframe extends Component {
@@ -8,7 +10,7 @@ class Addgrantframe extends Component {
     const orgNameAndId = `${this.props.orgName} (${this.props.orgId})`;
     const toYear = this.props.year + 1;
 
-    const iframeSrc = `https://data.detroitledger.org/node/add/grant?edit[field_year][und][0][value][date]=01/${this.props.year}&edit[field_year][und][0][value2][date]=01/${toYear}&edit[field_funder][und][0][target_id]=${orgNameAndId}`;
+    const iframeSrc = `${API_HOST}/node/add/grant?edit[field_year][und][0][value][date]=01/${this.props.year}&edit[field_year][und][0][value2][date]=01/${toYear}&edit[field_funder][und][0][target_id]=${orgNameAndId}`;
 
     return (
       <div className="Addgrantframe">

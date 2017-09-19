@@ -1,7 +1,7 @@
 import fetch from 'isomorphic-fetch';
 
 //export const API_HOST = 'https://data.detroitledger.org';
-export const API_HOST = 'http://unresolvable';
+export const API_HOST = 'http://127.0.0.1:8888';
 
 /**
  *  Mutate an array of responses into an object keyed by their IDs.
