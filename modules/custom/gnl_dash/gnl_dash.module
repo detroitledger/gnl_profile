@@ -116,7 +116,7 @@ function _gnl_dash_serialize_pdf($f) {
       'id' => (int) $f->field_grantentry_org->value()->nid,
       'name' => $f->field_grantentry_org->value()->title,
     ],
-    'pdfurl' => $f->field_grantentry_pdfurl->value(),
+    'pdfurl' => file_create_url($f->field_grantentry_pdf->value()['uri']),
     'done' => $f->field_grantentry_done->value(),
     'year' => (int) $f->field_grantentry_year->value(),
     'currentpg'  => (int) $f->field_grantentry_currentpg->value(),

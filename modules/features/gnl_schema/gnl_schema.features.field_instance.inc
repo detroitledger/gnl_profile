@@ -46,7 +46,7 @@ function gnl_schema_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 3,
+      'weight' => 4,
     ),
   );
 
@@ -83,7 +83,7 @@ function gnl_schema_field_default_field_instances() {
         'display_label' => 1,
       ),
       'type' => 'options_onoff',
-      'weight' => 4,
+      'weight' => 5,
     ),
   );
 
@@ -124,37 +124,39 @@ function gnl_schema_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'field_collection_item-field_grantentry_todos-field_grantentry_pdfurl'
-  $field_instances['field_collection_item-field_grantentry_todos-field_grantentry_pdfurl'] = array(
+  // Exported field_instance: 'field_collection_item-field_grantentry_todos-field_grantentry_pdf'
+  $field_instances['field_collection_item-field_grantentry_todos-field_grantentry_pdf'] = array(
     'bundle' => 'field_grantentry_todos',
-    'default_value' => NULL,
     'deleted' => 0,
     'description' => '',
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'text',
+        'module' => 'file',
         'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 6,
+        'type' => 'file_default',
+        'weight' => 7,
       ),
     ),
     'entity_type' => 'field_collection_item',
-    'field_name' => 'field_grantentry_pdfurl',
+    'field_name' => 'field_grantentry_pdf',
     'label' => 'PDF',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
-      'text_processing' => 0,
+      'description_field' => 0,
+      'file_directory' => 'grantentrypdfs',
+      'file_extensions' => 'pdf',
+      'max_filesize' => '',
       'user_register_form' => FALSE,
     ),
     'widget' => array(
       'active' => 1,
-      'module' => 'text',
+      'module' => 'file',
       'settings' => array(
-        'size' => 60,
+        'progress_indicator' => 'throbber',
       ),
-      'type' => 'text_textfield',
-      'weight' => 1,
+      'type' => 'file_generic',
+      'weight' => 2,
     ),
   );
 
@@ -194,7 +196,7 @@ function gnl_schema_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 2,
+      'weight' => 3,
     ),
   );
 

@@ -607,33 +607,35 @@ function gnl_schema_field_default_field_bases() {
     'type' => 'entityreference',
   );
 
-  // Exported field_base: 'field_grantentry_pdfurl'
-  $field_bases['field_grantentry_pdfurl'] = array(
+  // Exported field_base: 'field_grantentry_pdf'
+  $field_bases['field_grantentry_pdf'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
-    'field_name' => 'field_grantentry_pdfurl',
+    'field_name' => 'field_grantentry_pdf',
     'foreign keys' => array(
-      'format' => array(
+      'fid' => array(
         'columns' => array(
-          'format' => 'format',
+          'fid' => 'fid',
         ),
-        'table' => 'filter_format',
+        'table' => 'file_managed',
       ),
     ),
     'indexes' => array(
-      'format' => array(
-        0 => 'format',
+      'fid' => array(
+        0 => 'fid',
       ),
     ),
     'locked' => 0,
-    'module' => 'text',
+    'module' => 'file',
     'settings' => array(
-      'max_length' => 2048,
+      'display_default' => 0,
+      'display_field' => 0,
+      'uri_scheme' => 'public',
     ),
     'translatable' => 0,
-    'type' => 'text',
+    'type' => 'file',
   );
 
   // Exported field_base: 'field_grantentry_todos'
