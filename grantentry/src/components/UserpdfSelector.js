@@ -58,8 +58,8 @@ UserpdfSelector.propTypes = {
   fetchUserpdfs: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state, { match: { params } }) => {
-  const filter = params.filter || 'all';
+const mapStateToProps = (state) => {
+  const filter = 'all';
 
   return {
     isFetching: getIsFetching(state, filter),

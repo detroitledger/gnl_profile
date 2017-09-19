@@ -9,7 +9,7 @@ class Pdfviewer extends Component {
   state = {};
 
   onDocumentComplete = (pages) => {
-    this.setState({ scale: 1, page: 1, pages });
+    this.setState({ scale: 1, page: this.props.currentpg, pages });
   }
 
   onPageComplete = (page) => {
@@ -18,10 +18,12 @@ class Pdfviewer extends Component {
 
   handlePrevious = () => {
     this.setState({ page: this.state.page - 1 });
+    this.props.onPagechange(this.state.page - 1);
   }
 
   handleNext = () => {
     this.setState({ page: this.state.page + 1 });
+    this.props.onPagechange(this.state.page + 1);
   }
 
   handleFirst = () => {
@@ -73,6 +75,10 @@ class Pdfviewer extends Component {
   }
 
   render() {
+    if (!this.props.pdfUrl) {
+      return <div>Loading...</div>;
+    }
+
     let pagination = null;
 
     if (this.state.pages) {
@@ -94,7 +100,9 @@ class Pdfviewer extends Component {
 }
 
 Pdfviewer.propTypes = {
-  pdfUrl: PropTypes.string.isRequired,
+  pdfUrl: PropTypes.string,
+  currentpg: PropTypes.number,
+  onPagechange: PropTypes.func.isRequired,
 };
 
 export default Pdfviewer;

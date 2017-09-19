@@ -6,7 +6,8 @@ import { Provider } from 'react-redux';
 
 import thunk from 'redux-thunk';
 
-import createHistory from 'history/createBrowserHistory';
+//import createHistory from 'history/createBrowserHistory';
+import createHashHistory from 'history/createHashHistory';
 import { Route } from 'react-router';
 
 import { ConnectedRouter, routerMiddleware } from 'react-router-redux';
@@ -18,7 +19,7 @@ import App from './App';
 
 import registerServiceWorker from './registerServiceWorker';
 
-const history = createHistory();
+const history = createHashHistory();
 
 const enhancers = [];
 const middleware = [
@@ -47,7 +48,7 @@ const store = createStore(
 ReactDOM.render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
-        <Route path="/:filter?" component={App}/>
+        <Route path="/:userpdf?" component={App}/>
     </ConnectedRouter>
   </Provider>,
   document.getElementById('root')

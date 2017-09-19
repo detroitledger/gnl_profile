@@ -16,7 +16,6 @@ ListableUserpdf.propTypes = {
   onClick: PropTypes.func.isRequired,
   userpdf: PropTypes.shape({
     id: PropTypes.number.isRequired,
-    done: PropTypes.bool.isRequired,
     org: PropTypes.shape({
       id: PropTypes.number.isRequired,
       name: PropTypes.string.isRequired,
