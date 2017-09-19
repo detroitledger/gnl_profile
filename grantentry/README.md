@@ -5,6 +5,33 @@ Open `chrome://inspect/#devices` in a Chrome tab
 Run `./node_modules/.bin/react-scripts --inspect-brk test --runInBand --no-cache --env=jsdom src/actions/index.test.js` (or whatever test you want to run, or just leave off the name to run all tests)
 Go to the Chrome tab and attach to the new target.
 
+## Local dev with both backend server & this thing running
+
+While it's possible to access the grantentry dash from its production home within the Drupal docroot, it's ideal to have it served by the create-react-app setup so it live reloads & does the development (vs production) build. Doing it this way means you have two local servers running on different ports (8888 by default for the drupal `drush rs` server, and 3000 by default for cra's builtin server). This means we have to do some trickery to allow for cross origin requests:
+
+Run `drush vset x_frame_options 0 --format=boolean` to allow cross-origin iframe embedding
+
+Apply this diff to allow cross-origin cookiepassing:
+```
+diff --git a/modules/custom/gnl_api/gnl_api.module b/modules/custom/gnl_api/gnl_api.module
+index d67992d..08752f3 100644
+--- a/modules/custom/gnl_api/gnl_api.module
++++ b/modules/custom/gnl_api/gnl_api.module
+@@ -30,6 +30,8 @@ function gnl_api_init() {
+   if ($method == 'OPTIONS') {
+     exit; // CORS client gets what it wants
+   }
++
++  drupal_add_http_header('Access-Control-Allow-Credentials', 'true');
+ }
+
+ /**
+```
+
+Start the drupal 7 server with `drush rs` in the root directory
+
+Start the create-react-app server with `yarn start`
+
 # create-react-app docs
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
