@@ -52,7 +52,7 @@ function gnl_dash_services_resources() {
           'help' => 'Retrieves all grant entry PDFs for logged-in user',
           'callback' => '_gnl_dash_index_user_pdfs',
           'access callback' => 'user_access',
-          'access arguments' => ['view own user pdfs'],
+          'access arguments' => ['user pdf view own user pdfs'],
           'access arguments append' => FALSE,
           'args' => [],
         ],
