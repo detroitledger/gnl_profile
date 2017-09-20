@@ -47,5 +47,8 @@ export const updateUserpdf = (id, currentpg, done) => {
   })
   .then((response) => {
     return response.json();
+  })
+  .then((rawUserpdf) => {
+    return Promise.resolve(normalizeToObject([rawUserpdf]));
   });
 }

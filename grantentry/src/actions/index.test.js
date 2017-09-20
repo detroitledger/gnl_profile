@@ -76,12 +76,14 @@ describe('update userpdf', () => {
       {
         type: 'UPDATE_USERPDF_SUCCESS',
         response: {
-          'id': 2,
-          'org': { 'id': 55, 'name': 'Bollywood Music Festival - Michigan Philharmonic' },
-          'pdfurl': 'http://google.com/aliens-are-real.pdf',
-          'done': false,
-          'year': 2389,
-          'currentpg': 6
+          '2': {
+            'id': 2,
+            'org': { 'id': 55, 'name': 'Bollywood Music Festival - Michigan Philharmonic' },
+            'pdfurl': 'http://google.com/aliens-are-real.pdf',
+            'done': false,
+            'year': 2389,
+            'currentpg': 6,
+          }
         },
       },
     ];
