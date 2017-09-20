@@ -146,6 +146,13 @@ function gnl_schema_default_services_endpoint() {
         ),
       ),
     ),
+    'system' => array(
+      'actions' => array(
+        'connect' => array(
+          'enabled' => '1',
+        ),
+      ),
+    ),
   );
   $endpoint->debug = 0;
   $export['gnl_10'] = $endpoint;
