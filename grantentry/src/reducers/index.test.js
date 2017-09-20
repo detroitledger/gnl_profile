@@ -22,6 +22,7 @@ const emptyStore = {
       "isFetching": false,
     },
   },
+  "router": { "location": null },
 };
 
 describe('userpdfs reducer', () => {
@@ -77,6 +78,7 @@ describe('userpdfs reducer', () => {
           "isFetching": false,
         },
       },
+      "router": { "location": null },
     });
   });
 });

@@ -10,7 +10,7 @@ import { API_HOST } from '../api';
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
-describe('userpdf actions', () => {
+describe('fetch userpdfs', () => {
   afterEach(() => {
     nock.cleanAll();
   });
@@ -57,7 +57,7 @@ describe('userpdf actions', () => {
   });
 });
 
-describe('foo', () => {
+describe('update userpdf', () => {
   it('emits UPDATE_USERPDF_SUCCESS when updating a userpdf is done', () => {
     const nockScope = nock(API_HOST)
     .get('/services/session/token')
