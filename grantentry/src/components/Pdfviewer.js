@@ -74,6 +74,17 @@ class Pdfviewer extends Component {
     );
   }
 
+  /**
+   * Give a different url if we're using the cra server.
+   */
+  getPdfurl = () => {
+    if (window.location.host === "127.0.0.1:3000") {
+      return this.props.pdfUrl.replace('8888/sites/default/files', '3000');
+    }
+
+    return this.props.pdfUrl;
+  }
+
   render() {
     if (!this.props.pdfUrl) {
       return <div>Loading...</div>;
@@ -87,9 +98,11 @@ class Pdfviewer extends Component {
 
     const zoomer = this.renderZoomer();
 
+    const pdfurl = this.getPdfurl();
+
     return (
       <div className="Pdfviewer">
-        <PDF file={this.props.pdfUrl} onDocumentComplete={this.onDocumentComplete} onPageComplete={this.onPageComplete} page={this.state.page} scale={this.state.scale} />
+        <PDF file={pdfurl} onDocumentComplete={this.onDocumentComplete} onPageComplete={this.onPageComplete} page={this.state.page} scale={this.state.scale} />
         <nav className="Pdfviewer-controls">
           {pagination}
           {zoomer}
