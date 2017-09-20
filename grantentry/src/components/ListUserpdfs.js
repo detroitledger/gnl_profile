@@ -1,16 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
-import ListableUserpdf from './ListableUserpdf';
+import { Link } from 'react-router-dom'
 
 const ListUserpdfs = ({ userpdfs, onUserpdfClick }) => (
   <ul>
     {userpdfs.map(userpdf =>
-      <ListableUserpdf
-        key={userpdf.id}
-        userpdf={userpdf}
-        onClick={() => onUserpdfClick(userpdf.id)}
-      />
+      <li key={userpdf.id}>
+        <Link to={'/' + userpdf.id}>
+          {userpdf.org.name} ({userpdf.year})
+        </Link>
+      </li>
     )}
   </ul>
 );
@@ -27,7 +26,6 @@ ListUserpdfs.propTypes = {
     year: PropTypes.number.isRequired,
     currentpg: PropTypes.number.isRequired,
   }).isRequired).isRequired,
-  onUserpdfClick: PropTypes.func.isRequired,
 };
 
 export default ListUserpdfs;

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const ListableUserpdf = ({ onClick, userpdf }) => (
   <li
-    onClick={onClick}
+    onClick={onClick.bind(this, userpdf.id)}
     style={{
       textDecoration: userpdf.done ? 'line-through' : 'none',
     }}

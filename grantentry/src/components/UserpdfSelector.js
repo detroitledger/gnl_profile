@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
+
 import * as actions from '../actions';
 import { getVisibleUserpdfs, getErrorMessage, getIsFetching } from '../reducers';
 import ListUserpdfs from './ListUserpdfs';
@@ -37,14 +38,9 @@ class UserpdfSelector extends Component {
       );
     }
 
-    const loadUserpdf = () => {
-      debugger; // todo
-    }
-
     return (
       <ListUserpdfs
         userpdfs={userpdfs}
-        onUserpdfClick={loadUserpdf}
       />
     );
   }
