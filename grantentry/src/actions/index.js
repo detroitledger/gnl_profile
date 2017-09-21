@@ -39,3 +39,16 @@ export const updateUserpdf = (id, currentpg, done) => (dispatch) => {
     });
   });
 }
+
+export const fetchCurrentUser = () => (dispatch) => {
+  dispatch({
+    type: 'FETCH_CURRENTUSER_REQUEST',
+  });
+
+  return api.fetchCurrentUser().then(response => {
+    dispatch({
+      type: 'FETCH_CURRENTUSER_SUCCESS',
+      response,
+    });
+  });
+}

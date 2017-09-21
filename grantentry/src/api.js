@@ -52,3 +52,32 @@ export const updateUserpdf = (id, currentpg, done) => {
     return Promise.resolve(normalizeToObject([rawUserpdf]));
   });
 }
+
+export const fetchCurrentUser = () => {
+  return fetch(`${API_HOST}/services/session/token`, {
+    method: 'GET',
+    credentials: 'include',
+  })
+  .then(function(response) {
+    return response.text();
+  })
+  .then(function(token) {
+    return fetch(`${API_HOST}/api/1.0/system/connect.json`, {
+      method: 'POST',
+      credentials: 'include',
+      headers: {
+        'Content-type': 'application/json',
+        'X-CSRF-Token': token,
+      },
+    });
+  })
+  .then((response) => {
+    return response.json();
+  })
+  .then((rawSessioninfo) => {
+    return Promise.resolve({
+      id: rawSessioninfo.user.uid,
+      name: rawSessioninfo.user.name,
+    });
+  });
+}

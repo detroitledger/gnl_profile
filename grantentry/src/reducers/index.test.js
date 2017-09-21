@@ -22,10 +22,15 @@ const emptyStore = {
       "isFetching": false,
     },
   },
+  "user": {
+    id: null,
+    name: null,
+    isFetching: false,
+  },
   "router": { "location": null },
 };
 
-describe('userpdfs reducer', () => {
+describe('big ol reducer', () => {
   it('should return the initial state', () => {
     expect(reducer(undefined, {})).toEqual(emptyStore);
   });
@@ -78,7 +83,27 @@ describe('userpdfs reducer', () => {
           "isFetching": false,
         },
       },
+      user: {
+        id: null,
+        name: null,
+        isFetching: false,
+      },
       "router": { "location": null },
     });
+  });
+
+  it('should handle FETCH_CURRENTUSER_REQUEST', () => {
+    const userpart = reducer({}, {
+      type: 'FETCH_CURRENTUSER_REQUEST',
+    }).user;
+    expect(userpart).toEqual({ id: null, name: null, isFetching: true });
+  });
+
+  it('should handle FETCH_CURRENTUSER_SUCCESS', () => {
+    const userpart = reducer({}, {
+      type: 'FETCH_CURRENTUSER_SUCCESS',
+      response: MOCK_API_RESPONSES.normalizedSystemConnect,
+    }).user;
+    expect(userpart).toEqual({ id: '1', name: 'admin', isFetching: false });
   });
 });
