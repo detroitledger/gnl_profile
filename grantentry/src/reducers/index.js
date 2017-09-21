@@ -11,14 +11,14 @@ const listByFilter = combineReducers({
   completed: createList('completed'),
 });
 
-const userpdfs = combineReducers({
+const rootReducer = combineReducers({
   byId,
   listByFilter,
   user,
   router,
 });
 
-export default userpdfs;
+export default rootReducer;
 
 export const getVisibleUserpdfs = (state, filter) => {
   const ids = fromList.getIds(state.listByFilter[filter]);

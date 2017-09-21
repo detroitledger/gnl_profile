@@ -30,6 +30,7 @@ const createList = (filter) => {
     }
   };
 
+  // todo: We don't need to keep track of isFetching for each filtered list -- this should be higher up in the state tree!
   const isFetching = (state = false, action = { type: null }) => {
     if (filter !== action.filter) {
       return state;
@@ -45,6 +46,7 @@ const createList = (filter) => {
     }
   };
 
+  // Same here.
   const errorMessage = (state = null, action = { type: null }) => {
     if (filter !== action.filter) {
       return state;
