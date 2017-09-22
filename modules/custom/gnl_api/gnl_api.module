@@ -28,8 +28,11 @@ function gnl_api_init() {
     drupal_add_http_header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
   }
   if ($method == 'OPTIONS') {
+    drupal_add_http_header('Access-Control-Allow-Credentials', 'true');
     exit; // CORS client gets what it wants
   }
+
+  drupal_add_http_header('Access-Control-Allow-Credentials', 'true');
 }
 
 /**

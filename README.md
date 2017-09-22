@@ -3,10 +3,16 @@ Detroit Ledger: Drupal install profile
 
 This Drupal install profile is used by detroitledger.org.
 
-Docker install
+Deploy to prod
 --------------
 
-Use Docker to easily roll out the site. See `docker-deploy.sh`.
+```
+ssh root@detroitledger.org
+screen -r
+# find & switch to gnl_backend screen
+cd data.detroitledger.org/profiles/gnl_profile
+git pull
+```
 
 Local install
 -------
