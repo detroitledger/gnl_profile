@@ -65,6 +65,9 @@ projects[entityreference][subdir] = "contrib"
 projects[features][subdir] = "contrib"
 projects[features][version] = "2.0"
 
+projects[field_collection][subdir] = "contrib"
+projects[field_collection][version] = "1.0-beta12"
+
 projects[flag][subdir] = "contrib"
 projects[flag][version] = "3.5"
 

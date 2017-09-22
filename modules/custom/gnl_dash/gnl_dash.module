@@ -1,0 +1,223 @@
+<?php
+/**
+ * @file
+ * Module file for gnl_dash.
+ *
+ * What should it do?
+ */
+
+/**
+ * Implements hook_user_login().
+ *
+ * Redirect qualified users to the dashboard.
+ */
+function gnl_dash_user_login(&$edit, $account) {
+  if (!isset($_POST['form_id']) || $_POST['form_id'] != 'user_pass_reset' && _gnl_dash_check_user($account)) {
+    $_GET['destination'] = 'profiles/gnl_profile/grantentry/build/';
+  }
+}
+
+/**
+ * Check if user should see the dashboard.
+ *
+ * @param object $user
+ *   Drupal user account object
+ *
+ * @return bool
+ */
+function _gnl_dash_check_user($user) {
+  $user_roles = array_values($user->roles);
+
+  if (!is_array($user_roles)) {
+    return false;
+  }
+
+  if (in_array('grantentry', $user_roles)) {
+    return true;
+  }
+
+  return false;
+}
+
+/**
+ * Implements hook_services_resources().
+ *
+ * Let services API know about our resource.
+ */
+function gnl_dash_services_resources() {
+  return [
+    'assigned_pdfs' => [
+      'operations' => [
+        'index' => [
+          'help' => 'Retrieves all grant entry PDFs for logged-in user',
+          'callback' => '_gnl_dash_index_user_pdfs',
+          'access callback' => 'user_access',
+          'access arguments' => ['user pdf view own user pdfs'],
+          'access arguments append' => FALSE,
+          'args' => [],
+        ],
+        'update' => [
+          'help' => 'Update user grant entry PDF',
+          'callback' => '_gnl_dash_update_user_pdf',
+          'access callback' => '_gnl_dash_user_pdfs_access',
+          'access arguments' => ['update'],
+          'access arguments append' => TRUE,
+          'args' => [
+            [
+              'name' => 'id',
+              'type' => 'int',
+              'source' => [ 'path' => 0 ],
+              'description' => 'User PDF ID',
+              'optional' => FALSE,
+            ],
+            [
+              'name' => 'currentpg',
+              'type' => 'int',
+              'source' => [ 'data' => 'currentpg' ],
+              'description' => 'Current page',
+              'optional' => FALSE,
+            ],
+            [
+              'name' => 'done',
+              'type' => 'bool',
+              'source' => [ 'data' => 'done' ],
+              'description' => 'Done?',
+              'optional' => FALSE,
+            ],
+          ],
+        ],
+      ],
+    ],
+  ];
+}
+
+function _gnl_dash_index_user_pdfs() {
+  global $user;
+
+  // Retrieve the pdfs from this user's records.
+  $u = entity_metadata_wrapper('user', $user);
+  $rawvalues = $u->field_grantentry_todos->value();
+
+  // We'll eventually return this variable.
+  $pdfs = [];
+
+  foreach ($rawvalues as $raw) {
+    $f = entity_metadata_wrapper('field_collection_item', $raw);
+    $pdfs[] = _gnl_dash_serialize_pdf($f);
+  }
+
+  return $pdfs;
+}
+
+function _gnl_dash_serialize_pdf($f) {
+  return  [
+    'id' => (int) $f->item_id->value(),
+    'org' => [
+      'id' => (int) $f->field_grantentry_org->value()->nid,
+      'name' => $f->field_grantentry_org->value()->title,
+    ],
+    'pdfurl' => file_create_url($f->field_grantentry_pdf->value()['uri']),
+    'done' => $f->field_grantentry_done->value(),
+    'year' => (int) $f->field_grantentry_year->value(),
+    'currentpg'  => (int) $f->field_grantentry_currentpg->value(),
+  ];
+}
+
+/**
+ * @param int $id
+ * @param int $currentpg
+ * @param bool $done
+ *
+ * @return array
+ *   serialized user pdf
+ */
+function _gnl_dash_update_user_pdf($id, $currentpg, $done) {
+  global $user;
+
+  // Check to make sure this user has a grantentry pdf w/ the given id.
+  $u = entity_metadata_wrapper('user', $user);
+  $rawvalues = $u->field_grantentry_todos->value();
+
+  // The matching PDF field goes here.
+  $f_wrapped = null;
+  // Find this pdf field in the collection.
+  foreach ($rawvalues as $f_raw) {
+    if ($f_raw->item_id == $id) {
+      $f_wrapped = entity_metadata_wrapper('field_collection_item', $f_raw);
+      break;
+    }
+  }
+
+  // If we haven't found the PDF record, return 400.
+  if ($f_wrapped === null) {
+    return services_error('user pdf does not exist for your user', 400);
+  }
+
+  // Change its properties and save it
+  $f_wrapped->field_grantentry_currentpg = $currentpg;
+  $f_wrapped->field_grantentry_done = $done;
+  $f_wrapped->save();
+
+  return _gnl_dash_serialize_pdf($f_wrapped);
+}
+
+/**
+* Access callback for user PDFs.
+*
+* @param string $op
+*  The operation that's going to be performed.
+* @param array $args
+*  The arguments that will be passed to the callback.
+* @return bool
+*  Whether access is given or not.
+*/
+function _gnl_dash_user_pdfs_access($op, $args) {
+  global $user;
+  $access = FALSE;
+
+  switch ($op) {
+    case 'update':
+      $pdf = field_collection_item_load($args[0]);
+      $access = user_access('user pdf edit any user pdfs');
+      $access = $access || $pdf->hostEntity()->uid == $user->uid && user_access('user pdf edit own user pdfs');
+      break;
+  }
+
+  return $access;
+}
+
+/**
+  * Implements hook_permission().
+  */
+function gnl_dash_permission() {
+  return [
+    'user pdf create' => [
+      'title' => t('user pdf: create'),
+      'description' => t('create'),
+    ],
+    'user pdf view any user pdf' => [
+      'title' => t('user pdf: view any user pdf'),
+      'description' => t('view any user pdf'),
+    ],
+    'user pdf view own user pdfs' => [
+      'title' => t('user pdf: view own user pdfs'),
+      'description' => t('view own user pdfs'),
+    ],
+    'user pdf edit any user pdf' => [
+      'title' => t('user pdf: edit any user pdf'),
+      'description' => t('edit any user pdfs'),
+    ],
+    'user pdf edit own user pdfs' => [
+      'title' => t('user pdf: edit own user pdfs'),
+      'description' => t('edit own user pdfs'),
+    ],
+    'user pdf delete any user pdf' => [
+      'title' => t('user pdf: delete any user pdf'),
+      'description' => t('delete any user pdf'),
+    ],
+    'user pdf delete own user pdfs' => [
+      'title' => t('user pdf: delete own user pdfs'),
+      'description' => t('delete own user pdf'),
+    ],
+  ];
+}
