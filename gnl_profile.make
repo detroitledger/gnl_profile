@@ -98,7 +98,6 @@ projects[loadtermnames][download][type] = "git"
 projects[loadtermnames][download][url] = "https://github.com/bnchdrff/loadtermnames"
 projects[loadtermnames][download][branch] = "7.x-1.x"
 
-projects[pathauto][subdir] = "contrib"
 projects[migrate][type] = "module"
 projects[migrate][subdir] = "contrib"
 projects[migrate][download][type] = "git"
@@ -107,6 +106,11 @@ projects[migrate][download][branch] = "7.x-2.x"
 
 projects[pathauto][subdir] = "contrib"
 projects[pathauto][version] = "1.2"
+
+projects[prepopulate][subdir] = "contrib"
+projects[prepopulate][version] = "2.1"
+projects[prepopulate[patch][2679839][url] = "https://www.drupal.org/files/issues/prepopulate-2679839-36.patch"
+projects[prepopulate[patch][2679839][md5] = "d01be2b44c69256080079a4a738bf544"
 
 projects[schema][subdir] = "contrib"
 projects[schema][version] = "1.2"
