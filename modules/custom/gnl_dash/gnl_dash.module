@@ -13,7 +13,7 @@
  */
 function gnl_dash_user_login(&$edit, $account) {
   if (!isset($_POST['form_id']) || $_POST['form_id'] != 'user_pass_reset' && _gnl_dash_check_user($account)) {
-    $_GET['destination'] = 'profiles/gnl_profile/grantentry/build/';
+    $_GET['destination'] = 'grantentry/build/';
   }
 }
 
@@ -220,4 +220,14 @@ function gnl_dash_permission() {
       'description' => t('delete own user pdf'),
     ],
   ];
+}
+
+/**
+ * Adds some css to the node add grant page.
+ */
+function gnl_dash_init() {
+  global $user;
+  if (_gnl_dash_check_user($user) && drupal_get_path_alias() == 'node/add/grant') {
+    drupal_add_css('profiles/gnl_profile/modules/custom/gnl_dash/grant-add-styles.css');
+  }
 }

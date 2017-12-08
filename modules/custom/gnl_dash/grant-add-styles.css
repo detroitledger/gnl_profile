@@ -1,0 +1,13 @@
+#branding,
+.field-edit-link,
+#edit-field-grant-types,
+#edit-field-grant-tags,
+#edit-field-internal-notes,
+#edit-field-federal-award-id,
+#edit-field-region,
+#edit-field-client-project,
+.vertical-tabs,
+#block-system-user-menu {
+  display: none;
+}
+
