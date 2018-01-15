@@ -42,6 +42,7 @@ function gnl_schema_user_default_permissions() {
     'name' => 'create org content',
     'roles' => array(
       'administrator' => 'administrator',
+      'grantentry' => 'grantentry',
     ),
     'module' => 'node',
   );
@@ -255,6 +256,7 @@ function gnl_schema_user_default_permissions() {
     'name' => 'edit own org content',
     'roles' => array(
       'administrator' => 'administrator',
+      'grantentry' => 'grantentry',
     ),
     'module' => 'node',
   );

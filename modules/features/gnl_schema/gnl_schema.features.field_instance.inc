@@ -718,7 +718,7 @@ function gnl_schema_field_default_field_instances() {
     'bundle' => 'grant',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Can\'t find the funder? <a href="/node/add/org">Add them here.</a>',
+    'description' => 'Can\'t find the funder? <a href="/node/add/org" target="_blank">Add them here.</a>',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -884,7 +884,7 @@ function gnl_schema_field_default_field_instances() {
     'bundle' => 'grant',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Can\'t find the recipient? <a href="/node/add/org">Add them here.</a>',
+    'description' => 'Can\'t find the recipient? <a href="/node/add/org" target="_blank">Add them here.</a>',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -2258,8 +2258,8 @@ function gnl_schema_field_default_field_instances() {
   t('CSW Population');
   t('CSW Services');
   t('CSW Type');
-  t('Can\'t find the funder? <a href="/node/add/org">Add them here.</a>');
-  t('Can\'t find the recipient? <a href="/node/add/org">Add them here.</a>');
+  t('Can\'t find the funder? <a href="/node/add/org" target="_blank">Add them here.</a>');
+  t('Can\'t find the recipient? <a href="/node/add/org" target="_blank">Add them here.</a>');
   t('Client project');
   t('Compensation');
   t('Current page');

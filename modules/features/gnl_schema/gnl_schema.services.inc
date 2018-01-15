@@ -153,6 +153,13 @@ function gnl_schema_default_services_endpoint() {
         ),
       ),
     ),
+    'user' => array(
+      'actions' => array(
+        'token' => array(
+          'enabled' => '1',
+        ),
+      ),
+    ),
   );
   $endpoint->debug = 0;
   $export['gnl_10'] = $endpoint;
