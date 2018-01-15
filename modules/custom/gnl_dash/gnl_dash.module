@@ -227,7 +227,7 @@ function gnl_dash_permission() {
  */
 function gnl_dash_init() {
   global $user;
-  if (_gnl_dash_check_user($user) && drupal_get_path_alias() == 'node/add/grant') {
-    drupal_add_css('profiles/gnl_profile/modules/custom/gnl_dash/grant-add-styles.css');
+  if (_gnl_dash_check_user($user) && (drupal_get_path_alias() == 'node/add/grant' || drupal_get_path_alias() == 'node/add/org')) {
+    drupal_add_css('profiles/gnl_profile/modules/custom/gnl_dash/node-add-styles.css');
   }
 }
