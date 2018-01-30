@@ -40,7 +40,6 @@ function gnl_schema_preprocess_node(&$vars) {
  * Implements hook_form_alter().
  *
  * Dupe some fields from the previously-added grant.
- */
 function gnl_schema_form_alter(&$form, $form_state, $form_id) {
   if (arg(1) == 'add' && $form_id == 'grant_node_form') {
     $q = new EntityFieldQuery();
@@ -59,6 +58,7 @@ function gnl_schema_form_alter(&$form, $form_state, $form_id) {
     $form['field_funder'][LANGUAGE_NONE][0]['target_id']['#default_value'] = $mru->field_funder->value()->title . " (" . $mru->field_funder->value()->nid . ")";
   }
 }
+ */
 
 /**
  * Implements hook_init().
