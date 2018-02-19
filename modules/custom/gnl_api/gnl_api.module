@@ -681,8 +681,13 @@ function _gnl_api_related_org_board_members($org_id, $limit, $offset) {
  * @return object
  */
 function _gnl_api_retrieve($type, $id) {
+  global $user;
+
   $node = node_load($id);
-  if (!$node || $type !== $node->type || $node->status < 1) { // check the facts!
+
+  $can_view_unpublished = is_array($user->roles) && in_array('grantentry', array_values($user->roles));
+
+  if (!$node || $type !== $node->type || (!$can_view_unpublished && $node->status < 1)) { // check the facts!
     return services_error(t('@type @id does not exist.', array('@type' => $type, '@id' => $id)), 404);
   } else {
     return \Drupal\gnl_api\Utils::cleanNode($node);
