@@ -45,16 +45,33 @@ function _gnl_dash_check_user($user) {
  * Let services API know about our resource.
  */
 function gnl_dash_services_resources() {
+  $common_access_args = [
+    [
+      'name' => 'secret',
+      'type' => 'string',
+      'source' => [ 'param' => 'secret' ],
+      'description' => 'Server secret',
+      'optional' => FALSE,
+    ],
+    [
+      'name' => 'email',
+      'type' => 'string',
+      'source' => [ 'param' => 'email' ],
+      'description' => 'Email of user to be queried',
+      'optional' => FALSE,
+    ],
+  ];
+
   return [
     'assigned_pdfs' => [
       'operations' => [
         'index' => [
           'help' => 'Retrieves all grant entry PDFs for logged-in user',
           'callback' => '_gnl_dash_index_user_pdfs',
-          'access callback' => 'user_access',
-          'access arguments' => ['user pdf view own user pdfs'],
-          'access arguments append' => FALSE,
-          'args' => [],
+          'access callback' => '_gnl_dash_user_pdfs_access',
+          'access arguments' => ['index'],
+          'access arguments append' => TRUE,
+          'args' => $common_access_args,
         ],
         'update' => [
           'help' => 'Update user grant entry PDF',
@@ -62,7 +79,7 @@ function gnl_dash_services_resources() {
           'access callback' => '_gnl_dash_user_pdfs_access',
           'access arguments' => ['update'],
           'access arguments append' => TRUE,
-          'args' => [
+          'args' => array_push($common_access_args,
             [
               'name' => 'id',
               'type' => 'int',
@@ -83,16 +100,23 @@ function gnl_dash_services_resources() {
               'source' => [ 'data' => 'done' ],
               'description' => 'Done?',
               'optional' => FALSE,
-            ],
-          ],
+            ]
+          ),
         ],
       ],
     ],
   ];
 }
 
-function _gnl_dash_index_user_pdfs() {
-  global $user;
+/*
+ * @param string $secret server secret (only used in auth stage, unused here)
+ * @param string $email user email
+ *
+ * @return array
+ *   user pdfs
+ */
+function _gnl_dash_index_user_pdfs($secret, $email) {
+  $user = _gnl_dash_user_load_or_create($email);
 
   // Retrieve the pdfs from this user's records.
   $u = entity_metadata_wrapper('user', $user);
@@ -124,6 +148,8 @@ function _gnl_dash_serialize_pdf($f) {
 }
 
 /**
+ * @param string $secret server secret (only used in auth stage, unused here)
+ * @param string $email user email
  * @param int $id
  * @param int $currentpg
  * @param bool $done
@@ -131,8 +157,8 @@ function _gnl_dash_serialize_pdf($f) {
  * @return array
  *   serialized user pdf
  */
-function _gnl_dash_update_user_pdf($id, $currentpg, $done) {
-  global $user;
+function _gnl_dash_update_user_pdf($secret, $email, $id, $currentpg, $done) {
+  $user = _gnl_dash_user_load_or_create($email);
 
   // Check to make sure this user has a grantentry pdf w/ the given id.
   $u = entity_metadata_wrapper('user', $user);
@@ -161,6 +187,29 @@ function _gnl_dash_update_user_pdf($id, $currentpg, $done) {
   return _gnl_dash_serialize_pdf($f_wrapped);
 }
 
+function _gnl_dash_user_load_or_create($email) {
+  $user = user_load_by_mail($email);
+
+  // Create a new user on the fly, if necessary
+  if ($user == null) {
+    $roles = [ DRUPAL_AUTHENTICATED_RID => 'authenticated user' ];
+    $roles[user_role_load_by_name('grantentry')->rid] = 'grantentry';
+
+    $user = user_save(null, [
+      'name' => $email,
+      'pass' => variable_get('gnl_dash_shared_secret'),
+      'mail' => $email,
+      'status' => 1,
+      'language' => 'en',
+      'timezone' => 'America/Detroit',
+      'init' => $email,
+      'roles' => $roles,
+    ]);
+  }
+
+  return $user;
+}
+
 /**
 * Access callback for user PDFs.
 *
@@ -172,18 +221,27 @@ function _gnl_dash_update_user_pdf($id, $currentpg, $done) {
 *  Whether access is given or not.
 */
 function _gnl_dash_user_pdfs_access($op, $args) {
-  global $user;
-  $access = FALSE;
+  $shared_secret = variable_get('gnl_dash_shared_secret');
+
+  list($provided_secret, $email) = $args;
+  if ($shared_secret == null || $provided_secret != $shared_secret) {
+    throw new ServicesException('Bad secret', 403);
+  }
+
+  $user = _gnl_dash_user_load_or_create($email);
 
   switch ($op) {
     case 'update':
-      $pdf = field_collection_item_load($args[0]);
+      list(,, $pdf_id) = $args;
+      $pdf = field_collection_item_load($pdf_id);
       $access = user_access('user pdf edit any user pdfs');
-      $access = $access || $pdf->hostEntity()->uid == $user->uid && user_access('user pdf edit own user pdfs');
-      break;
+      return $access || $pdf->hostEntity()->uid == $user->uid && user_access('user pdf edit own user pdfs');
+
+    case 'index':
+      return user_access('user pdf view own user pdfs', $user);
   }
 
-  return $access;
+  return false;
 }
 
 /**
